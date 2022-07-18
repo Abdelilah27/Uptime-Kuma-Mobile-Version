@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.uptime.kuma.SplashFragment"
+        android:name="com.uptime.kuma.views.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/bienvenueFragment"
-        android:name="com.uptime.kuma.BienvenueFragment"
+        android:name="com.uptime.kuma.views.bienvenue.BienvenueFragment"
         android:label="fragment_bienvenue"
         tools:layout="@layout/fragment_bienvenue">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.uptime.kuma.LoginFragment"
+        android:name="com.uptime.kuma.views.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.uptime.kuma.DashboardFragment"
+        android:name="com.uptime.kuma.views.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -58,12 +58,12 @@
     </fragment>
     <fragment
         android:id="@+id/serverFragment"
-        android:name="com.uptime.kuma.ServerFragment"
+        android:name="com.uptime.kuma.views.ServerFragment"
         android:label="fragment_server"
         tools:layout="@layout/fragment_server" />
     <fragment
         android:id="@+id/allServersFragment"
-        android:name="com.uptime.kuma.AllServersFragment"
+        android:name="com.uptime.kuma.views.AllServersFragment"
         android:label="fragment_all_servers"
         tools:layout="@layout/fragment_all_servers">
         <action
@@ -72,12 +72,12 @@
     </fragment>
     <fragment
         android:id="@+id/statusFragment"
-        android:name="com.uptime.kuma.StatusFragment"
+        android:name="com.uptime.kuma.views.StatusFragment"
         android:label="fragment_status"
         tools:layout="@layout/fragment_status" />
     <fragment
         android:id="@+id/parametreFragment"
-        android:name="com.uptime.kuma.ParametreFragment"
+        android:name="com.uptime.kuma.views.ParametreFragment"
         android:label="fragment_parametre"
         tools:layout="@layout/fragment_parametre">
         <action
@@ -92,17 +92,17 @@
     </fragment>
     <fragment
         android:id="@+id/apparenceReglageFragment"
-        android:name="com.uptime.kuma.ApparenceReglageFragment"
+        android:name="com.uptime.kuma.views.ApparenceReglageFragment"
         android:label="fragment_apparence_reglage"
         tools:layout="@layout/fragment_apparence_reglage" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.uptime.kuma.NotificationsFragment"
+        android:name="com.uptime.kuma.views.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.uptime.kuma.AboutFragment"
+        android:name="com.uptime.kuma.views.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
 </navigation>
