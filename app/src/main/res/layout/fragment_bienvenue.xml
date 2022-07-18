@@ -162,13 +162,13 @@
         android:text="@string/second_bienvenue_fragment"
         android:textColor="@color/little_title_bienvenue_fragment"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button_commencer_biennvenue_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/button_commencer_biennvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
