@@ -1,4 +1,4 @@
-package com.uptime.kuma
+package com.uptime.kuma.views.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
