@@ -3,6 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/drawable/button_login_background.xml" value="0.1345" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/drawable/edit_text_background.xml" value="0.1" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/drawable/edittext_background.xml" value="0.1" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/drawable/ic_lock.xml" value="0.237" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/activity_main.xml" value="0.20854700854700856" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_about.xml" value="0.1" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_add_status.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_all_servers.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_bienvenue.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_dashboard.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_login.xml" value="0.19581017528858485" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_notifications.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_parametre.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_server.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_splash.xml" value="0.18675213675213675" />
+        <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_status.xml" value="0.18675213675213675" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.10477941176470588" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1" />
