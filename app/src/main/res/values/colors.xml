@@ -17,5 +17,6 @@
     <color name="background_no_active_item_all_server_fragment">#DD3444</color>
     <color name="main_text_item_all_server_fragment">#B1B8BF</color>
     <color name="app_bar_color">#161B22</color>
+    <color name="search_view_stroke_color">#161B22</color>
 
 </resources>

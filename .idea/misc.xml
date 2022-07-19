@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_icon.xml" value="0.253" />
         <entry key="app/src/main/res/drawable/ic_main_bienvenue_background.xml" value="0.253" />
+        <entry key="app/src/main/res/drawable/search_view_background_all_servers_fragment.xml" value="0.1965" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27370452880859375" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.30978260869565216" />
         <entry key="app/src/main/res/layout/fragment_add_status.xml" value="0.2078125" />
@@ -20,6 +21,9 @@
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/item_all_servers_fragment.xml" value="0.2342896174863388" />
         <entry key="app/src/main/res/layout/item_recycler_graph_all_servers.xml" value="0.21120689655172414" />
+        <entry key="app/src/main/res/menu/menu_all_servers_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_item.xml" value="0.225390625" />
+        <entry key="app/src/main/res/menu/search_servers.xml" value="0.280078125" />
       </map>
     </option>
   </component>
