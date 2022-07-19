@@ -1,0 +1,42 @@
+package com.uptime.kuma.views.monitorsList
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.R
+import com.uptime.kuma.adapters.MonitorItemAllServersAdapter
+import com.uptime.kuma.databinding.FragmentAllServersBinding
+import com.uptime.kuma.models.MonitorItem
+
+class AllServersFragment : Fragment(R.layout.fragment_all_servers) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentAllServersBinding.bind(view)
+        val itemAdapter = activity?.let { MonitorItemAllServersAdapter(it) }
+        binding.apply {
+            binding.allServerRecycler.apply {
+                adapter = itemAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+                itemAdapter?.submitList(getData())
+            }
+        }
+    }
+
+    private fun getData(): List<MonitorItem> {
+        val data = arrayListOf<MonitorItem>()
+        data.add(MonitorItem(id = 1, percent = "99.2%", title = "2M.ma", isOnline = false))
+        data.add(MonitorItem(id = 1, percent = "100%", title = "Mobiblanc.ma", isOnline = true))
+        data.add(MonitorItem(id = 1, percent = "72.99%", title = "Orange.ma", isOnline = true))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = false))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = false))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = true))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = false))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = true))
+        data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = false))
+        return data
+    }
+
+
+}

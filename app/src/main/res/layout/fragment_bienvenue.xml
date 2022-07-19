@@ -104,13 +104,11 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/main_text_bienvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center_vertical"
         android:text="@string/main_text_1_bienvenue_fragment"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -120,13 +118,11 @@
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/main_text_bienvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center_vertical"
         android:text="@string/main_text_2_bienvenue_fragment"
         android:textColor="@color/main_text_splash_fragment"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -136,13 +132,11 @@
 
     <TextView
         android:id="@+id/textView4"
+        style="@style/main_text_bienvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center_vertical"
         android:text="@string/main_text_3_bienvenue_fragment"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
