@@ -2,6 +2,7 @@ package com.uptime.kuma.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -11,14 +12,19 @@ import com.uptime.kuma.R
 import com.uptime.kuma.databinding.ItemAllServersFragmentBinding
 import com.uptime.kuma.models.MonitorItem
 
-class MonitorItemAllServersAdapter(val context: Context) :
+class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLister) :
     ListAdapter<MonitorItem, MonitorItemAllServersAdapter.ItemViewHolder>(DiffCallBack()) {
 
-    class ItemViewHolder(
+    inner class ItemViewHolder(
         private val biding: ItemAllServersFragmentBinding, val context:
         Context
     ) : RecyclerView
-    .ViewHolder(biding.root) {
+    .ViewHolder(biding.root), View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+
         fun bind(item: MonitorItem) {
             biding.apply {
                 percentText.text = item.percent
@@ -41,6 +47,13 @@ class MonitorItemAllServersAdapter(val context: Context) :
                     )
                 }
 
+            }
+        }
+
+        override fun onClick(p0: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
             }
         }
 
@@ -71,5 +84,10 @@ class MonitorItemAllServersAdapter(val context: Context) :
         }
 
     }
+
+    interface OnClickLister {
+        fun onItemClick(position: Int)
+    }
+
 
 }

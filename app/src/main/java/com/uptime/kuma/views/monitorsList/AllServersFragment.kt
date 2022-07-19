@@ -5,18 +5,21 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.models.MonitorItem
 
-class AllServersFragment : Fragment(R.layout.fragment_all_servers) {
+class AllServersFragment : Fragment(R.layout.fragment_all_servers),
+    MonitorItemAllServersAdapter.OnClickLister {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = FragmentAllServersBinding.bind(view)
-        val itemAdapter = activity?.let { MonitorItemAllServersAdapter(it) }
+        val itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this) }
         binding.apply {
             binding.allServerRecycler.apply {
                 adapter = itemAdapter
@@ -71,6 +74,11 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers) {
         data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = true))
         data.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = false))
         return data
+    }
+
+    override fun onItemClick(position: Int) {
+        findNavController().navigate(R.id.action_allServersFragment_to_serverFragment)
+//        Log.d("TAG", "onItemClick: " + position)
     }
 
 
