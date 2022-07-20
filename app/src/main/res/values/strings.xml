@@ -11,6 +11,13 @@
     <string name="title_status_fragment">Status Pages</string>
     <string name="title_dashboard_fragment">Résumé</string>
     <string name="add_new_status_fragment">Ajouter un status</string>
+    <string name="title_add_status_fragment">Ajouter un status Page</string>
+    <string name="nom_add_status_fragment">Nom</string>
+    <string name="slug_add_status_fragment">Slug</string>
+    <string name="text_button_add_status_fragment">confirmer</string>
+    <string name="caracter_accepted_1_add_status_fragment">Accepter les caractères: a-z / 0-9 / -</string>
+    <string name="caracter_accepted_2_add_status_fragment">Commencer ou finir par a-z uniquement</string>
+    <string name="caracter_accepted_3_add_status_fragment">Pas de tirets consécutifs --</string>
 
 
 </resources>

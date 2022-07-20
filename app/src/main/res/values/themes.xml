@@ -46,4 +46,11 @@
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
 
+    <style name="title_edit_text_add_statue_fragment">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
 </resources>

@@ -23,8 +23,6 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
         init {
             itemView.setOnClickListener(this)
         }
-
-
         fun bind(item: MonitorItem) {
             biding.apply {
                 percentText.text = item.percent

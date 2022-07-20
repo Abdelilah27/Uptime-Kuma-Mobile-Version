@@ -121,5 +121,9 @@
         android:id="@+id/addStatusFragment"
         android:name="com.uptime.kuma.views.addStatus.AddStatusFragment"
         android:label="fragment_add_status"
-        tools:layout="@layout/fragment_add_status" />
+        tools:layout="@layout/fragment_add_status" >
+        <action
+            android:id="@+id/action_addStatusFragment_to_statusFragment"
+            app:destination="@id/statusFragment" />
+    </fragment>
 </navigation>
