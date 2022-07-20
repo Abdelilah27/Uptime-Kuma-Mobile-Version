@@ -20,4 +20,10 @@
     <string name="caracter_accepted_3_add_status_fragment">Pas de tirets consécutifs --</string>
 
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_dashboard_fragment">Résumé</string>
+    <string name="titre">En ligne</string>
+    <string name="down">Down</string>
+    <string name="unknown">Unknown</string>
+    <string name="pause">Pause</string>
 </resources>

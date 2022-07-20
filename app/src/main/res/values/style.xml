@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/little_title_bienvenue_fragment</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    <style name="title">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    <style name="titre">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+
+</resources>

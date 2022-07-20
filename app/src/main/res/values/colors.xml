@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#00ff00</color>
+    <color name="red">#ff0000</color>
+    <color name="little_title_bienvenue_fragment">#959B9F</color>
+    <color name="black_cardview">#0D1117</color>
+    <color name="grey">#c0c0c0</color>
+    <color name="much_black">#161B22</color>
+    <color name="background_card_all_server_fragment">#0A0D11</color>
     <color name="main_text_splash_fragment">#5BDA88</color>
     <color name="background_bienvenue_fragment">#131A26</color>
     <color name="little_title_bienvenue_fragment">#959B9F</color>
