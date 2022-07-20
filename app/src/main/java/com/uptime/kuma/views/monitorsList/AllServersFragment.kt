@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
-import com.uptime.kuma.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.models.MonitorItem
+import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 
 class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     MonitorItemAllServersAdapter.OnClickLister {

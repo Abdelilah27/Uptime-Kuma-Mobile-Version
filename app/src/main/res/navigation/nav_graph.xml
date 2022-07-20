@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/bienvenueFragment">
+    app:startDestination="@id/statusFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.uptime.kuma.views.DashboardFragment"
+        android:name="com.uptime.kuma.views.dashbord.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -74,7 +74,7 @@
         android:id="@+id/statusFragment"
         android:name="com.uptime.kuma.views.status.StatusFragment"
         android:label="fragment_status"
-        tools:layout="@layout/fragment_status" >
+        tools:layout="@layout/fragment_status">
         <action
             android:id="@+id/action_statusFragment_to_itemStatusFragment"
             app:destination="@id/itemStatusFragment" />
@@ -121,7 +121,7 @@
         android:id="@+id/addStatusFragment"
         android:name="com.uptime.kuma.views.addStatus.AddStatusFragment"
         android:label="fragment_add_status"
-        tools:layout="@layout/fragment_add_status" >
+        tools:layout="@layout/fragment_add_status">
         <action
             android:id="@+id/action_addStatusFragment_to_statusFragment"
             app:destination="@id/statusFragment" />

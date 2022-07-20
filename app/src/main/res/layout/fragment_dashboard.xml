@@ -7,15 +7,6 @@
     android:background="@color/background_color_dashbord_fragment"
     tools:context=".views.dashbord.DashboardFragment">
 
-
-
-
-
-
-
-
-
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
@@ -37,7 +28,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
@@ -56,10 +46,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:backgroundTint="@color/background_color_Recycler_dashbord_fragment"
-        app:cardCornerRadius="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:backgroundTint="@color/background_color_Recycler_dashbord_fragment"
+        app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,34 +183,25 @@
     </androidx.cardview.widget.CardView>
 
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="30dp"
         app:cardCornerRadius="5dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
+        app:layout_constraintTop_toTopOf="@+id/guideline14">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dashbord_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/background_color_Recycler_dashbord_fragment"
-            tools:listitem="@layout/dashbord_recylcer_item"
-            />
+            tools:listitem="@layout/dashbord_recylcer_item" />
     </androidx.cardview.widget.CardView>
 
 

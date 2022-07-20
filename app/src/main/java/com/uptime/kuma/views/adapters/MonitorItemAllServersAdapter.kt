@@ -1,4 +1,4 @@
-package com.uptime.kuma.adapters
+package com.uptime.kuma.views.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
-import com.uptime.kuma.adapters.StatusAdapter
+import com.uptime.kuma.views.adapters.StatusAdapter
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
 
