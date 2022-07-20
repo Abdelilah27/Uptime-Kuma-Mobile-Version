@@ -9,6 +9,8 @@
     <string name="button_text_bienvenue_fragment">Commencer</string>
     <string name="search_text_all_servers_fragment">Recherche</string>
     <string name="title_status_fragment">Status Pages</string>
+    <string name="title_dashboard_fragment">Résumé</string>
+    <string name="add_new_status_fragment">Ajouter un status</string>
 
 
 </resources>

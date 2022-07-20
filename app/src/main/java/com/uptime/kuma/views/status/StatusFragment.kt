@@ -28,6 +28,11 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
 
             }
         }
+
+
+        binding.addNewStatusButton.setOnClickListener {
+            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
+        }
     }
 
     private fun getData(): List<Status>? {

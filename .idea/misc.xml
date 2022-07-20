@@ -12,14 +12,14 @@
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.20993957519531253" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.23852386474609383" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1483734130859376" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.13714613618974753" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_parametre.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_server.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.17036132812500002" />
+        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.35286102294921884" />
         <entry key="app/src/main/res/layout/item_all_servers_fragment.xml" value="0.2342896174863388" />
         <entry key="app/src/main/res/layout/item_recycler_graph_all_servers.xml" value="0.21120689655172414" />
         <entry key="app/src/main/res/layout/item_status_fragment.xml" value="0.21535040944667871" />
