@@ -15,6 +15,13 @@
     <color name="much_black">#161B22</color>
     <color name="background_card_all_server_fragment">#0A0D11</color>
     <color name="main_text_splash_fragment">#5BDA88</color>
+    <color name="main_color">#5BDA88</color>
+    <color name="background_color_login_fragment">#131A26</color>
+    <color name="background_color_dashbord_fragment">#070A10</color>
+    <color name="background_color_Recycler_dashbord_fragment">#0d1116</color>
+    <color name="dashbord_fragment_text_color">#c0c0c0</color>
+    <color name="dashbord_fragment_hors_ligne">#dc3545</color>
+
     <color name="background_bienvenue_fragment">#131A26</color>
     <color name="little_title_bienvenue_fragment">#959B9F</color>
     <color name="background_card_all_server_fragment">#0E1117</color>

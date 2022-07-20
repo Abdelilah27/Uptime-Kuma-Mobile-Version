@@ -53,4 +53,26 @@
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
 
+
+    <style name="title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dashbord_fragment_text_color</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    <style name="title">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    <style name="titre">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
 </resources>
