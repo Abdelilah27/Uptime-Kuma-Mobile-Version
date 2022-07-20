@@ -2,6 +2,7 @@ package com.uptime.kuma.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,7 @@ import com.uptime.kuma.R
 import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
 import com.uptime.kuma.models.DashbordItems
 
-class DashbordRecyclerAdapter(val context: Context):ListAdapter<DashbordItems,DashbordRecyclerAdapter.ItemViewHolder>(DiffCallback()) {
+class DashbordRecyclerAdapter(val context: Context, private  val listener: OnItemClickListener):ListAdapter<DashbordItems,DashbordRecyclerAdapter.ItemViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -25,7 +26,19 @@ class DashbordRecyclerAdapter(val context: Context):ListAdapter<DashbordItems,Da
     }
 
 
-    inner class ItemViewHolder(private val binding: DashbordRecylcerItemBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ItemViewHolder(private val binding: DashbordRecylcerItemBinding):RecyclerView.ViewHolder(binding.root),
+    View.OnClickListener{
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position :Int =adapterPosition
+            if (position!=RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+
         fun bind(dashbordItems: DashbordItems){
             binding.apply {
                 dashbordServernameTv.text=dashbordItems.name
@@ -51,6 +64,10 @@ class DashbordRecyclerAdapter(val context: Context):ListAdapter<DashbordItems,Da
                 dashbordMessageTv.text=dashbordItems.message
             }
         }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<DashbordItems>(){
