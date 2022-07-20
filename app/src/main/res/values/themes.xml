@@ -39,4 +39,12 @@
         <item name="android:textColor">@color/little_title_bienvenue_fragment</item>
         <item name="android:layout_margin">16dp</item>
     </style>
+
+    <style name="status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
 </resources>
