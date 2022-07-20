@@ -8,5 +8,7 @@
     <string name="second_bienvenue_fragment"><![CDATA[Le premier service mondial de surveillance de la disponibilité.Soyez le premier à savoir que votre site Web est en panne! Une surveillance fiable vous avertit avant tout problème important et vous fait économiser de l\'argent.]]></string>
     <string name="button_text_bienvenue_fragment">Commencer</string>
     <string name="search_text_all_servers_fragment">Recherche</string>
+    <string name="title_status_fragment">Status Pages</string>
+
 
 </resources>
