@@ -22,7 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_parametre.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_server.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.18795166015625003" />
         <entry key="app/src/main/res/layout/item_all_servers_fragment.xml" value="0.2342896174863388" />
         <entry key="app/src/main/res/layout/item_recycler_graph_all_servers.xml" value="0.21120689655172414" />
         <entry key="app/src/main/res/layout/item_status_fragment.xml" value="0.21535040944667871" />

@@ -7,7 +7,6 @@
     android:background="@color/background_all_server_fragment"
     tools:context=".views.monitorsList.AllServersFragment">
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
