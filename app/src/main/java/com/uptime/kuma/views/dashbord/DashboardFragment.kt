@@ -5,10 +5,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.DashbordItems
+import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
@@ -26,6 +26,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 setHasFixedSize(true)
                 dashbordRecyclerAdapter.submitList(getData())
             }
+        }
+
+        binding.addNewSondeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_addNewSondeFragment)
         }
     }
 
