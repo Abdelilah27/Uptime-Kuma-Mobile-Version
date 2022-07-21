@@ -7,24 +7,14 @@
     android:background="@color/background_all_server_fragment"
     tools:context=".views.status.StatusFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
 
     <TextView
         android:id="@+id/textView5"
         style="@style/title_fragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="0dp"
-        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:maxLines="1"
         android:text="@string/title_status_fragment"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/background_card_all_server_fragment"
@@ -62,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6">
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/statusRecycler"
