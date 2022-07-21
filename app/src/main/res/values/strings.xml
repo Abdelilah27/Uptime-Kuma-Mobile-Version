@@ -29,4 +29,14 @@
     <string name="Uptime_Kuma">Uptime Kuma</string>
     <string name="version">Version: 1.17.1</string>
     <string name="credits">Credits Mobiblanc</string>
+    <string name="apparence">Apparence</string>
+    <string name="langue">Language:</string>
+    <string name="anglais">English</string>
+    <string name="switche">Dark Mode</string>
+
+    <string-array name="list">
+        <item>Français</item>
+        <item>Anglais</item>
+        <item>Arabe</item>
+    </string-array>
 </resources>
