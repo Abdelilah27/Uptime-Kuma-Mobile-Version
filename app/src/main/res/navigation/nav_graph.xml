@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/parametreFragment"
-        android:name="com.uptime.kuma.views.ParametreFragment"
+        android:name="com.uptime.kuma.views.parametre.ParametreFragment"
         android:label="fragment_parametre"
         tools:layout="@layout/fragment_parametre">
         <action

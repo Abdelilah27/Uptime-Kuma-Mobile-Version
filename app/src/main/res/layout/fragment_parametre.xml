@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color_main"
-    tools:context="views.ParametreFragment">
+    tools:context=".views.parametre.ParametreFragment">
 
 
     <TextView

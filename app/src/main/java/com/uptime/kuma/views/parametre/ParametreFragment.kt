@@ -1,14 +1,11 @@
-package com.uptime.kuma.views
+package com.uptime.kuma.views.parametre
 
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentParametreBinding
 import com.uptime.kuma.models.ParametreItem
@@ -39,9 +36,7 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),ParametreRecycle
             "About" -> findNavController().navigate(R.id.action_parametreFragment_to_aboutFragment)
             "Notifications" -> findNavController().navigate(R.id.action_parametreFragment_to_notificationsFragment)
             "Apparence" -> findNavController().navigate(R.id.action_parametreFragment_to_apparenceReglageFragment)
-            else -> {
-                print("None")
-            }
+
         }
     }
 
