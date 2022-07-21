@@ -18,7 +18,10 @@
     <color name="background_color_login_fragment">#131A26</color>
     <color name="background_color_dashbord_fragment">#070A10</color>
     <color name="background_color_Recycler_dashbord_fragment">#0d1116</color>
+    <color name="background_color_second">#0d1116</color>
+    <color name="background_color_main">#070A10</color>
     <color name="dashbord_fragment_text_color">#c0c0c0</color>
+    <color name="text_color">#c0c0c0</color>
     <color name="dashbord_fragment_hors_ligne">#dc3545</color>
 
     <color name="background_bienvenue_fragment">#131A26</color>
