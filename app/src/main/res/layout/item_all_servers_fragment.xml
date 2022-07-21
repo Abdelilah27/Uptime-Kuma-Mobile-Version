@@ -36,10 +36,12 @@
         android:layout_toStartOf="@+id/graph_view"
         android:layout_toEndOf="@id/card_view"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-black"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:text="TextView"
-        android:textColor="@color/main_text_item_all_server_fragment" />
+        android:textColor="@color/main_text_item_all_server_fragment"
+        android:textSize="15sp" />
 
 
     <TextView
