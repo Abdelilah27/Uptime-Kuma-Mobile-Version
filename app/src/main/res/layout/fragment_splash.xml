@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/background_bienvenue_fragment"
     tools:context=".views.splash.SplashFragment">
 
 
@@ -24,11 +24,12 @@
 
     <TextView
         android:id="@+id/text"
+        style="@style/main_text_bienvenue_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Uptime Kuma"
+        android:text="@string/app_name"
         android:textColor="@color/main_text_splash_fragment"
-        android:textSize="40sp"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"

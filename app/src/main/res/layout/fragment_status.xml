@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <TextView
         android:id="@+id/textView5"
@@ -20,6 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="0dp"
+        android:gravity="center_vertical"
         android:maxLines="1"
         android:text="@string/title_status_fragment"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -32,15 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.9" />
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_new_status_button"
-        style="@style/main_button_bienvenue_fragment"
+        style="@style/main_button_different_size_bienvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:gravity="center"
         android:text="@string/add_new_status_fragment"
         app:cornerRadius="30dp"
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"

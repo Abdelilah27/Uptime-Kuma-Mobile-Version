@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.085" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_begin="329dp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -59,7 +59,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp">
 
                     <TextView
                         android:id="@+id/textView7"
@@ -73,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_edit_text_add_status_fragment"
                         android:padding="8dp"
-                        android:textColor="@color/white"></EditText>
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <LinearLayout
