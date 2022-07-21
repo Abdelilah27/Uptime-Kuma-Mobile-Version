@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_serverFragment"
             app:destination="@id/serverFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_addNewSondeFragment"
+            app:destination="@id/addNewSondeFragment" />
     </fragment>
     <fragment
         android:id="@+id/serverFragment"
@@ -125,5 +128,14 @@
         <action
             android:id="@+id/action_addStatusFragment_to_statusFragment"
             app:destination="@id/statusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewSondeFragment"
+        android:name="com.uptime.kuma.AddNewSondeFragment"
+        android:label="fragment_add_new_sonde"
+        tools:layout="@layout/fragment_add_new_sonde">
+        <action
+            android:id="@+id/action_addNewSondeFragment_to_allServersFragment"
+            app:destination="@id/allServersFragment" />
     </fragment>
 </navigation>
