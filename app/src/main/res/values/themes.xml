@@ -60,7 +60,14 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
-
+    <style name="langue">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
 
     <style name="title_fragment">
         <item name="autoSizeTextType">uniform</item>
@@ -99,5 +106,9 @@
         <item name="autoSizeTextType">uniform</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+    <style name="drop_list">
+        <item name="android:gradientRadius">8dp</item>
+        <item name="android:textColor">@color/grey</item>
     </style>
 </resources>
