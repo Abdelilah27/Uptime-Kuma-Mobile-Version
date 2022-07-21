@@ -72,7 +72,7 @@
     <style name="title_fragment">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/dashbord_fragment_text_color</item>
         <item name="android:textSize">22sp</item>
         <item name="android:layout_margin">16dp</item>

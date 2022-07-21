@@ -41,7 +41,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         val data = arrayListOf<DashbordItems>()
         data.add(
             DashbordItems(
-                1,
+
                 "Inwi",
                 true,
                 "2022-07-20 02:07:49",
@@ -50,7 +50,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                2,
+
                 "Orange",
                 false,
                 "2022-07-20 02:07:49",
@@ -59,7 +59,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                3,
+
                 "Wana",
                 true,
                 "2022-07-20 02:07:49",
@@ -68,7 +68,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                4,
+
                 "Miditel",
                 true,
                 "2022-07-20 02:07:49",
@@ -77,7 +77,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                5,
+
                 "MarocTelecom",
                 false,
                 "2022-07-20 02:07:49",
@@ -86,7 +86,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                6,
+
                 "2M",
                 false,
                 "2022-07-20 02:07:49",
@@ -95,7 +95,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                7,
+
                 "Mobiblanc",
                 true,
                 "2022-07-20 02:07:49",
@@ -104,7 +104,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                8,
+
                 "MobiblancVPN",
                 false,
                 "2022-07-20 02:07:49",
@@ -113,7 +113,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                9,
+
                 "Test404",
                 false,
                 "2022-07-20 02:07:49",
@@ -122,7 +122,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         data.add(
             DashbordItems(
-                10,
+
                 "ValarMorghulis",
                 true,
                 "2022-07-20 02:07:49",

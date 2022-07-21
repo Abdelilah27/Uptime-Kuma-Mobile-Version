@@ -43,7 +43,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 Snackbar.make(binding.root, "text Error", Snackbar.LENGTH_LONG).show()
             } else
                 Navigation.findNavController(view)
-                    .navigate(R.id.action_loginFragment_to_parametreFragment)
+                    .navigate(R.id.action_loginFragment_to_dashboardFragment)
         }
     }
 
