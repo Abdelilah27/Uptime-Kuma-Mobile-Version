@@ -75,8 +75,9 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
     }
 
     class DiffCallback : DiffUtil.ItemCallback<DashbordItems>() {
-        override fun areItemsTheSame(oldItem: DashbordItems, newItem: DashbordItems) =
-            oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: DashbordItems, newItem: DashbordItems) : Boolean {
+            return oldItem.name==newItem.name&&oldItem.status==newItem.status&&oldItem.date==newItem.date&&oldItem.message==newItem.message
+        }
 
         override fun areContentsTheSame(oldItem: DashbordItems, newItem: DashbordItems) =
             oldItem == newItem

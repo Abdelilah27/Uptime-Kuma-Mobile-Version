@@ -90,7 +90,7 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/ParamName"
         style="@style/title_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
