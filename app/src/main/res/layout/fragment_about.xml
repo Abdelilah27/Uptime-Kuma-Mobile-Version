@@ -122,10 +122,10 @@
 
     <TextView
         android:id="@+id/textView15"
+        style="@style/title_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Credits Mobiblanc"
-        style="@style/title_fragment"
         app:layout_constraintBottom_toTopOf="@+id/guideline28"
         app:layout_constraintEnd_toStartOf="@+id/guideline25"
         app:layout_constraintStart_toStartOf="@+id/guideline24"
@@ -144,7 +144,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

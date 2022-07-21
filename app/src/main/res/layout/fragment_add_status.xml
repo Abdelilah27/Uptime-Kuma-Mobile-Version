@@ -179,7 +179,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_new_status_button"
-        style="@style/main_button_bienvenue_fragment"
+        style="@style/main_button_different_size_bienvenue_fragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
