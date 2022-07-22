@@ -20,6 +20,8 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),ParametreRecycle
 
         val parametreRecyclerAdapter=ParametreRecyclerAdapter(requireContext(),this)
 
+
+
         binding.apply {
         parametreRecycler.apply {
             adapter=parametreRecyclerAdapter

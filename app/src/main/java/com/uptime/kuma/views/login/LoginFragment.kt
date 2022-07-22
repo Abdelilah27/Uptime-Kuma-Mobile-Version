@@ -11,12 +11,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private var Email = "aaa"
@@ -29,7 +23,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+    //    (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
