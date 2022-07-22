@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_bar_color</item>
-        <item name="colorPrimaryVariant">@color/main_text_splash_fragment</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -53,6 +53,22 @@
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
 
+    <style name="large_size_status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+    <style name="medium_size_status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
+
     <style name="title_edit_text_add_statue_fragment">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_weight">1</item>
@@ -60,6 +76,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
+
     <style name="langue">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_weight">1</item>
@@ -91,6 +108,7 @@
         <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
         <item name="android:layout_margin">16dp</item>
     </style>
+
     <style name="titre">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
@@ -98,6 +116,7 @@
         <item name="android:textColor">@color/main_color</item>
         <item name="android:layout_margin">16dp</item>
     </style>
+
     <style name="version">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_weight">1</item>
@@ -105,6 +124,7 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
+
     <style name="credits">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_weight">1</item>
@@ -112,6 +132,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
+
     <style name="drop_list">
         <item name="android:gradientRadius">8dp</item>
         <item name="android:textColor">@color/grey</item>

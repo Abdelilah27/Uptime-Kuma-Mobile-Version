@@ -27,10 +27,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 dashbordRecyclerAdapter.submitList(getData())
             }
         }
-
-        binding.addNewSondeButton.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboardFragment_to_addNewSondeFragment)
-        }
     }
 
     override fun onItemClick(position: Int) {
