@@ -48,7 +48,9 @@
         <entry key="app/src/main/res/layout/item_status_group.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_test.xml" value="0.24180327868852458" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/notifications_recycler_item.xml" value="0.3125" />
         <entry key="app/src/main/res/layout/parametre_recycler_item.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/toolbar_main_ressource.xml" value="0.3125" />
         <entry key="app/src/main/res/menu/search_servers.xml" value="0.3880208333333333" />
       </map>
     </option>

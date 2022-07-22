@@ -6,35 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_all_server_fragment"
     tools:context="views.apparence.ApparenceReglageFragment">
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/mytoolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:titleTextColor="@color/white"
-            app:title="Apparence"
-            android:theme="?attr/actionBarTheme"></androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <TextView
-        android:id="@+id/apparence"
-        style="@style/title_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:maxLines="1"
-        android:text="@string/apparence"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/langue"
@@ -52,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"

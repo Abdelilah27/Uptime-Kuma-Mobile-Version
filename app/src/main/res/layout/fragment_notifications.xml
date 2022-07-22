@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="views.NotificationsFragment"
-    android:background="@color/background_color_main">
+    android:background="@color/background_color_main"
+    tools:context="views.NotificationsFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="20dp"
         app:cardBackgroundColor="@color/background_color_second"
-        app:cardCornerRadius="40dp"
-        android:layout_margin="20dp">
+        app:cardCornerRadius="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,39 +21,27 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_fragment_notifications_name"
-                style="@style/title_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:layout_margin="0dp"
-                android:text="Notifications" />
-
-            <TextView
                 android:id="@+id/tv_fragment_notification_desc"
                 style="@style/title_fragment"
-                android:textSize = "17sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Une fois ajoutée, vous devez l'activer manuellement dans les paramètres de vos hôtes." />
+                android:text="Une fois ajoutée, vous devez l'activer manuellement dans les paramètres de vos hôtes."
+                android:textSize="17sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notification_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:background="@color/background_color_second"
-                tools:listitem="@layout/notifications_recycler_item"
-                />
+                tools:listitem="@layout/notifications_recycler_item" />
 
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
