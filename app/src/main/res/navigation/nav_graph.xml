@@ -104,7 +104,7 @@
         tools:layout="@layout/fragment_apparence_reglage" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.uptime.kuma.views.NotificationsFragment"
+        android:name="com.uptime.kuma.views.notifications.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment

@@ -44,8 +44,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/guideline2"
         app:layout_constraintRight_toLeftOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline4"
@@ -64,8 +64,8 @@
             android:hint="@string/Email"
             android:padding="8dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/main_text_item_all_server_fragment"
-            />
+            android:textColorHint="@color/main_text_item_all_server_fragment" />
+
         <EditText
             android:id="@+id/password_edt"
             android:layout_width="match_parent"
@@ -80,17 +80,16 @@
             android:inputType="textPassword"
             android:padding="8dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/main_text_item_all_server_fragment"
-            />
+            android:textColorHint="@color/main_text_item_all_server_fragment" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
             style="@style/main_button_different_size_bienvenue_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="16dp"
             android:gravity="center"
             android:text="@string/text_button_add_status_fragment"
             app:cornerRadius="30dp" />
@@ -100,36 +99,36 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<!--<EditText-->
-<!--android:id="@+id/email_edt"-->
-<!--android:layout_width="0dp"-->
-<!--android:layout_height="0dp"-->
-<!--android:layout_margin="8dp"-->
-<!--android:background="@drawable/edit_text_background"-->
-<!--android:drawableStart="@drawable/ic_person"-->
-<!--android:drawablePadding="10sp"-->
-<!--android:hint="@string/Email"-->
-<!--android:inputType="textEmailAddress"-->
-<!--android:padding="15dp"-->
-<!--    />-->
+    <!--<EditText-->
+    <!--android:id="@+id/email_edt"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:background="@drawable/edit_text_background"-->
+    <!--android:drawableStart="@drawable/ic_person"-->
+    <!--android:drawablePadding="10sp"-->
+    <!--android:hint="@string/Email"-->
+    <!--android:inputType="textEmailAddress"-->
+    <!--android:padding="15dp"-->
+    <!--    />-->
 
-<!--<EditText-->
-<!--android:id="@+id/password_edt"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_margin="8dp"-->
-<!--android:background="@drawable/edit_text_background"-->
-<!--android:drawableStart="@drawable/ic_lock"-->
-<!--android:drawablePadding="10sp"-->
-<!--android:hint="@string/Password"-->
-<!--android:inputType="textPassword"-->
-<!--android:padding="15dp"-->
-<!--    />-->
-<!--<com.google.android.material.button.MaterialButton-->
-<!--android:id="@+id/buttonLogin"-->
-<!--android:layout_width="0dp"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_margin="16dp"-->
-<!--android:background="@drawable/button_login_background"-->
-<!--android:text="Login"-->
-<!--    />-->
+    <!--<EditText-->
+    <!--android:id="@+id/password_edt"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:background="@drawable/edit_text_background"-->
+    <!--android:drawableStart="@drawable/ic_lock"-->
+    <!--android:drawablePadding="10sp"-->
+    <!--android:hint="@string/Password"-->
+    <!--android:inputType="textPassword"-->
+    <!--android:padding="15dp"-->
+    <!--    />-->
+    <!--<com.google.android.material.button.MaterialButton-->
+    <!--android:id="@+id/buttonLogin"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:background="@drawable/button_login_background"-->
+    <!--android:text="Login"-->
+    <!--    />-->
