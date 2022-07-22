@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/allServersFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -104,7 +104,7 @@
         tools:layout="@layout/fragment_apparence_reglage" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.uptime.kuma.views.NotificationsFragment"
+        android:name="com.uptime.kuma.views.notifications.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
