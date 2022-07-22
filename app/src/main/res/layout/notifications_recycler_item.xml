@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_item_all_server_fragment"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/tv_fragment_notifications_name"
+        style="@style/notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="189dp"
+        android:layout_toStartOf="@+id/notification_switch"
+        android:text="Notification EMAIL"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/dashbord_fragment_text_color"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:gravity="top"
+        android:orientation="horizontal" />
+
+
+</RelativeLayout>
+
+
+
+
