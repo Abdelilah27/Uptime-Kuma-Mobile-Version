@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_all_server_fragment"
-    tools:context=".GroupStatusFragment">
+    tools:context=".views.itemGroupStatus.GroupStatusFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -73,7 +73,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:layout_margin="2dp"
                     android:src="@drawable/ic_baseline_check_circle_24" />
 
                 <TextView
@@ -86,6 +86,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/group_status_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

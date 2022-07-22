@@ -14,7 +14,6 @@ import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 
 class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     MonitorItemAllServersAdapter.OnClickLister {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
