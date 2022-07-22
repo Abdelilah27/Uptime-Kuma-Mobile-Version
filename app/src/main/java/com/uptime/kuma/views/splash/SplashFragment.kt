@@ -15,18 +15,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+     //   (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
         // Inflate the layout for this fragment
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(R.id.action_splashFragment_to_bienvenueFragment)
-        }, 1500)
+        }, 3000)
 
         return view
     }
