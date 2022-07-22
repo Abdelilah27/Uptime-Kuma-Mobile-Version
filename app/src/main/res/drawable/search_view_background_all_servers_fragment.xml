@@ -4,11 +4,13 @@
 
     <stroke
         android:width="4dp"
-        android:color="@color/search_view_stroke_color"></stroke>
+        android:color="@color/main_text_item_all_server_fragment" />
 
     <gradient
         android:centerColor="@color/background_item_all_server_fragment"
         android:endColor="@color/background_item_all_server_fragment"
-        android:startColor="@color/background_item_all_server_fragment"></gradient>
+        android:startColor="@color/background_item_all_server_fragment" />
+
+
 
 </shape>

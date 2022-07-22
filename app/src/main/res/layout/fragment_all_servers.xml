@@ -29,17 +29,19 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <SearchView
-        android:id="@+id/searchView_all_server"
+    <EditText
+        android:id="@+id/search_edit_text_all_servers_fragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/search_view_background_all_servers_fragment"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/search_text_all_servers_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:layout_editor_absoluteX="55dp" />
+        android:background="@drawable/background_edit_text_add_status_fragment"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:hint="@string/search_text_all_servers_fragment"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -51,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView_all_server">
+        app:layout_constraintTop_toBottomOf="@+id/search_edit_text_all_servers_fragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_server_recycler"
