@@ -3,7 +3,7 @@
     <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_bar_color</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimaryVariant">@color/app_bar_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -99,25 +99,28 @@
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/dashbord_fragment_text_color</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_margin">8dp</item>
 
     </style>
 
-    <style name="title">
+    <style name="card_dashboard_red_color">
         <item name="autoSizeTextType">uniform</item>
-        <item name="fontFamily">sans-serif-medium</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
+
     </style>
 
-    <style name="titre">
+    <style name="card_dashboard_green_color">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/main_color</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
     </style>
 
     <style name="version">

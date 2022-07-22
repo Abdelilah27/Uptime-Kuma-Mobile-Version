@@ -32,7 +32,7 @@
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.34913024902343737" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.12431693989071038" />
         <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.18575286865234375" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.15437158469945356" />

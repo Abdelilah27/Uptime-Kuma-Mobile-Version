@@ -13,15 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.15" />
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/background_color_Recycler_dashbord_fragment"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -31,7 +30,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline16"
@@ -54,22 +54,12 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.75" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
-
             <TextView
                 android:id="@+id/textView30"
                 style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="8dp"
-                android:autoSizeTextType="uniform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/titre"
-                app:layout_constraintBottom_toTopOf="@+id/guideline18"
                 app:layout_constraintEnd_toStartOf="@+id/guideline16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,12 +67,11 @@
             <TextView
                 android:id="@+id/textView31"
                 style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:autoSizeTextType="uniform"
                 android:text="@string/down"
-                app:layout_constraintBottom_toTopOf="@+id/guideline18"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,10 +79,10 @@
             <TextView
                 android:id="@+id/textView"
                 style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="@string/unknown"
-                app:layout_constraintBottom_toTopOf="@+id/guideline18"
                 app:layout_constraintEnd_toStartOf="@+id/guideline1"
                 app:layout_constraintStart_toStartOf="@+id/guideline17"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -101,57 +90,53 @@
             <TextView
                 android:id="@+id/textView2"
                 style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:text="@string/pause"
-                app:layout_constraintBottom_toTopOf="@+id/guideline18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView3"
-                style="@style/titre"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/en_ligne_number"
+                style="@style/card_dashboard_green_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="27"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline18" />
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
             <TextView
-                android:id="@+id/textView4"
-                style="@style/title"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/down_number"
+                style="@style/card_dashboard_green_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="7"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline17"
                 app:layout_constraintStart_toStartOf="@+id/guideline16"
-                app:layout_constraintTop_toTopOf="@+id/guideline18" />
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
-                android:id="@+id/textView5"
-                style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/unknown_number"
+                style="@style/card_dashboard_red_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="0"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline1"
                 app:layout_constraintStart_toStartOf="@+id/guideline17"
-                app:layout_constraintTop_toTopOf="@+id/guideline18" />
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
-                android:id="@+id/textView6"
-                style="@style/title_fragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/pause_number"
+                style="@style/card_dashboard_red_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="3"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toTopOf="@+id/guideline18" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
