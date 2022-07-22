@@ -1,10 +1,8 @@
-package com.uptime.kuma.views
+package com.uptime.kuma.views.notifications
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentNotificationsBinding
