@@ -8,5 +8,5 @@ import android.view.ViewGroup
 import com.uptime.kuma.R
 
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
 }

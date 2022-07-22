@@ -5,17 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="views.NotificationsFragment"
-    android:background="@color/background_color_second">
+    android:background="@color/background_color_main">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/background_color_second"
+        app:cardCornerRadius="40dp"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_fragment_notifications_name"
+                style="@style/title_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:layout_margin="0dp"
+                android:text="Notifications" />
+
+            <TextView
+                android:id="@+id/tv_fragment_notification_desc"
+                style="@style/title_fragment"
+                android:textSize = "17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Une fois ajoutée, vous devez l'activer manuellement dans les paramètres de vos hôtes." />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/parametreRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@color/background_color_second"
+                tools:listitem="@layout/parametre_recycler_item"
+                />
 
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/main_color"
-        android:text="Activer les notifications"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="76dp" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
