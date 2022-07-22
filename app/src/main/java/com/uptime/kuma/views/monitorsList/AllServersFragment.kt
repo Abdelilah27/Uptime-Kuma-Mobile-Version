@@ -1,9 +1,13 @@
 package com.uptime.kuma.views.monitorsList
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,26 +33,6 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
 
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_servers, menu)
-        val searchItem = menu.findItem(R.id.search_action)
-        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-
-        searchView.setOnQueryTextListener(object :
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return true
-
-            }
-
-        })
-
     }
 
 

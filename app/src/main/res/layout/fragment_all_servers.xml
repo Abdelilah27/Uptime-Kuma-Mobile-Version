@@ -44,4 +44,5 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_all_servers_fragment" />
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
