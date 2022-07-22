@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/background_color_main">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_item_all_server_fragment"
+    android:padding="16dp">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_fragment_notifications_name"
+        style="@style/notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="189dp"
+        android:layout_toStartOf="@+id/notification_switch"
+        android:text="Notification EMAIL"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/dashbord_fragment_text_color"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-</androidx.cardview.widget.CardView>
+    <Switch
+        android:id="@+id/notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:gravity="top"
+        android:orientation="horizontal" />
+
+
+</RelativeLayout>
+
+
+
+

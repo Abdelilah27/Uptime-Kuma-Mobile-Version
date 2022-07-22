@@ -38,13 +38,13 @@
                 android:text="Une fois ajoutée, vous devez l'activer manuellement dans les paramètres de vos hôtes." />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/parametreRecycler"
+                android:id="@+id/notification_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 android:background="@color/background_color_second"
-                tools:listitem="@layout/parametre_recycler_item"
+                tools:listitem="@layout/notifications_recycler_item"
                 />
 
 
