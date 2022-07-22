@@ -7,4 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:navGraph="@navigation/nav_graph"
-    tools:context=".MainActivity" />
+    tools:context=".MainActivity">
+</androidx.fragment.app.FragmentContainerView>
