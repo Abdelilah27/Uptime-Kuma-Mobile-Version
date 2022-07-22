@@ -28,7 +28,7 @@ class GroupStatusFragment : Fragment(R.layout.fragment_group_status) {
 
     private fun getData(): List<StatusGroup> {
         val subListData1 = arrayListOf<MonitorItem>()
-        subListData1.add(MonitorItem(id = 1, percent = "99.2", title = "2M.ma", isOnline = false))
+        subListData1.add(MonitorItem(id = 1, percent = "99.2%", title = "2M.ma", isOnline = false))
         subListData1.add(
             MonitorItem(
                 id = 1, percent = "100", title = "Mobiblanc.ma", isOnline =
@@ -36,8 +36,8 @@ class GroupStatusFragment : Fragment(R.layout.fragment_group_status) {
             )
         )
         val subListData2 = arrayListOf<MonitorItem>()
-        subListData2.add(MonitorItem(id = 1, percent = "87.29", title = "Inwi.ma", isOnline = true))
-        subListData2.add(MonitorItem(id = 1, percent = "87.2", title = "Inwi.ma", isOnline = true))
+        subListData2.add(MonitorItem(id = 1, percent = "87.29%", title = "Inwi.ma", isOnline = true))
+        subListData2.add(MonitorItem(id = 1, percent = "87.2%", title = "Inwi.ma", isOnline = false))
         subListData2.add(
             MonitorItem(
                 id = 1,
