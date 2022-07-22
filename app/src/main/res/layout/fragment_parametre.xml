@@ -22,19 +22,20 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineparametre" >
+        app:layout_constraintTop_toTopOf="@+id/guidelineparametre">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/parametreRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/background_color_second"
-            tools:listitem="@layout/parametre_recycler_item"
-            />
+            tools:listitem="@layout/parametre_recycler_item" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline

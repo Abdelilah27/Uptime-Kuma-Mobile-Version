@@ -4,7 +4,6 @@
     <string name="main_text_1_bienvenue_fragment">Welcome to the</string>
     <string name="main_text_2_bienvenue_fragment">uptime monitoring</string>
     <string name="main_text_3_bienvenue_fragment">ecosystem</string>
-
     <string name="second_bienvenue_fragment"><![CDATA[Le premier service mondial de surveillance de la disponibilité.Soyez le premier à savoir que votre site Web est en panne! Une surveillance fiable vous avertit avant tout problème important et vous fait économiser de l\'argent.]]></string>
     <string name="button_text_bienvenue_fragment">Commencer</string>
     <string name="search_text_all_servers_fragment">Recherche</string>
@@ -26,4 +25,18 @@
     <string name="down">Down</string>
     <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
+    <string name="about">About</string>
+    <string name="Uptime_Kuma">Uptime Kuma</string>
+    <string name="version">Version: 1.17.1</string>
+    <string name="credits">Credits Mobiblanc</string>
+    <string name="apparence">Apparence</string>
+    <string name="langue">Language:</string>
+    <string name="anglais">English</string>
+    <string name="switche">Dark Mode</string>
+
+    <string-array name="list">
+        <item>Français</item>
+        <item>Anglais</item>
+        <item>Arabe</item>
+    </string-array>
 </resources>
