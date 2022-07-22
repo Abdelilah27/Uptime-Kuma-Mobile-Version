@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
-import com.uptime.kuma.views.adapters.StatusAdapter
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
+import com.uptime.kuma.views.adapters.StatusAdapter
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
@@ -57,7 +57,7 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_statusFragment_to_itemStatusFragment)
+        findNavController().navigate(R.id.action_statusFragment_to_groupStatusFragment)
         Log.d("TAG", "onItemClick: " + position)
     }
 

@@ -29,19 +29,23 @@
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.12431693989071038" />
         <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.14617462158203126" />
-        <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.12039431157078216" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.18575286865234375" />
+        <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.15437158469945356" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20032894736842105" />
         <entry key="app/src/main/res/layout/fragment_parametre.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_server.xml" value="0.2390710382513661" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.12039431157078216" />
+        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_status_details.xml" value="0.24385245901639344" />
         <entry key="app/src/main/res/layout/item_all_servers_fragment.xml" value="0.2853036743637509" />
         <entry key="app/src/main/res/layout/item_status_details_fragment.xml" value="0.24385245901639344" />
-        <entry key="app/src/main/res/layout/item_status_fragment.xml" value="0.12039431157078216" />
+        <entry key="app/src/main/res/layout/item_status_fragment.xml" value="0.2281350952621884" />
+        <entry key="app/src/main/res/layout/item_status_group.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_test.xml" value="0.24180327868852458" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/parametre_recycler_item.xml" value="0.2776268115942029" />
       </map>
     </option>
   </component>
