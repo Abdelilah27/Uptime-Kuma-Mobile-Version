@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_all_servers"
         android:title="Lister" />
     <item
-        android:id="@+id/addStatusFragment"
+        android:id="@+id/statusFragment"
         android:icon="@drawable/ic_add_status"
         android:title="Ajouter" />
     <item

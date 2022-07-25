@@ -1,6 +1,7 @@
 package com.uptime.kuma
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,6 +23,16 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         val bottomNavigationView =findViewById<BottomNavigationView>(R.id.BottomNavigationview)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.splashFragment|| destination.id == R.id.loginFragment || destination.id == R.id.bienvenueFragment) {
+
+                bottomNavigationView.visibility = View.GONE
+            } else {
+
+                bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
         setupWithNavController(bottomNavigationView,navController)
 
        // setupActionBarWithNavController(navController)
