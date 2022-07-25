@@ -8,7 +8,6 @@
     android:background="@color/background_all_server_fragment"
     tools:context=".views.server.ServerFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

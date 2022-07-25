@@ -150,9 +150,7 @@
     <style name="link_server_fragment">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="android:textColor">@color/main_text_splash_fragment</item>
     </style>
     <style name="card_dashboard_red_color">
         <item name="autoSizeTextType">uniform</item>
@@ -161,9 +159,16 @@
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:textSize">35sp</item>
-
     </style>
 
+    <style name="card_dashboard_green_color">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
     <style name="titre">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
