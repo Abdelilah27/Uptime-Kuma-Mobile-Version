@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_bar_color</item>
-        <item name="colorPrimaryVariant">@color/app_bar_color</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -91,7 +91,6 @@
         <item name="fontFamily">sans-serif-black</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
     </style>
-
     <style name="medium_size_status_text_fragment">
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_vertical</item>
@@ -117,14 +116,12 @@
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
         <item name="android:layout_margin">16dp</item>
     </style>
-
     <style name="notification_text">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
         <item name="android:layout_margin">16dp</item>
     </style>
-
     <style name="title_fragment">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
@@ -153,11 +150,10 @@
     <style name="link_server_fragment">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/main_text_splash_fragment</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
+        <item name="android:layout_margin">16dp</item>
     </style>
-
     <style name="card_dashboard_red_color">
         <item name="autoSizeTextType">uniform</item>
         <item name="android:gravity">center</item>
@@ -168,13 +164,12 @@
 
     </style>
 
-    <style name="card_dashboard_green_color">
+    <style name="titre">
         <item name="autoSizeTextType">uniform</item>
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/main_color</item>
-        <item name="android:layout_margin">0dp</item>
-        <item name="android:textSize">35sp</item>
+        <item name="android:layout_margin">16dp</item>
     </style>
 
     <style name="version">
@@ -197,5 +192,4 @@
         <item name="android:gradientRadius">8dp</item>
         <item name="android:textColor">@color/grey</item>
     </style>
-
 </resources>
