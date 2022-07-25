@@ -46,6 +46,37 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
+    <style name="delete_button_different_size_server_fragment">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/background_no_active_item_all_server_fragment</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="pause_button_different_size_server_fragment">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/main_text_item_all_server_fragment</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="status_server_fragment">
+        <item name="android:textColor">@color/background_all_server_fragment</item>
+        <item name="backgroundTint">@color/main_text_splash_fragment</item>
+        <item name="android:textSize">20sp</item>s
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_margin">8dp</item>
+
+    </style>
+
     <style name="status_text_fragment">
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_vertical</item>
@@ -101,7 +132,30 @@
         <item name="android:textColor">@color/dashbord_fragment_text_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:layout_margin">8dp</item>
+    </style>
 
+    <style name="without_margin_title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dashbord_fragment_text_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="differente_size_title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dashbord_fragment_text_color</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="link_server_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/main_text_splash_fragment</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="card_dashboard_red_color">
