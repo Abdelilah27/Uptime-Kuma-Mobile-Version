@@ -19,12 +19,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-     //   (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+
+
+        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
         // Inflate the layout for this fragment
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(R.id.action_splashFragment_to_bienvenueFragment)
-        }, 3000)
+        }, 2500)
 
         return view
     }

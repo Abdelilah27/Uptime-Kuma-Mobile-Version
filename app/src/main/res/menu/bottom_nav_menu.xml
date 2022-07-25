@@ -11,8 +11,8 @@
         android:title="Lister" />
     <item
         android:id="@+id/statusFragment"
-        android:icon="@drawable/ic_add_status"
-        android:title="Ajouter" />
+        android:icon="@drawable/ic_baseline_checklist_24"
+        android:title="Status" />
     <item
         android:id="@+id/parametreFragment"
         android:icon="@drawable/ic_parametre"

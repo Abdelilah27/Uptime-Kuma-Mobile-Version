@@ -35,10 +35,9 @@ class MainActivity : AppCompatActivity() {
         }
         setupWithNavController(bottomNavigationView,navController)
 
-       // setupActionBarWithNavController(navController)
+        setupActionBarWithNavController(navController)
     }
-/*
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-    }*/
+    }
 }

@@ -23,7 +23,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-    //    (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }

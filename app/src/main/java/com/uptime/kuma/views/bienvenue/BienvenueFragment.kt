@@ -24,7 +24,7 @@ class BienvenueFragment : Fragment(R.layout.fragment_bienvenue) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-    //    (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
+        (activity as AppCompatActivity?)!!.getSupportActionBar()!!.hide()
 //        activity?.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
         _binding = FragmentBienvenueBinding.inflate(inflater, container, false)
 
