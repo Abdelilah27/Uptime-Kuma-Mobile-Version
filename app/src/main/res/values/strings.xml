@@ -53,6 +53,8 @@ s
     <string name="second_uptime_second_server_fragment">(30-jours)</string>
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
+    <string name="range_graph_server_fragment">Temps de reponse</string>
+
 
     <string-array name="list">
         <item>Français</item>

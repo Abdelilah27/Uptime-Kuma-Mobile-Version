@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/serverFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/serverFragment"
-        android:name="com.uptime.kuma.views.ServerFragment"
+        android:name="com.uptime.kuma.views.server.ServerFragment"
         android:label="fragment_server"
         tools:layout="@layout/fragment_server" />
     <fragment

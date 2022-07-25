@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_all_server_fragment"
-    tools:context="views.ServerFragment">
+    tools:context=".views.server.ServerFragment">
 
 
     <ScrollView
@@ -434,6 +434,38 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/background_item_all_server_fragment"
+                app:cardCornerRadius="30dp">
+
+                <com.androidplot.xy.XYPlot
+                    android:id="@+id/graph_server_fragment"
+                    style="@style/APDefacto.Dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:backgroundColor="@color/background_item_all_server_fragment"
+                    app:rangeTitle="@string/range_graph_server_fragment">
+
+                </com.androidplot.xy.XYPlot>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_server_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background_color_Recycler_dashbord_fragment"
+                    tools:listitem="@layout/dashbord_recylcer_item" />
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
