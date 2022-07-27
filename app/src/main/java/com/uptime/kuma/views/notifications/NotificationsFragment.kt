@@ -14,7 +14,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding=FragmentNotificationsBinding.bind(view)
+        val binding=com.uptime.kuma.databinding.FragmentNotificationsBinding.bind(view)
 
         val notificationRecyclerAdapter=NotificationRecyclerAdapter()
         binding.apply {
@@ -36,7 +36,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
             NotificationItem("Mobiblanc.World",true)
         )
         data.add(
-            NotificationItem("Notification Google Chat Devops",false)
+            NotificationItem("Notification Google Chat Devops Notification Google Chat Devops Notification Google Chat Devops",false)
         )
         data.add(
             NotificationItem("Notification Rocket.chat",true)

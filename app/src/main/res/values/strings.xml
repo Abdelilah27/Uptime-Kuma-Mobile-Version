@@ -18,8 +18,8 @@
     <string name="caracter_accepted_1_add_status_fragment">Accepter les caractères: a-z / 0-9 / -</string>
     <string name="caracter_accepted_2_add_status_fragment">Commencer ou finir par a-z uniquement</string>
     <string name="caracter_accepted_3_add_status_fragment">Pas de tirets consécutifs --</string>
-    <string name="Email">Email Adresse</string>
-    <string name="Password">Password</string>
+    <!--    <string name="Email">Email Adresse</string>-->
+    <!--    <string name="Password">Password</string>-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="titre">En ligne</string>
     <string name="down">Down</string>
@@ -49,11 +49,15 @@
 
     <string name="uptime_second_server_fragment">(24-heures)</string>
     <string name="uptime_third_server_fragment">100%</string>
-s
+    s
     <string name="second_uptime_second_server_fragment">(30-jours)</string>
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
     <string name="range_graph_server_fragment">Temps de reponse</string>
+
+
+    <string name="Email"><font size="15">Email Adresse</font></string>
+    <string name="Password"><font size="15">Password</font></string>
 
 
     <string-array name="list">
