@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_main"
+    android:background="@color/background_all_server_fragment"
     tools:context=".views.parametre.ParametreFragment">
 
 
@@ -11,7 +11,7 @@
         android:id="@+id/parametreRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color_second"
+        android:background="@color/background_all_server_fragment"
         android:padding="8dp"
         tools:listitem="@layout/parametre_recycler_item" />
 

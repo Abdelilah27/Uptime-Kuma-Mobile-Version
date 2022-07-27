@@ -13,6 +13,7 @@
         style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:text="@string/langue"
@@ -41,7 +42,6 @@
             style="@style/drop_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:inputType="none"
             android:text="@string/anglais" />
@@ -52,7 +52,7 @@
         style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:fontFamily="sans-serif-black"
         android:text="@string/switche"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
@@ -64,7 +64,6 @@
         android:layout_marginTop="16dp"
         android:text="Switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 

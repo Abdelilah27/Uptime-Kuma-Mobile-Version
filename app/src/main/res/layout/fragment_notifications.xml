@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Une fois ajoutée, vous devez l'activer manuellement dans les paramètres de vos hôtes."
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notification_recycler"

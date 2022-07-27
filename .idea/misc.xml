@@ -27,20 +27,20 @@
         <entry key="app/src/main/res/drawable/search_view_background_all_servers_fragment.xml" value="0.231" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/dashbord_recylcer_item.xml" value="0.24180327868852458" />
-        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.17098330082859464" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2501397949692197" />
         <entry key="app/src/main/res/layout/fragment_add_status.xml" value="0.18478912353515622" />
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.34913024902343737" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.17708793598446038" />
-        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.34092010498046876" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.40788116455078127" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.15437158469945356" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2071425807932036" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20032894736842105" />
         <entry key="app/src/main/res/layout/fragment_parametre.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/layout/fragment_server.xml" value="0.19891204833984372" />
-        <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_server.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1488555908203125" />
+        <entry key="app/src/main/res/layout/fragment_status.xml" value="0.3885238647460938" />
         <entry key="app/src/main/res/layout/fragment_status_details.xml" value="0.24385245901639344" />
         <entry key="app/src/main/res/layout/item_all_servers_fragment.xml" value="0.2853036743637509" />
         <entry key="app/src/main/res/layout/item_status_details_fragment.xml" value="0.24385245901639344" />

@@ -13,8 +13,8 @@ import com.uptime.kuma.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private var Email = "aaa"
-    private var Password = "111"
+    private var Email = ""
+    private var Password = ""
 
     lateinit var binding: FragmentLoginBinding
 
