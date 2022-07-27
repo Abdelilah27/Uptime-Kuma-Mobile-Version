@@ -35,8 +35,8 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.40788116455078127" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2071425807932036" />
-        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.20032894736842105" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2159377468088286" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2640939009817023" />
         <entry key="app/src/main/res/layout/fragment_parametre.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_server.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1488555908203125" />
