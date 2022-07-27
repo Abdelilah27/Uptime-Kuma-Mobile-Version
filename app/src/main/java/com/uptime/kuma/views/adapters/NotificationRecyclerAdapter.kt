@@ -11,7 +11,7 @@ import com.uptime.kuma.models.NotificationItem
 
 class NotificationRecyclerAdapter:ListAdapter<NotificationItem,NotificationRecyclerAdapter.ViewHolder>(DiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding=NotificationsRecyclerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding=com.uptime.kuma.databinding.NotificationsRecyclerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 

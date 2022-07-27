@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/dashboardFragment"
         android:icon="@drawable/ic_dashbord"
-        android:title="Dashbord" />
+        android:title="Dashbord"
+
+        />
     <item
         android:id="@+id/allServersFragment"
         android:icon="@drawable/ic_all_servers"
@@ -16,5 +19,6 @@
     <item
         android:id="@+id/parametreFragment"
         android:icon="@drawable/ic_parametre"
-        android:title="Paramètres" />
+        android:title="Paramètres"
+        />
 </menu>

@@ -25,8 +25,8 @@
             android:id="@+id/notification_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             tools:listitem="@layout/notifications_recycler_item" />
 
 

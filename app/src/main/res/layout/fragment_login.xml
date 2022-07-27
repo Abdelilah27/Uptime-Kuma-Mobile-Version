@@ -18,6 +18,21 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text"
+        style="@style/main_text_bienvenue_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/main_text_splash_fragment"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/icon"
+         />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -38,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.52" />
+        app:layout_constraintGuide_percent="0.57" />
 
 
     <LinearLayout
@@ -58,7 +73,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/background_edit_text_login"
+            android:background="@drawable/custom_login_edit_text"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="10sp"
             android:hint="@string/Email"
@@ -73,7 +88,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/background_edit_text_login"
+            android:background="@drawable/custom_login_edit_text"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="10sp"
             android:hint="@string/Password"
