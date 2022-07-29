@@ -35,12 +35,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         replaceFragment(dashboardFragment)
-        binding.BottomNavigationView.setOnNavigationItemReselectedListener {
+        binding.BottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.dashboardFragment -> replaceFragment(dashboardFragment)
                 R.id.allServersFragment -> replaceFragment(allServersdFragment)
                 R.id.statusFragment -> replaceFragment(statusFragment)
                 R.id.parametreFragment -> replaceFragment(parametreFragment)
+//                findNavController().navigate(R.id.allServersFragment)
             }
             true
         }
@@ -49,6 +50,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun replaceFragment(fragment: Fragment) {
         val transaction = (activity as FragmentActivity).supportFragmentManager.beginTransaction()
         transaction.replace(R.id.nav_host_frame_layout, fragment)
+        transaction.show(fragment)
         transaction.commit()
 
     }

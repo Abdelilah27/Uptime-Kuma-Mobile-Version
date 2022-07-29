@@ -3,6 +3,7 @@ package com.uptime.kuma.views.dashbord
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.MainActivity
 import com.uptime.kuma.R
@@ -13,7 +14,6 @@ import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DashboardRecyclerAdapter.OnItemClickListener {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDashboardBinding.bind(view)
@@ -30,8 +30,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     override fun onItemClick(position: Int) {
-            MainActivity.navController.navigate(R.id.action_dashboardFragment_to_serverFragment)
-//         findNavController().navigate(R.id.action_dashboardFragment_to_serverFragment)
+         findNavController().navigate(R.id.action_dashboardFragment_to_serverFragment)
     }
 
     private fun getData(): List<DashbordItems> {

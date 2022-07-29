@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
@@ -13,7 +17,6 @@ import com.uptime.kuma.views.adapters.StatusAdapter
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -25,11 +28,17 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
                 itemAdapter?.submitList(getData())
-
             }
         }
         binding.addfloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
+//            MainActivity.navController.navigate(
+//                R.id
+//                    .action_statusFragment_to_addStatusFragment
+//            )
+//            Log.d("TAG", "onViewCreated: "+ MainActivity.navController.currentDestination)
+            MainActivity.navController.navigate(R.id.addStatusFragment)
+//            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
+
         }
     }
 
