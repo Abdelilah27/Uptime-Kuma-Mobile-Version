@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_fragment__nav_graph"
+    app:startDestination="@id/dashboardFragment">
+    <fragment
+        android:id="@+id/parametreFragment"
+        android:name="com.uptime.kuma.views.parametre.ParametreFragment"
+        android:label="fragment_parametre"
+        tools:layout="@layout/fragment_parametre">
+        <action
+            android:id="@+id/action_parametreFragment_to_apparenceReglageFragment"
+            app:destination="@id/apparenceReglageFragment" />
+        <action
+            android:id="@+id/action_parametreFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_parametreFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.uptime.kuma.views.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/apparenceReglageFragment"
+        android:name="com.uptime.kuma.views.apparence.ApparenceReglageFragment"
+        android:label="fragment_apparence_reglage"
+        tools:layout="@layout/fragment_apparence_reglage" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.uptime.kuma.views.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.uptime.kuma.views.dashbord.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_serverFragment"
+            app:destination="@id/serverFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.uptime.kuma.views.status.StatusFragment"
+        android:label="fragment_status"
+        tools:layout="@layout/fragment_status">
+        <action
+            android:id="@+id/action_statusFragment_to_addStatusFragment"
+            app:destination="@id/addStatusFragment" />
+        <action
+            android:id="@+id/action_statusFragment_to_groupStatusFragment"
+            app:destination="@id/groupStatusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupStatusFragment"
+        android:name="com.uptime.kuma.views.itemGroupStatus.GroupStatusFragment"
+        android:label="fragment_group_status"
+        tools:layout="@layout/fragment_group_status" />
+    <fragment
+        android:id="@+id/serverFragment"
+        android:name="com.uptime.kuma.views.server.ServerFragment"
+        android:label="fragment_server"
+        tools:layout="@layout/fragment_server" />
+    <fragment
+        android:id="@+id/addStatusFragment"
+        android:name="com.uptime.kuma.views.addStatus.AddStatusFragment"
+        android:label="fragment_add_status"
+        tools:layout="@layout/fragment_add_status">
+        <action
+            android:id="@+id/action_addStatusFragment_to_statusFragment"
+            app:destination="@id/statusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allServersFragment"
+        android:name="com.uptime.kuma.views.monitorsList.AllServersFragment"
+        android:label="fragment_all_servers"
+        tools:layout="@layout/fragment_all_servers">
+        <action
+            android:id="@+id/action_allServersFragment_to_serverFragment"
+            app:destination="@id/serverFragment" />
+    </fragment>
+</navigation>

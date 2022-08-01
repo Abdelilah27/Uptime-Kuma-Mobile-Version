@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.MainActivity
+import com.uptime.kuma.MainFragment
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
@@ -17,6 +14,7 @@ import com.uptime.kuma.views.adapters.StatusAdapter
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -31,18 +29,36 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
             }
         }
         binding.addfloatingActionButton.setOnClickListener {
-//            MainActivity.navController.navigate(
+            MainFragment.navMainController.navigate(
+                R.id
+                    .action_statusFragment_to_addStatusFragment
+            )
+//            Log.d("TAG", "onViewCreated: "+ MainActivity.navController.currentDestination)
+//            MainActivity.navController.navigate(R.id.addStatusFragment)
+//            Log.d("TAG", "onViewCreated: " + navController.currentDestination)
+//            val action = StatusFragmentDirections
+//                .actionStatusFragmentToAddStatusFragment()
+//            MainActivity.navController.navigate(action)
+
+//            Navigation.findNavController(view).navigate(
+//                StatusFragmentDirections
+//                    .actionStatusFragmentToAddStatusFragment()
+//            )
+//            if (findNavController().currentDestination?.id == R.id.addStatusFragment)
+//                findNavController().navigate(
+//                    StatusFragmentDirections
+//                        .actionStatusFragmentToAddStatusFragment()
+//                )
+
+//            Log.d("scatC", "onCreate:" + NavControllerHelper.instance.get())
+//            NavControllerHelper.instance.get().navigate(
 //                R.id
 //                    .action_statusFragment_to_addStatusFragment
 //            )
-//            Log.d("TAG", "onViewCreated: "+ MainActivity.navController.currentDestination)
-            MainActivity.navController.navigate(R.id.addStatusFragment)
-//            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
-
         }
     }
 
-    private fun getData(): List<Status>? {
+    private fun getData(): List<Status> {
         val data = arrayListOf<Status>()
         data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
         data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
@@ -64,7 +80,10 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_statusFragment_to_groupStatusFragment)
+        findNavController().navigate(
+            R.id
+                .action_statusFragment_to_groupStatusFragment
+        )
         Log.d("TAG", "onItemClick: " + position)
     }
 
