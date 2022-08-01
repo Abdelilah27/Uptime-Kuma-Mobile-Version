@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import com.uptime.kuma.MainActivity
+import com.uptime.kuma.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
 
@@ -33,8 +35,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (binding.emailEdt.text.toString() != Email || binding.passwordEdt.text.toString() != Password) {
                 Snackbar.make(binding.root, "Email et/ou Mot de passe incorrect(s)", Snackbar.LENGTH_LONG).show()
             } else
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_loginFragment_to_mainFragment)
+                navController
+                    .navigate(R.id.mainFragment)
         }
     }
 

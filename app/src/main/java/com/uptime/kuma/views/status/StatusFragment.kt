@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
@@ -28,33 +28,7 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
             }
         }
         binding.addfloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
-//            MainFragment.navMainController.navigate(
-//                R.id
-//                    .action_statusFragment_to_addStatusFragment
-//            )
-//            Log.d("TAG", "onViewCreated: "+ MainActivity.navController.currentDestination)
-//            MainActivity.navController.navigate(R.id.addStatusFragment)
-//            Log.d("TAG", "onViewCreated: " + navController.currentDestination)
-//            val action = StatusFragmentDirections
-//                .actionStatusFragmentToAddStatusFragment()
-//            MainActivity.navController.navigate(action)
-
-//            Navigation.findNavController(view).navigate(
-//                StatusFragmentDirections
-//                    .actionStatusFragmentToAddStatusFragment()
-//            )
-//            if (findNavController().currentDestination?.id == R.id.addStatusFragment)
-//                findNavController().navigate(
-//                    StatusFragmentDirections
-//                        .actionStatusFragmentToAddStatusFragment()
-//                )
-
-//            Log.d("scatC", "onCreate:" + NavControllerHelper.instance.get())
-//            NavControllerHelper.instance.get().navigate(
-//                R.id
-//                    .action_statusFragment_to_addStatusFragment
-//            )
+            navController.navigate(R.id.addStatusFragment)
         }
     }
 
@@ -80,9 +54,9 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(
+        navController.navigate(
             R.id
-                .action_statusFragment_to_groupStatusFragment
+                .groupStatusFragment
         )
         Log.d("TAG", "onItemClick: " + position)
     }

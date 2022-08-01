@@ -39,8 +39,43 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
+        android:id="@+id/serverFragment"
+        android:name="com.uptime.kuma.views.server.ServerFragment"
+        android:label="fragment_server"
+        tools:layout="@layout/fragment_server" />
+    <fragment
+        android:id="@+id/apparenceReglageFragment"
+        android:name="com.uptime.kuma.views.apparence.ApparenceReglageFragment"
+        android:label="fragment_apparence_reglage"
+        tools:layout="@layout/fragment_apparence_reglage" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.uptime.kuma.views.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.uptime.kuma.views.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/addStatusFragment"
+        android:name="com.uptime.kuma.views.addStatus.AddStatusFragment"
+        android:label="fragment_add_status"
+        tools:layout="@layout/fragment_add_status">
+        <action
+            android:id="@+id/action_addStatusFragment_to_bottom_nav_graph"
+            app:destination="@id/bottom_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupStatusFragment"
+        android:name="com.uptime.kuma.views.itemGroupStatus.GroupStatusFragment"
+        android:label="fragment_group_status"
+        tools:layout="@layout/fragment_group_status" />
+    <fragment
         android:id="@+id/mainFragment"
-        android:name="com.uptime.kuma.MainFragment"
+        android:name="com.uptime.kuma.views.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <include app:graph="@navigation/bottom_nav_graph" />
 </navigation>

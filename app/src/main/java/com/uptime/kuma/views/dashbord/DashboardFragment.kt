@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.DashbordItems
@@ -30,7 +31,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_dashboardFragment_to_serverFragment)
+        MainActivity.navController.navigate(R.id.serverFragment)
     }
 
     private fun getData(): List<DashbordItems> {

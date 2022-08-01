@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.models.MonitorItem
@@ -60,7 +58,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_allServersFragment_to_serverFragment)
+        MainActivity.navController.navigate(R.id.serverFragment)
 //        Log.d("TAG", "onItemClick: " + position)
     }
 

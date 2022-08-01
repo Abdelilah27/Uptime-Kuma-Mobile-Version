@@ -2,14 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
-    id ("androidx.navigation.safeargs")
-
 }
 
 plugins {
     id("kotlin-kapt")
 }
-
 
 android {
     compileSdk 32

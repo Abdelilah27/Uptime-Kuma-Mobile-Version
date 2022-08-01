@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.uptime.kuma.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentParametreBinding
 import com.uptime.kuma.models.ParametreItem
@@ -35,9 +36,9 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),ParametreRecycle
 
         Log.d("Parametre Name",getData()[position].paramname)
         when (getData()[position].paramname) {
-            "About" -> findNavController().navigate(R.id.action_parametreFragment_to_aboutFragment)
-            "Notifications" -> findNavController().navigate(R.id.action_parametreFragment_to_notificationsFragment)
-            "Apparence" -> findNavController().navigate(R.id.action_parametreFragment_to_apparenceReglageFragment)
+            "About" -> MainActivity.navController.navigate(R.id.aboutFragment)
+            "Notifications" -> MainActivity.navController.navigate(R.id.notificationsFragment)
+            "Apparence" -> MainActivity.navController.navigate(R.id.apparenceReglageFragment)
 
         }
     }
