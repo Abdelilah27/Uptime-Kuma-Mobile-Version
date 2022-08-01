@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.MainFragment
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
@@ -29,10 +28,11 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
             }
         }
         binding.addfloatingActionButton.setOnClickListener {
-            MainFragment.navMainController.navigate(
-                R.id
-                    .action_statusFragment_to_addStatusFragment
-            )
+            findNavController().navigate(R.id.action_statusFragment_to_addStatusFragment)
+//            MainFragment.navMainController.navigate(
+//                R.id
+//                    .action_statusFragment_to_addStatusFragment
+//            )
 //            Log.d("TAG", "onViewCreated: "+ MainActivity.navController.currentDestination)
 //            MainActivity.navController.navigate(R.id.addStatusFragment)
 //            Log.d("TAG", "onViewCreated: " + navController.currentDestination)

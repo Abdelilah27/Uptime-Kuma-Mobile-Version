@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uptime.kuma.databinding.FragmentMainBinding
 import com.uptime.kuma.views.dashbord.DashboardFragment
 import com.uptime.kuma.views.monitorsList.AllServersFragment
@@ -19,10 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
-    companion object {
-        lateinit var navMainController: NavController
-    }
-
     private val dashboardFragment = DashboardFragment()
     private val allServersdFragment = AllServersFragment()
     private val statusFragment = StatusFragment()
@@ -48,14 +43,36 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 //        navMainController = navHostFragment.navController
 //        binding.bottomNavigationView.setupWithNavController(navMainController)
 
-        val appCompat = requireActivity() as AppCompatActivity
+//        val appCompat = requireActivity() as AppCompatActivity
+//
+//        val navHostFragment =
+//            activity!!.supportFragmentManager.findFragmentById(R.id
+//                .fragmentContainerView) as
+//                    NavHostFragment
+//        val navController = navHostFragment.findNavController()
+//
+//        binding.bottomNavigationView.setupWithNavController(navController)
 
-        val navHostFragment =
-            (activity as MainFragment).childFragmentManager.findFragmentById(R.id
-                .fragmentContainerView) as
-                    NavHostFragment
-        val navController = navHostFragment.findNavController()
+//        val navHostFragment =
+//            (activity!!.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as
+//                    NavHostFragment)
+//        val inflater = navHostFragment.navController.navInflater
+//        val graph = inflater.inflate(R.navigation.main_fragment__nav_graph)
+////graph.addArgument("argument", NavArgument)
+//        graph.setStartDestination(R.id.dashboardFragment)
+////or
+////graph.setStartDestination(R.id.fragment2)
+//
+//        navHostFragment.navController.graph = graph
 
-        binding.bottomNavigationView.setupWithNavController(navController)
+
+        val navHost = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as
+                NavHostFragment
+        val navController = navHost.findNavController()
+
+        view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            .setupWithNavController(navController)
+
+
     }
 }
