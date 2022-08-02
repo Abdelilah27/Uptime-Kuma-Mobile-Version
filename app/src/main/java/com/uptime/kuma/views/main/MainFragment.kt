@@ -40,7 +40,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         view.findViewById<BottomNavigationView>(R.id.BottomNavigationView)
             .setupWithNavController(navController)
-
-
     }
 }
