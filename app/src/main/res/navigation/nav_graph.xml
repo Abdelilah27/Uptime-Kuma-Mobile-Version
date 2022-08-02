@@ -62,11 +62,7 @@
         android:id="@+id/addStatusFragment"
         android:name="com.uptime.kuma.views.addStatus.AddStatusFragment"
         android:label="fragment_add_status"
-        tools:layout="@layout/fragment_add_status">
-        <action
-            android:id="@+id/action_addStatusFragment_to_bottom_nav_graph"
-            app:destination="@id/bottom_nav_graph" />
-    </fragment>
+        tools:layout="@layout/fragment_add_status" />
     <fragment
         android:id="@+id/groupStatusFragment"
         android:name="com.uptime.kuma.views.itemGroupStatus.GroupStatusFragment"
@@ -77,5 +73,4 @@
         android:name="com.uptime.kuma.views.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
-    <include app:graph="@navigation/bottom_nav_graph" />
 </navigation>
