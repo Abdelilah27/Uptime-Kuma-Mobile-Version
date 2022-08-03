@@ -8,27 +8,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentSplashBinding
-import com.uptime.kuma.repository.ConnexionRepository
+import com.uptime.kuma.repository.SplashRepository
 import com.uptime.kuma.services.ApiUtilities
-import com.uptime.kuma.services.ConnexionService
+import com.uptime.kuma.services.ConnexionInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    private lateinit var webSocketService: ConnexionService
+    private lateinit var webSocketService: ConnexionInterface
     private lateinit var splashViewModel: SplashViewModel
-    private lateinit var connexionRepository: ConnexionRepository
+    private lateinit var splashRepository: SplashRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentSplashBinding.bind(view)
 
-
         webSocketService = ApiUtilities.getInstance(requireActivity().application)
-        connexionRepository =
-            ConnexionRepository(webSocketService)
-        splashViewModel = ViewModelProvider(this, SplashViewModelFactory(connexionRepository))
+        splashRepository =
+            SplashRepository(webSocketService)
+        splashViewModel = ViewModelProvider(this, SplashViewModelFactory(splashRepository))
             .get(SplashViewModel::class.java)
 
 
