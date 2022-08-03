@@ -11,7 +11,6 @@ import com.uptime.kuma.databinding.FragmentSplashBinding
 import com.uptime.kuma.repository.SplashRepository
 import com.uptime.kuma.services.ApiUtilities
 import com.uptime.kuma.services.ConnexionInterface
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -30,7 +29,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         splashViewModel = ViewModelProvider(this, SplashViewModelFactory(splashRepository))
             .get(SplashViewModel::class.java)
 
-
         observeConnection()
         binding.image.setOnClickListener {
             splashViewModel.sendQuery("40")
@@ -39,13 +37,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     @SuppressLint("CheckResult")
     private fun observeConnection() {
-        webSocketService.observeConnection()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response ->
-                Log.d("observeConnection", response.toString())
-            }, { error ->
-                Log.e("observeConnection", error.message.orEmpty())
-            })
+        splashViewModel.data.subscribe({ response ->
+            Log.d("observeConnection", response.toString())
+        }, { error ->
+            Log.e("observeConnection", error.message.orEmpty())
+        })
     }
 
 
