@@ -81,6 +81,9 @@ dependencies {
     implementation 'com.tinder.scarlet:lifecycle-android:0.1.12'
     implementation 'com.tinder.scarlet:websocket-okhttp:0.1.12'
     implementation 'com.tinder.scarlet:stream-adapter-rxjava2:0.1.12'
+    implementation 'com.tinder.scarlet:message-adapter-gson:0.1.12'
+    implementation 'com.tinder.scarlet:stream-adapter-coroutines:0.1.12'
+
 
     // rx
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
