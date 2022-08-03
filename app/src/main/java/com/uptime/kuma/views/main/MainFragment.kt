@@ -12,9 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentMainBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
     companion object {
         lateinit var navController: NavController
