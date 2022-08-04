@@ -1,4 +1,4 @@
-package com.uptime.kuma.services
+package com.uptime.kuma.api
 
 import com.tinder.scarlet.WebSocket
 import com.tinder.scarlet.ws.Receive

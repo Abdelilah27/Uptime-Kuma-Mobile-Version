@@ -1,4 +1,4 @@
-package com.uptime.kuma.services
+package com.uptime.kuma.api
 
 import android.app.Application
 import com.tinder.scarlet.Scarlet
