@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
-import com.uptime.kuma.MainActivity
-import com.uptime.kuma.MainActivity.Companion.navController
+import com.uptime.kuma.views.mainActivity.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
 

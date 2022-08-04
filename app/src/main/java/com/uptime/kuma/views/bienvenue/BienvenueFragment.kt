@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.uptime.kuma.MainActivity
+import com.uptime.kuma.views.mainActivity.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentBienvenueBinding
 

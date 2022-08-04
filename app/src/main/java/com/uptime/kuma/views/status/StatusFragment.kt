@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.MainActivity.Companion.navController
+import com.uptime.kuma.views.mainActivity.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status

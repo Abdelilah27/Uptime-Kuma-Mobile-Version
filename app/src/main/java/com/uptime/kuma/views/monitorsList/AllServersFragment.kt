@@ -1,14 +1,10 @@
 package com.uptime.kuma.views.monitorsList
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.MainActivity
+import com.uptime.kuma.views.mainActivity.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.models.MonitorItem

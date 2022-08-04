@@ -1,10 +1,10 @@
-package com.uptime.kuma.repository
+package com.uptime.kuma.service.sharedData
 
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.ConnexionInterface
 import io.reactivex.Flowable
 
-class SplashRepository(private val connexionInterface: ConnexionInterface) {
+class SharedRepository(private val connexionInterface: ConnexionInterface) {
     fun sendMessage(param: String) {
         val response = connexionInterface.sendMessage(param)
     }

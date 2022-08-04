@@ -3,9 +3,8 @@ package com.uptime.kuma.views.dashbord
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.MainActivity
+import com.uptime.kuma.views.mainActivity.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.DashbordItems
