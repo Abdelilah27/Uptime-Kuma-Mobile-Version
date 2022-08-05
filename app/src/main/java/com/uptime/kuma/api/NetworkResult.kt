@@ -1,6 +1,7 @@
 package com.uptime.kuma.api
 
 class NetworkResult {
+    // 0 -> Connexion opened
     // 1 -> Success response
     // 2 -> failure response
     // 3 -> error response

@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
             SharedViewModelFactory(sharedRepository)
         )[SharedViewModel::class.java]
 
+//        //Send query
+//        sharedViewModel.sendQuery(Constants.dataQuery)
+
+        sharedViewModel.listeningToResponse()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
