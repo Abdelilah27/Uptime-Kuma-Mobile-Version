@@ -2,20 +2,25 @@ package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
+import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.utils.Constants
 import io.reactivex.Flowable
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
-    private var connexion: Boolean = false
+
+    private val _monitorLiveData = MutableLiveData<List<Monitor>>()
+    val monitorLiveData: LiveData<List<Monitor>>
+        get() = _monitorLiveData
 
     //Get Data
     val data: Flowable<WebSocket.Event>
         get() = sharedRepository.getData()
+
 
     private fun sendQuery(param: String) {
         viewModelScope.launch {
@@ -26,24 +31,42 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
 
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
-    fun listeningToResponse() {
-        NetworkResult().set("0") //set connexion to open
+    fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
+        NetworkResult().set(MutableLiveData("0"))//set connexion to open
         data.subscribe({ response ->
-            if (response.toString().contains(Constants.successConnexion) || NetworkResult
-                    .instance.get() != "1"
-            ) {
-                Log.d("EFG", "listeningToResponse: ")
-                sendQuery(Constants.dataQuery)
-                NetworkResult().set("1")
+            lifecycleScope.launch {
+                NetworkResult.instance.get().observe(lifecycleOwner, Observer {
+                    if (response.toString()
+                            .contains(Constants.successConnexion) && NetworkResult
+                            .instance.get().value == "0"
+                    ) {
+                        sendQuery(Constants.dataQuery)
+                        NetworkResult.instance.get().postValue("1") //Success response
+                    }
+                })
+
             }
-            Log.d("response: ", response.toString())
+            Log.d("TAG", response.toString())
         }, { error ->
+            NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())
         })
     }
 
+//    //get Monitors item
+//    private fun getMonitorsItem(response: WebSocket.Event?, suffix: String, prefix: String) {
+//
+//    }
 
-    //get Monitors item
+    //extract String between two string
+    private fun extractResponse(response: String, suffix: String, prefix: String) {
+        val after =
+            response.substringAfter(suffix)
+        val before =
+            after.substringBefore(prefix)
+        Log.d("before4", before)
+    }
 
 
 }
+

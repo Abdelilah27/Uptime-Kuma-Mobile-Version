@@ -1,5 +1,6 @@
 package com.uptime.kuma.service.sharedData
 
+import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.ConnexionInterface
 import io.reactivex.Flowable

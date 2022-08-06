@@ -9,7 +9,7 @@ import com.uptime.kuma.utils.Constants
 import okhttp3.OkHttpClient
 
 object ApiUtilities {
-    fun getInstance(application: Application): ConnexionInterface {
+    fun provideScarlet(application: Application): Scarlet {
         val lifecycle = AndroidLifecycle.ofApplicationForeground(application)
         val okHttpClient = OkHttpClient.Builder().build()
         val streamAdapterFactory = RxJava2StreamAdapterFactory()
@@ -18,6 +18,10 @@ object ApiUtilities {
             .lifecycle(lifecycle)
             .addStreamAdapterFactory(streamAdapterFactory)
             .build()
-            .create(ConnexionInterface::class.java)
     }
+
+    fun getInstance(scarlet: Scarlet): ConnexionInterface {
+        return scarlet.create()
+    }
+
 }
