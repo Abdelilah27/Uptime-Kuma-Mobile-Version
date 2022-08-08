@@ -21,32 +21,10 @@ import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var scarlet: Scarlet
-        lateinit var webSocketService: ConnexionInterface
-        lateinit var sharedViewModel: SharedViewModel
-    }
-
-    private lateinit var sharedRepository: SharedRepository
-
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentSplashBinding.bind(view)
-
-        //Setup and create connexion
-        scarlet = ApiUtilities.provideScarlet(requireActivity().application)
-        webSocketService = ApiUtilities.getInstance(scarlet)
-
-        //Service Shared Data
-        sharedRepository = SharedRepository(webSocketService)
-        sharedViewModel = ViewModelProvider(
-            this,
-            SharedViewModelFactory(sharedRepository)
-        )[SharedViewModel::class.java]
-
-        sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
 
         binding.apply {
             //Direction to the Bienvenue fragment when the data are retrieved
