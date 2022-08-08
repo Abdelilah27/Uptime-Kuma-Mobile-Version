@@ -49,13 +49,11 @@
 
     <string name="uptime_second_server_fragment">(24-heures)</string>
     <string name="uptime_third_server_fragment">100%</string>
-    s
+
     <string name="second_uptime_second_server_fragment">(30-jours)</string>
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
     <string name="range_graph_server_fragment">Temps de reponse</string>
-
-
     <string name="Email"><font size="15">Email Adresse</font></string>
     <string name="Password"><font size="15">Password</font></string>
 
