@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
 
+        setFullScreen(window)
+        lightStatusBar(window)
+
         //Setup and create connexion
         scarlet = ApiUtilities.provideScarlet(application)
         webSocketService = ApiUtilities.getInstance(scarlet)
@@ -47,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         )[SharedViewModel::class.java]
 
         sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
-
 
     }
 
