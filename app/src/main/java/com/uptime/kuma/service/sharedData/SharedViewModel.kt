@@ -14,8 +14,9 @@ import org.json.JSONObject
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
 
-    private val _monitorLiveData = MutableLiveData<Monitor>()
-    val monitorLiveData: LiveData<Monitor>
+    private val monitors: ArrayList<Monitor> = ArrayList()
+    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
+    val monitorLiveData: LiveData<ArrayList<Monitor>>
         get() = _monitorLiveData
 
     //Get Data
@@ -71,7 +72,6 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
             val jsonObject = JSONObject(customResponseEnd)
             for (i in 1 until jsonObject.length()) {
                 if (jsonObject.has(i.toString())) {
-                    Log.d("REA", i.toString())
                     //get separated jsonObjects
                     val json = jsonObject.getJSONObject(i.toString())
                     val name = json.get("name").toString()
@@ -101,36 +101,37 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                         )
                         accepted_statuscodes.add(statusCode.toString())
                     }
-                    //add data to MutableLiveData
-                    _monitorLiveData.postValue(
-                        Monitor(
-                            id = id as Int,
-                            name = name,
-                            active =
-                            active as Int,
-                            dns_resolve_server = dns_resolve_server,
-                            dns_resolve_type =
-                            dns_resolve_type,
-                            expiryNotification = expiryNotification as Boolean,
-                            ignoreTls = ignoreTls as Boolean,
-                            interval = interval as Int,
-                            maxredirects = maxredirects as Int,
-                            maxretries = maxretries as Int,
-                            method = method,
-                            type = type,
-                            upsideDown = upsideDown as Boolean,
-                            url = url,
-                            weight = weight as Int,
-                            retryInterval = retryInterval as Int,
-                            accepted_statuscodes = accepted_statuscodes
-                        )
+                    //init monitor
+                    val monitor = Monitor(
+                        id = id as Int,
+                        name = name,
+                        active =
+                        active as Int,
+                        dns_resolve_server = dns_resolve_server,
+                        dns_resolve_type =
+                        dns_resolve_type,
+                        expiryNotification = expiryNotification as Boolean,
+                        ignoreTls = ignoreTls as Boolean,
+                        interval = interval as Int,
+                        maxredirects = maxredirects as Int,
+                        maxretries = maxretries as Int,
+                        method = method,
+                        type = type,
+                        upsideDown = upsideDown as Boolean,
+                        url = url,
+                        weight = weight as Int,
+                        retryInterval = retryInterval as Int,
+                        accepted_statuscodes = accepted_statuscodes
                     )
+                    //add monitors to ArrayList
+                    monitors.add(monitor)
 
-                    Log.d("add", _monitorLiveData.value.toString())
                 } else {
                     continue
                 }
             }
+            //add ArrayList to MutableLiveData
+            _monitorLiveData.postValue(monitors)
         }
     }
 }

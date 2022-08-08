@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.ItemAllServersFragmentBinding
-import com.uptime.kuma.models.MonitorItem
+import com.uptime.kuma.models.monitor.Monitor
 
 class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLister) :
-    ListAdapter<MonitorItem, MonitorItemAllServersAdapter.ItemViewHolder>(DiffCallBack()) {
+    ListAdapter<Monitor, MonitorItemAllServersAdapter.ItemViewHolder>(DiffCallBack()) {
 
     inner class ItemViewHolder(
         private val biding: ItemAllServersFragmentBinding, val context:
@@ -24,11 +24,11 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
             itemView.setOnClickListener(this)
         }
 
-        fun bind(item: MonitorItem) {
+        fun bind(item: Monitor) {
             biding.apply {
-                percentText.text = item.percent
-                titleText.text = item.title
-                if (item.isOnline) {
+                percentText.text = "100%" // TODO
+                titleText.text = item.name
+                if (item.active != 1) {
                     cardView.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
@@ -73,14 +73,13 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
         holder.bind(currentItem)
     }
 
-    class DiffCallBack : DiffUtil.ItemCallback<MonitorItem>() {
-        override fun areItemsTheSame(oldItem: MonitorItem, newItem: MonitorItem): Boolean {
+    class DiffCallBack : DiffUtil.ItemCallback<Monitor>() {
+        override fun areItemsTheSame(oldItem: Monitor, newItem: Monitor): Boolean {
             return oldItem.id === newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MonitorItem, newItem: MonitorItem): Boolean {
-            return oldItem.title == newItem.title && oldItem.percent == newItem.percent &&
-                    oldItem.isOnline == newItem.isOnline
+        override fun areContentsTheSame(oldItem: Monitor, newItem: Monitor): Boolean {
+            return oldItem == newItem
         }
 
     }
