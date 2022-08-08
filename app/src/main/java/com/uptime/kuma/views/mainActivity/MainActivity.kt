@@ -17,9 +17,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setFullScreen(window) //rendre le title bar transparent
+        lightStatusBar(window) //rendre le title bar transparent
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
