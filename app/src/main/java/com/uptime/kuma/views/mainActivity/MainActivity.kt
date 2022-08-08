@@ -11,9 +11,11 @@ import com.tinder.scarlet.Scarlet
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ApiUtilities
 import com.uptime.kuma.api.ConnexionInterface
-import com.uptime.kuma.service.sharedData.SharedRepository
+import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
+import com.uptime.kuma.utils.lightStatusBar
+import com.uptime.kuma.utils.setFullScreen
 
 class MainActivity : AppCompatActivity() {
     companion object {

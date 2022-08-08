@@ -5,18 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.tinder.scarlet.Scarlet
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ApiUtilities
-import com.uptime.kuma.api.ConnexionInterface
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.databinding.FragmentSplashBinding
-import com.uptime.kuma.service.sharedData.SharedRepository
-import com.uptime.kuma.service.sharedData.SharedViewModel
-import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
