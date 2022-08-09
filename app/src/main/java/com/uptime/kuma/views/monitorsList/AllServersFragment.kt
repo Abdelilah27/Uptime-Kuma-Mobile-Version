@@ -18,6 +18,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = FragmentAllServersBinding.bind(view)
+
         binding.allServerRecycler.apply {
             itemAdapter = MonitorItemAllServersAdapter(context, this@AllServersFragment)
             adapter = itemAdapter
@@ -29,7 +30,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
 
     //observe monitor list
     private fun observeMonitorsList() {
-        MainActivity.sharedViewModel.monitorLiveData.observe(viewLifecycleOwner, Observer {
+        AllServersCompanionObject.monitorLiveData.observe(viewLifecycleOwner, Observer {
             itemAdapter.submitList(it)
         })
     }
