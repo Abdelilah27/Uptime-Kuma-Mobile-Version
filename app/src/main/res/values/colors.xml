@@ -21,7 +21,7 @@
     <color name="background_color_second">#0d1116</color>
     <color name="background_color_main">#070A10</color>
     <color name="dashbord_fragment_text_color">#c0c0c0</color>
-    <color name="text_color">#c0c0c0</color>
+
     <color name="dashbord_fragment_hors_ligne">#dc3545</color>
 
     <color name="background_bienvenue_fragment">#131A26</color>
@@ -33,5 +33,8 @@
     <color name="main_text_item_all_server_fragment">#B1B8BF</color>
     <color name="app_bar_color">#0A0D11</color>
     <color name="search_view_stroke_color">#161B22</color>
+<!---->
+    <color name="text_color">#c0c0c0</color>
+<!---->
 
 </resources>

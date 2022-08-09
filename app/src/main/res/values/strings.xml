@@ -4,24 +4,24 @@
     <string name="main_text_1_bienvenue_fragment">Welcome to the</string>
     <string name="main_text_2_bienvenue_fragment">uptime monitoring</string>
     <string name="main_text_3_bienvenue_fragment">ecosystem</string>
-    <string name="second_bienvenue_fragment"><![CDATA[Le premier service mondial de surveillance de la disponibilité.Soyez le premier à savoir que votre site Web est en panne! Une surveillance fiable vous avertit avant tout problème important et vous fait économiser de l\'argent.]]></string>
-    <string name="button_text_bienvenue_fragment">Commencer</string>
-    <string name="search_text_all_servers_fragment">Recherche</string>
+    <string name="second_bienvenue_fragment"><![CDATA[The world\'s leading uptime monitoring service. Be the first to know your website is down! Reliable monitoring warns you before any major problem and saves you money.]]></string>
+    <string name="button_text_bienvenue_fragment">Begin</string>
+    <string name="search_text_all_servers_fragment">Search</string>
     <string name="title_status_fragment">Status Pages</string>
-    <string name="title_dashboard_fragment">Résumé</string>
-    <string name="add_new_status_fragment">Ajouter un status</string>
-    <string name="title_add_status_fragment">Ajouter un status Page</string>
-    <string name="nom_add_status_fragment">Nom</string>
+    <string name="title_dashboard_fragment">Summary</string>
+    <string name="add_new_status_fragment">Add new status</string>
+    <string name="title_add_status_fragment">Add new status Page</string>
+    <string name="nom_add_status_fragment">Name</string>
     <string name="slug_add_status_fragment">Slug</string>
-    <string name="text_button_add_status_fragment">confirmer</string>
-    <string name="text_button_add_new_sonde_dashboard_fragment">Ajouter une sonde</string>
-    <string name="caracter_accepted_1_add_status_fragment">Accepter les caractères: a-z / 0-9 / -</string>
-    <string name="caracter_accepted_2_add_status_fragment">Commencer ou finir par a-z uniquement</string>
-    <string name="caracter_accepted_3_add_status_fragment">Pas de tirets consécutifs --</string>
+    <string name="text_button_add_status_fragment">confirm</string>
+    <string name="text_button_add_new_sonde_dashboard_fragment">Add new probe</string>
+    <string name="caracter_accepted_1_add_status_fragment">Accept caracters: a-z / 0-9 / -</string>
+    <string name="caracter_accepted_2_add_status_fragment">begin by define char a-z </string>
+    <string name="caracter_accepted_3_add_status_fragment"> No consecutive dashes--</string>
     <!--    <string name="Email">Email Adresse</string>-->
     <!--    <string name="Password">Password</string>-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="titre">En ligne</string>
+    <string name="titre">Online</string>
     <string name="down">Down</string>
     <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
@@ -29,38 +29,37 @@
     <string name="Uptime_Kuma">Uptime Kuma</string>
     <string name="version">Version: 1.17.1</string>
     <string name="credits">Credits Mobiblanc</string>
-    <string name="apparence">Apparence</string>
+    <string name="apparence">Appearance</string>
     <string name="langue">Language</string>
     <string name="anglais">English</string>
     <string name="switche">Dark Mode</string>
     <string name="pause_button_server_fragment">En Pause</string>
-    <string name="delete_button_server_fragment">Supprimer</string>
-    <string name="enLigne_status_server_fragment">En Ligne</string>
-    <string name="status_verification_server_fragment">Verifier toutes les 60 seconds</string>
-    <string name="temps_reponse_server_fragment">Temps \n de reponse</string>
-    <string name="reponse_moyenne_server_fragment">Reponse \n moyenne</string>
+    <string name="delete_button_server_fragment">Delete</string>
+    <string name="enLigne_status_server_fragment">Online</string>
+    <string name="status_verification_server_fragment">check every 60 seconds</string>
+    <string name="temps_reponse_server_fragment">time \n response</string>
+    <string name="reponse_moyenne_server_fragment">Response \n average</string>
     <string name="uptime_server_fragment">Uptime</string>
     <string name="second_uptime_server_fragment">Uptime</string>
-    <string name="temps_reponse_second_server_fragment">(Actuellement)</string>
+    <string name="temps_reponse_second_server_fragment">(Currently)</string>
     <string name="temps_reponse_third_server_fragment">499ms</string>
 
-    <string name="reponse_moyenne_second_server_fragment">(24-heures)</string>
+    <string name="reponse_moyenne_second_server_fragment">(24-hours)</string>
     <string name="reponse_moyenne_third_server_fragment">889ms</string>
 
-    <string name="uptime_second_server_fragment">(24-heures)</string>
+    <string name="uptime_second_server_fragment">(24-hours)</string>
     <string name="uptime_third_server_fragment">100%</string>
 
-    <string name="second_uptime_second_server_fragment">(30-jours)</string>
+    <string name="second_uptime_second_server_fragment">(30-days)</string>
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
-    <string name="range_graph_server_fragment">Temps de reponse</string>
-    <string name="Email"><font size="15">Email Adresse</font></string>
+    <string name="range_graph_server_fragment">Time of response</string>
+    <string name="Email"><font size="15">Email Address</font></string>
     <string name="Password"><font size="15">Password</font></string>
 
 
     <string-array name="list">
-        <item>Français</item>
-        <item>Anglais</item>
-        <item>Arabe</item>
+        <item>French</item>
+        <item>English</item>
     </string-array>
 </resources>
