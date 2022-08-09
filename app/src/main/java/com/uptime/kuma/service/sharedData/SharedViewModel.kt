@@ -1,8 +1,10 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
@@ -11,6 +13,7 @@ import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
 
@@ -49,6 +52,16 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())
         })
+    }
+
+    //setup language
+    fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
 

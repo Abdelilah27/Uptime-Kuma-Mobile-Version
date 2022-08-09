@@ -1,8 +1,5 @@
 package com.uptime.kuma.views.apparence
 
-import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,13 +13,11 @@ import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentApparenceReglageBinding
 import com.uptime.kuma.views.mainActivity.MainActivity
 
-import java.util.*
-
 
 class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage) {
 
     companion object {
-         lateinit var language :String
+        lateinit var language: String
     }
 
     private lateinit var apparenceReglageViewModel: ApparenceReglageViewModel
@@ -37,29 +32,28 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage) {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_item, list)
         // Inflate the layout for this fragment
         binding!!.auto.setAdapter(arrayAdapter)
-        apparenceReglageViewModel=ViewModelProvider(requireActivity()).get(ApparenceReglageViewModel::class.java)
         binding.auto.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-            Log.d("item selected",binding.auto.text.toString())
+            Log.d("item selected", binding.auto.text.toString())
             when (binding.auto.text.toString()) {
                 "English" -> {
-                    apparenceReglageViewModel.setAppLocale(requireContext(), "en")
+                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "en")
 //                    language="en"
-                    MainActivity.languageSettings.language="en"
+                    MainActivity.languageSettings.language = "en"
                 }
                 "French" -> {
-                    apparenceReglageViewModel.setAppLocale(requireContext(), "fr")
+                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "fr")
 //                    language="fr"
-                    MainActivity.languageSettings.language="fr"
+                    MainActivity.languageSettings.language = "fr"
                 }
                 "Anglais" -> {
-                    apparenceReglageViewModel.setAppLocale(requireContext(), "en")
+                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "en")
 //                    language="en"
-                    MainActivity.languageSettings.language="en"
+                   MainActivity.languageSettings.language = "en"
                 }
                 "Francais" -> {
-                    apparenceReglageViewModel.setAppLocale(requireContext(), "fr")
+                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "fr")
 //                    language="fr"
-                    MainActivity.languageSettings.language="fr"
+                    MainActivity.languageSettings.language = "fr"
                 }
 
             }
