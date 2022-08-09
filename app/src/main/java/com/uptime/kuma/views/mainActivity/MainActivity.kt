@@ -15,7 +15,6 @@ import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
-import com.uptime.kuma.utils.lightStatusBar
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -33,16 +32,20 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
+
+
+
         //instance Helper class languageSettings
         languageSettings = LanguageSettings(this)
 
 //        setFullScreen(window)
-        lightStatusBar(window)
+//        lightStatusBar(window)
 
         //Setup and create connexion
         scarlet = ApiUtilities.provideScarlet(application)

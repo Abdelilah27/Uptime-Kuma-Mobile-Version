@@ -14,7 +14,6 @@
             @color/background_color_dashbord_fragment
         </item>
         <!-- Customize your theme here. -->
-
     </style>
 
     <style name="bar_title_bienvenue_fragment">

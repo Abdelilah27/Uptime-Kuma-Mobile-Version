@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_all_server_fragment"
     tools:context=".views.monitorsList.AllServersFragment">
+
     <EditText
         android:id="@+id/search_edit_text_all_servers_fragment"
         android:layout_width="match_parent"
