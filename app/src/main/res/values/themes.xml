@@ -42,7 +42,7 @@
     <style name="delete_button_different_size_server_fragment">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/background_no_active_item_all_server_fragment</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -52,7 +52,7 @@
     <style name="pause_button_different_size_server_fragment">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/main_text_item_all_server_fragment</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
         <item name="android:layout_marginTop">8dp</item>

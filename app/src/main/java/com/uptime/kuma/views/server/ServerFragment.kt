@@ -21,6 +21,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 adapter = serverAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
+                isNestedScrollingEnabled = false;
                 serverAdapter.submitList(getData())
             }
         }
