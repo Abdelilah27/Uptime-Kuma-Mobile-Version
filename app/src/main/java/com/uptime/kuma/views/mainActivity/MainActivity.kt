@@ -15,7 +15,6 @@ import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.lightStatusBar
-import com.uptime.kuma.utils.setFullScreen
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setFullScreen(window)
+//        setFullScreen(window)
         lightStatusBar(window)
 
         //Setup and create connexion
