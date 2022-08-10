@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.uptime.kuma.databinding.ItemStatusFragmentBinding
-import com.uptime.kuma.models.Status
+import com.uptime.kuma.models.status.Status
 
 class StatusAdapter(val context: Context, val listener: OnClickLister) :
     ListAdapter<Status, StatusAdapter.ViewHolder>(
@@ -28,9 +28,9 @@ class StatusAdapter(val context: Context, val listener: OnClickLister) :
         fun bind(item: Status) {
             biding.apply {
                 titleStatus.text = item.title
-                pathStatus.text = item.path
+                pathStatus.text = "/status/"+item.slug
                 Glide.with(imageStatus)
-                    .load(item.image)
+                    .load(item.icon)
                     .into(imageStatus)
             }
         }
@@ -66,7 +66,7 @@ class StatusAdapter(val context: Context, val listener: OnClickLister) :
         }
 
         override fun areContentsTheSame(oldItem: Status, newItem: Status): Boolean {
-            return oldItem.title == newItem.title && oldItem.path == newItem.path
+            return oldItem == newItem
         }
     }
 

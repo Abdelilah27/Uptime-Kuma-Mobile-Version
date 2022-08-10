@@ -5,7 +5,7 @@ data class Status(
     val description: Any?=null,
     val domainNameList: List<Any>?=null,
     val footerText: Any?=null,
-    val icon: String?=null,
+    val icon: Int?=null,
     val id: Int=1,
     val published: Boolean=false,
     val showPoweredBy: Boolean=false,
