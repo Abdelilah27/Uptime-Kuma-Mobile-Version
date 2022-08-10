@@ -8,5 +8,5 @@ object Constants {
     const val successConnexion = "\"upgrades\":[],\"pingInterval\":25000,\"pingTimeout\":20000"
     const val closedConnexion = "shutdownReason"
     const val monitorListSuffix = "42[\"monitorList\","
-    const val statusListSuffix = "42[\"statusPageList\","
+    const val statusListSuffix = "42[\"statusPageList\",{"
 }
