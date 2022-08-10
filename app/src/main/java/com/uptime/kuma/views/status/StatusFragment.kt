@@ -19,6 +19,9 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
         setHasOptionsMenu(true)
         val binding = FragmentStatusBinding.bind(view)
         val itemAdapter = activity?.let { StatusAdapter(it, this) }
+
+
+
         binding.apply {
             binding.statusRecycler.apply {
                 adapter = itemAdapter
