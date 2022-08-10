@@ -1,5 +1,6 @@
-package com.uptime.kuma.views.monitorsList
+package com.uptime.kuma.views.allServers
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
@@ -9,6 +10,8 @@ import org.json.JSONObject
 
 object AllServersCompanionObject {
     private val monitors: ArrayList<Monitor> = ArrayList()
+    private val tempMonitors: ArrayList<Monitor> = ArrayList() //for searching monitor
+
     private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
     val monitorLiveData: LiveData<ArrayList<Monitor>>
         get() = _monitorLiveData
@@ -25,8 +28,13 @@ object AllServersCompanionObject {
             val customResponseEnd = customResponseAfter.dropLast(0)
             //transform to jsonObject
             val jsonObject = JSONObject(customResponseEnd)
-
-            for (i in 1 until jsonObject.length()) {
+            //last Json Object
+            val lastJsonObject = jsonObject.getJSONObject(
+                jsonObject.names().get(jsonObject.length() - 1) as String
+            )
+            //get id of last json object as length of json object
+            val lengthOfJsonObject = lastJsonObject.get("id") as Int
+            for (i in 0 until lengthOfJsonObject) {
                 if (jsonObject.has(i.toString())) {
                     //get separated jsonObjects
                     val json = jsonObject.getJSONObject(i.toString())

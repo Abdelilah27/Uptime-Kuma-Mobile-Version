@@ -12,7 +12,7 @@ import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
-import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
+import com.uptime.kuma.views.allServers.AllServersCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

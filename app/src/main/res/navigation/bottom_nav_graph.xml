@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/allServersFragment"
-        android:name="com.uptime.kuma.views.monitorsList.AllServersFragment"
+        android:name="com.uptime.kuma.views.allServers.AllServersFragment"
         android:label="fragment_all_servers"
         tools:layout="@layout/fragment_all_servers" />
     <fragment
