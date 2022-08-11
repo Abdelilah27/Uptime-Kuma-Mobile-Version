@@ -1,4 +1,4 @@
-package com.uptime.kuma.views.monitorsList
+package com.uptime.kuma.views.allServers
 
 import android.os.Bundle
 import android.view.View

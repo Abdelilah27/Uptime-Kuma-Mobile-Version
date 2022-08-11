@@ -1,5 +1,8 @@
 package com.uptime.kuma.models.monitor
 
+import com.uptime.kuma.models.monitorStatus.MonitorStatus
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+
 data class Monitor(
     val accepted_statuscodes: ArrayList<String>? = null,
     val active: Int = 1,
@@ -39,5 +42,8 @@ data class Monitor(
     val type: String = "http",
     val upsideDown: Boolean = false,
     val url: String,
-    val weight: Int = 2000
+    val weight: Int = 2000,
+
+    // MonitorStatus
+    val monitorStatus: ArrayList<MonitorStatusItem> ?= null
 )

@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
 import com.uptime.kuma.models.DashbordItems
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 
 class DashboardRecyclerAdapter(val context: Context, private val listener: OnItemClickListener) :
-    ListAdapter<DashbordItems, DashboardRecyclerAdapter.ItemViewHolder>(DiffCallback()) {
+    ListAdapter<MonitorStatusItem, DashboardRecyclerAdapter.ItemViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -42,10 +43,10 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
             }
         }
 
-        fun bind(dashbordItems: DashbordItems) {
+        fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
-                dashbordServernameTv.text = dashbordItems.name
-                if (dashbordItems.status) {
+                dashbordServernameTv.text = "Test"
+                if (monitorStatusItem.status==1) {
                     dashbordStatusTv.text = "En ligne"
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -54,7 +55,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                                 .main_color
                         )
                     )
-                } else {
+                } else if (monitorStatusItem.status==0) {
                     dashbordStatusTv.text = "Hors ligne"
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -64,8 +65,19 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                         )
                     )
                 }
-                dashbordTimeTv.text = dashbordItems.date
-                dashbordMessageTv.text = dashbordItems.message
+                else  {
+                    dashbordStatusTv.text = "En pause"
+                    cardViewStatus.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .dashbord_fragment_hors_ligne
+                        )
+                    )
+                }
+
+                dashbordTimeTv.text = monitorStatusItem.time
+                dashbordMessageTv.text = monitorStatusItem.msg
             }
         }
     }
@@ -74,12 +86,12 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         fun onItemClick(position: Int)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<DashbordItems>() {
-        override fun areItemsTheSame(oldItem: DashbordItems, newItem: DashbordItems) : Boolean {
-            return oldItem.name==newItem.name&&oldItem.status==newItem.status&&oldItem.date==newItem.date&&oldItem.message==newItem.message
+    class DiffCallback : DiffUtil.ItemCallback<MonitorStatusItem>() {
+        override fun areItemsTheSame(oldItem: MonitorStatusItem, newItem: MonitorStatusItem) : Boolean {
+            return oldItem.monitorID==newItem.monitorID
         }
 
-        override fun areContentsTheSame(oldItem: DashbordItems, newItem: DashbordItems) =
+        override fun areContentsTheSame(oldItem: MonitorStatusItem, newItem: MonitorStatusItem) =
             oldItem == newItem
     }
 }

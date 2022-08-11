@@ -1,10 +1,12 @@
-package com.uptime.kuma.views.monitorsList
+package com.uptime.kuma.views.allServers
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.utils.Constants
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import org.json.JSONObject
 
 object AllServersCompanionObject {
@@ -25,6 +27,8 @@ object AllServersCompanionObject {
             val customResponseEnd = customResponseAfter.dropLast(0)
             //transform to jsonObject
             val jsonObject = JSONObject(customResponseEnd)
+//            Log.d("DonMhammed", "\n")
+//            Log.d("TAG", jsonObject.toString())
 
             for (i in 1 until jsonObject.length()) {
                 if (jsonObject.has(i.toString())) {
@@ -57,6 +61,7 @@ object AllServersCompanionObject {
                         )
                         accepted_statuscodes.add(statusCode.toString())
                     }
+
                     //init monitor
                     val monitor = Monitor(
                         id = id as Int,
@@ -77,11 +82,18 @@ object AllServersCompanionObject {
                         url = url,
                         weight = weight as Int,
                         retryInterval = retryInterval as Int,
-                        accepted_statuscodes = accepted_statuscodes
+                        accepted_statuscodes = accepted_statuscodes,
+                        // Monitor status
+//                        monitorStatus = DashbordCompanionObject.monitorStatusList
+
                     )
+//                    Log.d("TAG", DashbordCompanionObject.filterMonitorstatus(1).toString())
                     //add monitors to ArrayList
                     monitors.add(monitor)
-
+                    //Log.d("monitors", monitors..toString())
+                    //Log.d("monitors", monitors..toString())
+//                    val d = DashbordCompanionObject.filterMonitorstatus(1)
+//                    Log.d("d", d.toString())
                 } else {
                     continue
                 }
