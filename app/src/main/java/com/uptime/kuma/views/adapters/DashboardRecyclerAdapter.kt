@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.TypedArrayUtils.getString
+import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
 import com.uptime.kuma.models.DashbordItems
@@ -47,7 +50,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
             binding.apply {
                 dashbordServernameTv.text = "Test"
                 if (monitorStatusItem.status==1) {
-                    dashbordStatusTv.text = "En ligne"
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
@@ -56,7 +59,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                         )
                     )
                 } else if (monitorStatusItem.status==0) {
-                    dashbordStatusTv.text = "Hors ligne"
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.offline)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
@@ -66,7 +69,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                     )
                 }
                 else  {
-                    dashbordStatusTv.text = "En pause"
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,

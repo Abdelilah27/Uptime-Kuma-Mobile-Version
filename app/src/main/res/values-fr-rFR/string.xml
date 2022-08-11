@@ -24,6 +24,8 @@
         <!--    <string name="Password">Password</string>-->
         <string name="hello_blank_fragment">Hello blank fragment</string>
         <string name="titre">En ligne</string>
+        <string name="online">En ligne</string>
+        <string name="offline">Hors ligne</string>
         <string name="down">Indisponible</string>
         <string name="unknown">inconnu</string>
         <string name="pause">Pause</string>
