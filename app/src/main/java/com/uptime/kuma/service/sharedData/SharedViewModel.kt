@@ -2,6 +2,7 @@ package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -34,6 +35,12 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
         NetworkResult().set(MutableLiveData("0"))//set connexion to open
+        lifecycleScope.launch {
+            Handler().postDelayed({
+                Log.d("FFF", "FFF: ")
+                NetworkResult.instance.get().postValue("0") //resend response
+            }, 180000)
+        }
         data.subscribe({ response ->
             lifecycleScope.launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
@@ -41,16 +48,20 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.successConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
+                        Log.d("SSS", "SSS: ")
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
                     }
                 })
             }
+
+
+
             AllServersCompanionObject.getMonitorsFromResponse(
                 response,
                 Constants.monitorListSuffix,
             )
-//            Log.d("TAG", response.toString())
+            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

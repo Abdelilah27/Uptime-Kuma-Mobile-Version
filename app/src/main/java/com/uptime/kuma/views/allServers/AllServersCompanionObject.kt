@@ -1,6 +1,5 @@
 package com.uptime.kuma.views.allServers
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
@@ -9,9 +8,7 @@ import com.uptime.kuma.utils.Constants
 import org.json.JSONObject
 
 object AllServersCompanionObject {
-    private val monitors: ArrayList<Monitor> = ArrayList()
-    private val tempMonitors: ArrayList<Monitor> = ArrayList() //for searching monitor
-
+    val monitors: ArrayList<Monitor> = ArrayList()
     private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
     val monitorLiveData: LiveData<ArrayList<Monitor>>
         get() = _monitorLiveData
@@ -34,7 +31,7 @@ object AllServersCompanionObject {
             )
             //get id of last json object as length of json object
             val lengthOfJsonObject = lastJsonObject.get("id") as Int
-            for (i in 0 until lengthOfJsonObject) {
+            for (i in 0 until lengthOfJsonObject + 1) {
                 if (jsonObject.has(i.toString())) {
                     //get separated jsonObjects
                     val json = jsonObject.getJSONObject(i.toString())
@@ -65,7 +62,8 @@ object AllServersCompanionObject {
                         )
                         accepted_statuscodes.add(statusCode.toString())
                     }
-                    //init monitor
+
+                    //instance monitor
                     val monitor = Monitor(
                         id = id as Int,
                         name = name,
