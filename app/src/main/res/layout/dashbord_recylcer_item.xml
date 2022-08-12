@@ -69,7 +69,7 @@
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="2"
+
             android:text="400 - Bad request"
             android:textColor="@color/text_color"
             android:textSize="15sp"

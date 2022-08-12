@@ -54,6 +54,8 @@ object DashbordCompanionObject {
 //                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }
 
+            monitorStatusList.sortByDescending { it.time }
+
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
         }
