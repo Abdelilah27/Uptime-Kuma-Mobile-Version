@@ -1,17 +1,16 @@
 package com.uptime.kuma.views.monitorsList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.utils.Constants
 import org.json.JSONObject
 
 object AllServersCompanionObject {
-    private val monitors: ArrayList<Monitor> = ArrayList()
-    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
-    val monitorLiveData: LiveData<ArrayList<Monitor>>
-        get() = _monitorLiveData
+    val monitors: ArrayList<Monitor> = ArrayList()
+//    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
+//    val monitorLiveData: LiveData<ArrayList<Monitor>>
+//        get() = _monitorLiveData
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -98,8 +97,9 @@ object AllServersCompanionObject {
                     continue
                 }
             }
+//            Log.d("ZZZ", monitors.toString())
             //add ArrayList to MutableLiveData
-            _monitorLiveData.postValue(monitors)
+//            _monitorLiveData.postValue(monitors)
         }
     }
 

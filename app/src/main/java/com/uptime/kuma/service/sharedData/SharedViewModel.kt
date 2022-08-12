@@ -12,6 +12,7 @@ import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
@@ -34,12 +35,6 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
         NetworkResult().set(MutableLiveData("0"))//set connexion to open
-        lifecycleScope.launch {
-            Handler().postDelayed({
-                Log.d("FFF", "FFF: ")
-                NetworkResult.instance.get().postValue("0") //resend response
-            }, 180000)
-        }
         data.subscribe({ response ->
             lifecycleScope.launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
