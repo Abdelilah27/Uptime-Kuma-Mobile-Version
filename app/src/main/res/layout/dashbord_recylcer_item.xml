@@ -62,14 +62,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_view_status" />
 
+
         <TextView
             android:id="@+id/dashbord_message_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
+
             android:text="400 - Bad request"
             android:textColor="@color/text_color"
             android:textSize="15sp"
@@ -77,6 +76,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dashbord_time_tv" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/dashbord_message_tv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:ellipsize="end"-->
+<!--            android:gravity="center"-->
+<!--            android:maxLines="2"-->
+<!--            android:text="400 - Bad request"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="15sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/dashbord_time_tv" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import org.json.JSONObject
 
 object DashbordCompanionObject {
 //    lateinit var monitorStatusList:MonitorStatus
-    private val monitorStatusList:ArrayList<MonitorStatusItem> = ArrayList()
+     val monitorStatusList:ArrayList<MonitorStatusItem> = ArrayList()
     private  val _monitorStatusLiveData= MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
     get() = _monitorStatusLiveData
@@ -54,31 +54,34 @@ object DashbordCompanionObject {
 //                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }
 
-//            Log.d("TAG", monitorStatusList.toString())
+//            var sortedList = monitorStatusList.sortedWith(compareBy({ it.time }))
+//            Log.d("TAG", sortedList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
         }
     }
 
-//   suspend fun filterMonitorstatus(id: Int):ArrayList<MonitorStatusItem> {
-//
-//        val filtredList:ArrayList<MonitorStatusItem> = ArrayList()
-////        filtredList.clear()
-////        monitorStatusList.forEach{
-////            if(it.monitorID == id && !it.equals("[]")){
-////                filtredList.add(it)
-////                Log.d("qsdqsd", it.toString())
-////            }
-////        }
-//        for (i in 0 until monitorStatusList.size)
-//        {
-//            if (monitorStatusList[i].monitorID==id){
-//                filtredList.add(monitorStatusList[i])
+   fun filterMonitorstatus(id: Int) {
+
+        val filtredList:ArrayList<MonitorStatusItem> = ArrayList()
+//        filtredList.clear()
+//        monitorStatusList.forEach{
+//            if(it.monitorID == id && !it.equals("[]")){
+//                filtredList.add(it)
+//                Log.d("qsdqsd", it.toString())
 //            }
 //        }
-////        if(!filtredList.isEmpty())
-//
+        for (i in 0 until monitorStatusList.size)
+        {
+            if (monitorStatusList[i].monitorID==id){
+                filtredList.add(monitorStatusList[i])
+            }
+        }
+//        if(!filtredList.isEmpty())
+
 //       return filtredList
-////        Log.d("TAG", filtredList.toString())
-//
-//    }
+        Log.d("filtred list", filtredList.toString())
+            var sortedList = monitorStatusList.sortedWith(compareBy({ it.time }))
+            Log.d("TAG", sortedList.toString())
+
+    }
 }

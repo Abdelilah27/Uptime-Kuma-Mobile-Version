@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import com.uptime.kuma.views.mainActivity.MainActivity
 
 class AllServersFragment : Fragment(R.layout.fragment_all_servers),
@@ -38,6 +39,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     override fun onItemClick(position: Int) {
         MainActivity.navController.navigate(R.id.serverFragment)
 //        Log.d("TAG", "onItemClick: " + position)
+        DashbordCompanionObject.filterMonitorstatus(1)
     }
 
 
