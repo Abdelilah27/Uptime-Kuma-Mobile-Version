@@ -1,4 +1,4 @@
-package com.uptime.kuma.views.allServers
+package com.uptime.kuma.views.monitorsList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.uptime.kuma.utils.Constants
 import org.json.JSONObject
 
 object AllServersCompanionObject {
-    val monitors: ArrayList<Monitor> = ArrayList()
+    private val monitors: ArrayList<Monitor> = ArrayList()
     private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
     val monitorLiveData: LiveData<ArrayList<Monitor>>
         get() = _monitorLiveData
@@ -62,8 +62,7 @@ object AllServersCompanionObject {
                         )
                         accepted_statuscodes.add(statusCode.toString())
                     }
-
-                    //instance monitor
+                    //init monitor
                     val monitor = Monitor(
                         id = id as Int,
                         name = name,
@@ -83,11 +82,18 @@ object AllServersCompanionObject {
                         url = url,
                         weight = weight as Int,
                         retryInterval = retryInterval as Int,
-                        accepted_statuscodes = accepted_statuscodes
+                        accepted_statuscodes = accepted_statuscodes,
+                        // Monitor status
+//                        monitorStatus = DashbordCompanionObject.monitorStatusList
+
                     )
+//                    Log.d("TAG", DashbordCompanionObject.filterMonitorstatus(1).toString())
                     //add monitors to ArrayList
                     monitors.add(monitor)
-
+                    //Log.d("monitors", monitors..toString())
+                    //Log.d("monitors", monitors..toString())
+//                    val d = DashbordCompanionObject.filterMonitorstatus(1)
+//                    Log.d("d", d.toString())
                 } else {
                     continue
                 }

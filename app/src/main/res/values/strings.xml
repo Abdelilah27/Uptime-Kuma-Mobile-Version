@@ -24,6 +24,8 @@
     <string name="titre">Online</string>
     <string name="down">Down</string>
     <string name="unknown">Unknown</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
     <string name="pause">Pause</string>
     <string name="about">About</string>
     <string name="Uptime_Kuma">Uptime Kuma</string>

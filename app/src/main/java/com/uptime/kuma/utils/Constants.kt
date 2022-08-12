@@ -8,4 +8,5 @@ object Constants {
     const val successConnexion = "value=0"
     const val closedConnexion = "shutdownReason=ShutdownReason"
     const val monitorListSuffix = "42[\"monitorList\","
+    const val dashbordMonitorItemsSuffix = "42[\"importantHeartbeatList\","
 }

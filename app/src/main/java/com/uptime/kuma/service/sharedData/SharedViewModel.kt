@@ -2,7 +2,6 @@ package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +12,7 @@ import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
-import com.uptime.kuma.views.allServers.AllServersCompanionObject
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -48,20 +47,22 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.successConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
-                        Log.d("SSS", "SSS: ")
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
                     }
                 })
             }
+            DashbordCompanionObject.getDashbordMonitorItem(
+                response,
+                Constants.dashbordMonitorItemsSuffix
 
-
-
+            )
             AllServersCompanionObject.getMonitorsFromResponse(
                 response,
                 Constants.monitorListSuffix,
             )
-            Log.d("TAG", response.toString())
+//            DashbordCompanionObject.filterMonitorstatus(1)
+//            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())
