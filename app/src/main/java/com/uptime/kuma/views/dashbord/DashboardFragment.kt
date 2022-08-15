@@ -24,9 +24,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         val binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
         dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
-
-
-
         binding.apply {
             dashbordRecycler.apply {
                 itemAdapter = DashboardRecyclerAdapter(context, this@DashboardFragment)
@@ -40,6 +37,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             pauseNumber.text = dashbordViewModel.pause.toString()
             observeMonitorsList()
         }
+
+        //get statistics
+        dashbordViewModel.calculStatistics()
     }
 
     //observe monitorstatus list

@@ -8,11 +8,7 @@ class DashbordViewModel : ViewModel() {
     var unknown: Int = 0
     var pause: Int = 0
 
-    init {
-        calculStatics()
-    }
-
-    fun calculStatics() {
+    fun calculStatistics() {
         for (i in 0 until DashbordCompanionObject.newList.size) {
             when (DashbordCompanionObject.newList[i].status) {
                 0 -> offline += 1

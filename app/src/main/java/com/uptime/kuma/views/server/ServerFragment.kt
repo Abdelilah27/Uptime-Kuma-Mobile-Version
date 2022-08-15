@@ -1,6 +1,7 @@
 package com.uptime.kuma.views.server
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +22,6 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         //get Id from args
         val serverId = args.serverId
-
         binding.apply {
             recyclerServerFragment.apply {
                 adapter = serverAdapter
@@ -31,6 +31,17 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 serverAdapter.submitList(serverViewModel.filterMonitorstatus(serverId.toInt()))
             }
         }
+
+        //get monitor
+        val monitor = serverViewModel.getMonitorById(serverId.toInt())
+        Log.d("monitor", monitor.toString())
+        binding.apply {
+            serverTitle.text = monitor.name
+            serverLink.text = monitor.url
+
+        }
+
+
     }
 
 }
