@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.dashbord
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
@@ -21,7 +22,6 @@ object DashbordCompanionObject {
         get() = _monitorStatusLiveData
 
     fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
-        //
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             //add [ at the beginning of the response
@@ -53,8 +53,6 @@ object DashbordCompanionObject {
                     time = time
                 )
                 monitorStatusList.add(monitorStatusItem)
-
-
 //                Log.d("TAG1", "HHH1   "+myObject.get("status"))
 //                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }

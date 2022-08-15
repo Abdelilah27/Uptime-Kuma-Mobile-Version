@@ -9,18 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
-import com.uptime.kuma.views.mainActivity.MainActivity
-import kotlin.properties.Delegates
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DashboardRecyclerAdapter.OnItemClickListener {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
-//    var online:Int = 0
-//    var offline:Int = 0
-//    var unknown:Int = 0
-//    var pause:Int = 0
-
 
     //    private lateinit var dashbordViewModel: DashbordViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,14 +21,16 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         val binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
 //        dashbordViewModel=ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
-        var online:Int = 0
-        var offline:Int = 0
-        var unknown:Int = 0
-        var pause:Int = 0
+        var online: Int = 0
+        var offline: Int = 0
+        var unknown: Int = 0
+        var pause: Int = 0
 
-        for (i in 0 until DashbordCompanionObject.newList.size)
-        {
-            Log.d("TAG2",DashbordCompanionObject.newList[i].monitorID.toString()+"  Status  "+DashbordCompanionObject.newList[i].status )
+        for (i in 0 until DashbordCompanionObject.newList.size) {
+            Log.d(
+                "TAG2",
+                DashbordCompanionObject.newList[i].monitorID.toString() + "  Status  " + DashbordCompanionObject.newList[i].status
+            )
             when (DashbordCompanionObject.newList[i].status) {
                 0 -> offline += 1
                 1 -> online += 1
@@ -55,10 +50,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 //                dashbordRecyclerAdapter.submitList(getData())
 
             }
-            enLigneNumber.text=online.toString()
-            downNumber.text=offline.toString()
-            unknownNumber.text=unknown.toString()
-            pauseNumber.text=pause.toString()
+            enLigneNumber.text = online.toString()
+            downNumber.text = offline.toString()
+            unknownNumber.text = unknown.toString()
+            pauseNumber.text = pause.toString()
             observeMonitorsList()
         }
     }
@@ -71,16 +66,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     override fun onItemClick(position: Int) {
-        MainActivity.navController.navigate(R.id.serverFragment)
-//        print(DashbordCompanionObject.monitorStatusList)
-//        print(DashbordCompanionObject.newList)
-                for (i in 0 until DashbordCompanionObject.newList.size)
-        {
-//            print(DashbordCompanionObject.newList[i])
-            Log.d("TAG2",DashbordCompanionObject.newList[i].monitorID.toString() )
-//                filtredList.add(monitorStatusList[i])
+//        Log.d(TAG, "onItemClick: ")
+//        MainActivity.navController.navigate(R.id.serverFragment)
 
-        }
     }
 }
 

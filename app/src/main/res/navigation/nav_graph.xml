@@ -42,7 +42,12 @@
         android:id="@+id/serverFragment"
         android:name="com.uptime.kuma.views.server.ServerFragment"
         android:label="fragment_server"
-        tools:layout="@layout/fragment_server" />
+        tools:layout="@layout/fragment_server" >
+        <argument
+            android:name="serverId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/apparenceReglageFragment"
         android:name="com.uptime.kuma.views.apparence.ApparenceReglageFragment"
