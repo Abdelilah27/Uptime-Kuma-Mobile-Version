@@ -3,7 +3,7 @@
 
         <string name="app_name">Uptime Kuma</string>
         <!-- TODO: Remove or change this placeholder text -->
-        <string name="main_text_1_bienvenue_fragment">Bienvenu dans</string>
+        <string name="main_text_1_bienvenue_fragment">Bienvenue dans</string>
         <string name="main_text_2_bienvenue_fragment">uptime monitoring</string>
         <string name="main_text_3_bienvenue_fragment">ecosystem</string>
         <string name="second_bienvenue_fragment"><![CDATA[Le premier service mondial de surveillance de la disponibilité.Soyez le premier à savoir que votre site Web est en panne! Une surveillance fiable vous avertit avant tout problème important et vous fait économiser de l\'argent.]]></string>

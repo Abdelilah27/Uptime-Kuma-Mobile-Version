@@ -10,10 +10,6 @@ import org.json.JSONObject
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
-    var online: Int = 0
-    var offline: Int = 0
-    var unknown: Int = 0
-    var pause: Int = 0
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
@@ -29,18 +25,11 @@ object DashbordCompanionObject {
             //delete )) at the end of the response
             val customResponseEnd = customResponseBegin.dropLast(9)
             val customResponselast = "$customResponseEnd]"
-//            Log.d("TAG", customResponselast)
-
-////            Log.d("fgfg", cuscustomResponseEnd)
-//            Log.d("DonMhammed", "\n")
-//
             val jsonObject = JSONArray(customResponselast)
             val monitorList = jsonObject[1].toString()
             val monitorStatus = JSONArray(monitorList)
-//            val monitorStatusItem=monitorStatus[1]
             for (i in 0 until monitorStatus.length()) {
                 val myObject = JSONObject(monitorStatus[i].toString())
-
                 val monitorID = myObject.get("monitorID").toString()
                 val msg = myObject.get("msg").toString()
                 val status = myObject.get("status").toString()
@@ -53,10 +42,6 @@ object DashbordCompanionObject {
                     time = time
                 )
                 monitorStatusList.add(monitorStatusItem)
-
-
-//                Log.d("TAG1", "HHH1   "+myObject.get("status"))
-//                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }
             // Traverse through the first list
             newList =

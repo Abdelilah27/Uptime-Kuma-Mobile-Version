@@ -19,6 +19,7 @@ class ServerAdapter(val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
+                dashbordId.text = monitorStatusItem.monitorID.toString()
                 dashbordServernameTv.visibility = View.GONE // hide username part
                 if (monitorStatusItem.status == 1) {
                     dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)

@@ -12,7 +12,9 @@ import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
+import com.uptime.kuma.views.status.StatusCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -55,7 +57,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 response,
                 Constants.monitorListSuffix,
             )
-            StatusCompanionObject.getStatusFromResponse(response,Constants.statusListSuffix)
+            StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
 //            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
