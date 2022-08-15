@@ -26,9 +26,10 @@
         <string name="titre">En ligne</string>
         <string name="online">En ligne</string>
         <string name="offline">Hors ligne</string>
-        <string name="down">Indisponible</string>
+        <string name="down">Hors ligne</string>
         <string name="unknown">inconnu</string>
         <string name="pause">Pause</string>
+        <string name="attente">En Attente</string>
         <string name="about">A Propos</string>
         <string name="Uptime_Kuma">Uptime Kuma</string>
         <string name="version">Version: 1.17.1</string>

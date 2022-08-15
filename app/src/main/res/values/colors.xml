@@ -23,6 +23,7 @@
     <color name="dashbord_fragment_text_color">#c0c0c0</color>
 
     <color name="dashbord_fragment_hors_ligne">#dc3545</color>
+    <color name="attente">#F8A306</color>
 
     <color name="background_bienvenue_fragment">#131A26</color>
     <color name="background_card_all_server_fragment">#0E1117</color>

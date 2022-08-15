@@ -1,18 +1,23 @@
 package com.uptime.kuma.views.dashbord
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
-import com.uptime.kuma.models.monitor.Monitor
-import com.uptime.kuma.models.monitorStatus.MonitorStatus
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import org.json.JSONArray
 import org.json.JSONObject
 
+
 object DashbordCompanionObject {
 //    lateinit var monitorStatusList:MonitorStatus
-    private val monitorStatusList:ArrayList<MonitorStatusItem> = ArrayList()
+    var online:Int = 0
+    var offline:Int = 0
+    var unknown:Int = 0
+    var pause:Int = 0
+    var newList: ArrayList<MonitorStatusItem> = ArrayList()
+     val monitorStatusList:ArrayList<MonitorStatusItem> = ArrayList()
     private  val _monitorStatusLiveData= MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
     get() = _monitorStatusLiveData
@@ -50,15 +55,23 @@ object DashbordCompanionObject {
                 )
                 monitorStatusList.add(monitorStatusItem)
 
+
 //                Log.d("TAG1", "HHH1   "+myObject.get("status"))
 //                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }
 
-            monitorStatusList.sortByDescending { it.time }
+            // Traverse through the first list
+
+            // Traverse through the first list
+             newList= monitorStatusList.distinctBy { MonitorStatusItem->MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+
+//            monitorStatusList.sortByDescending { it.time }
 
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
+
         }
+
     }
 
 //   suspend fun filterMonitorstatus(id: Int):ArrayList<MonitorStatusItem> {
@@ -83,4 +96,6 @@ object DashbordCompanionObject {
 ////        Log.d("TAG", filtredList.toString())
 //
 //    }
+
+
 }

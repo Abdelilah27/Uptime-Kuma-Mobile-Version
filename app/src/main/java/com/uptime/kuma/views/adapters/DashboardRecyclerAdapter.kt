@@ -69,19 +69,21 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                     )
                 }
                 else  {
-                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.attente)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color
-                                .dashbord_fragment_hors_ligne
+                                .attente
                         )
                     )
                 }
 
                 dashbordTimeTv.text = monitorStatusItem.time
                 dashbordMessageTv.text = monitorStatusItem.msg
+
             }
+
         }
     }
 
