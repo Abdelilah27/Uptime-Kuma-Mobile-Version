@@ -27,6 +27,7 @@
     <string name="online">Online</string>
     <string name="offline">Offline</string>
     <string name="pause">Pause</string>
+    <string name="attente">Waiting</string>
     <string name="about">About</string>
     <string name="Uptime_Kuma">Uptime Kuma</string>
     <string name="version">Version: 1.17.1</string>

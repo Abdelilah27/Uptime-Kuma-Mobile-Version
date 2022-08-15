@@ -108,7 +108,7 @@
 
             <TextView
                 android:id="@+id/down_number"
-                style="@style/card_dashboard_green_color"
+                style="@style/card_dashboard_red_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7"
@@ -128,7 +128,7 @@
 
             <TextView
                 android:id="@+id/pause_number"
-                style="@style/card_dashboard_red_color"
+                style="@style/card_dashboard_orange_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3"

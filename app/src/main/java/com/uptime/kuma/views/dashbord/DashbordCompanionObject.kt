@@ -1,5 +1,7 @@
 package com.uptime.kuma.views.dashbord
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
@@ -7,16 +9,21 @@ import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import org.json.JSONArray
 import org.json.JSONObject
 
-object DashbordCompanionObject {
-    //    lateinit var monitorStatusList:MonitorStatus
-    val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
-    private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
-    val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
-        get() = _monitorStatusLiveData
 
-    fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
+object DashbordCompanionObject {
+//    lateinit var monitorStatusList:MonitorStatus
+    var online:Int = 0
+    var offline:Int = 0
+    var unknown:Int = 0
+    var pause:Int = 0
+    var newList: ArrayList<MonitorStatusItem> = ArrayList()
+     val monitorStatusList:ArrayList<MonitorStatusItem> = ArrayList()
+    private  val _monitorStatusLiveData= MutableLiveData<ArrayList<MonitorStatusItem>>()
+    val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
+    get() = _monitorStatusLiveData
+    fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String){
         //
-        if (response.toString().contains(suffix)) {
+        if (response.toString().contains(suffix)){
             val customResponseAfter = response.toString().substringAfter(suffix)
             //add [ at the beginning of the response
             val customResponseBegin = "[$customResponseAfter"
@@ -34,6 +41,7 @@ object DashbordCompanionObject {
 //            val monitorStatusItem=monitorStatus[1]
             for (i in 0 until monitorStatus.length()) {
                 val myObject = JSONObject(monitorStatus[i].toString())
+
                 val monitorID = myObject.get("monitorID").toString()
                 val msg = myObject.get("msg").toString()
                 val status = myObject.get("status").toString()
@@ -46,12 +54,48 @@ object DashbordCompanionObject {
                     time = time
                 )
                 monitorStatusList.add(monitorStatusItem)
+
+
 //                Log.d("TAG1", "HHH1   "+myObject.get("status"))
 //                Log.d("TAG2","HHH2"+monitorStatus[i].toString() )
             }
-            monitorStatusList.sortByDescending { it.time }
+
+            // Traverse through the first list
+
+            // Traverse through the first list
+             newList= monitorStatusList.distinctBy { MonitorStatusItem->MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+
+//            monitorStatusList.sortByDescending { it.time }
+
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
+
         }
+
     }
+
+//   suspend fun filterMonitorstatus(id: Int):ArrayList<MonitorStatusItem> {
+//
+//        val filtredList:ArrayList<MonitorStatusItem> = ArrayList()
+////        filtredList.clear()
+////        monitorStatusList.forEach{
+////            if(it.monitorID == id && !it.equals("[]")){
+////                filtredList.add(it)
+////                Log.d("qsdqsd", it.toString())
+////            }
+////        }
+//        for (i in 0 until monitorStatusList.size)
+//        {
+//            if (monitorStatusList[i].monitorID==id){
+//                filtredList.add(monitorStatusList[i])
+//            }
+//        }
+////        if(!filtredList.isEmpty())
+//
+//       return filtredList
+////        Log.d("TAG", filtredList.toString())
+//
+//    }
+
+
 }
