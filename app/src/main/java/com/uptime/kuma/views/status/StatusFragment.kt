@@ -4,54 +4,47 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.views.mainActivity.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.models.Status
+import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.adapters.StatusAdapter
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
+    private lateinit var itemAdapter: StatusAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = FragmentStatusBinding.bind(view)
-        val itemAdapter = activity?.let { StatusAdapter(it, this) }
+
         binding.apply {
             binding.statusRecycler.apply {
+                itemAdapter = StatusAdapter(context, this@StatusFragment)
                 adapter = itemAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-                itemAdapter?.submitList(getData())
             }
         }
         binding.addfloatingActionButton.setOnClickListener {
             navController.navigate(R.id.addStatusFragment)
         }
+
+        observeStatusList()
     }
 
-    private fun getData(): List<Status> {
-        val data = arrayListOf<Status>()
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Dev", "/status/dev/"))
-        data.add(Status(R.drawable.ic_icon, "Dev", "/status/dev/"))
-        data.add(Status(R.drawable.ic_icon, "Dev", "/status/dev/"))
-        data.add(Status(R.drawable.ic_icon, "Moov Ci Dev", "/status/Moovcidev/"))
-        data.add(Status(R.drawable.ic_icon, "Moov Ci Dev", "/status/Moovcidev/"))
-        data.add(Status(R.drawable.ic_icon, "Moov Ci Dev", "/status/Moovcidev/"))
-        data.add(Status(R.drawable.ic_icon, "Moov Ci Dev", "/status/Moovcidev/"))
-        data.add(Status(R.drawable.ic_icon, "Moov Ci Dev", "/status/Moovcidev/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        data.add(Status(R.drawable.ic_icon, "Production", "/status/production/"))
-        return data
+    //observe status list
+    private fun observeStatusList() {
+        StatusCompanionObject.statusLiveData.observe(viewLifecycleOwner, Observer {
+            itemAdapter.submitList(it)
+        })
     }
+
 
     override fun onItemClick(position: Int) {
         navController.navigate(
