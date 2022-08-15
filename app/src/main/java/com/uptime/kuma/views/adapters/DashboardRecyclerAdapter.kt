@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.TypedArrayUtils.getString
-import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
-import com.uptime.kuma.models.DashbordItems
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 
 class DashboardRecyclerAdapter(val context: Context, private val listener: OnItemClickListener) :
@@ -49,7 +46,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
                 dashbordServernameTv.text = "Test"
-                if (monitorStatusItem.status==1) {
+                if (monitorStatusItem.status == 1) {
                     dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -58,7 +55,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                                 .main_color
                         )
                     )
-                } else if (monitorStatusItem.status==0) {
+                } else if (monitorStatusItem.status == 0) {
                     dashbordStatusTv.text = getActivity(context)?.getText(R.string.offline)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -67,8 +64,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                                 .dashbord_fragment_hors_ligne
                         )
                     )
-                }
-                else  {
+                } else {
                     dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -90,8 +86,11 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
     }
 
     class DiffCallback : DiffUtil.ItemCallback<MonitorStatusItem>() {
-        override fun areItemsTheSame(oldItem: MonitorStatusItem, newItem: MonitorStatusItem) : Boolean {
-            return oldItem.monitorID==newItem.monitorID
+        override fun areItemsTheSame(
+            oldItem: MonitorStatusItem,
+            newItem: MonitorStatusItem
+        ): Boolean {
+            return oldItem.monitorID == newItem.monitorID
         }
 
         override fun areContentsTheSame(oldItem: MonitorStatusItem, newItem: MonitorStatusItem) =

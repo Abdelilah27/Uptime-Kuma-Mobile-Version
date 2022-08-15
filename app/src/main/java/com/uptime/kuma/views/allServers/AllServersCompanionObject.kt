@@ -4,6 +4,7 @@ import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.utils.Constants
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import org.json.JSONObject
 
 object AllServersCompanionObject {
@@ -82,17 +83,9 @@ object AllServersCompanionObject {
                         weight = weight as Int,
                         retryInterval = retryInterval as Int,
                         accepted_statuscodes = accepted_statuscodes,
-                        // Monitor status
-//                        monitorStatus = DashbordCompanionObject.monitorStatusList
-
                     )
-//                    Log.d("TAG", DashbordCompanionObject.filterMonitorstatus(1).toString())
                     //add monitors to ArrayList
                     monitors.add(monitor)
-                    //Log.d("monitors", monitors..toString())
-                    //Log.d("monitors", monitors..toString())
-//                    val d = DashbordCompanionObject.filterMonitorstatus(1)
-//                    Log.d("d", d.toString())
                 } else {
                     continue
                 }

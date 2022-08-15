@@ -2,24 +2,26 @@ package com.uptime.kuma.views.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
-import com.uptime.kuma.models.DashbordItems
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 
 class ServerAdapter(val context: Context) :
-    ListAdapter<DashbordItems, ServerAdapter.ServerViewHolder>(DiffCallback()) {
+    ListAdapter<MonitorStatusItem, ServerAdapter.ServerViewHolder>(DiffCallback()) {
     inner class ServerViewHolder(private val binding: DashbordRecylcerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(dashbordItems: DashbordItems) {
+        fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
-                dashbordServernameTv.text = dashbordItems.name
-                if (dashbordItems.status) {
-                    dashbordStatusTv.text = "En ligne"
+                dashbordServernameTv.visibility = View.GONE
+                if (monitorStatusItem.status == 1) {
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
@@ -27,8 +29,17 @@ class ServerAdapter(val context: Context) :
                                 .main_color
                         )
                     )
+                } else if (monitorStatusItem.status == 0) {
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.offline)
+                    cardViewStatus.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .dashbord_fragment_hors_ligne
+                        )
+                    )
                 } else {
-                    dashbordStatusTv.text = "Hors ligne"
+                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
                     cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
@@ -37,8 +48,8 @@ class ServerAdapter(val context: Context) :
                         )
                     )
                 }
-                dashbordTimeTv.text = dashbordItems.date
-                dashbordMessageTv.text = dashbordItems.message
+                dashbordTimeTv.text = monitorStatusItem.time
+                dashbordMessageTv.text = monitorStatusItem.msg
             }
         }
     }
@@ -54,12 +65,15 @@ class ServerAdapter(val context: Context) :
         holder.bind(currentItem)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<DashbordItems>() {
-        override fun areItemsTheSame(oldItem: DashbordItems, newItem: DashbordItems): Boolean {
-            return oldItem.name == newItem.name && oldItem.status == newItem.status && oldItem.date == newItem.date && oldItem.message == newItem.message
+    class DiffCallback : DiffUtil.ItemCallback<MonitorStatusItem>() {
+        override fun areItemsTheSame(
+            oldItem: MonitorStatusItem,
+            newItem: MonitorStatusItem
+        ): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DashbordItems, newItem: DashbordItems) =
+        override fun areContentsTheSame(oldItem: MonitorStatusItem, newItem: MonitorStatusItem) =
             oldItem == newItem
     }
 }
