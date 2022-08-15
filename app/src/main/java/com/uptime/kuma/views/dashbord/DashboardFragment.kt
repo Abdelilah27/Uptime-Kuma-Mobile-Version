@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
@@ -15,42 +16,28 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DashboardRecyclerAdapter.OnItemClickListener {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
+    private lateinit var dashbordViewModel: DashbordViewModel
 
     //    private lateinit var dashbordViewModel: DashbordViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
-//        dashbordViewModel=ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
-        var online: Int = 0
-        var offline: Int = 0
-        var unknown: Int = 0
-        var pause: Int = 0
+        dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
 
-        for (i in 0 until DashbordCompanionObject.newList.size) {
-            when (DashbordCompanionObject.newList[i].status) {
-                0 -> offline += 1
-                1 -> online += 1
-                2 -> pause += 1
-                else -> {
-                    unknown += 1
-                }
-            }
 
-        }
+
         binding.apply {
             dashbordRecycler.apply {
                 itemAdapter = DashboardRecyclerAdapter(context, this@DashboardFragment)
                 adapter = itemAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-//                dashbordRecyclerAdapter.submitList(getData())
-
             }
-            enLigneNumber.text = online.toString()
-            downNumber.text = offline.toString()
-            unknownNumber.text = unknown.toString()
-            pauseNumber.text = pause.toString()
+            enLigneNumber.text = dashbordViewModel.online.toString()
+            downNumber.text = dashbordViewModel.offline.toString()
+            unknownNumber.text = dashbordViewModel.unknown.toString()
+            pauseNumber.text = dashbordViewModel.pause.toString()
             observeMonitorsList()
         }
     }

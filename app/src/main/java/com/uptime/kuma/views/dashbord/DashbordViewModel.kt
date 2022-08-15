@@ -1,9 +1,28 @@
 package com.uptime.kuma.views.dashbord
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.tinder.scarlet.WebSocket
-import com.uptime.kuma.utils.Constants
 
-class DashbordViewModel : ViewModel(){
+class DashbordViewModel : ViewModel() {
+    var online: Int = 0
+    var offline: Int = 0
+    var unknown: Int = 0
+    var pause: Int = 0
+
+    init {
+        calculStatics()
+    }
+
+    fun calculStatics() {
+        for (i in 0 until DashbordCompanionObject.newList.size) {
+            when (DashbordCompanionObject.newList[i].status) {
+                0 -> offline += 1
+                1 -> online += 1
+                2 -> pause += 1
+                else -> {
+                    unknown += 1
+                }
+            }
+
+        }
+    }
 }
