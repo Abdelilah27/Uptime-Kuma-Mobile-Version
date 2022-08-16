@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.bienvenue
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,11 +27,20 @@ class BienvenueFragment : Fragment(R.layout.fragment_bienvenue) {
         _binding = FragmentBienvenueBinding.inflate(inflater, container, false)
 
         binding.buttonCommencerBiennvenueFragment.setOnClickListener {
+            onCommencerFinished()
             MainActivity.navController.navigate(R.id.loginFragment)
         }
 
         return binding.root
     }
+    private fun onCommencerFinished(){
+        val sharedpref= requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
+        val editor = sharedpref.edit()
+        editor.putBoolean("Finished",true)
+        editor.apply()
+    }
+
+
 
 
 }
