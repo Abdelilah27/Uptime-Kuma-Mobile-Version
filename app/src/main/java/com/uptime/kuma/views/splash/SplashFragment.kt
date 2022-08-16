@@ -20,16 +20,24 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         binding.apply {
             //Direction to the Bienvenue fragment when the data are retrieved
-            findNavController().navigate(R.id.bienvenueFragment)
-
-//            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-//                if (NetworkResult.instance.get().value == "1") {
-//                    progressBar.visibility = View.GONE
-//                    findNavController().navigate(R.id.bienvenueFragment)
-//                }
-//            })
+            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
+                if (NetworkResult.instance.get().value == "1") {
+                    progressBar.visibility = View.GONE
+                    if (onCommencerFinished())
+                        MainActivity.navController.navigate(R.id.loginFragment)
+                    else
+                        findNavController().navigate(R.id.bienvenueFragment)
+                }
+            }
+            )
         }
     }
+    private fun onCommencerFinished():Boolean{
+
+        val sharedpref= requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
+        return sharedpref.getBoolean("Finished",false)
+    }
+
 
 
 }
