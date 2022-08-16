@@ -67,22 +67,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <EditText
-            android:id="@+id/email_edt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/custom_login_edit_text"
-            android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="10sp"
-            android:hint="@string/Email"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/main_text_item_all_server_fragment" />
-
-        <EditText
-            android:id="@+id/password_edt"
+            android:id="@+id/socket_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -91,11 +76,19 @@
             android:background="@drawable/custom_login_edit_text"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="10sp"
-            android:hint="@string/Password"
-            android:inputType="textPassword"
+            android:hint="@string/socket_url"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/main_text_item_all_server_fragment" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="8dp"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"

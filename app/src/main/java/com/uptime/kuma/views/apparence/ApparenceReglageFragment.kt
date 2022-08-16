@@ -34,19 +34,19 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage) {
             Log.d("item selected", binding.auto.text.toString())
             when (binding.auto.text.toString()) {
                 "English" -> {
-                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "en")
+                    MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "en")
                     MainActivity.languageSettings.language = "en"
                 }
                 "French" -> {
-                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "fr")
+                    MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "fr")
                     MainActivity.languageSettings.language = "fr"
                 }
                 "Anglais" -> {
-                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "en")
+                    MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "en")
                     MainActivity.languageSettings.language = "en"
                 }
                 "Francais" -> {
-                    MainActivity.sharedViewModel.setAppLocale(requireContext(), "fr")
+                    MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "fr")
                     MainActivity.languageSettings.language = "fr"
                 }
 

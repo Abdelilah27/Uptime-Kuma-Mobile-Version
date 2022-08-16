@@ -57,23 +57,12 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.monitorListSuffix,
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-//            Log.d("TAG", response.toString())
+            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())
         })
     }
-
-    //setup language
-    fun setAppLocale(context: Context, language: String) {
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val config = context.resources.configuration
-        config.setLocale(locale)
-        context.createConfigurationContext(config)
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-
 
 }
 

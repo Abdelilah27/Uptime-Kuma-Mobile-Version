@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
-import com.uptime.kuma.views.mainActivity.MainActivity.Companion.navController
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private var Email = ""
-    private var Password = ""
+class LoginFragment : Fragment(R.layout.fragment_login) {
+    companion object {
+        private val _socketLiveData = MutableLiveData<String>()
+        val socketLiveData: LiveData<String>
+            get() = _socketLiveData
+    }
 
     lateinit var binding: FragmentLoginBinding
 
@@ -28,12 +32,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.buttonLogin.setOnClickListener {
-            if (binding.emailEdt.text.toString() != Email || binding.passwordEdt.text.toString() != Password) {
-                Snackbar.make(binding.root, "Email et/ou Mot de passe incorrect(s)", Snackbar.LENGTH_LONG).show()
-            } else
-                navController
-                    .navigate(R.id.mainFragment)
+            _socketLiveData.postValue(binding.socketUrl.text.toString())
+            findNavController().navigate(R.id.mainFragment)
+
         }
     }
 

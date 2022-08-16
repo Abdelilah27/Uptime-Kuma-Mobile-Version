@@ -59,7 +59,7 @@
         <string name="second_uptime_third_server_fragment">98.2%</string>
 
         <string name="range_graph_server_fragment">Temps de reponse</string>
-        <string name="Email"><font size="15">Email Adresse</font></string>
+        <string name="socket_url"><font size="15">Lien socket</font></string>
         <string name="Password"><font size="15">Password</font></string>
 
 

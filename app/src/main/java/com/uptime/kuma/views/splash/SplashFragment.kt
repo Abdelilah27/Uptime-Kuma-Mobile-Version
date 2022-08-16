@@ -20,12 +20,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         binding.apply {
             //Direction to the Bienvenue fragment when the data are retrieved
-            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-                if (NetworkResult.instance.get().value == "1") {
-                    progressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.bienvenueFragment)
-                }
-            })
+            findNavController().navigate(R.id.bienvenueFragment)
+
+//            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
+//                if (NetworkResult.instance.get().value == "1") {
+//                    progressBar.visibility = View.GONE
+//                    findNavController().navigate(R.id.bienvenueFragment)
+//                }
+//            })
         }
     }
 
