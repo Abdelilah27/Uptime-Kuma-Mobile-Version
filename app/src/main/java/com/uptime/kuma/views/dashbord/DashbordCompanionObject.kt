@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.views.dashbord.utils.UpdateData
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -43,18 +44,29 @@ object DashbordCompanionObject {
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
-                    time = time
+                    time = time,
+                    name = getMonitorName(monitorID.toInt())
+
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
             // Traverse through the first list
-            newList =
-                monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+            newList = monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
             monitorStatusList.sortByDescending { it.time }
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
 
         }
+
+    }
+
+    fun getMonitorName(id:Int):String{
+        AllServersCompanionObject.monitors.forEach {
+            if(it.id==id){
+                return it.name
+            }
+        }
+        return ""
 
     }
 
@@ -75,7 +87,8 @@ object DashbordCompanionObject {
                 msg = msg,
                 status = status.toInt(),
                 time = time,
-                important = important
+                important = important,
+                name = getMonitorName(monitorID.toInt())
             )
             if(monitorUpdate.important == true)
             {

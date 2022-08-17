@@ -34,7 +34,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
 
-            holder.nom.text = "test"
+            holder.nom.text = it.name
             holder.date.text = it.time
             holder.msg.text = it.msg
             when(it.status){

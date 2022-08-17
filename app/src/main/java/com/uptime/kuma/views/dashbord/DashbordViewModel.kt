@@ -18,7 +18,6 @@ class DashbordViewModel : ViewModel() {
                     unknown += 1
                 }
             }
-
         }
     }
 }
