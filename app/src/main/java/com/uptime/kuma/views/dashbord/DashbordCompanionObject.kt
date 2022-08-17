@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
-import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
 import com.uptime.kuma.views.dashbord.utils.UpdateData
 import org.json.JSONArray
 import org.json.JSONObject
@@ -13,7 +12,7 @@ import org.json.JSONObject
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
-    var sharedNewRecievedData : UpdateData = DashboardFragment.instance
+    var sharedNewRecievedData: UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
     val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
@@ -71,30 +70,18 @@ object DashbordCompanionObject {
             val time = jsonObject.get("time").toString()
             val important = jsonObject.getBoolean("important")
             // init MonitorStatusItem
-            val monitorUpdate = MonitorUpdate(
+            val monitorUpdate = MonitorStatusItem(
                 monitorID = monitorID.toInt(),
                 msg = msg,
                 status = status.toInt(),
                 time = time,
                 important = important
             )
-            if (monitorUpdate.important == false) {
-                sharedNewRecievedData.onReceivedData( MonitorStatusItem(
-                    monitorUpdate.duration,
-                    1,
-                    monitorUpdate.monitorID,
-                    monitorUpdate.msg,
-                    monitorUpdate.ping,
-                    monitorUpdate.status,
-                    monitorUpdate.time
-                ))
+            monitorStatusList.add(monitorUpdate)
+            monitorStatusList.sortByDescending { it.time }
+            _monitorStatusLiveData.postValue(monitorStatusList)
 
-
-            }
             Log.d("hello", "getDashbordUpdate: " + monitorUpdateList.size)
-
-
-
 
             Log.d("list update", "getDashbordUpdate: " + list.size)
         }
