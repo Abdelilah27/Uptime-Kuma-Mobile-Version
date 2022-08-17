@@ -6,6 +6,7 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -32,9 +33,19 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
+
             holder.nom.text = "test"
             holder.date.text = it.time
             holder.msg.text = it.msg
+            when(it.status){
+                0-> {holder.status.text= getActivity(context)?.getText(R.string.offline)
+                    holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.dashbord_fragment_hors_ligne))}
+                1-> {holder.status.text= getActivity(context)?.getText(R.string.online)
+                    holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.main_color))}
+                2-> {holder.status.text= getActivity(context)?.getText(R.string.attente)
+                    holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.attente))}
+
+            }
 
         }
 
@@ -45,6 +56,8 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         var nom :TextView = view.findViewById(R.id.dashbord_servername_tv)
         var date  :TextView = view.findViewById(R.id.dashbord_time_tv)
         var msg  :TextView = view.findViewById(R.id.dashbord_message_tv)
+        var status :TextView = view.findViewById(R.id.dashbord_status_tv)
+        var card:CardView=view.findViewById(R.id.card_view_status)
     }
 
 

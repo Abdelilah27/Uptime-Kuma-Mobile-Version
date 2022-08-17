@@ -77,13 +77,13 @@ object DashbordCompanionObject {
                 time = time,
                 important = important
             )
-            monitorStatusList.add(monitorUpdate)
-            monitorStatusList.sortByDescending { it.time }
-            _monitorStatusLiveData.postValue(monitorStatusList)
+            if(monitorUpdate.important == true)
+            {
+                monitorStatusList.add(monitorUpdate)
+                monitorStatusList.sortByDescending { it.time }
+                _monitorStatusLiveData.postValue(monitorStatusList)
+            }
 
-            Log.d("hello", "getDashbordUpdate: " + monitorUpdateList.size)
-
-            Log.d("list update", "getDashbordUpdate: " + list.size)
         }
 
 
