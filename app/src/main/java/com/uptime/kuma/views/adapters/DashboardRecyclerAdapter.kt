@@ -35,7 +35,6 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
             holder.nom.text = "test"
             holder.date.text = it.time
             holder.msg.text = it.msg
-
         }
 
     }

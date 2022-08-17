@@ -1,13 +1,8 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
@@ -18,7 +13,6 @@ import com.uptime.kuma.views.status.StatusCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
 
@@ -45,8 +39,11 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                     ) {
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
-                    }else if(response.toString().contains(Constants.emission) ){
-                        sendQuery("3")
+                    } else if (response.toString().contains(Constants.emission) && NetworkResult
+                            .instance.get().value == "1"
+                    ) {
+                        sendQuery(Constants.dataQueryResend)
+                        NetworkResult.instance.get().postValue("5") //Success response
                     }
                 })
             }
@@ -59,7 +56,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.monitorListSuffix,
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-            Log.d("TAG", response.toString())
+//            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

@@ -4,6 +4,7 @@ object Constants {
     const val socketUrl = "ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket"
     const val openedConnexion = "OnConnectionOpened"
     const val dataQuery = "40"
+    const val dataQueryResend = "3"
     const val unSuccessConnexion = "Failed to connect"
     const val successConnexion = "value=0"
     const val emission = "value=2"

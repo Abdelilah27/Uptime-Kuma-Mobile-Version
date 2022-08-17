@@ -8,6 +8,7 @@ class NetworkResult {
     // 2 -> failure response
     // 3 -> error response
     // 4 -> closed response
+    // 5 -> resend response
 
     var response: MutableLiveData<String> = MutableLiveData()
 
