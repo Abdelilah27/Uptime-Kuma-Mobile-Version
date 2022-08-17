@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         LoginFragment.socketLiveData.observe(this, Observer {
             //Setup and create connexion
-            scarlet = ApiUtilities.provideScarlet(it.toString())
+            scarlet = ApiUtilities.provideScarlet("ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket")
             webSocketService = ApiUtilities.getInstance(scarlet)
 
             //Service Shared Data

@@ -6,6 +6,7 @@ object Constants {
     const val dataQuery = "40"
     const val unSuccessConnexion = "Failed to connect"
     const val successConnexion = "value=0"
+    const val emission = "value=2"
     const val closedConnexion = "shutdownReason=ShutdownReason"
     const val monitorListSuffix = "42[\"monitorList\","
     const val statusListSuffix = "42[\"statusPageList\",{"

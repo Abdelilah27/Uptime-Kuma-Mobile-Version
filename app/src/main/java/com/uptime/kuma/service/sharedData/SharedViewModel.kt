@@ -45,6 +45,8 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                     ) {
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
+                    }else if(response.toString().contains(Constants.emission) ){
+                        sendQuery("3")
                     }
                 })
             }

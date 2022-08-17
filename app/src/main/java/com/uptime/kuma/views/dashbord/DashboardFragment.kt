@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
+import com.uptime.kuma.utils.STATUS
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -44,8 +45,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     //observe monitorstatus list
     private fun observeMonitorsList() {
-        DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer {
-            itemAdapter.submitList(it)
+        DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
+            STATUS = data
+            itemAdapter.setData(STATUS?: listOf())
+
+
         })
     }
 
