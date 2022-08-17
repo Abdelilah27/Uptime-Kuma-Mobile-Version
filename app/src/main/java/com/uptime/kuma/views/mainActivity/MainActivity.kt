@@ -3,6 +3,7 @@ package com.uptime.kuma.views.mainActivity
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
+import com.uptime.kuma.utils.SaveData
 import com.uptime.kuma.views.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
@@ -28,14 +30,23 @@ class MainActivity : AppCompatActivity() {
 
         //        lateinit var sharedViewModel: SharedViewModel
         lateinit var mainActivityViewModel: MainActivityViewModel
+        lateinit var saveData: SaveData
     }
 
     private lateinit var sharedRepository: SharedRepository
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        saveData = SaveData(this)
 
+        //set light or dark mode from sharedPreferences
+        if (saveData.lightMode == "true") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -52,7 +63,8 @@ class MainActivity : AppCompatActivity() {
 
         LoginFragment.socketLiveData.observe(this, Observer {
             //Setup and create connexion
-            scarlet = ApiUtilities.provideScarlet("ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket")
+            scarlet =
+                ApiUtilities.provideScarlet("ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket")
             webSocketService = ApiUtilities.getInstance(scarlet)
 
             //Service Shared Data
@@ -65,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
 
         })
-
 
     }
 

@@ -87,9 +87,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                     }
                 }
 
-                Log.d("horsLigne", horsLigne.toString())
-                Log.d("enLigne", enLigne.toString())
-                Log.d("enPause", enPause.toString())
+//                Log.d("horsLigne", horsLigne.toString())
+//                Log.d("enLigne", enLigne.toString())
+//                Log.d("enPause", enPause.toString())
                 CALCUL = ArrayList()
                 CALCUL?.add(CalculDashboardItem("Hors ligne",horsLigne.toString()))
                 CALCUL?.add(CalculDashboardItem("En ligne",enLigne.toString()))

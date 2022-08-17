@@ -1,7 +1,8 @@
 package com.uptime.kuma.views.apparence
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +26,26 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentApparenceReglageBinding.inflate(inflater, container, false)
-        val root: View = binding!!.root
+        val root: View = binding.root
+
+        binding.apply {
+            switchDarkMode.isChecked = MainActivity.saveData.lightMode == "true"
+            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    MainActivity.saveData.lightMode = "true"
+                    restartApplication()
+                } else {
+                    MainActivity.saveData.lightMode = "false"
+                    restartApplication()
+                }
+            }
+        }
+
         val list = resources.getStringArray(R.array.list)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_item, list)
         // Inflate the layout for this fragment
-        binding!!.auto.setAdapter(arrayAdapter)
+        binding.auto.setAdapter(arrayAdapter)
         binding.auto.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-            Log.d("item selected", binding.auto.text.toString())
             when (binding.auto.text.toString()) {
                 "English" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "en")
@@ -53,12 +67,17 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage) {
             }
         })
 
-
-
-
-
-
         return root
+    }
+
+    private fun restartApplication() {
+        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
+            requireActivity().baseContext.packageName
+        )
+        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        Process.killProcess(Process.myPid())
+        System.exit(0)
     }
 
 

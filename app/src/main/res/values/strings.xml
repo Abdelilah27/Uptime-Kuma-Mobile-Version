@@ -35,7 +35,7 @@
     <string name="apparence">Appearance</string>
     <string name="langue">Language</string>
     <string name="anglais">English</string>
-    <string name="switche">Dark Mode</string>
+    <string name="switche">Light Mode</string>
     <string name="pause_button_server_fragment">En Pause</string>
     <string name="delete_button_server_fragment">Delete</string>
     <string name="enLigne_status_server_fragment">Online</string>
