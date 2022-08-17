@@ -45,7 +45,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                     ) {
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
-                    }else if(response.toString().contains(Constants.emission) ){
+                    } else if (response.toString().contains(Constants.emission)) {
                         sendQuery("3")
                     }
                 })
@@ -57,6 +57,10 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
             AllServersCompanionObject.getMonitorsFromResponse(
                 response,
                 Constants.monitorListSuffix,
+            )
+            DashbordCompanionObject.getDashbordUpdate(
+                response,
+                Constants.dashbordMonitorUpdate
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
             Log.d("TAG", response.toString())

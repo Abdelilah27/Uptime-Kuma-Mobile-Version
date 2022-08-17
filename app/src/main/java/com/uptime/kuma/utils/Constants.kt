@@ -11,4 +11,5 @@ object Constants {
     const val monitorListSuffix = "42[\"monitorList\","
     const val statusListSuffix = "42[\"statusPageList\",{"
     const val dashbordMonitorItemsSuffix = "42[\"importantHeartbeatList\","
+    const val dashbordMonitorUpdate = "42[\"heartbeat\","
 }

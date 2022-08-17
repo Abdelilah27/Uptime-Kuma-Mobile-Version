@@ -1,17 +1,22 @@
 package com.uptime.kuma.views.dashbord
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
+import com.uptime.kuma.views.dashbord.utils.UpdateData
 import org.json.JSONArray
 import org.json.JSONObject
 
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
+    var sharedNewRecievedData : UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
+    val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
@@ -52,6 +57,47 @@ object DashbordCompanionObject {
 
         }
 
+    }
+
+    fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+        var list: ArrayList<MonitorStatusItem> = ArrayList()
+        if (response.toString().contains(suffix)) {
+            val customResponseAfter = response.toString().substringAfter(suffix)
+            val jsonObject = JSONObject(customResponseAfter)
+            Log.d("filter2", jsonObject.toString())
+            val monitorID = jsonObject.get("monitorID").toString()
+            val msg = jsonObject.get("msg").toString()
+            val status = jsonObject.get("status").toString()
+            val time = jsonObject.get("time").toString()
+            val important = jsonObject.getBoolean("important")
+            // init MonitorStatusItem
+            val monitorUpdate = MonitorUpdate(
+                monitorID = monitorID.toInt(),
+                msg = msg,
+                status = status.toInt(),
+                time = time,
+                important = important
+            )
+            if (monitorUpdate.important == false) {
+                sharedNewRecievedData.onReceivedData( MonitorStatusItem(
+                    monitorUpdate.duration,
+                    1,
+                    monitorUpdate.monitorID,
+                    monitorUpdate.msg,
+                    monitorUpdate.ping,
+                    monitorUpdate.status,
+                    monitorUpdate.time
+                ))
+
+
+            }
+            Log.d("hello", "getDashbordUpdate: " + monitorUpdateList.size)
+
+
+
+
+            Log.d("list update", "getDashbordUpdate: " + list.size)
+        }
 
 
     }
