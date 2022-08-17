@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
-import com.uptime.kuma.views.dashbord.utils.UpdateData
 import org.json.JSONArray
 import org.json.JSONObject
 
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
-    var sharedNewRecievedData: UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
+    private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
+    val newLiveData: LiveData<ArrayList<MonitorStatusItem>>
+        get() = _newLiveData
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
-    val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
@@ -50,6 +50,7 @@ object DashbordCompanionObject {
             // Traverse through the first list
             newList =
                 monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+            _newLiveData.postValue(newList)
             monitorStatusList.sortByDescending { it.time }
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
@@ -59,7 +60,6 @@ object DashbordCompanionObject {
     }
 
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
-        var list: ArrayList<MonitorStatusItem> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
@@ -77,8 +77,10 @@ object DashbordCompanionObject {
                 time = time,
                 important = important
             )
-            if(monitorUpdate.important == true)
-            {
+            if (monitorUpdate.important == true) {
+//                newList.add(monitorUpdate)
+//                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
+//                _newLiveData.postValue(newList)
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }
                 _monitorStatusLiveData.postValue(monitorStatusList)

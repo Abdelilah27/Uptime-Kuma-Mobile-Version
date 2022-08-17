@@ -1,6 +1,7 @@
 package com.uptime.kuma.views.dashbord
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -8,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
+import com.uptime.kuma.models.CalculDashboardItem
+import com.uptime.kuma.utils.CALCUL
 import com.uptime.kuma.utils.STATUS
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
@@ -21,11 +24,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
-    companion object {
-        lateinit var  instance : DashboardFragment
-    }
 
-    //    private lateinit var dashbordViewModel: DashbordViewModel
+    //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDashboardBinding.bind(view)
@@ -45,23 +45,16 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
-           observeMonitorsList()
-            getStatisctics()
+            observeMonitorsList()
+            getStatistics()
         }
-    }
-    private fun getStatisctics() {
-        dashbordViewModel.calculItemLiveData.observe(viewLifecycleOwner, Observer { data ->
-            calculItemAdapter.setData(data)
-        })
     }
 
     //observe monitorstatus list
     private fun observeMonitorsList() {
         DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
             STATUS = data
-            itemAdapter.setData(STATUS?: listOf())
-
-
+            itemAdapter.setData(STATUS ?: listOf())
         })
     }
 
@@ -70,12 +63,46 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         MainActivity.navController.navigate(action)
     }
 
-    override fun onReceivedData(data: MonitorStatusItem) {
-        Log.d("element", "onReceivedData: ")
-        STATUS?.add(data)
-        itemAdapter.setData(STATUS?: listOf())
-        binding.dashbordRecycler.adapter = itemAdapter
+    private fun getStatistics() {
+        DashbordCompanionObject.newLiveData.observe(
+            viewLifecycleOwner, Observer { data ->
+                var enLigne = 0
+                var horsLigne = 0
+                var enPause = 0
+                var unKnown = 0
+                data.forEach {
+                    when (it.status) {
+                        0 -> {
+                            horsLigne++
+                        }
+                        1 -> {
+                            enLigne++
+                        }
+                        2 -> {
+                            enPause++
+                        }
+                        else -> {
+                            unKnown++
+                        }
+                    }
+                }
+
+                Log.d("horsLigne", horsLigne.toString())
+                Log.d("enLigne", enLigne.toString())
+                Log.d("enPause", enPause.toString())
+                CALCUL = ArrayList()
+                CALCUL?.add(CalculDashboardItem("Hors ligne",horsLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En ligne",enLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En pause",enPause.toString()))
+                CALCUL?.add(CalculDashboardItem("Inconnu",unKnown.toString()))
+
+                calculItemAdapter.setData(CALCUL?: listOf())
 
 
+
+
+
+            })
     }
 
+}
