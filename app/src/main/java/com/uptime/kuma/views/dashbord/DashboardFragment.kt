@@ -20,6 +20,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var itemAdapter: DashboardRecyclerAdapter
     private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
+    private lateinit var binding: FragmentDashboardBinding
+    companion object {
+        lateinit var  instance : DashboardFragment
+    }
 
     //    private lateinit var dashbordViewModel: DashbordViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,11 +45,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
-            observeMonitorsList()
+           observeMonitorsList()
             getStatisctics()
         }
     }
-
     private fun getStatisctics() {
         dashbordViewModel.calculItemLiveData.observe(viewLifecycleOwner, Observer { data ->
             calculItemAdapter.setData(data)
@@ -56,7 +59,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private fun observeMonitorsList() {
         DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
             STATUS = data
-            itemAdapter.setData(STATUS ?: listOf())
+            itemAdapter.setData(STATUS?: listOf())
+
+
         })
     }
 
@@ -64,5 +69,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(position)
         MainActivity.navController.navigate(action)
     }
-}
+
+    override fun onReceivedData(data: MonitorStatusItem) {
+        Log.d("element", "onReceivedData: ")
+        STATUS?.add(data)
+        itemAdapter.setData(STATUS?: listOf())
+        binding.dashbordRecycler.adapter = itemAdapter
+
+
+    }
 

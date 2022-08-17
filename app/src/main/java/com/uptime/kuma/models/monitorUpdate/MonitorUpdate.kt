@@ -1,8 +1,8 @@
-package com.uptime.kuma.models.monitorStatus
+package com.uptime.kuma.models.monitorUpdate
 
-data class MonitorStatusItem(
-    val duration: Int ?= null,
-    val important: Boolean ?= null,
+data class MonitorUpdate(
+    val duration: Int?= null,
+    val important: Boolean  ?= null,
     val monitorID: Int ?= null,
     val msg: String ?= null,
     val ping: Int ?= null,
