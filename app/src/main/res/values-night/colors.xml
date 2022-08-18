@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_200">#990099</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#000000</color>
     <color name="green">#00ff00</color>
     <color name="red">#ff0000</color>
-    <color name="little_title_bienvenue_fragment">#959B9F</color>
-    <color name="black_cardview">#0D1117</color>
-    <color name="grey">#c0c0c0</color>
-    <color name="much_black">#161B22</color>
+    <color name="little_title_bienvenue_fragment">#000000</color>
+    <color name="black_cardview">#FFFFFFFF</color>
+    <color name="grey">#000000</color>
+    <color name="much_black">#FFFFFFFF</color>
     <color name="main_text_splash_fragment">#5BDA88</color>
     <color name="main_color">#5BDA88</color>
     <color name="background_color_login_fragment">#FFFFFFFF</color>
-    <color name="background_color_dashbord_fragment">#070A10</color>
-    <color name="background_color_Recycler_dashbord_fragment">#0d1116</color>
-    <color name="background_color_second">#0d1116</color>
-    <color name="background_color_main">#070A10</color>
-    <color name="dashbord_fragment_text_color">#c0c0c0</color>
-
+    <color name="background_color_dashbord_fragment">#FFFFFFFF</color>
+    <color name="background_color_Recycler_dashbord_fragment">#FFFFFFFF</color>
+    <color name="background_color_second">#FFFFFFFF</color>
+    <color name="background_color_main">#FFFFFFFF</color>
+    <color name="dashbord_fragment_text_color">#000000</color>
     <color name="dashbord_fragment_hors_ligne">#dc3545</color>
-    <color name="attente">#F8A306</color>
-
-    <color name="background_bienvenue_fragment">#131A26</color>
-    <color name="background_card_all_server_fragment">#0E1117</color>
-    <color name="background_all_server_fragment">#FFF</color>
-    <color name="background_item_all_server_fragment">#0E1117</color>
+    <color name="attente">#c0c0c0</color>
+    <color name="background_bienvenue_fragment">#FFFFFFFF</color>
+    <color name="background_card_all_server_fragment">#FFFFFFFF</color>
+    <color name="background_all_server_fragment">#FFFFFFFF</color>
+    <color name="background_item_all_server_fragment">#FFFFFFFF</color>
     <color name="background_active_item_all_server_fragment">#5BDA88</color>
     <color name="background_no_active_item_all_server_fragment">#DD3444</color>
-    <color name="main_text_item_all_server_fragment">#B1B8BF</color>
-    <color name="app_bar_color">#0A0D11</color>
-    <color name="search_view_stroke_color">#161B22</color>
+    <color name="main_text_item_all_server_fragment">#000000</color>
+    <color name="app_bar_color">#FFFFFFFF</color>
+    <color name="search_view_stroke_color">#000000</color>
     <!---->
-    <color name="text_color">#c0c0c0</color>
+    <color name="text_color">#000000</color>
     <!---->
+
 
 </resources>
