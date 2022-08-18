@@ -1,7 +1,6 @@
 package com.uptime.kuma.views.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
             monitorId = it.monitorID.toString()
-            holder.nom.text = "test"
+            holder.nom.text = it.name
             holder.date.text = it.time
             holder.msg.text = it.msg
             when (it.status) {

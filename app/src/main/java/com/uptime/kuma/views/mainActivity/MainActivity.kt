@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
 
             sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
 
-
         })
 
     }

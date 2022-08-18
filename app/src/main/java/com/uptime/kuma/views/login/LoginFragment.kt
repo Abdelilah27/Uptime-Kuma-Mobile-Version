@@ -17,6 +17,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.databinding.FragmentLoginBinding
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
@@ -39,35 +41,33 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.buttonLogin.setOnClickListener {
             if (binding.socketUrl.text.isNotEmpty()) {
-                _socketLiveData.postValue(binding.socketUrl.text.toString())
-                binding.progressBar.visibility = View.VISIBLE
-                NetworkResult().set(MutableLiveData("0"))//set connexion to open
-                NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-                    when (NetworkResult.instance.get().value) {
-                        "1" -> {
-                            binding.progressBar.visibility = View.GONE
-                            findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
+                if (verificationSocketLink(binding.socketUrl.text.toString())) {
+                    _socketLiveData.postValue(binding.socketUrl.text.toString())
+                    binding.progressBar.visibility = View.VISIBLE
+                    NetworkResult().set(MutableLiveData("0"))//set connexion to open
+                    NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
+                        when (NetworkResult.instance.get().value) {
+                            "1" -> {
+                                binding.progressBar.visibility = View.GONE
+                                findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
+                            }
+                            "2", "3", "6" -> {
+                                Log.d("ccc", "onViewCreated: ")
+                                binding.progressBar.visibility = View.GONE
+                                showErrorDialog()
+                            }
                         }
-                        "2" -> {
-                            Log.d("ccc", "onViewCreated: ")
-                            binding.progressBar.visibility = View.GONE
-                            showErrorDialog()
-                        }
-                        "3" -> {
-                            binding.progressBar.visibility = View.GONE
-                            showErrorDialog()
-                        }
-                        "6" -> {
-                            binding.progressBar.visibility = View.GONE
-                            showErrorDialog()
-                        }
-
                     }
+                    )
+                } else {
+                    Toast.makeText(
+                        context,
+                        resources.getString(com.uptime.kuma.R.string.valide_socket_url),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                )
             } else {
                 Toast.makeText(
                     context,
@@ -97,6 +97,16 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
+    }
+
+    //socket link regular expression
+    private fun verificationSocketLink(socketLink: String): Boolean {
+        val regex =
+            "^(wss|ws):(\\/\\/)([a-zA-Z]+||[0-9]*).(.*)\$"
+        //Compile regular expression to get the pattern
+        val pattern: Pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(socketLink)
+        return matcher.matches()
     }
 
 

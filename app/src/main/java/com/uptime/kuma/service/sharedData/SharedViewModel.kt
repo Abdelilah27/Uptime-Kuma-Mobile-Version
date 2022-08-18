@@ -76,7 +76,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.dashbordMonitorUpdate
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-            Log.d("JJJ", response.toString())
+//            Log.d("JJJ", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())
