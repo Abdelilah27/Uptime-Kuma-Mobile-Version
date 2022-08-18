@@ -25,6 +25,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
+    private lateinit var shimmerViewCalcul: ShimmerFrameLayout
     private lateinit var binnding: FragmentDashboardBinding
 
     //    private lateinit var dashbordViewModel: DashbordViewModelf
@@ -34,7 +35,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         // instantiation de ViewModel
         dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
         shimmerView = binding.dashboardShimmer
+        shimmerViewCalcul = binding.dashboardShimmerCalcul
         shimmerView.startShimmerAnimation()
+        shimmerViewCalcul.startShimmerAnimation()
         binding.apply {
             calculRecycler.apply {
                 calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
@@ -60,6 +63,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             STATUS = data
             itemAdapter.setData(STATUS ?: listOf())
             if (data.size > 0) {
+                shimmerView.stopShimmerAnimation()
                 shimmerView.visibility = View.GONE
                 binding.dashbordRecycler.visibility = View.VISIBLE
             }
@@ -104,6 +108,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 CALCUL?.add(CalculDashboardItem("En pause", enPause.toString()))
                 CALCUL?.add(CalculDashboardItem("Inconnu", unKnown.toString()))
 
+                shimmerViewCalcul.stopShimmerAnimation()
+                shimmerViewCalcul.visibility = View.GONE
+                binding.calculRecycler.visibility = View.VISIBLE
                 calculItemAdapter.setData(CALCUL ?: listOf())
 
 

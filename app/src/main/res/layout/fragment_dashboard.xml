@@ -26,10 +26,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/dashboard_shimmer_calcul"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_color_Recycler_dashbord_fragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <include layout="@layout/dashboard_recycler_calcul_item_shimmer" />
+
+                <include layout="@layout/dashboard_recycler_calcul_item_shimmer" />
+
+                <include layout="@layout/dashboard_recycler_calcul_item_shimmer" />
+
+                <include layout="@layout/dashboard_recycler_calcul_item_shimmer" />
+
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calcul_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             tools:listitem="@layout/dashboard_recycler_calcul_item" />
     </androidx.cardview.widget.CardView>
 
@@ -42,7 +68,6 @@
         android:layout_marginRight="16dp"
         app:cardCornerRadius="5dp"
         app:cardUseCompatPadding="true"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
