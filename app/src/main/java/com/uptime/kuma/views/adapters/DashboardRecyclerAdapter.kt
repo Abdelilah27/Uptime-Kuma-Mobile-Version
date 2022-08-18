@@ -33,7 +33,6 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
-
             holder.nom.text = it.name
             holder.date.text = it.time
             holder.msg.text = it.msg
@@ -57,7 +56,7 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         var date  :TextView = view.findViewById(R.id.dashbord_time_tv)
         var msg  :TextView = view.findViewById(R.id.dashbord_message_tv)
         var status :TextView = view.findViewById(R.id.dashbord_status_tv)
-        var card:CardView=view.findViewById(R.id.card_view_status)
+        var card: CardView =view.findViewById(R.id.card_view_status)
     }
 
 

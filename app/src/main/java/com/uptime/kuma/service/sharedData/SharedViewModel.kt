@@ -45,9 +45,8 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                     ) {
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
-                    } else if (response.toString().contains(Constants.emission)) {
-                        Log.d("TestQ", "handleConnexionState: ")
-                        sendQuery("3")
+                    }else if(response.toString().contains(Constants.emission) ){
+                        sendQuery(Constants.dataQueryResend)
                     }
                 })
             }
@@ -55,16 +54,18 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 response,
                 Constants.monitorListSuffix,
             )
+
             DashbordCompanionObject.getDashbordMonitorItem(
                 response,
                 Constants.dashbordMonitorItemsSuffix
             )
+
             DashbordCompanionObject.getDashbordUpdate(
                 response,
                 Constants.dashbordMonitorUpdate
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-            Log.d("TAG", response.toString())
+//            Log.d("TAG", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
-import com.uptime.kuma.views.dashbord.utils.UpdateData
+
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import org.json.JSONArray
 import org.json.JSONObject
@@ -13,10 +13,11 @@ import org.json.JSONObject
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
-    var sharedNewRecievedData: UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
+    private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
+    val newLiveData: LiveData<ArrayList<MonitorStatusItem>>
+        get() = _newLiveData
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
-    val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
@@ -44,14 +45,19 @@ object DashbordCompanionObject {
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
-                    time = time,
+
+                    time = time ,
                     name = getMonitorName(monitorID.toInt())
 
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
             // Traverse through the first list
-            newList = monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+
+            newList =
+                monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+            _newLiveData.postValue(newList)
+
             monitorStatusList.sortByDescending { it.time }
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
@@ -59,6 +65,7 @@ object DashbordCompanionObject {
         }
 
     }
+
 
     fun getMonitorName(id:Int):String{
         AllServersCompanionObject.monitors.forEach {
@@ -71,11 +78,9 @@ object DashbordCompanionObject {
     }
 
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
-        var list: ArrayList<MonitorStatusItem> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
-            Log.d("filter2", jsonObject.toString())
             val monitorID = jsonObject.get("monitorID").toString()
             val msg = jsonObject.get("msg").toString()
             val status = jsonObject.get("status").toString()
@@ -90,8 +95,18 @@ object DashbordCompanionObject {
                 important = important,
                 name = getMonitorName(monitorID.toInt())
             )
-            if(monitorUpdate.important == true)
-            {
+            if (monitorUpdate.important == true) {
+                newList.add(monitorUpdate)
+//                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
+//                _newLiveData.postValue(newList)
+                 newList.sortByDescending { MonitorUpdate ->MonitorUpdate.time}
+                newList= newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+                newList.sortBy { MonitorUpdate ->MonitorUpdate.monitorID}
+                newList.forEach {
+                    println(it.monitorID.toString()+it.time)
+                }
+
+                _newLiveData.postValue(newList)
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }
                 _monitorStatusLiveData.postValue(monitorStatusList)

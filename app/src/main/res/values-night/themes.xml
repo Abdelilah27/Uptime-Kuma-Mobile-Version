@@ -2,15 +2,206 @@
     <!-- Base application theme. -->
     <style name="Theme.UptimeKuma" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/background_color_dashbord_fragment</item>
+        <item name="colorPrimaryVariant">@color/background_color_dashbord_fragment</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/main_text_splash_fragment</item>
+        <item name="colorSecondaryVariant">@color/main_text_splash_fragment</item>
+        <item name="colorOnSecondary">@color/background_color_dashbord_fragment</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">
+            @color/background_color_dashbord_fragment
+        </item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="bar_title_bienvenue_fragment">
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="main_text_bienvenue_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="main_button_bienvenue_fragment">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/main_text_splash_fragment</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="delete_button_different_size_server_fragment">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/background_no_active_item_all_server_fragment</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="pause_button_different_size_server_fragment">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/main_text_item_all_server_fragment</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="status_server_fragment">
+        <item name="android:textColor">@color/background_all_server_fragment</item>
+        <item name="backgroundTint">@color/main_text_splash_fragment</item>
+        <item name="android:textSize">20sp</item>s
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_margin">8dp</item>
+
+    </style>
+
+    <style name="status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
+    <style name="large_size_status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
+    <style name="medium_size_status_text_fragment">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+    </style>
+
+
+    <style name="title_edit_text_add_statue_fragment">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="langue">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="notification_text">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/main_text_item_all_server_fragment</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="without_margin_title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dashbord_fragment_text_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="differente_size_title_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/dashbord_fragment_text_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="link_server_fragment">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/main_text_splash_fragment</item>
+    </style>
+
+    <style name="card_dashboard_red_color">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/dashbord_fragment_hors_ligne</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="card_dashboard_orange_color">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/attente</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="card_dashboard_green_color">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="titre">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="version">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="credits">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="drop_list">
+        <item name="android:gradientRadius">8dp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+
 </resources>

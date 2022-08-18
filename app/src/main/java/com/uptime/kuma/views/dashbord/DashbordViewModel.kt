@@ -1,23 +1,12 @@
 package com.uptime.kuma.views.dashbord
 
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.uptime.kuma.views.dashbord.DashbordCompanionObject.newLiveData
 
 class DashbordViewModel : ViewModel() {
-    var online: Int = 0
-    var offline: Int = 0
-    var unknown: Int = 0
-    var pause: Int = 0
 
-    fun calculStatistics() {
-        for (i in 0 until DashbordCompanionObject.newList.size) {
-            when (DashbordCompanionObject.newList[i].status) {
-                0 -> offline += 1
-                1 -> online += 1
-                2 -> pause += 1
-                else -> {
-                    unknown += 1
-                }
-            }
-        }
-    }
+
+
 }

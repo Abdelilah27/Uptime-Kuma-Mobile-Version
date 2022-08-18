@@ -9,56 +9,52 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
-import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import com.uptime.kuma.models.CalculDashboardItem
+import com.uptime.kuma.utils.CALCUL
 import com.uptime.kuma.utils.STATUS
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
-import com.uptime.kuma.views.dashbord.utils.UpdateData
+import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
-import kotlinx.coroutines.flow.combine
 
 
-class DashboardFragment : Fragment(R.layout.fragment_dashboard),UpdateData,
+class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DashboardRecyclerAdapter.OnItemClickListener {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
     private lateinit var dashbordViewModel: DashbordViewModel
+    private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
-    companion object {
-        lateinit var  instance : DashboardFragment
-    }
 
-    //    private lateinit var dashbordViewModel: DashbordViewModel
+    //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        instance=this
         super.onViewCreated(view, savedInstanceState)
-         binding = FragmentDashboardBinding.bind(view)
+        val binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
         dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
         binding.apply {
+            calculRecycler.apply {
+                calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
+                adapter = calculItemAdapter
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+            }
+
             dashbordRecycler.apply {
                 itemAdapter = DashboardRecyclerAdapter(context, this@DashboardFragment)
                 adapter = itemAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
-            enLigneNumber.text = dashbordViewModel.online.toString()
-            downNumber.text = dashbordViewModel.offline.toString()
-            unknownNumber.text = dashbordViewModel.unknown.toString()
-            pauseNumber.text = dashbordViewModel.pause.toString()
             observeMonitorsList()
+            getStatistics()
         }
-
-        //get statistics
-        dashbordViewModel.calculStatistics()
     }
 
     //observe monitorstatus list
     private fun observeMonitorsList() {
         DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
             STATUS = data
-            itemAdapter.setData(STATUS?: listOf())
-
-
+            itemAdapter.setData(STATUS ?: listOf())
         })
     }
 
@@ -67,13 +63,46 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),UpdateData,
         MainActivity.navController.navigate(action)
     }
 
-    override fun onReceivedData(data: MonitorStatusItem) {
-        Log.d("element", "onReceivedData: ")
-        STATUS?.add(data)
-        itemAdapter.setData(STATUS?: listOf())
-        binding.dashbordRecycler.adapter = itemAdapter
+    private fun getStatistics() {
+        DashbordCompanionObject.newLiveData.observe(
+            viewLifecycleOwner, Observer { data ->
+                var enLigne = 0
+                var horsLigne = 0
+                var enPause = 0
+                var unKnown = 0
+                data.forEach {
+                    when (it.status) {
+                        0 -> {
+                            horsLigne++
+                        }
+                        1 -> {
+                            enLigne++
+                        }
+                        2 -> {
+                            enPause++
+                        }
+                        else -> {
+                            unKnown++
+                        }
+                    }
+                }
+
+//                Log.d("horsLigne", horsLigne.toString())
+//                Log.d("enLigne", enLigne.toString())
+//                Log.d("enPause", enPause.toString())
+                CALCUL = ArrayList()
+                CALCUL?.add(CalculDashboardItem("Hors ligne",horsLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En ligne",enLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En pause",enPause.toString()))
+                CALCUL?.add(CalculDashboardItem("Inconnu",unKnown.toString()))
+
+                calculItemAdapter.setData(CALCUL?: listOf())
 
 
+
+
+
+            })
     }
-}
 
+}

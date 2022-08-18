@@ -32,8 +32,6 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),ParametreRecycle
         }
     }
     override fun onItemClick(position: Int) {
-
-        Log.d("Parametre Name",getData()[position].paramname)
         when (getData()[position].paramname) {
             "About" -> MainActivity.navController.navigate(R.id.aboutFragment)
             "Notifications" -> MainActivity.navController.navigate(R.id.notificationsFragment)
