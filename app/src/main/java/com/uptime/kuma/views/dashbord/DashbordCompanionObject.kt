@@ -1,20 +1,25 @@
 package com.uptime.kuma.views.dashbord
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import com.uptime.kuma.utils.UpdateData
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import org.json.JSONArray
 import org.json.JSONObject
 
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
+    var sharedNewRecievedData: UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val newLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _newLiveData
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
+    val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
@@ -42,7 +47,9 @@ object DashbordCompanionObject {
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
-                    time = time
+                    time = time,
+                    name = getMonitorName(monitorID.toInt())
+
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
@@ -58,10 +65,22 @@ object DashbordCompanionObject {
 
     }
 
+    fun getMonitorName(id:Int):String{
+        AllServersCompanionObject.monitors.forEach {
+            if(it.id==id){
+                return it.name
+            }
+        }
+        return ""
+
+    }
+
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+        var list: ArrayList<MonitorStatusItem> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
+            Log.d("filter2", jsonObject.toString())
             val monitorID = jsonObject.get("monitorID").toString()
             val msg = jsonObject.get("msg").toString()
             val status = jsonObject.get("status").toString()
@@ -73,7 +92,8 @@ object DashbordCompanionObject {
                 msg = msg,
                 status = status.toInt(),
                 time = time,
-                important = important
+                important = important,
+                name = getMonitorName(monitorID.toInt())
             )
             if (monitorUpdate.important == true) {
                 newList.add(monitorUpdate)
