@@ -29,6 +29,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
         }
     }
 
+
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
@@ -48,6 +49,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.unSuccessConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
+                        Log.d("BBB", "handleConnexionState: ")
                         NetworkResult.instance.get().postValue("2") //Failed connexion
                     }
                 })
@@ -65,7 +67,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.dashbordMonitorUpdate
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-//            Log.d("JJJ", response.toString())
+            Log.d("JJJ", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

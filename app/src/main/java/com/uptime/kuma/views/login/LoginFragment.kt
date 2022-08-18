@@ -1,6 +1,7 @@
 package com.uptime.kuma.views.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
                         findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
                     }
                     "2" -> {
+                        Log.d("ccc", "onViewCreated: ")
                         binding.progressBar.visibility = View.GONE
                         showErrorDialog()
                     }

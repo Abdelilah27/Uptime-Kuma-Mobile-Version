@@ -5,7 +5,7 @@ object Constants {
     const val openedConnexion = "OnConnectionOpened"
     const val dataQuery = "40"
     const val dataQueryResend = "3"
-    const val unSuccessConnexion = "failed to connect to"
+    const val unSuccessConnexion = "ailed to connect to"
     const val successConnexion = "value=0"
     const val emission = "value=2"
     const val closedConnexion = "shutdownReason=ShutdownReason"

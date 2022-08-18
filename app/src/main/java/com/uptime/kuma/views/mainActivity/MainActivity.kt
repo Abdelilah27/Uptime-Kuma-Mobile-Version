@@ -61,10 +61,12 @@ class MainActivity : AppCompatActivity() {
 //        setFullScreen(window)
 //        lightStatusBar(window)
 
+
+//        ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
         LoginFragment.socketLiveData.observe(this, Observer {
             //Setup and create connexion
             scarlet =
-                ApiUtilities.provideScarlet("ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket")
+                ApiUtilities.provideScarlet(it.toString())
             webSocketService = ApiUtilities.getInstance(scarlet)
 
             //Service Shared Data
