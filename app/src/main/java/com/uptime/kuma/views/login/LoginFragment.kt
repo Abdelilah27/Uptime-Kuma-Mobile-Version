@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -40,29 +41,40 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonLogin.setOnClickListener {
-            _socketLiveData.postValue(binding.socketUrl.text.toString())
-            binding.progressBar.visibility = View.VISIBLE
-            NetworkResult().set(MutableLiveData("0"))//set connexion to open
-            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-                when (NetworkResult.instance.get().value) {
-                    "1" -> {
-                        binding.progressBar.visibility = View.GONE
-                        findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
-                    }
-                    "2" -> {
-                        Log.d("ccc", "onViewCreated: ")
-                        binding.progressBar.visibility = View.GONE
-                        showErrorDialog()
-                    }
-                    "3" -> {
-                        binding.progressBar.visibility = View.GONE
-                        showErrorDialog()
-                    }
+            if (binding.socketUrl.text.isNotEmpty()) {
+                _socketLiveData.postValue(binding.socketUrl.text.toString())
+                binding.progressBar.visibility = View.VISIBLE
+                NetworkResult().set(MutableLiveData("0"))//set connexion to open
+                NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
+                    when (NetworkResult.instance.get().value) {
+                        "1" -> {
+                            binding.progressBar.visibility = View.GONE
+                            findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
+                        }
+                        "2" -> {
+                            Log.d("ccc", "onViewCreated: ")
+                            binding.progressBar.visibility = View.GONE
+                            showErrorDialog()
+                        }
+                        "3" -> {
+                            binding.progressBar.visibility = View.GONE
+                            showErrorDialog()
+                        }
+                        "6" -> {
+                            binding.progressBar.visibility = View.GONE
+                            showErrorDialog()
+                        }
 
+                    }
                 }
+                )
+            } else {
+                Toast.makeText(
+                    context,
+                    resources.getString(com.uptime.kuma.R.string.empty_socket_url),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            )
-
         }
     }
 

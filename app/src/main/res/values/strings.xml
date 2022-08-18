@@ -63,6 +63,9 @@
     <string name="title_error_dialog">Error message</string>
     <string name="message_error_dialog">Please retry later</string>
 
+    <string name="empty_socket_url">Please complete all fields</string>
+    <string name="valide_socket_url">Please enter a valid link</string>
+
 
     <string-array name="list">
         <item>French</item>

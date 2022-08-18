@@ -9,6 +9,7 @@ class NetworkResult {
     // 3 -> error response
     // 4 -> closed response
     // 5 -> resend response
+    // 6 -> no response after a delay
 
     var response: MutableLiveData<String> = MutableLiveData()
 

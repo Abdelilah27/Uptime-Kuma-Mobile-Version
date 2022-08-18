@@ -1,6 +1,8 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -36,6 +38,12 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
         data.subscribe({ response ->
             lifecycleScope.launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
+                    //to show error dialog after a delay
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        if (NetworkResult.instance.get().value == "0") {
+                            NetworkResult.instance.get().postValue("6") //no response
+                        }
+                    }, 30000)
                     if (response.toString()
                             .contains(Constants.successConnexion) && NetworkResult
                             .instance.get().value == "0"
@@ -49,7 +57,6 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.unSuccessConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
-                        Log.d("BBB", "handleConnexionState: ")
                         NetworkResult.instance.get().postValue("2") //Failed connexion
                     }
                 })

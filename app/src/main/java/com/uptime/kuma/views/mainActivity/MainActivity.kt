@@ -67,7 +67,11 @@ class MainActivity : AppCompatActivity() {
             //Setup and create connexion
             scarlet =
                 ApiUtilities.provideScarlet(it.toString())
-            webSocketService = ApiUtilities.getInstance(scarlet)
+            try {
+                webSocketService = ApiUtilities.getInstance(scarlet)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
             //Service Shared Data
             sharedRepository = SharedRepository(webSocketService)
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             )[SharedViewModel::class.java]
 
             sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
+
 
         })
 
