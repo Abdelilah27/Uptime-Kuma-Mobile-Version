@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -44,7 +45,8 @@ object DashbordCompanionObject {
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
-                    time = time
+                    time = time ,
+                    name = getMonitorName(monitorID.toInt())
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
@@ -57,6 +59,17 @@ object DashbordCompanionObject {
             _monitorStatusLiveData.postValue(monitorStatusList)
 
         }
+
+    }
+
+
+    fun getMonitorName(id:Int):String{
+        AllServersCompanionObject.monitors.forEach {
+            if(it.id==id){
+                return it.name
+            }
+        }
+        return ""
 
     }
 
@@ -75,15 +88,20 @@ object DashbordCompanionObject {
                 msg = msg,
                 status = status.toInt(),
                 time = time,
-                important = important
+                important = important,
+                name = getMonitorName(monitorID.toInt())
             )
             if (monitorUpdate.important == true) {
                 newList.add(monitorUpdate)
 //                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
 //                _newLiveData.postValue(newList)
+                 newList.sortByDescending { MonitorUpdate ->MonitorUpdate.time}
+                newList= newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+                newList.sortBy { MonitorUpdate ->MonitorUpdate.monitorID}
+                newList.forEach {
+                    println(it.monitorID.toString()+it.time)
+                }
 
-                newList.sortBy { MonitorUpdate ->MonitorUpdate.time}
-                newList.distinctBy { MonitorUpdate ->MonitorUpdate.monitorID }
                 _newLiveData.postValue(newList)
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }

@@ -7,5 +7,6 @@ data class MonitorUpdate(
     val msg: String ?= null,
     val ping: Int ?= null,
     val status: Int ?= null,
-    val time: String?= null
+    val time: String?= null,
+    val name: String?= null
 )
