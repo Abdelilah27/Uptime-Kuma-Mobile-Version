@@ -14,7 +14,6 @@ import com.uptime.kuma.models.monitor.Monitor
 
 class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLister) :
     ListAdapter<Monitor, MonitorItemAllServersAdapter.ItemViewHolder>(DiffCallBack()) {
-
     inner class ItemViewHolder(
         private val biding: ItemAllServersFragmentBinding, val context:
         Context
@@ -26,6 +25,7 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
 
         fun bind(item: Monitor) {
             biding.apply {
+                idText.text = item.id.toString()
                 percentText.text = "100%" // TODO
                 titleText.text = item.name
                 if (item.active != 1) {

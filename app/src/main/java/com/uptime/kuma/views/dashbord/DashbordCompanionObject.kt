@@ -13,7 +13,6 @@ import org.json.JSONObject
 
 object DashbordCompanionObject {
     //    lateinit var monitorStatusList:MonitorStatus
-    var sharedNewRecievedData: UpdateData = DashboardFragment.instance
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val newLiveData: LiveData<ArrayList<MonitorStatusItem>>

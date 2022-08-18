@@ -64,13 +64,9 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                         )
                     )
                 }
-
             }
-
         }
-
     }
-
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         init {
@@ -85,7 +81,6 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         var id: TextView = view.findViewById(R.id.dashbord_id)
         override fun onClick(p0: View?) {
             val position: String = monitorId
-            Log.d("adapter", position)
             listener.onItemClick(position)
         }
     }

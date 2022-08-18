@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
+import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
 import java.util.*
 
@@ -51,6 +52,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val searchText = binding.searchEditTextAllServersFragment.text.toString()
                     .toLowerCase(Locale.getDefault())
@@ -68,8 +70,9 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     }
 
     override fun onItemClick(position: Int) {
-        MainActivity.navController.navigate(R.id.serverFragment)
-//        Log.d("TAG", "onItemClick: " + position)
+        val serverId = allServersViewModel.tempMonitors[position].id.toString()
+        val action = MainFragmentDirections.actionMainFragmentToServerFragment(serverId)
+        MainActivity.navController.navigate(action)
     }
 
 
