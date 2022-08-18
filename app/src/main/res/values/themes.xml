@@ -155,6 +155,7 @@
         <item name="android:layout_margin">0dp</item>
         <item name="android:textSize">35sp</item>
     </style>
+
     <style name="card_dashboard_orange_color">
         <item name="autoSizeTextType">uniform</item>
         <item name="android:gravity">center</item>
@@ -200,6 +201,10 @@
     <style name="drop_list">
         <item name="android:gradientRadius">8dp</item>
         <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
     </style>
 
 

@@ -1,10 +1,8 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +16,6 @@ import com.uptime.kuma.views.status.StatusCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
 
@@ -35,7 +32,6 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
-        NetworkResult().set(MutableLiveData("0"))//set connexion to open
         data.subscribe({ response ->
             lifecycleScope.launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
@@ -43,10 +39,17 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.successConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
+                        Log.d("BONN", "handleConnexionState: ")
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
-                    }else if(response.toString().contains(Constants.emission) ){
+                    } else if (response.toString().contains(Constants.emission)) {
                         sendQuery(Constants.dataQueryResend)
+                        NetworkResult.instance.get().postValue("5") //Resend response
+                    } else if (response.toString()
+                            .contains(Constants.unSuccessConnexion) && NetworkResult
+                            .instance.get().value == "0"
+                    ) {
+                        NetworkResult.instance.get().postValue("2") //Failed connexion
                     }
                 })
             }
@@ -63,7 +66,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.dashbordMonitorUpdate
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-//            Log.d("TAG", response.toString())
+            Log.d("JJJ", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

@@ -24,13 +24,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                 MainActivity.navController.navigate(R.id.loginFragment)
             else
                 findNavController().navigate(R.id.bienvenueFragment)
-//            NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-//                if (NetworkResult.instance.get().value == "1") {
-//                    progressBar.visibility = View.GONE
-//
-//                }
-//            }
-//            )
         }
     }
 

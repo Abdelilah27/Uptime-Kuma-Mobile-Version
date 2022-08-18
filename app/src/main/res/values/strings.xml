@@ -60,6 +60,9 @@
     <string name="socket_url"><font size="15">Socket url</font></string>
     <string name="Password"><font size="15">Password</font></string>
 
+    <string name="title_error_dialog">Error message</string>
+    <string name="message_error_dialog">Please retry later</string>
+
 
     <string-array name="list">
         <item>French</item>
