@@ -107,7 +107,6 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01")
     // ViewModel utilities for Compose
@@ -138,8 +137,10 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.1.0")
 
     // optional - Test helpers for Lifecycle runtime
-    testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:2.6.0-alpha01")
+    testImplementation("androidx.lifecycle:lifecycle-runtime-testing:2.6.0-alpha01")
 
+    // Shimmer effect
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }
 kapt {
     correctErrorTypes true

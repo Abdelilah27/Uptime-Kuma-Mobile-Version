@@ -1,11 +1,9 @@
 package com.uptime.kuma.views.dashbord
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
-import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -82,8 +80,8 @@ object DashbordCompanionObject {
 //                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
 //                _newLiveData.postValue(newList)
 
-                newList.sortBy { MonitorUpdate ->MonitorUpdate.time}
-                newList.distinctBy { MonitorUpdate ->MonitorUpdate.monitorID }
+                newList.sortBy { MonitorUpdate -> MonitorUpdate.time }
+                newList.distinctBy { MonitorUpdate -> MonitorUpdate.monitorID }
                 _newLiveData.postValue(newList)
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }

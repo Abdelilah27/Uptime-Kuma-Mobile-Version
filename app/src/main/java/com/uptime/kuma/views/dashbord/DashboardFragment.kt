@@ -1,12 +1,12 @@
 package com.uptime.kuma.views.dashbord
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.CalculDashboardItem
@@ -24,13 +24,17 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
+    private lateinit var shimmerView: ShimmerFrameLayout
+    private lateinit var binnding: FragmentDashboardBinding
 
     //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentDashboardBinding.bind(view)
+        binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
         dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
+        shimmerView = binding.dashboardShimmer
+        shimmerView.startShimmerAnimation()
         binding.apply {
             calculRecycler.apply {
                 calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
@@ -55,6 +59,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
             STATUS = data
             itemAdapter.setData(STATUS ?: listOf())
+            if (data.size > 0) {
+                shimmerView.visibility = View.GONE
+                binding.dashbordRecycler.visibility = View.VISIBLE
+            }
         })
     }
 
@@ -91,15 +99,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 //                Log.d("enLigne", enLigne.toString())
 //                Log.d("enPause", enPause.toString())
                 CALCUL = ArrayList()
-                CALCUL?.add(CalculDashboardItem("Hors ligne",horsLigne.toString()))
-                CALCUL?.add(CalculDashboardItem("En ligne",enLigne.toString()))
-                CALCUL?.add(CalculDashboardItem("En pause",enPause.toString()))
-                CALCUL?.add(CalculDashboardItem("Inconnu",unKnown.toString()))
+                CALCUL?.add(CalculDashboardItem("Hors ligne", horsLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En ligne", enLigne.toString()))
+                CALCUL?.add(CalculDashboardItem("En pause", enPause.toString()))
+                CALCUL?.add(CalculDashboardItem("Inconnu", unKnown.toString()))
 
-                calculItemAdapter.setData(CALCUL?: listOf())
-
-
-
+                calculItemAdapter.setData(CALCUL ?: listOf())
 
 
             })

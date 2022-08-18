@@ -39,7 +39,6 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                             .contains(Constants.successConnexion) && NetworkResult
                             .instance.get().value == "0"
                     ) {
-                        Log.d("BONN", "handleConnexionState: ")
                         sendQuery(Constants.dataQuery)
                         NetworkResult.instance.get().postValue("1") //Success response
                     } else if (response.toString().contains(Constants.emission)) {
