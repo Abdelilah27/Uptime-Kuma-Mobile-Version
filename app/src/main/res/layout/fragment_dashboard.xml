@@ -55,6 +55,7 @@
             android:id="@+id/calcul_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:visibility="gone"
             tools:listitem="@layout/dashboard_recycler_calcul_item" />
     </androidx.cardview.widget.CardView>

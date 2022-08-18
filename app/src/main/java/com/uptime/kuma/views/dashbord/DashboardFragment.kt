@@ -1,6 +1,7 @@
 package com.uptime.kuma.views.dashbord
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -71,6 +72,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     override fun onItemClick(position: String) {
+        Log.d("fra", position)
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(position)
         MainActivity.navController.navigate(action)
     }
@@ -103,10 +105,31 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 //                Log.d("enLigne", enLigne.toString())
 //                Log.d("enPause", enPause.toString())
                 CALCUL = ArrayList()
-                CALCUL?.add(CalculDashboardItem("Hors ligne", horsLigne.toString()))
-                CALCUL?.add(CalculDashboardItem("En ligne", enLigne.toString()))
-                CALCUL?.add(CalculDashboardItem("En pause", enPause.toString()))
-                CALCUL?.add(CalculDashboardItem("Inconnu", unKnown.toString()))
+                CALCUL?.add(
+                    CalculDashboardItem(
+                        resources.getString(R.string.online), enLigne
+                            .toString()
+                    )
+                )
+                CALCUL?.add(
+                    CalculDashboardItem(
+                        resources.getString(R.string.offline),
+                        horsLigne.toString()
+                    )
+                )
+
+                CALCUL?.add(
+                    CalculDashboardItem(
+                        resources.getString(R.string.pause), enPause
+                            .toString()
+                    )
+                )
+                CALCUL?.add(
+                    CalculDashboardItem(
+                        resources.getString(R.string.unknown), unKnown
+                            .toString()
+                    )
+                )
 
                 shimmerViewCalcul.stopShimmerAnimation()
                 shimmerViewCalcul.visibility = View.GONE
