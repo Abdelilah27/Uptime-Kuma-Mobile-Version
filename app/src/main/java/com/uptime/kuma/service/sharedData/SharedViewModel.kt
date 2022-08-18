@@ -65,10 +65,12 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 response,
                 Constants.monitorListSuffix,
             )
+
             DashbordCompanionObject.getDashbordMonitorItem(
                 response,
                 Constants.dashbordMonitorItemsSuffix
             )
+
             DashbordCompanionObject.getDashbordUpdate(
                 response,
                 Constants.dashbordMonitorUpdate

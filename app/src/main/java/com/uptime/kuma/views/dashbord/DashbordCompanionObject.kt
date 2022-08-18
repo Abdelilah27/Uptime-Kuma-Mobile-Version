@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
-import com.uptime.kuma.utils.UpdateData
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
+import com.uptime.kuma.utils.UpdateData
+import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -53,16 +54,19 @@ object DashbordCompanionObject {
                 monitorStatusList.add(monitorStatusItem)
             }
             // Traverse through the first list
+
             newList =
                 monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
             _newLiveData.postValue(newList)
             monitorStatusList.sortByDescending { it.time }
+
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
 
         }
 
     }
+
 
     fun getMonitorName(id:Int):String{
         AllServersCompanionObject.monitors.forEach {
@@ -79,7 +83,6 @@ object DashbordCompanionObject {
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
-            Log.d("filter2", jsonObject.toString())
             val monitorID = jsonObject.get("monitorID").toString()
             val msg = jsonObject.get("msg").toString()
             val status = jsonObject.get("status").toString()
@@ -98,6 +101,12 @@ object DashbordCompanionObject {
                 newList.add(monitorUpdate)
 //                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
 //                _newLiveData.postValue(newList)
+                 newList.sortByDescending { MonitorUpdate ->MonitorUpdate.time}
+                newList= newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+                newList.sortBy { MonitorUpdate ->MonitorUpdate.monitorID}
+                newList.forEach {
+                    println(it.monitorID.toString()+it.time)
+                }
 
                 newList.sortBy { MonitorUpdate -> MonitorUpdate.time }
                 newList.distinctBy { MonitorUpdate -> MonitorUpdate.monitorID }
