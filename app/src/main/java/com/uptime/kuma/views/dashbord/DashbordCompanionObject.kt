@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
+import com.uptime.kuma.utils.UpdateData
+import com.uptime.kuma.views.mainActivity.MainActivity
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -20,6 +22,8 @@ object DashbordCompanionObject {
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
+
+    val instance :UpdateData = MainActivity.instance
 
     fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
         //
@@ -84,6 +88,7 @@ object DashbordCompanionObject {
 
                 newList.sortBy { MonitorUpdate ->MonitorUpdate.time}
                 newList.distinctBy { MonitorUpdate ->MonitorUpdate.monitorID }
+                instance.onReceivedData(monitorUpdate)
                 _newLiveData.postValue(newList)
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }
