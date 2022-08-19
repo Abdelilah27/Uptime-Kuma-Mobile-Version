@@ -1,7 +1,6 @@
 package com.uptime.kuma.views.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.databinding.FragmentLoginBinding
 import com.uptime.kuma.utils.SessionManagement
@@ -41,22 +41,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         sessionManagement = SessionManagement(requireContext())
         //redirection to the dashboard fragment
         if (sessionManagement.checkIsLogged()) {
-            (activity as MainActivity).setUpConnexeion(sessionManagement.getSocket())
+            (activity as MainActivity).setUpConnexion(sessionManagement.getSocket())
             findNavController().navigate(R.id.mainFragment)
         }
 
         binding.buttonLogin.setOnClickListener {
             NetworkResult().set(MutableLiveData("0"))//set connexion to open
             if (binding.socketUrl.text.isNotEmpty()) {
-                Log.d("AAA", "onViewCreated: ")
                 if (verificationSocketLink(binding.socketUrl.text.toString())) {
-                    (activity as MainActivity).setUpConnexeion(binding.socketUrl.text.toString())
-                    Log.d("BBB", "onViewCreated: ")
+                    (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
                     binding.progressBar.visibility = View.VISIBLE
                     NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
                         when (NetworkResult.instance.get().value) {
                             "1" -> {
-                                Log.d("CCC", "onViewCreated: ")
                                 sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
                                 binding.progressBar.visibility = View.GONE
                                 findNavController().navigate(R.id.mainFragment)
@@ -102,6 +99,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         button.setOnClickListener {
             builder.dismiss()
             NetworkResult().set(MutableLiveData("0"))//set connexion to open
+            ConnexionLifecycle.closeConnexion()
+            binding.socketUrl.text.clear()
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()

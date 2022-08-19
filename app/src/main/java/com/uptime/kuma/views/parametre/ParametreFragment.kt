@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tinder.scarlet.Lifecycle
-import com.tinder.scarlet.ShutdownReason
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ApiUtilities.myLifecycle
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentParametreBinding
 import com.uptime.kuma.models.ParametreItem
 import com.uptime.kuma.utils.SessionManagement
@@ -35,11 +33,7 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
             buttonLogout.setOnClickListener {
                 sessionManagement.logOut()
                 //close connexion
-                myLifecycle.lifecycleRegistry.onNext(
-                    Lifecycle.State.Stopped.WithReason(
-                        ShutdownReason.GRACEFUL
-                    )
-                )
+                ConnexionLifecycle.closeConnexion()
                 MainActivity.navController.navigate(R.id.loginFragment)
             }
         }

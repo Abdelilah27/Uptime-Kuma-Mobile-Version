@@ -8,12 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.tinder.scarlet.Lifecycle
 import com.tinder.scarlet.Scarlet
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ApiUtilities
-import com.uptime.kuma.api.ApiUtilities.myLifecycle
 import com.uptime.kuma.api.ConnexionInterface
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
@@ -62,8 +61,8 @@ class MainActivity : AppCompatActivity() {
         //        ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
     }
 
-    fun setUpConnexeion(url: String) {
-        myLifecycle.lifecycleRegistry.onNext(Lifecycle.State.Started)
+    fun setUpConnexion(url: String) {
+        ConnexionLifecycle.openConnexion()
         //Setup and create connexion
         scarlet =
             ApiUtilities.provideScarlet(url)
