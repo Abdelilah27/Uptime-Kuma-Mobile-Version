@@ -140,6 +140,9 @@ dependencies {
     // optional - Test helpers for Lifecycle runtime
     testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:2.6.0-alpha01")
 
+    //format date - ...time ago
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+
 }
 kapt {
     correctErrorTypes true

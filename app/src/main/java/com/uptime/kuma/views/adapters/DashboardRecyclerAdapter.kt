@@ -1,20 +1,28 @@
 package com.uptime.kuma.views.adapters
 
 import android.content.Context
+import android.os.Build
+import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.uptime.kuma.R
-import com.uptime.kuma.databinding.DashbordRecylcerItemBinding
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import org.ocpsoft.prettytime.PrettyTime
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 
 class DashboardRecyclerAdapter(val context: Context, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.ItemViewHolder>() {
@@ -26,15 +34,37 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         notifyDataSetChanged()
     }
 
+    private fun formatData(date: String): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSS")
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
+        var time: Long
+        var now: Long
+        var ago = ""
+        try {
+            time = sdf.parse(date).getTime()
+            now = System.currentTimeMillis()
+            ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+                .toString()
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return ago
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding =LayoutInflater.from(parent.context).inflate(R.layout.dashbord_recylcer_item,parent,false)
         return ItemViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
+
+            val formatDate = formatData(it.time!!)
+        //    Log.d("SCAT", formateDate.toString())
+
             holder.nom.text = "test"
-            holder.date.text = it.time
+            holder.date.text =formatDate
             holder.msg.text = it.msg
             when(it.status){
                 0-> {holder.status.text= getActivity(context)?.getText(R.string.offline)
