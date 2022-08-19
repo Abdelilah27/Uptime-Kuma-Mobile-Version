@@ -3,7 +3,9 @@ package com.uptime.kuma.views.monitorsList
 import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
+import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.utils.Constants
 import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import org.json.JSONArray
@@ -14,7 +16,9 @@ object AllServersCompanionObject {
 //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
 //    val monitorLiveData: LiveData<ArrayList<Monitor>>
 //        get() = _monitorLiveData
+    var idM=1
     val monitorCalcul : ArrayList<ServerCalcul> = ArrayList()
+    val calculitems : ArrayList<ServerCalcul_Items> = ArrayList()
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -108,6 +112,7 @@ object AllServersCompanionObject {
             val jsonObject = JSONArray(customResponselast)
 //            Log.d("getServerCalcul", jsonObject[1].toString())
             val monitorList = jsonObject[1].toString()
+//            Log.d("testarray", monitorList)
             val monitorStatus = JSONArray(monitorList)
             for (i in 0 until monitorStatus.length()){
                 val jsonObject = JSONObject(monitorStatus[i].toString())
@@ -115,20 +120,43 @@ object AllServersCompanionObject {
                 val msg = jsonObject.get("msg").toString()
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
-                // init object
-                val myobject=ServerCalcul(
+//                // init object
+//                idM=monitorID.toInt()
+                val myobject=ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time
                 )
-                monitorCalcul.add(myobject)
-                println(myobject.monitor_id)
+                idM=monitorID.toInt()
+                calculitems.add(myobject)
+
+
             }
+            val list1=ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
+//            println(list1.monitorStatus.size)
+            monitorCalcul.add(list1)
+//
+////            Log.d("TAG", monitorCalcul.toString())
+            calculitems.clear()
+
         }
 
 
+
+
     }
+
+//    fun filterMonitorstatus(id: Int): ServerCalcul {
+//        val filtredList: ArrayList<ServerCalcul_Items> = ArrayList()
+//        filtredList.clear()
+//        monitorCalcul.forEach {
+//            if (it.monitor_id == id) {
+//                filtredList.add(it)
+//            }
+//        }
+//        return ServerCalcul(id,filtredList)
+//    }
 
 
 
