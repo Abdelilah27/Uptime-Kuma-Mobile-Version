@@ -3,8 +3,10 @@ package com.uptime.kuma.views.monitorsList
 import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.utils.Constants
 import com.uptime.kuma.views.dashbord.DashbordCompanionObject
+import org.json.JSONArray
 import org.json.JSONObject
 
 object AllServersCompanionObject {
@@ -12,6 +14,7 @@ object AllServersCompanionObject {
 //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
 //    val monitorLiveData: LiveData<ArrayList<Monitor>>
 //        get() = _monitorLiveData
+    val monitorCalcul : ArrayList<ServerCalcul> = ArrayList()
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -95,5 +98,38 @@ object AllServersCompanionObject {
 //            _monitorLiveData.postValue(monitors)
         }
     }
+
+    fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
+        if (response.toString().contains(suffix)){
+            val customResponseAfter = response.toString().substringAfter(suffix)
+            val customResponseBegin = "[$customResponseAfter"
+            val customResponseEnd = customResponseBegin.dropLast(9)
+            val customResponselast = "$customResponseEnd]"
+            val jsonObject = JSONArray(customResponselast)
+//            Log.d("getServerCalcul", jsonObject[1].toString())
+            val monitorList = jsonObject[1].toString()
+            val monitorStatus = JSONArray(monitorList)
+            for (i in 0 until monitorStatus.length()){
+                val jsonObject = JSONObject(monitorStatus[i].toString())
+                val monitorID = jsonObject.get("monitor_id").toString()
+                val msg = jsonObject.get("msg").toString()
+                val status = jsonObject.get("status").toString()
+                val time = jsonObject.get("time").toString()
+                // init object
+                val myobject=ServerCalcul(
+                    monitor_id = monitorID.toInt(),
+                    msg = msg,
+                    status = status.toInt(),
+                    time = time
+                )
+                monitorCalcul.add(myobject)
+                println(myobject.monitor_id)
+            }
+        }
+
+
+    }
+
+
 
 }

@@ -67,7 +67,6 @@ object DashbordCompanionObject {
 
     }
 
-
     fun getMonitorName(id:Int):String{
         AllServersCompanionObject.monitors.forEach {
             if(it.id==id){
@@ -75,7 +74,6 @@ object DashbordCompanionObject {
             }
         }
         return ""
-
     }
 
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {

@@ -75,6 +75,10 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 response,
                 Constants.dashbordMonitorUpdate
             )
+            AllServersCompanionObject.getServerCalcul(
+                response,
+                Constants.heartbeatlist
+            )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
 //            Log.d("JJJ", response.toString())
         }, { error ->
