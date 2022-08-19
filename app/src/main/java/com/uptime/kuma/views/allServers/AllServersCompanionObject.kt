@@ -1,22 +1,22 @@
 package com.uptime.kuma.views.monitorsList
 
-import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
+import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.utils.Constants
-import com.uptime.kuma.views.dashbord.DashbordCompanionObject
 import org.json.JSONArray
 import org.json.JSONObject
 
 object AllServersCompanionObject {
     val monitors: ArrayList<Monitor> = ArrayList()
-//    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
+
+    //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
 //    val monitorLiveData: LiveData<ArrayList<Monitor>>
 //        get() = _monitorLiveData
-    var idM=1
-    val monitorCalcul : ArrayList<ServerCalcul> = ArrayList()
-    val calculitems : ArrayList<ServerCalcul_Items> = ArrayList()
+    var idM = 1
+    val monitorCalcul: ArrayList<ServerCalcul> = ArrayList()
+    val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -102,7 +102,7 @@ object AllServersCompanionObject {
     }
 
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
-        if (response.toString().contains(suffix)){
+        if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val customResponseBegin = "[$customResponseAfter"
             val customResponseEnd = customResponseBegin.dropLast(9)
@@ -111,7 +111,7 @@ object AllServersCompanionObject {
 //            Log.d("getServerCalcul", jsonObject[1].toString())
             val monitorList = jsonObject[1].toString()
             val monitorStatus = JSONArray(monitorList)
-            for (i in 0 until monitorStatus.length()){
+            for (i in 0 until monitorStatus.length()) {
                 val jsonObject = JSONObject(monitorStatus[i].toString())
                 val monitorID = jsonObject.get("monitor_id").toString()
                 val msg = jsonObject.get("msg").toString()
@@ -119,21 +119,21 @@ object AllServersCompanionObject {
                 val time = jsonObject.get("time").toString()
 //                // init object
 //                idM=monitorID.toInt()
-                val myobject=ServerCalcul_Items(
+                val myobject = ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time
                 )
-                idM=monitorID.toInt()
+                idM = monitorID.toInt()
                 calculitems.add(myobject)
 
 
                 //For recycler graph card
-                monitorCalcul.add(myobject)
+                calculitems.add(myobject)
                 println(myobject.monitor_id)
             }
-            val list1=ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
+            val list1 = ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
 //            println(list1.monitorStatus.size)
             monitorCalcul.add(list1)
 //
@@ -144,7 +144,6 @@ object AllServersCompanionObject {
 
 
     }
-
 
 
 }

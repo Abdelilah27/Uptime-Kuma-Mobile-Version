@@ -32,7 +32,6 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         app:cardBackgroundColor="@color/background_all_server_fragment"
-        app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
