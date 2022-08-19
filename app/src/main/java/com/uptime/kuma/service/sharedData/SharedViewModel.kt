@@ -50,17 +50,23 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                     }
                 })
             }
-            DashbordCompanionObject.getDashbordMonitorItem(
-                response,
-                Constants.dashbordMonitorItemsSuffix
-            )
             AllServersCompanionObject.getMonitorsFromResponse(
                 response,
                 Constants.monitorListSuffix,
             )
+
+            DashbordCompanionObject.getDashbordMonitorItem(
+                response,
+                Constants.dashbordMonitorItemsSuffix
+            )
+
             DashbordCompanionObject.getDashbordUpdate(
                 response,
                 Constants.dashbordMonitorUpdate
+            )
+            AllServersCompanionObject.getServerCalcul(
+                response,
+                Constants.heartbeatlist
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
 //            Log.d("TAG", response.toString())

@@ -1,8 +1,13 @@
 package com.uptime.kuma.views.dashbord
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.CalculDashboardItem
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.utils.CALCUL
 import com.uptime.kuma.utils.STATUS
+import com.uptime.kuma.utils.UpdateData
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -19,16 +26,21 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
-    DashboardRecyclerAdapter.OnItemClickListener {
+    DashboardRecyclerAdapter.OnItemClickListener,UpdateData {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
     private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
 
+    companion object {
+        lateinit var instance :DashboardFragment
+    }
+
 
     //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        instance =this
         val binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
         dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
@@ -104,6 +116,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
 
             })
+    }
+
+
+    override fun onReceivedData(data: MonitorStatusItem) {
+        MainActivity.instance.sendNotification(data.msg?:"")
+        Log.d("0000", "onReceivedData: ++++++")
     }
 
 }

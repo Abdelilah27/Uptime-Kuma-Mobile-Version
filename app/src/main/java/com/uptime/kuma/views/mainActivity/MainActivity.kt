@@ -7,13 +7,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.widget.RemoteViews
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -23,22 +22,21 @@ import com.tinder.scarlet.Scarlet
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ApiUtilities
 import com.uptime.kuma.api.ConnexionInterface
-import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
 import com.uptime.kuma.utils.SaveData
-import com.uptime.kuma.utils.UpdateData
 import com.uptime.kuma.views.dashbord.DashboardFragment
 import com.uptime.kuma.views.login.LoginFragment
 
-class MainActivity : AppCompatActivity() ,UpdateData{
+
+class MainActivity : AppCompatActivity(){
 
     lateinit var notificationManager: NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder: Notification.Builder
-    private val channelId = "i.apps.notifications"
+    private val channelId = "0"
     private val description = "Test notification"
 
     companion object {
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity() ,UpdateData{
     override fun onCreate(savedInstanceState: Bundle?) {
         saveData = SaveData(this)
         instance =this
-
+createNotificationChannel()
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         //set light or dark mode from sharedPreferences
@@ -108,36 +106,46 @@ class MainActivity : AppCompatActivity() ,UpdateData{
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RemoteViewLayout")
     fun sendNotification(elm:String){
-        val intent = Intent(this, DashboardFragment::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val intent = Intent(this,DashboardFragment::class.java)
 
-        // RemoteViews are used to use the content of
-        // some different layout apart from the current activity layout
-        val contentView = RemoteViews(packageName, R.layout.notification_layout)
+        val pIntent = PendingIntent.getActivity(this, System.currentTimeMillis().toInt(), intent, 0)
 
-        // checking if android version is greater than oreo(API 26) or not
+
+        val n: Notification = Notification.Builder(this,channelId)
+            .setContentTitle("Alert")
+            .setContentText(elm)
+            .setSmallIcon(com.uptime.kuma.R.drawable.icon)
+            .setContentIntent(pIntent)
+            .setAutoCancel(true)
+            .addAction(R.drawable.icon, "Call", pIntent)
+            .addAction(R.drawable.icon, "More", pIntent)
+            .addAction(R.drawable.icon, "And more", pIntent).build()
+
+
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.notify(channelId.toInt(), n)
+    }
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-
-            builder = Notification.Builder(this, channelId)
-                .setContent(contentView)
-                .setContentIntent(pendingIntent)
-        } else {
-
-            builder = Notification.Builder(this)
-                .setContent(contentView)
-                .setContentIntent(pendingIntent)
+            val name = "name"
+            val descriptionText = "desc"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
-        notificationManager.notify(1234, builder.build())
     }
 
-    override fun onReceivedData(data: MonitorStatusItem) {
-        sendNotification(data.msg?:"")
-    }
+
+
 }
