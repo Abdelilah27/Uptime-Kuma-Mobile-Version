@@ -29,7 +29,7 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
                 percentText.text = "100%" // TODO
                 titleText.text = item.name
                 if (item.active != 1) {
-                    cardView.setCardBackgroundColor(
+                    cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color
@@ -38,7 +38,7 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
                     )
 
                 } else {
-                    cardView.setCardBackgroundColor(
+                    cardViewStatus.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color
