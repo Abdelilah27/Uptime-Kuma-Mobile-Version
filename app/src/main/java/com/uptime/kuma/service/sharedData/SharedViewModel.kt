@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.repository.SharedRepository
@@ -35,6 +32,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
+        NetworkResult().set(MutableLiveData("0"))//set connexion to open
         data.subscribe({ response ->
             lifecycleScope.launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
@@ -80,7 +78,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                 Constants.heartbeatlist
             )
             StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
-//            Log.d("JJJ", response.toString())
+            Log.d("JJJ", response.toString())
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

@@ -122,6 +122,7 @@ object AllServersCompanionObject {
                     status = status.toInt(),
                     time = time
                 )
+                //For recycler graph card
                 monitorCalcul.add(myobject)
                 println(myobject.monitor_id)
             }

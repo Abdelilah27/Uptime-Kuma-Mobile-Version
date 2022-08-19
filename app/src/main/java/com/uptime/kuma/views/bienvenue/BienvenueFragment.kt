@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.uptime.kuma.views.mainActivity.MainActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentBienvenueBinding
+import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class BienvenueFragment : Fragment(R.layout.fragment_bienvenue) {
@@ -33,14 +33,11 @@ class BienvenueFragment : Fragment(R.layout.fragment_bienvenue) {
 
         return binding.root
     }
-    private fun onCommencerFinished(){
-        val sharedpref= requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
+
+    private fun onCommencerFinished() {
+        val sharedpref = requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
         val editor = sharedpref.edit()
-        editor.putBoolean("Finished",true)
+        editor.putBoolean("Finished", true)
         editor.apply()
     }
-
-
-
-
 }

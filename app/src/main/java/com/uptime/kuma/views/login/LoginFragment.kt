@@ -11,24 +11,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.uptime.kuma.R
 import com.uptime.kuma.api.NetworkResult
 import com.uptime.kuma.databinding.FragmentLoginBinding
+import com.uptime.kuma.utils.SessionManagement
+import com.uptime.kuma.views.mainActivity.MainActivity
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
-    companion object {
-        private val _socketLiveData = MutableLiveData<String>()
-        val socketLiveData: LiveData<String>
-            get() = _socketLiveData
-    }
-
+class LoginFragment : Fragment(R.layout.fragment_login) {
     lateinit var binding: FragmentLoginBinding
+    lateinit var sessionManagement: SessionManagement
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,20 +38,31 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sessionManagement = SessionManagement(requireContext())
+        //redirection to the dashboard fragment
+        if (sessionManagement.checkIsLogged()) {
+            (activity as MainActivity).setUpConnexeion(sessionManagement.getSocket())
+            findNavController().navigate(R.id.mainFragment)
+        }
+
         binding.buttonLogin.setOnClickListener {
+            NetworkResult().set(MutableLiveData("0"))//set connexion to open
             if (binding.socketUrl.text.isNotEmpty()) {
+                Log.d("AAA", "onViewCreated: ")
                 if (verificationSocketLink(binding.socketUrl.text.toString())) {
-                    _socketLiveData.postValue(binding.socketUrl.text.toString())
+                    (activity as MainActivity).setUpConnexeion(binding.socketUrl.text.toString())
+                    Log.d("BBB", "onViewCreated: ")
                     binding.progressBar.visibility = View.VISIBLE
-                    NetworkResult().set(MutableLiveData("0"))//set connexion to open
                     NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
                         when (NetworkResult.instance.get().value) {
                             "1" -> {
+                                Log.d("CCC", "onViewCreated: ")
+                                sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
                                 binding.progressBar.visibility = View.GONE
-                                findNavController().navigate(com.uptime.kuma.R.id.mainFragment)
+                                findNavController().navigate(R.id.mainFragment)
+
                             }
                             "2", "3", "6" -> {
-                                Log.d("ccc", "onViewCreated: ")
                                 binding.progressBar.visibility = View.GONE
                                 showErrorDialog()
                             }
@@ -102,7 +110,7 @@ class LoginFragment : Fragment(com.uptime.kuma.R.layout.fragment_login) {
     //socket link regular expression
     private fun verificationSocketLink(socketLink: String): Boolean {
         val regex =
-            "^(wss|ws):(\\/\\/)([a-zA-Z]+||[0-9]*).(.*)\$"
+            "^(wss|ws|http|https):(\\/\\/)([a-zA-Z]+||[0-9]*).(.*)\$"
         //Compile regular expression to get the pattern
         val pattern: Pattern = Pattern.compile(regex)
         val matcher: Matcher = pattern.matcher(socketLink)

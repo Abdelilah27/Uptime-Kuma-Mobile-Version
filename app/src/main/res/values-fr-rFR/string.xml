@@ -16,6 +16,7 @@
     <string name="nom_add_status_fragment">Nom</string>
     <string name="slug_add_status_fragment">Slug</string>
     <string name="text_button_add_status_fragment">confirmer</string>
+    <string name="text_button_log_out_parametre_fragment">deconnexion</string>
     <string name="text_button_add_new_sonde_dashboard_fragment">Ajouter une sonde</string>
     <string name="caracter_accepted_1_add_status_fragment">Accepter les caractères: a-z / 0-9 / -</string>
     <string name="caracter_accepted_2_add_status_fragment">Commencer ou finir par a-z uniquement</string>

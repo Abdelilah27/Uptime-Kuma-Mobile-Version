@@ -3,6 +3,8 @@ package com.uptime.kuma.views.splash
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,11 +21,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         val binding = FragmentSplashBinding.bind(view)
 
         binding.apply {
-            //Direction to the Bienvenue fragment when the data are retrieved
-            if (onCommencerFinished())
-                MainActivity.navController.navigate(R.id.loginFragment)
-            else
-                findNavController().navigate(R.id.bienvenueFragment)
+            Handler(Looper.myLooper()!!).postDelayed({
+                //Direction to the Bienvenue fragment when the data are retrieved
+                if (onCommencerFinished())
+                    MainActivity.navController.navigate(R.id.loginFragment)
+                else
+                    findNavController().navigate(R.id.bienvenueFragment)
+            }, 2000)
+
         }
     }
 
@@ -31,6 +36,5 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         val sharedpref = requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
         return sharedpref.getBoolean("Finished", false)
     }
-
 
 }

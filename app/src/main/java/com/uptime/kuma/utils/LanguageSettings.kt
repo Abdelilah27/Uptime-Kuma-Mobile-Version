@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class LanguageSettings(context: Context){
+
         var sharedPreferences: SharedPreferences
         var editor: SharedPreferences.Editor
         var language: String?
