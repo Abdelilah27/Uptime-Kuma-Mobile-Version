@@ -1,8 +1,11 @@
 package com.uptime.kuma.views.allServers
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import java.util.*
 
@@ -11,10 +14,21 @@ class AllServersViewModel : ViewModel() {
     val tempMonitors: ArrayList<Monitor> = ArrayList() //for searching monitor
     val monitors = AllServersCompanionObject.monitors //get monitors list
 
+    private var _calcultItem : MutableLiveData<ArrayList<ServerCalcul>> = MutableLiveData< ArrayList<ServerCalcul>>()
+    var mycalcalculItems  : LiveData<ArrayList<ServerCalcul>> = _calcultItem
+
 
     init {
         tempMonitors.addAll(monitors)
     }
+
+
+
+    fun getServerStatus(){
+        _calcultItem.postValue(AllServersCompanionObject.monitorCalcul)
+    }
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     fun searchMonitor(searchText: String) {

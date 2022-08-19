@@ -1,6 +1,8 @@
 package com.uptime.kuma.views.monitorsList
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
@@ -19,6 +21,8 @@ object AllServersCompanionObject {
     var idM=1
     val monitorCalcul : ArrayList<ServerCalcul> = ArrayList()
     val calculitems : ArrayList<ServerCalcul_Items> = ArrayList()
+
+
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -136,6 +140,7 @@ object AllServersCompanionObject {
             val list1=ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
 //            println(list1.monitorStatus.size)
             monitorCalcul.add(list1)
+
 //
 ////            Log.d("TAG", monitorCalcul.toString())
             calculitems.clear()

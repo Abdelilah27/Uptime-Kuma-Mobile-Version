@@ -3,6 +3,7 @@ package com.uptime.kuma.views.allServers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +44,14 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         }
         observeMonitorsList()
         searchViewListener()
+        observeStatus()
+    }
+
+    private fun observeStatus(){
+        allServersViewModel.getServerStatus()
+        allServersViewModel.mycalcalculItems.observe(viewLifecycleOwner){
+            Log.d("size :", "-------> "+it.size)
+        }
     }
 
     //search for a monitor in monitors
