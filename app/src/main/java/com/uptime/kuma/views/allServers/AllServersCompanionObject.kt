@@ -14,7 +14,9 @@ object AllServersCompanionObject {
 //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
 //    val monitorLiveData: LiveData<ArrayList<Monitor>>
 //        get() = _monitorLiveData
+    var idM=1
     val monitorCalcul : ArrayList<ServerCalcul> = ArrayList()
+    val calculitems : ArrayList<ServerCalcul_Items> = ArrayList()
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -115,17 +117,29 @@ object AllServersCompanionObject {
                 val msg = jsonObject.get("msg").toString()
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
-                // init object
-                val myobject=ServerCalcul(
+//                // init object
+//                idM=monitorID.toInt()
+                val myobject=ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time
                 )
+                idM=monitorID.toInt()
+                calculitems.add(myobject)
+
+
                 //For recycler graph card
                 monitorCalcul.add(myobject)
                 println(myobject.monitor_id)
             }
+            val list1=ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
+//            println(list1.monitorStatus.size)
+            monitorCalcul.add(list1)
+//
+////            Log.d("TAG", monitorCalcul.toString())
+            calculitems.clear()
+
         }
 
 
