@@ -1,6 +1,8 @@
 package com.uptime.kuma.views.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.uptime.kuma.R
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class DashboardRecyclerAdapter(val context: Context, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.ItemViewHolder>() {
@@ -29,11 +35,30 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         return ItemViewHolder(binding)
     }
 
+    private fun formatData(date: String): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSS")
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
+        var time: Long
+        var now: Long
+        var ago = ""
+        try {
+            time = sdf.parse(date).getTime()
+            now = System.currentTimeMillis()
+            ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+                .toString()
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return ago
+    }
+
+    @SuppressLint("RestrictedApi")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
             monitorId = it.monitorID.toString()
+            val formatDate = formatData(it.time!!)
             holder.nom.text = it.name
-            holder.date.text = it.time
+            holder.date.text = formatDate
             holder.msg.text = it.msg
             when (it.status) {
                 0 -> {
