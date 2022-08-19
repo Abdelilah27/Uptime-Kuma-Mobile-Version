@@ -7,6 +7,4 @@ import com.uptime.kuma.views.dashbord.DashbordCompanionObject.newLiveData
 
 class DashbordViewModel : ViewModel() {
 
-
-
 }
