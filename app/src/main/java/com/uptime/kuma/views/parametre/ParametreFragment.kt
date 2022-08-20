@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentParametreBinding
-import com.uptime.kuma.models.ParametreItem
+import com.uptime.kuma.models.parametreItem.ParametreItem
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.adapters.ParametreRecyclerAdapter
 import com.uptime.kuma.views.mainActivity.MainActivity

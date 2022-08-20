@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.databinding.ParametreRecyclerItemBinding
-import com.uptime.kuma.models.ParametreItem
+import com.uptime.kuma.models.parametreItem.ParametreItem
 
 class ParametreRecyclerAdapter (val context: Context, private val listener : OnItemClickListener) :
     ListAdapter<ParametreItem,ParametreRecyclerAdapter.ParametreViewHolder>(DifCallback()) {
@@ -37,7 +37,7 @@ class ParametreRecyclerAdapter (val context: Context, private val listener : OnI
         }
 
 
-        fun bind(Parametre:ParametreItem){
+        fun bind(Parametre: ParametreItem){
             binding.apply {
                 ParamName.text=Parametre.paramname
             }

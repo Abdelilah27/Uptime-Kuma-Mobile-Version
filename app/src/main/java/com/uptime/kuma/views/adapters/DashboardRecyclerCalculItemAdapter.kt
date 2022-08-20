@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
-import com.uptime.kuma.models.CalculDashboardItem
+import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 
 class DashboardRecyclerCalculItemAdapter(val context: Context) :
     RecyclerView.Adapter<DashboardRecyclerCalculItemAdapter.ItemViewHolder>() {

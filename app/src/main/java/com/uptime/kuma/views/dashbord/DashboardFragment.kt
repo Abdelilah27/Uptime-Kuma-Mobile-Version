@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
-import com.uptime.kuma.models.CalculDashboardItem
+import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 import com.uptime.kuma.utils.CALCUL
 import com.uptime.kuma.utils.STATUS
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
