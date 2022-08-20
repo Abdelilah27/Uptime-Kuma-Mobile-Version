@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -17,40 +18,67 @@ class ServerAdapter(val context: Context) :
     ListAdapter<MonitorStatusItem, ServerAdapter.ServerViewHolder>(DiffCallback()) {
     inner class ServerViewHolder(private val binding: DashbordRecylcerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("RestrictedApi")
         fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
                 dashbordId.text = monitorStatusItem.monitorID.toString()
                 dashbordServernameTv.visibility = View.GONE // hide username part
-                if (monitorStatusItem.status == 1) {
-                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)
-                    cardViewStatus.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .main_color
-                        )
-                    )
-                } else if (monitorStatusItem.status == 0) {
-                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.offline)
-                    cardViewStatus.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .dashbord_fragment_hors_ligne
-                        )
-                    )
-                } else {
-                    dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
-                    cardViewStatus.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .dashbord_fragment_hors_ligne
-                        )
-                    )
-                }
                 dashbordTimeTv.text = monitorStatusItem.time
                 dashbordMessageTv.text = monitorStatusItem.msg
+                when (monitorStatusItem.status) {
+                    1 -> {
+                        dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .main_color
+                            )
+                        )
+                        profileCard.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_active_item_all_server_fragment
+                            )
+                        )
+                    }
+                    0 -> {
+                        dashbordStatusTv.text = getActivity(context)?.getText(R.string.offline)
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .dashbord_fragment_hors_ligne
+                            )
+                        )
+                        profileCard.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .dashbord_fragment_hors_ligne
+                            )
+                        )
+                    }
+                    else -> {
+                        dashbordStatusTv.text = getActivity(context)?.getText(R.string.pause)
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                        profileCard.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                    }
+
+                }
             }
         }
     }

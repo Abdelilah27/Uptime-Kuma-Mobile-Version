@@ -282,8 +282,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_server_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/background_color_Recycler_dashbord_fragment"
+                    android:layout_height="match_parent" android:background="@color/background_color_Recycler_dashbord_fragment"
                     tools:listitem="@layout/dashbord_recylcer_item" />
             </androidx.cardview.widget.CardView>
 
