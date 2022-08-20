@@ -1,18 +1,13 @@
 package com.uptime.kuma.views.status
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.uptime.kuma.views.mainActivity.MainActivity.Companion.navController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentStatusBinding
-import com.uptime.kuma.models.Status
-import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.adapters.StatusAdapter
-import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
@@ -31,10 +26,6 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
                 setHasFixedSize(true)
             }
         }
-        binding.addfloatingActionButton.setOnClickListener {
-            navController.navigate(R.id.addStatusFragment)
-        }
-
         observeStatusList()
     }
 
@@ -45,13 +36,7 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
         })
     }
 
-
     override fun onItemClick(position: Int) {
-        navController.navigate(
-            R.id
-                .groupStatusFragment
-        )
-        Log.d("TAG", "onItemClick: " + position)
-    }
 
+    }
 }

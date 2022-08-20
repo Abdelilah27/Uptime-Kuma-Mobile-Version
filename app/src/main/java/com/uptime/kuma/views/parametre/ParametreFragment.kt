@@ -42,7 +42,6 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
     override fun onItemClick(position: Int) {
         when (getData()[position].paramname) {
             "About" -> MainActivity.navController.navigate(R.id.aboutFragment)
-            "Notifications" -> MainActivity.navController.navigate(R.id.notificationsFragment)
             "Apparence" -> MainActivity.navController.navigate(R.id.apparenceReglageFragment)
 
         }
@@ -50,7 +49,6 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
 
     private fun getData(): List<ParametreItem> {
         val data = arrayListOf<ParametreItem>()
-        data.add(ParametreItem("Notifications"))
         data.add(ParametreItem("Apparence"))
         data.add(ParametreItem("About"))
 
