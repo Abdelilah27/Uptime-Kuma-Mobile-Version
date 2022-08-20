@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_all_server_fragment"
+    android:background="@color/black"
     tools:context=".views.server.ServerFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -35,41 +35,12 @@
                 android:layout_marginTop="4dp"
                 android:text="http://admtrafic.ma/" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button"
-                    style="@style/pause_button_different_size_server_fragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/pause_button_server_fragment"
-                    app:cornerRadius="30dp"
-                    app:icon="@drawable/ic_baseline_pause_24" />
-
-                <Button
-                    android:id="@+id/button2"
-                    style="@style/delete_button_different_size_server_fragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:text="@string/delete_button_server_fragment"
-                    app:cornerRadius="30dp"
-                    app:icon="@drawable/ic_baseline_delete_24" />
-            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_item_all_server_fragment"
+                android:backgroundTint="@color/grey"
                 app:cardCornerRadius="30dp">
 
                 <LinearLayout
@@ -273,7 +244,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/enLigne_status_server_fragment"
-                            android:textColor="@color/white"></TextView>
+                            android:textColor="@color/white" />
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -281,156 +252,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/background_item_all_server_fragment"
-                app:cardCornerRadius="30dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView1"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/temps_reponse_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                style="@style/title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/temps_reponse_second_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/temps_reponse_third_server_fragment" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView4"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/reponse_moyenne_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView5"
-                                style="@style/title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/reponse_moyenne_second_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView6"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/reponse_moyenne_third_server_fragment" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView10"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/uptime_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView11"
-                                style="@style/title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/uptime_second_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView12"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/uptime_third_server_fragment" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView13"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/second_uptime_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView14"
-                                style="@style/title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/second_uptime_second_server_fragment" />
-
-                            <TextView
-                                android:id="@+id/textView15"
-                                style="@style/differente_size_title_fragment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/second_uptime_third_server_fragment" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -444,7 +265,7 @@
                     style="@style/APDefacto.Dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:backgroundColor="@color/background_item_all_server_fragment"
+                    app:backgroundColor="@color/grey"
                     app:rangeTitle="@string/range_graph_server_fragment">
 
                 </com.androidplot.xy.XYPlot>

@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.server
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -14,6 +15,8 @@ import com.uptime.kuma.views.adapters.ServerAdapter
 class ServerFragment : Fragment(R.layout.fragment_server) {
     private val args: ServerFragmentArgs by navArgs()
     private lateinit var serverViewModel: ServerViewModel
+
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentServerBinding.bind(view)
@@ -36,7 +39,11 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         binding.apply {
             serverTitle.text = monitor.name
             serverLink.text = monitor.url
-
+            statusVerificationServerFragment.text =
+                resources.getString(R.string.status_verification_server_fragment) + " " + monitor
+                    .retryInterval.toString() + " " + resources.getString(
+                    R.string.seconds
+                )
         }
 
 
