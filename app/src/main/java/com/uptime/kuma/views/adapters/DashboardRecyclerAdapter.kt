@@ -58,12 +58,19 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
             monitorId = it.monitorID.toString()
             val formatDate = formatData(it.time!!)
             holder.nom.text = it.name
+            holder.slug.text = it.name!!.toUpperCase().subSequence(0, 2)
             holder.date.text = formatDate
             holder.msg.text = it.msg
             when (it.status) {
                 0 -> {
                     holder.status.text = getActivity(context)?.getText(R.string.offline)
                     holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.dashbord_fragment_hors_ligne
+                        )
+                    )
+                    holder.ProfileCard.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color.dashbord_fragment_hors_ligne
@@ -78,10 +85,22 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
                             R.color.main_color
                         )
                     )
+                    holder.ProfileCard.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.main_color
+                        )
+                    )
                 }
                 2 -> {
                     holder.status.text = getActivity(context)?.getText(R.string.attente)
                     holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.attente
+                        )
+                    )
+                    holder.ProfileCard.setCardBackgroundColor(
                         ContextCompat.getColor(
                             context,
                             R.color.attente
@@ -98,10 +117,12 @@ class DashboardRecyclerAdapter(val context: Context, private val listener: OnIte
         }
 
         var nom: TextView = view.findViewById(R.id.dashbord_servername_tv)
+        var slug: TextView = view.findViewById(R.id.dashbord_slug_tv)
         var date: TextView = view.findViewById(R.id.dashbord_time_tv)
         var msg: TextView = view.findViewById(R.id.dashbord_message_tv)
         var status: TextView = view.findViewById(R.id.dashbord_status_tv)
         var card: CardView = view.findViewById(R.id.card_view_status)
+        var ProfileCard: CardView = view.findViewById(R.id.profile_card)
         var id: TextView = view.findViewById(R.id.dashbord_id)
         override fun onClick(p0: View?) {
             val position: String = monitorId

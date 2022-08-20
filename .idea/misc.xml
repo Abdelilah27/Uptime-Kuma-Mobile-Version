@@ -26,6 +26,7 @@
         <entry key="..\:/Uptime-Kuma-Mobile-Version5/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Uptime-Kuma-Mobile-Version6/app/src/main/res/layout/item_status_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/background_edit_text_add_status_fragment.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/background_edit_text_login.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/button_error_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.229" />

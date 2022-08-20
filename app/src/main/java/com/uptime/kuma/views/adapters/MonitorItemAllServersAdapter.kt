@@ -28,23 +28,57 @@ class MonitorItemAllServersAdapter(val context: Context, val listener: OnClickLi
                 idText.text = item.id.toString()
                 percentText.text = "100%" // TODO
                 titleText.text = item.name
-                if (item.active != 1) {
-                    cardViewStatus.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_no_active_item_all_server_fragment
+                allServersSlugTv.text = item.name.toUpperCase().subSequence(0, 2)
+                when (item.active) {
+                    0 -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_no_active_item_all_server_fragment
+                            )
                         )
-                    )
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_no_active_item_all_server_fragment
+                            )
+                        )
+                    }
+                    1 -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_active_item_all_server_fragment
+                            )
+                        )
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_active_item_all_server_fragment
+                            )
+                        )
+                    }
+                    else -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                    }
 
-                } else {
-                    cardViewStatus.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_active_item_all_server_fragment
-                        )
-                    )
                 }
 
             }

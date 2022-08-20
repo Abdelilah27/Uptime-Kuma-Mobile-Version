@@ -43,7 +43,6 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
         when (getData()[position].paramname) {
             "About" -> MainActivity.navController.navigate(R.id.aboutFragment)
             "Apparence" -> MainActivity.navController.navigate(R.id.apparenceReglageFragment)
-
         }
     }
 

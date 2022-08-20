@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    android:backgroundTint="@color/background_color_Recycler_dashbord_fragment"
+    android:background="@color/grey"
     android:padding="8dp">
 
     <TextView

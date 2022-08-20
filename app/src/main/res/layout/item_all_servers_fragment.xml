@@ -21,6 +21,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/profile_card_servers"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:cardBackgroundColor="@color/main_color"
