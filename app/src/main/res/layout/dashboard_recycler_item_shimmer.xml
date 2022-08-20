@@ -7,26 +7,18 @@
     app:cardBackgroundColor="@color/grey"
     app:cardCornerRadius="10dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:padding="16dp">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
-
         <androidx.cardview.widget.CardView
+            android:id="@+id/profile_card"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:cardBackgroundColor="@color/title_color_grey"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/dashbord_slug_tv"
@@ -35,19 +27,15 @@
                 android:layout_gravity="center"
                 android:background="@color/title_color_grey"
                 android:fontFamily="@font/roboto"
-                android:text="VP"
-                android:textColor="@color/title_color_grey"
+                android:textColor="@color/black"
                 android:textSize="30sp" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_status"
@@ -65,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/title_color_grey"
                     android:textSize="12sp" />
             </androidx.cardview.widget.CardView>
 
@@ -77,13 +64,11 @@
 
             <TextView
                 android:id="@+id/dashbord_servername_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@color/title_color_grey"
                 android:fontFamily="@font/roboto"
-                android:text="VPN IPSEC MOOVCI"
-                android:textColor="@color/title_color_grey"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -123,7 +108,7 @@
 
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

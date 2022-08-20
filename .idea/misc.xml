@@ -38,13 +38,13 @@
         <entry key="app/src/main/res/layout/dashboard_recycler_calcul_item.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/dashboard_recycler_calcul_item_shimmer.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/dashboard_recycler_item_shimmer.xml" value="0.2857789855072464" />
-        <entry key="app/src/main/res/layout/dashbord_recylcer_item.xml" value="0.34599395751953127" />
+        <entry key="app/src/main/res/layout/dashbord_recylcer_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2501397949692197" />
         <entry key="app/src/main/res/layout/fragment_add_status.xml" value="0.18478912353515622" />
-        <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.34913024902343737" />
+        <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.25897979736328114" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.17708793598446038" />
-        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.34092010498046876" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.31376495361328116" />
+        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.23317932128906255" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21921691894531242" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.40788116455078127" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2159377468088286" />

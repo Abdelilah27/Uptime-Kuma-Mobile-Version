@@ -7,28 +7,18 @@
     app:cardBackgroundColor="@color/grey"
     app:cardCornerRadius="10dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="16dp">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/profile_card_servers"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:cardBackgroundColor="@color/main_color"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardCornerRadius="10dp">
 
             <TextView
                 android:id="@+id/all_servers_slug_tv"
@@ -43,13 +33,10 @@
 
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_status"
@@ -99,7 +86,6 @@
                 android:id="@+id/graph_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
@@ -230,8 +216,8 @@
 
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
 
