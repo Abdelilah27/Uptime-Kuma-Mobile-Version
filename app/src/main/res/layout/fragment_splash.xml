@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/app_name"
         android:textColor="@color/main_text_splash_fragment"
         android:textSize="28sp"

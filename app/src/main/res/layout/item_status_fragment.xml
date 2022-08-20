@@ -4,14 +4,15 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/background_item_all_server_fragment"
+    android:backgroundTint="@color/grey"
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="10dp"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <ImageView
             android:id="@+id/image_status"
             android:layout_width="60dp"
@@ -32,7 +33,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/roboto_bold"
             android:textSize="17sp"
             app:layout_constraintLeft_toRightOf="@+id/image_status"
             app:layout_constraintRight_toRightOf="parent"
@@ -46,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
+            android:fontFamily="@font/roboto_medium"
             android:textSize="14sp"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/title_status"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_status"

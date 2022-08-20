@@ -17,14 +17,12 @@
     </style>
 
     <style name="bar_title_bienvenue_fragment">
-        <item name="fontFamily">sans-serif-black</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="main_text_bienvenue_fragment">
         <item name="autoSizeTextType">uniform</item>
-        <item name="fontFamily">sans-serif-black</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
@@ -127,7 +125,7 @@
 
     <style name="without_margin_title_fragment">
         <item name="autoSizeTextType">uniform</item>
-        <item name="fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/dashbord_fragment_text_color</item>
         <item name="android:textSize">18sp</item>
@@ -135,7 +133,7 @@
 
     <style name="differente_size_title_fragment">
         <item name="autoSizeTextType">uniform</item>
-        <item name="fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/dashbord_fragment_text_color</item>
         <item name="android:textSize">18sp</item>
@@ -143,7 +141,7 @@
 
     <style name="link_server_fragment">
         <item name="autoSizeTextType">uniform</item>
-        <item name="fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textColor">@color/main_text_splash_fragment</item>
     </style>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_all_server_fragment"
+    android:background="@color/black"
     tools:context="views.apparence.ApparenceReglageFragment">
 
 
@@ -13,7 +13,7 @@
         style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:text="@string/langue"
@@ -52,7 +52,7 @@
         style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/switche"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />

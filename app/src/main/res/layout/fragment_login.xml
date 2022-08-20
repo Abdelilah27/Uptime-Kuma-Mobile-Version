@@ -25,7 +25,7 @@
         style="@style/main_text_bienvenue_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/roboto_bold"
         android:text="Login"
         android:textColor="@color/main_text_splash_fragment"
         android:textSize="28sp"
