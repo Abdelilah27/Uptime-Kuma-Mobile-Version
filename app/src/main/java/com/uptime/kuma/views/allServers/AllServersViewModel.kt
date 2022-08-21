@@ -11,7 +11,6 @@ class AllServersViewModel : ViewModel() {
     val tempMonitors: ArrayList<Monitor> = ArrayList() //for searching monitor
     val monitors = AllServersCompanionObject.monitors //get monitors list
 
-
     init {
         tempMonitors.addAll(monitors)
     }

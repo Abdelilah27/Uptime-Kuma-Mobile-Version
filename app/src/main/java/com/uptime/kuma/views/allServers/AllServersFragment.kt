@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
+import com.uptime.kuma.models.ServerCard
+import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -19,7 +22,6 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     MonitorItemAllServersAdapter.OnClickLister {
     companion object {
         lateinit var allRecycler: RecyclerView
-
     }
 
     private lateinit var itemAdapter: MonitorItemAllServersAdapter
@@ -30,19 +32,18 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         binding = FragmentAllServersBinding.bind(view)
-
         allRecycler = view.findViewById(R.id.all_server_recycler)
-
         allServersViewModel =
             ViewModelProvider(requireActivity()).get(AllServersViewModel::class.java)
-
+        itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this) }!!
         allRecycler.apply {
-            itemAdapter = MonitorItemAllServersAdapter(context, this@AllServersFragment)
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
+//            itemAdapter.submitList(getData())
+            itemAdapter.setData(getData())
         }
-        observeMonitorsList()
+//        observeMon:itorsList()
         searchViewListener()
     }
 
@@ -64,10 +65,19 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         })
     }
 
-    //observe monitor list
-    private fun observeMonitorsList() {
-        itemAdapter.submitList(allServersViewModel.tempMonitors)
+    private fun getData(): List<ServerCard> {
+        val subListData1 = arrayListOf<MonitorStatusItem>()
+        subListData1.add(MonitorStatusItem(status = 0))
+        subListData1.add(MonitorStatusItem(status = 1))
+
+        val monitor = Monitor(id = 1, name = "Test", url = "test.com")
+        val data = arrayListOf<ServerCard>()
+        data.add(ServerCard(monitor, subListData1))
+//        data.add(ServerCard(monitor, subListData1))
+//        data.add(ServerCard(monitor, subListData1))
+        return data
     }
+
 
     override fun onItemClick(position: Int) {
         val serverId = allServersViewModel.tempMonitors[position].id.toString()

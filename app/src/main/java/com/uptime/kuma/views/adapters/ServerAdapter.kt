@@ -25,6 +25,7 @@ class ServerAdapter(val context: Context) :
                 dashbordServernameTv.visibility = View.GONE // hide username part
                 dashbordTimeTv.text = monitorStatusItem.time
                 dashbordMessageTv.text = monitorStatusItem.msg
+                dashbordSlugTv.text = monitorStatusItem.name!!.toUpperCase().subSequence(0, 2)
                 when (monitorStatusItem.status) {
                     1 -> {
                         dashbordStatusTv.text = getActivity(context)?.getText(R.string.online)

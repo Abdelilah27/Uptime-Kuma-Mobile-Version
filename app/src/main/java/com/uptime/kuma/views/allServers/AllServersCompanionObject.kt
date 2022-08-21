@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.monitorsList
 
+import android.util.Log
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
@@ -108,7 +109,6 @@ object AllServersCompanionObject {
             val customResponseEnd = customResponseBegin.dropLast(9)
             val customResponselast = "$customResponseEnd]"
             val jsonObject = JSONArray(customResponselast)
-//            Log.d("getServerCalcul", jsonObject[1].toString())
             val monitorList = jsonObject[1].toString()
             val monitorStatus = JSONArray(monitorList)
             for (i in 0 until monitorStatus.length()) {
@@ -126,23 +126,13 @@ object AllServersCompanionObject {
                     time = time
                 )
                 idM = monitorID.toInt()
-                calculitems.add(myobject)
-
-
                 //For recycler graph card
                 calculitems.add(myobject)
-                println(myobject.monitor_id)
             }
             val list1 = ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
-//            println(list1.monitorStatus.size)
             monitorCalcul.add(list1)
-//
-////            Log.d("TAG", monitorCalcul.toString())
             calculitems.clear()
-
         }
-
-
     }
 
 

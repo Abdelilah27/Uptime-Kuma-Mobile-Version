@@ -26,7 +26,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
     private lateinit var shimmerViewCalcul: ShimmerFrameLayout
-    private lateinit var binnding: FragmentDashboardBinding
 
     //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

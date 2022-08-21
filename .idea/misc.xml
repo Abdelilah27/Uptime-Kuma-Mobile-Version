@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/font/font.xml" value="0.4107692307692308" />
         <entry key="app/src/main/res/font/poppins.xml" value="0.4111111111111111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/card_graph_server.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/dashboard_recycler_calcul_item.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/dashboard_recycler_calcul_item_shimmer.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/dashboard_recycler_item_shimmer.xml" value="0.2857789855072464" />
