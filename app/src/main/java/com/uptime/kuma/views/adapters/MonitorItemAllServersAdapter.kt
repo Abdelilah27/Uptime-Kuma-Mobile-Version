@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
@@ -16,7 +18,7 @@ import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 
 class MonitorItemAllServersAdapter(
-    val context: Context, val listener: OnClickLister
+    val context: Context, val listener: OnClickLister, val lifecycleOwner: LifecycleOwner
 ) :
     RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>() {
     private var myList: List<ServerCalcul> = listOf()
@@ -122,23 +124,16 @@ class MonitorItemAllServersAdapter(
 
     }
 
-//    private fun getLastStatus(status: ArrayList<ServerCalcul_Items>): ArrayList<ServerCalcul_Items> {
-//        val ourList: ArrayList<ServerCalcul_Items> = ArrayList()
-//        val size = status.size
-//        for (i in size - 1 downTo size - 16) {
-//            ourList.add(status[i])
-//            Log.d("TAG", ourList.toString())
-//
-//        }
-//
-//        return ourList
-//    }
 
     private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<ServerCalcul_Items>) {
         val adapter = MonitorItemAllServersCardAdapter(context)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
-        adapter.setData(list)
+        AllServersCompanionObject.calculitemsLiveData.observe(lifecycleOwner, Observer {
+            Log.d("LOLOLO", it.toString())
+            adapter.setData(it)
+        })
+
     }
 
     interface OnClickLister {

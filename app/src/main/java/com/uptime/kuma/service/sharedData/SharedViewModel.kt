@@ -21,7 +21,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     //Get Data
     val data: Flowable<WebSocket.Event>
         get() = sharedRepository.getData()
-
+// background
     private fun sendQuery(param: String) {
         viewModelScope.launch {
             sharedRepository.sendMessage(param)
@@ -35,6 +35,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
         NetworkResult().set(MutableLiveData("0"))//set connexion to open
         data.subscribe({ response ->
             lifecycleScope.launch {
+
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
                     //to show error dialog after a delay
                     Handler(Looper.getMainLooper()).postDelayed({

@@ -1,6 +1,5 @@
 package com.uptime.kuma.views.monitorsList
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
@@ -22,6 +21,9 @@ object AllServersCompanionObject {
     var idM = 0
     val monitorCalcul: ArrayList<ServerCalcul> = ArrayList()
     val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
+    private val _calculitemsLiveData = MutableLiveData<ArrayList<ServerCalcul_Items>>()
+    val calculitemsLiveData: LiveData<ArrayList<ServerCalcul_Items>>
+        get() = _calculitemsLiveData
 
     //get Monitors List
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
@@ -134,14 +136,15 @@ object AllServersCompanionObject {
                 )
                 //For recycler graph card
                 calculitems.add(myobject)
+                calculitems.sortByDescending { it.time }
+                _calculitemsLiveData.postValue(calculitems)
+                calculitems.clear()
             }
-//            idM = calculitems[0].id!!
-            val list1 = ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
-            Log.d("TagTag", list1.toString())
-            monitorCalcul.add(list1)
+            monitorCalcul.add(ServerCalcul(monitor_id = idM, monitorStatus = calculitems))
             _monitorCalculLiveData.postValue(monitorCalcul)
-//            calculitems.clear()
+
         }
+        //Log.d("monitorCalcul", monitorCalcul.toString())
     }
 
     //get monitor by id

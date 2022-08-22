@@ -3,6 +3,7 @@ package com.uptime.kuma.views.allServers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -33,14 +34,21 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         allRecycler = view.findViewById(R.id.all_server_recycler)
         allServersViewModel =
             ViewModelProvider(requireActivity()).get(AllServersViewModel::class.java)
-        itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this) }!!
+        itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this, viewLifecycleOwner) }!!
         allRecycler.apply {
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            itemAdapter.setData(AllServersCompanionObject.monitorCalcul)
+
         }
         searchViewListener()
+
+        AllServersCompanionObject.monitorCalculLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                Log.d("A", it.toString())
+                itemAdapter.setData(it)
+            })
 
     }
 
@@ -62,18 +70,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         })
     }
 
-//    private fun getData(): List<ServerCard> {
-//        val subListData1 = arrayListOf<MonitorStatusItem>()
-//        subListData1.add(MonitorStatusItem(status = 0))
-//        subListData1.add(MonitorStatusItem(status = 1))
-//
-//        val monitor = Monitor(id = 1, name = "Test", url = "test.com")
-//        val data = arrayListOf<ServerCard>()
-//        data.add(ServerCard(monitor, subListData1))
-//        data.add(ServerCard(monitor, subListData1))
-//        data.add(ServerCard(monitor, subListData1))
-//        return data
-//    }
+
 
 
     override fun onItemClick(position: Int) {
