@@ -61,10 +61,11 @@ class MonitorItemAllServersAdapter(
         myList[position].let {
             holder.id.text = it.monitor_id.toString()
             val monitor = AllServersCompanionObject.getMonitorById(it.monitor_id)
+            val statusList = getStatusById((holder.id.text as String).toInt())
             holder.title.text = monitor.name
             holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
             holder.percent.text = "99.99%"
-            when (monitor.active) {
+            when (statusList[0].status) {
                 0 -> {
                     holder.card.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -117,14 +118,13 @@ class MonitorItemAllServersAdapter(
             }
             setCallItemRecycler(
                 holder.secondRecycler,
-                getStatusById((holder.id.text as String).toInt())
+                statusList
             )
         }
     }
 
     private fun getStatusById(id: Int): List<ServerCalcul_Items> {
         val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
-        val statusV3: ArrayList<ServerCalcul_Items> = ArrayList()
         myList.forEach { it ->
             if (it.monitor_id == id) {
                 it.monitorStatus.forEach {
