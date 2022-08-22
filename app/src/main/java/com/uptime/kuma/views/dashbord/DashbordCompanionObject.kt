@@ -1,13 +1,10 @@
 package com.uptime.kuma.views.dashbord
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
-import com.uptime.kuma.utils.UpdateData
-import com.uptime.kuma.models.monitorUpdate.MonitorUpdate
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -19,7 +16,6 @@ object DashbordCompanionObject {
     val newLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _newLiveData
     val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
-    val monitorUpdateList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
     val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
         get() = _monitorStatusLiveData
@@ -62,14 +58,12 @@ object DashbordCompanionObject {
 
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
-
         }
-
     }
 
-    fun getMonitorName(id:Int):String{
+    fun getMonitorName(id: Int): String {
         AllServersCompanionObject.monitors.forEach {
-            if(it.id==id){
+            if (it.id == id) {
                 return it.name
             }
         }
@@ -77,7 +71,6 @@ object DashbordCompanionObject {
     }
 
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
-        var list: ArrayList<MonitorStatusItem> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
@@ -99,11 +92,12 @@ object DashbordCompanionObject {
                 newList.add(monitorUpdate)
 //                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
 //                _newLiveData.postValue(newList)
-                 newList.sortByDescending { MonitorUpdate ->MonitorUpdate.time}
-                newList= newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
-                newList.sortBy { MonitorUpdate ->MonitorUpdate.monitorID}
+                newList.sortByDescending { MonitorUpdate -> MonitorUpdate.time }
+                newList =
+                    newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+                newList.sortBy { MonitorUpdate -> MonitorUpdate.monitorID }
                 newList.forEach {
-                    println(it.monitorID.toString()+it.time)
+                    println(it.monitorID.toString() + it.time)
                 }
 
                 newList.sortBy { MonitorUpdate -> MonitorUpdate.time }
@@ -115,9 +109,6 @@ object DashbordCompanionObject {
             }
 
         }
-
-
     }
-
 
 }

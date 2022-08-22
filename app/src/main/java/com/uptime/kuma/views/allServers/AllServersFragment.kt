@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
-import com.uptime.kuma.models.ServerCard
-import com.uptime.kuma.models.monitor.Monitor
-import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import java.util.*
 
 class AllServersFragment : Fragment(R.layout.fragment_all_servers),
@@ -40,11 +38,10 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-//            itemAdapter.submitList(getData())
-            itemAdapter.setData(getData())
+            itemAdapter.setData(AllServersCompanionObject.monitorCalcul)
         }
-//        observeMon:itorsList()
         searchViewListener()
+
     }
 
     //search for a monitor in monitors
@@ -65,18 +62,18 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         })
     }
 
-    private fun getData(): List<ServerCard> {
-        val subListData1 = arrayListOf<MonitorStatusItem>()
-        subListData1.add(MonitorStatusItem(status = 0))
-        subListData1.add(MonitorStatusItem(status = 1))
-
-        val monitor = Monitor(id = 1, name = "Test", url = "test.com")
-        val data = arrayListOf<ServerCard>()
-        data.add(ServerCard(monitor, subListData1))
+//    private fun getData(): List<ServerCard> {
+//        val subListData1 = arrayListOf<MonitorStatusItem>()
+//        subListData1.add(MonitorStatusItem(status = 0))
+//        subListData1.add(MonitorStatusItem(status = 1))
+//
+//        val monitor = Monitor(id = 1, name = "Test", url = "test.com")
+//        val data = arrayListOf<ServerCard>()
 //        data.add(ServerCard(monitor, subListData1))
 //        data.add(ServerCard(monitor, subListData1))
-        return data
-    }
+//        data.add(ServerCard(monitor, subListData1))
+//        return data
+//    }
 
 
     override fun onItemClick(position: Int) {

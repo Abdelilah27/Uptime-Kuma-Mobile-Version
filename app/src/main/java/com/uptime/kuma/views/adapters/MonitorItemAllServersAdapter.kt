@@ -11,16 +11,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
-import com.uptime.kuma.models.ServerCard
-import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import com.uptime.kuma.models.serverCalcul.ServerCalcul
+import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
+import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 
 class MonitorItemAllServersAdapter(
     val context: Context, val listener: OnClickLister
 ) :
     RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>() {
-    private var myList: List<ServerCard> = listOf()
+    private var myList: List<ServerCalcul> = listOf()
 
-    fun setData(data: List<ServerCard>) {
+    fun setData(data: List<ServerCalcul>) {
         myList = data
         notifyDataSetChanged()
     }
@@ -57,11 +58,12 @@ class MonitorItemAllServersAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         myList[position].let {
-            holder.id.text = it.monitor.id.toString()
-            holder.title.text = it.monitor.name
-            holder.slug.text = it.monitor.name.toUpperCase().subSequence(0, 2)
+            holder.id.text = it.monitor_id.toString()
+            val monitor = AllServersCompanionObject.getMonitorById(it.monitor_id)
+            holder.title.text = monitor.name
+            holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
             holder.percent.text = "99.99%"
-            when (it.monitor.active) {
+            when (monitor.active) {
                 0 -> {
                     holder.card.setCardBackgroundColor(
                         ContextCompat.getColor(
@@ -112,14 +114,29 @@ class MonitorItemAllServersAdapter(
                     )
                 }
             }
-            setCallItemRecycler(holder.secondRecycler, myList[position].listOfStatus)
+            setCallItemRecycler(
+                holder.secondRecycler,
+                myList[position].monitorStatus
+            )
         }
 
     }
 
-    private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<MonitorStatusItem>) {
+//    private fun getLastStatus(status: ArrayList<ServerCalcul_Items>): ArrayList<ServerCalcul_Items> {
+//        val ourList: ArrayList<ServerCalcul_Items> = ArrayList()
+//        val size = status.size
+//        for (i in size - 1 downTo size - 16) {
+//            ourList.add(status[i])
+//            Log.d("TAG", ourList.toString())
+//
+//        }
+//
+//        return ourList
+//    }
+
+    private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<ServerCalcul_Items>) {
         val adapter = MonitorItemAllServersCardAdapter(context)
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
         adapter.setData(list)
     }

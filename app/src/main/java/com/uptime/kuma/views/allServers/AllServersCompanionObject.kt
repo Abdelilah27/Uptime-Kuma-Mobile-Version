@@ -1,6 +1,8 @@
 package com.uptime.kuma.views.monitorsList
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
@@ -11,11 +13,13 @@ import org.json.JSONObject
 
 object AllServersCompanionObject {
     val monitors: ArrayList<Monitor> = ArrayList()
+    val idMonitors: ArrayList<Int> = ArrayList()
 
     //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
-//    val monitorLiveData: LiveData<ArrayList<Monitor>>
-//        get() = _monitorLiveData
-    var idM = 1
+    private val _monitorCalculLiveData = MutableLiveData<ArrayList<ServerCalcul>>()
+    val monitorCalculLiveData: LiveData<ArrayList<ServerCalcul>>
+        get() = _monitorCalculLiveData
+    var idM = 0
     val monitorCalcul: ArrayList<ServerCalcul> = ArrayList()
     val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
 
@@ -114,25 +118,40 @@ object AllServersCompanionObject {
             for (i in 0 until monitorStatus.length()) {
                 val jsonObject = JSONObject(monitorStatus[i].toString())
                 val monitorID = jsonObject.get("monitor_id").toString()
+                if (monitorID.toInt() !in idMonitors) {
+                    idMonitors.add(monitorID.toInt())
+                    idM = monitorID.toInt()
+                }
                 val msg = jsonObject.get("msg").toString()
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
 //                // init object
-//                idM=monitorID.toInt()
                 val myobject = ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time
                 )
-                idM = monitorID.toInt()
                 //For recycler graph card
                 calculitems.add(myobject)
             }
+//            idM = calculitems[0].id!!
             val list1 = ServerCalcul(monitor_id = idM, monitorStatus = calculitems)
+            Log.d("TagTag", list1.toString())
             monitorCalcul.add(list1)
-            calculitems.clear()
+            _monitorCalculLiveData.postValue(monitorCalcul)
+//            calculitems.clear()
         }
+    }
+
+    //get monitor by id
+    fun getMonitorById(id: Int): Monitor {
+        monitors.forEach {
+            if (it.id == id) {
+                return it
+            }
+        }
+        return monitors.get(0)
     }
 
 
