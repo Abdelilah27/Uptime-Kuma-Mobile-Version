@@ -50,6 +50,15 @@ class MonitorItemAllServersCardAdapter(val context: Context) :
                         )
                     )
                 }
+                else -> {
+                    holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            holder.itemView.context,
+                            R.color
+                                .attente
+                        )
+                    )
+                }
             }
         }
     }
