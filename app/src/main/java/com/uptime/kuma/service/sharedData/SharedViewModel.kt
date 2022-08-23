@@ -1,32 +1,63 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.*
 import com.tinder.scarlet.WebSocket
-import com.uptime.kuma.api.NetworkResult
+import com.uptime.kuma.R
+import com.uptime.kuma.api.NetworkStatus
+import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
+import com.uptime.kuma.models.serverCalcul.ServerCalcul
+import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
+import com.uptime.kuma.models.status.Status
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
-import com.uptime.kuma.views.dashbord.DashbordCompanionObject
-import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
-import com.uptime.kuma.views.status.StatusCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
 
-class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
+class SharedViewModel(private val sharedRepository: SharedRepository?) :
+    ViewModel() {
+    constructor() : this(null)
+
+    //Dashboard Fragment
+    var newList: ArrayList<MonitorStatusItem> = ArrayList()
+    private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
+    val newLiveData: LiveData<ArrayList<MonitorStatusItem>>
+        get() = _newLiveData
+    val monitorStatusList: ArrayList<MonitorStatusItem> = ArrayList()
+    private val _monitorStatusLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
+    val monitorStatusLiveData: LiveData<ArrayList<MonitorStatusItem>>
+        get() = _monitorStatusLiveData
+
+    //AllServers Fragment
+    val monitors: ArrayList<Monitor> = ArrayList()
+    val idMonitors: ArrayList<Int> = ArrayList()
+    private val _monitorCalculLiveData = MutableLiveData<ArrayList<ServerCalcul>>()
+    val monitorCalculLiveData: LiveData<ArrayList<ServerCalcul>>
+        get() = _monitorCalculLiveData
+    var idM = 0
+    val monitorCalcul: ArrayList<ServerCalcul> = ArrayList()
+
+    //Status Fragment
+    private val statues: ArrayList<Status> = ArrayList()
+    private val _statusLiveData = MutableLiveData<ArrayList<Status>>()
+    val statusLiveData: LiveData<ArrayList<Status>>
+        get() = _statusLiveData
+
 
     //Get Data
     val data: Flowable<WebSocket.Event>
-        get() = sharedRepository.getData()
-// background
+        get() = sharedRepository!!.getData()
+
     private fun sendQuery(param: String) {
         viewModelScope.launch {
-            sharedRepository.sendMessage(param)
+            sharedRepository!!.sendMessage(param)
         }
     }
 
@@ -34,60 +65,331 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
-        NetworkResult().set(MutableLiveData("0"))//set connexion to open
+        NetworkStatus.networkStatus = "0" //set connexion to open
         data.subscribe({ response ->
             CoroutineScope(Dispatchers.Main).launch {
-                NetworkResult.instance.get().observe(lifecycleOwner, Observer {
-                    //to show error dialog after a delay
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (NetworkResult.instance.get().value == "0") {
-                            NetworkResult.instance.get().postValue("6") //no response
-                        }
-                    }, 30000)
-                    if (response.toString()
-                            .contains(Constants.successConnexion) && NetworkResult
-                            .instance.get().value == "0"
-                    ) {
-                        sendQuery(Constants.dataQuery)
-                        NetworkResult.instance.get().postValue("1") //Success response
-                    } else if (response.toString().contains(Constants.emission)) {
-                        sendQuery(Constants.dataQueryResend)
-                        NetworkResult.instance.get().postValue("5") //Resend response
-                    } else if (response.toString()
-                            .contains(Constants.unSuccessConnexion) && NetworkResult
-                            .instance.get().value == "0"
-                    ) {
-                        NetworkResult.instance.get().postValue("2") //Failed connexion
-                    }
-                })
+                //to show error dialog after a delay
+//                Handler(Looper.getMainLooper()).postDelayed({
+//                    if (NetworkStatus.networkStatus == "0") {
+//                        NetworkStatus.networkStatus = "6"
+//                    }
+//                }, 30000)
+                if (response.toString()
+                        .contains(Constants.successConnexion) && NetworkStatus.networkStatus == "0"
+                ) {
+                    sendQuery(Constants.dataQuery)
+                    NetworkStatus.networkStatus = "1" //Success response
+                } else if (response.toString().contains(Constants.emission)) {
+                    sendQuery(Constants.dataQueryResend)
+                    NetworkStatus.networkStatus = "5" //Resend response
+                }
 
-                withContext(Dispatchers.Main){
-                    AllServersCompanionObject.getMonitorsFromResponse(
+                withContext(Dispatchers.Main) {
+                    getMonitorsFromResponse(
                         response,
                         Constants.monitorListSuffix,
                     )
 
-                    DashbordCompanionObject.getDashbordMonitorItem(
+                    getDashbordMonitorItem(
                         response,
                         Constants.dashbordMonitorItemsSuffix
                     )
 
-                    DashbordCompanionObject.getDashbordUpdate(
+                    getDashbordUpdate(
                         response,
                         Constants.dashbordMonitorUpdate
                     )
-                    AllServersCompanionObject.getServerCalcul(
+                    getServerCalcul(
                         response,
                         Constants.heartbeatlist
                     )
-                    StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
+                    getStatusFromResponse(
+                        response,
+                        Constants.statusListSuffix
+                    )
                 }
             }
-
+            Log.d("RES", response.toString())
         }, { error ->
-            NetworkResult.instance.get().postValue("3")//set error
+            NetworkStatus.networkStatus = "3"//set error
             Log.d("error: ", error.toString())
         })
+    }
+
+
+    //Dashboard Fragment
+    fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
+        //
+        if (response.toString().contains(suffix)) {
+            val customResponseAfter = response.toString().substringAfter(suffix)
+            //add [ at the beginning of the response
+            val customResponseBegin = "[$customResponseAfter"
+            //delete )) at the end of the response
+            val customResponseEnd = customResponseBegin.dropLast(9)
+            val customResponselast = "$customResponseEnd]"
+            val jsonObject = JSONArray(customResponselast)
+            val monitorList = jsonObject[1].toString()
+            val monitorStatus = JSONArray(monitorList)
+            for (i in 0 until monitorStatus.length()) {
+                val myObject = JSONObject(monitorStatus[i].toString())
+                val monitorID = myObject.get("monitorID").toString()
+                val msg = myObject.get("msg").toString()
+                val status = myObject.get("status").toString()
+                val time = myObject.get("time").toString()
+                // init MonitorStatusItem
+                val monitorStatusItem = MonitorStatusItem(
+                    monitorID = monitorID.toInt(),
+                    msg = msg,
+                    status = status.toInt(),
+                    time = time,
+                    name = getMonitorName(monitorID.toInt())
+
+                )
+                monitorStatusList.add(monitorStatusItem)
+            }
+            // Traverse through the first list
+
+            newList =
+                monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+            _newLiveData.postValue(newList)
+            monitorStatusList.sortByDescending { it.time }
+
+//            Log.d("TAG", monitorStatusList.toString())
+            _monitorStatusLiveData.postValue(monitorStatusList)
+        }
+    }
+
+    fun getMonitorName(id: Int): String {
+        monitors.forEach {
+            if (it.id == id) {
+                return it.name
+            }
+        }
+        return ""
+    }
+
+    fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+        if (response.toString().contains(suffix)) {
+            val customResponseAfter = response.toString().substringAfter(suffix)
+            val jsonObject = JSONObject(customResponseAfter)
+            val monitorID = jsonObject.get("monitorID").toString()
+            val msg = jsonObject.get("msg").toString()
+            val status = jsonObject.get("status").toString()
+            val time = jsonObject.get("time").toString()
+            val important = jsonObject.getBoolean("important")
+            // init MonitorStatusItem
+            val monitorUpdate = MonitorStatusItem(
+                monitorID = monitorID.toInt(),
+                msg = msg,
+                status = status.toInt(),
+                time = time,
+                important = important,
+                name = getMonitorName(monitorID.toInt())
+            )
+            if (monitorUpdate.important == true) {
+                newList.add(monitorUpdate)
+//                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
+//                _newLiveData.postValue(newList)
+                newList.sortByDescending { MonitorUpdate -> MonitorUpdate.time }
+                newList =
+                    newList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
+                newList.sortBy { MonitorUpdate -> MonitorUpdate.monitorID }
+                newList.forEach {
+                    println(it.monitorID.toString() + it.time)
+                }
+
+                newList.sortBy { MonitorUpdate -> MonitorUpdate.time }
+                newList.distinctBy { MonitorUpdate -> MonitorUpdate.monitorID }
+                _newLiveData.postValue(newList)
+                monitorStatusList.add(monitorUpdate)
+                monitorStatusList.sortByDescending { it.time }
+                _monitorStatusLiveData.postValue(monitorStatusList)
+            }
+
+        }
+    }
+
+    //AllServers Fragment
+    fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
+        val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
+        if (response.toString().contains(suffix)) {
+            val customResponseAfter = response.toString().substringAfter(suffix)
+            val customResponseBegin = "[$customResponseAfter"
+            val customResponseEnd = customResponseBegin.dropLast(9)
+            val customResponselast = "$customResponseEnd]"
+            val jsonObject = JSONArray(customResponselast)
+            val monitorList = jsonObject[1].toString()
+            val monitorStatus = JSONArray(monitorList)
+            for (i in 0 until monitorStatus.length()) {
+                val jsonObject = JSONObject(monitorStatus[i].toString())
+                val monitorID = jsonObject.get("monitor_id").toString()
+                if (monitorID.toInt() !in idMonitors) {
+                    idMonitors.add(monitorID.toInt())
+                    idM = monitorID.toInt()
+                }
+                val msg = jsonObject.get("msg").toString()
+                val status = jsonObject.get("status").toString()
+                val time = jsonObject.get("time").toString()
+//                // init object
+                val myobject = ServerCalcul_Items(
+                    monitor_id = monitorID.toInt(),
+                    msg = msg,
+                    status = status.toInt(),
+                    time = time
+                )
+                //For recycler graph card
+                calculitems.add(myobject)
+                calculitems.sortByDescending { it.time }
+            }
+            monitorCalcul.add(ServerCalcul(monitor_id = idM, monitorStatus = calculitems))
+            _monitorCalculLiveData.postValue(monitorCalcul)
+
+        }
+        //Log.d("monitorCalcul", monitorCalcul.toString())
+    }
+
+    fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
+        if (response.toString().contains(suffix)) {
+            // deleting suffix part
+            val customResponseAfter = response.toString().substringAfter(
+                Constants.monitorListSuffix
+            )
+            //parse response to JSON
+            //delete ] at the end of the response
+            val customResponseEnd = customResponseAfter.dropLast(0)
+            //transform to jsonObject
+            val jsonObject = JSONObject(customResponseEnd)
+            //last Json Object
+            val lastJsonObject = jsonObject.getJSONObject(
+                jsonObject.names().get(jsonObject.length() - 1) as String
+            )
+            //get id of last json object as length of json object
+            val lengthOfJsonObject = lastJsonObject.get("id") as Int
+            for (i in 0 until lengthOfJsonObject + 1) {
+                if (jsonObject.has(i.toString())) {
+                    //get separated jsonObjects
+                    val json = jsonObject.getJSONObject(i.toString())
+                    val name = json.get("name").toString()
+                    val id = json.get("id")
+                    val active = json.get("active")
+                    val dns_resolve_server = json.get("dns_resolve_server").toString()
+                    val dns_resolve_type = json.get("dns_resolve_type").toString()
+                    val expiryNotification = json.get("expiryNotification")
+                    val ignoreTls = json.get("ignoreTls")
+                    val interval = json.get("interval")
+                    val maxredirects = json.get("maxredirects")
+                    val maxretries = json.get("maxretries")
+                    val method = json.get("method").toString()
+                    val type = json.get("type").toString()
+                    val upsideDown = json.get("upsideDown")
+                    val url = json.get("url").toString()
+                    val weight = json.get("weight")
+                    val retryInterval = json.get("retryInterval")
+                    //accepted_statuscodes list
+                    var accepted_statuscodes: ArrayList<String> = ArrayList()
+                    val accepted_statuscodes_array =
+                        json.getJSONArray("accepted_statuscodes")
+                    for (j in 0 until accepted_statuscodes_array.length()) {
+                        val statusCode = accepted_statuscodes.add(
+                            accepted_statuscodes_array[j]
+                                .toString()
+                        )
+                        accepted_statuscodes.add(statusCode.toString())
+                    }
+                    //init monitor
+                    val monitor = Monitor(
+                        id = id as Int,
+                        name = name,
+                        active =
+                        active as Int,
+                        dns_resolve_server = dns_resolve_server,
+                        dns_resolve_type =
+                        dns_resolve_type,
+                        expiryNotification = expiryNotification as Boolean,
+                        ignoreTls = ignoreTls as Boolean,
+                        interval = interval as Int,
+                        maxredirects = maxredirects as Int,
+                        maxretries = maxretries as Int,
+                        method = method,
+                        type = type,
+                        upsideDown = upsideDown as Boolean,
+                        url = url,
+                        weight = weight as Int,
+                        retryInterval = retryInterval as Int,
+                        accepted_statuscodes = accepted_statuscodes,
+                    )
+                    //add monitors to ArrayList
+                    monitors.add(monitor)
+                } else {
+                    continue
+                }
+            }
+//            Log.d("ZZZ", monitors.toString())
+            //add ArrayList to MutableLiveData
+//            _monitorLiveData.postValue(monitors)
+        }
+    }
+
+    fun getMonitorById(id: Int): Monitor {
+        monitors.forEach {
+            if (it.id == id) {
+                return it
+            }
+        }
+        return monitors.get(0)
+    }
+
+    //Status Fragment
+    fun getStatusFromResponse(response: WebSocket.Event?, suffix: String) {
+        if (response.toString().contains(suffix)) {
+            val responseAfter = response.toString().substringAfter(
+                Constants.statusListSuffix
+            )
+            val responseBefore = "{$responseAfter"
+            val responseEnd = responseBefore.dropLast(3)//hade 3 dialach
+            val jsonObject = JSONObject(responseEnd)
+            val lastJsonObject = jsonObject.getJSONObject(
+                jsonObject.names().get(jsonObject.length() - 1) as String
+            )// i don't understand
+            val lengthOfJsonObject = lastJsonObject.get("id") as Int
+            for (i in 0 until lengthOfJsonObject + 1) {
+                if (jsonObject.has(i.toString())) {
+                    val json = jsonObject.getJSONObject(i.toString())
+                    val customCSS = json.get("customCSS").toString()
+                    val description = json.get("description").toString()
+                    val domainNameList: ArrayList<Any> = ArrayList()
+
+                    val footerText = json.get("footerText").toString()
+                    val icon = R.drawable.ic_icon
+                    val id = json.get("id")
+                    val published = json.get("published")
+                    val showPoweredBy = json.get("showPoweredBy")
+                    val showTags = json.get("showTags")
+                    val slug = json.get("slug").toString()
+                    val theme = json.get("theme").toString()
+                    val title = json.get("title").toString()
+
+                    val status = Status(
+                        customCSS = customCSS,
+                        description = description,
+                        footerText = footerText,
+                        id = id as Int,
+                        icon = icon,
+                        published = published as Boolean,
+                        showPoweredBy = showPoweredBy as Boolean,
+                        showTags = showTags as Boolean,
+                        slug = slug,
+                        theme = theme,
+                        title = title
+                    )
+                    statues.add(status)
+
+                } else {
+                    continue
+                }
+            }
+            _statusLiveData.postValue(statues)
+        }
     }
 
 }

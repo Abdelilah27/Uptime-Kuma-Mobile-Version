@@ -3,7 +3,6 @@ package com.uptime.kuma.views.allServers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +14,6 @@ import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
-import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import java.util.*
 
 class AllServersFragment : Fragment(R.layout.fragment_all_servers),
@@ -32,7 +30,6 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         binding = FragmentAllServersBinding.bind(view)
-        ConnexionLifecycle.openConnexion()
         allRecycler = view.findViewById(R.id.all_server_recycler)
         allServersViewModel =
             ViewModelProvider(requireActivity()).get(AllServersViewModel::class.java)
@@ -41,7 +38,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            itemAdapter.setData(AllServersCompanionObject.monitorCalcul)
+            itemAdapter.setData(MainActivity.sharedViewModel.monitorCalcul)
         }
         searchViewListener()
 
@@ -49,8 +46,8 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
 
     override fun onDestroyView() {
         super.onDestroyView()
-        AllServersCompanionObject.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
-        ConnexionLifecycle.closeConnexion()
+        MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
+//        ConnexionLifecycle.closeConnexion()
     }
 
     //search for a monitor in monitors

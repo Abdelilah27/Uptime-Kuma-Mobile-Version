@@ -10,12 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
-import com.uptime.kuma.api.NetworkResult
+import com.uptime.kuma.api.NetworkStatus
 import com.uptime.kuma.databinding.FragmentLoginBinding
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -46,26 +44,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.buttonLogin.setOnClickListener {
-            NetworkResult().set(MutableLiveData("0"))//set connexion to open
+            NetworkStatus.networkStatus = "0"//set connexion to open
             if (binding.socketUrl.text.isNotEmpty()) {
                 if (verificationSocketLink(binding.socketUrl.text.toString())) {
                     (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
                     binding.progressBar.visibility = View.VISIBLE
-                    NetworkResult.instance.get().observe(viewLifecycleOwner, Observer {
-                        when (NetworkResult.instance.get().value) {
-                            "1" -> {
-                                sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
-                                binding.progressBar.visibility = View.GONE
-                                findNavController().navigate(R.id.mainFragment)
+                    when (NetworkStatus.networkStatus) {
+                        "1" -> {
+                            sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
+                            binding.progressBar.visibility = View.GONE
+                            findNavController().navigate(R.id.mainFragment)
 
-                            }
-                            "2", "3", "6" -> {
-                                binding.progressBar.visibility = View.GONE
-                                showErrorDialog()
-                            }
+                        }
+                        "2", "3", "6" -> {
+                            binding.progressBar.visibility = View.GONE
+                            showErrorDialog()
                         }
                     }
-                    )
                 } else {
                     Toast.makeText(
                         context,
@@ -98,7 +93,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         button.setOnClickListener {
             builder.dismiss()
-            NetworkResult().set(MutableLiveData("0"))//set connexion to open
+            NetworkStatus.networkStatus = "0" //set connexion to open
             ConnexionLifecycle.closeConnexion()
             binding.socketUrl.text.clear()
         }

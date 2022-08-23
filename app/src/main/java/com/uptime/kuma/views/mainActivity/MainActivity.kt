@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var webSocketService: ConnexionInterface
         lateinit var mainActivityViewModel: MainActivityViewModel
         lateinit var saveData: SaveData
+        var sharedViewModel: SharedViewModel = SharedViewModel()
     }
 
     private lateinit var sharedRepository: SharedRepository
@@ -35,19 +36,18 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         saveData = SaveData(this)
-
         //set light or dark mode from sharedPreferences
         if (saveData.lightMode == "true") {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
 
         //instance mainViewModel
         mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
@@ -57,8 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 //        setFullScreen(window)
 //        lightStatusBar(window)
-
-        //        ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
+        //        ws://status.mobiblanc.tech/socket.io/?EIO=4&trfansport=websocket
     }
 
     fun setUpConnexion(url: String) {
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         webSocketService = ApiUtilities.getInstance(scarlet)
         //Service Shared Data
         sharedRepository = SharedRepository(webSocketService)
-        val sharedViewModel = ViewModelProvider(
+        sharedViewModel = ViewModelProvider(
             this,
             SharedViewModelFactory(sharedRepository)
         )[SharedViewModel::class.java]

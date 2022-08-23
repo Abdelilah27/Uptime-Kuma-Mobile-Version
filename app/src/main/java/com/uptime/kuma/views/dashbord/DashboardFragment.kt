@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 import com.uptime.kuma.utils.CALCUL
@@ -38,7 +37,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         shimmerViewCalcul = binding.dashboardShimmerCalcul
         shimmerView.startShimmerAnimation()
         shimmerViewCalcul.startShimmerAnimation()
-        ConnexionLifecycle.openConnexion()
         binding.apply {
             calculRecycler.apply {
                 calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
@@ -60,23 +58,25 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     override fun onDestroyView() {
         super.onDestroyView()
-        DashbordCompanionObject.monitorStatusLiveData.removeObservers(viewLifecycleOwner)
-        DashbordCompanionObject.newLiveData.removeObservers(viewLifecycleOwner)
-        ConnexionLifecycle.closeConnexion()
+        MainActivity.sharedViewModel.monitorStatusLiveData.removeObservers(viewLifecycleOwner)
+        MainActivity.sharedViewModel.newLiveData.removeObservers(viewLifecycleOwner)
+//        ConnexionLifecycle.closeConnexion()
     }
 
 
     //observe monitorstatus list
     private fun observeMonitorsList() {
-        DashbordCompanionObject.monitorStatusLiveData.observe(viewLifecycleOwner, Observer { data ->
-            STATUS = data
-            itemAdapter.setData(STATUS ?: listOf())
-            if (data.size > 0) {
-                shimmerView.stopShimmerAnimation()
-                shimmerView.visibility = View.GONE
-                binding.dashbordRecycler.visibility = View.VISIBLE
-            }
-        })
+        MainActivity.sharedViewModel.monitorStatusLiveData.observe(
+            viewLifecycleOwner,
+            Observer { data ->
+                STATUS = data
+                itemAdapter.setData(STATUS ?: listOf())
+                if (data.size > 0) {
+                    shimmerView.stopShimmerAnimation()
+                    shimmerView.visibility = View.GONE
+                    binding.dashbordRecycler.visibility = View.VISIBLE
+                }
+            })
     }
 
     override fun onItemClick(position: String) {
@@ -85,7 +85,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     private fun getStatistics() {
-        DashbordCompanionObject.newLiveData.observe(
+        MainActivity.sharedViewModel.newLiveData.observe(
             viewLifecycleOwner, Observer { data ->
                 var enLigne = 0
                 var horsLigne = 0
@@ -142,8 +142,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 shimmerViewCalcul.visibility = View.GONE
                 binding.calculRecycler.visibility = View.VISIBLE
                 calculItemAdapter.setData(CALCUL ?: listOf())
-
-
             })
     }
 

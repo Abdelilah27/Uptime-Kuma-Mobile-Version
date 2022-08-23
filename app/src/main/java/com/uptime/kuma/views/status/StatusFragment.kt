@@ -9,6 +9,7 @@ import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentStatusBinding
 import com.uptime.kuma.views.adapters.StatusAdapter
+import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClickLister {
@@ -18,7 +19,6 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = FragmentStatusBinding.bind(view)
-        ConnexionLifecycle.openConnexion()
         binding.apply {
             binding.statusRecycler.apply {
                 itemAdapter = StatusAdapter(context, this@StatusFragment)
@@ -32,13 +32,13 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
 
     override fun onDestroyView() {
         super.onDestroyView()
-        StatusCompanionObject.statusLiveData.removeObservers(viewLifecycleOwner)
-        ConnexionLifecycle.closeConnexion()
+        MainActivity.sharedViewModel.statusLiveData.removeObservers(viewLifecycleOwner)
+//        ConnexionLifecycle.closeConnexion()
     }
 
     //observe status list
     private fun observeStatusList() {
-        StatusCompanionObject.statusLiveData.observe(viewLifecycleOwner, Observer {
+        MainActivity.sharedViewModel.statusLiveData.observe(viewLifecycleOwner, Observer {
             itemAdapter.submitList(it)
         })
     }

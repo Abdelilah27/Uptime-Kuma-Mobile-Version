@@ -10,22 +10,22 @@ class NetworkResult {
     // 4 -> closed response
     // 5 -> resend response
     // 6 -> no response after a delay
-
-    var response: MutableLiveData<String> = MutableLiveData()
-
-    fun get(): MutableLiveData<String> {
-        return this.response
-    }
-
-    companion object {
-        lateinit var instance: NetworkResult
-    }
-
-    init {
-        instance = this
-    }
-
-    fun set(response: MutableLiveData<String>) {
-        this.response = response
-    }
+//
+//    var response: MutableLiveData<String> = MutableLiveData()
+//
+//    fun get(): MutableLiveData<String> {
+//        return this.response
+//    }
+//
+//    companion object {
+//        lateinit var instance: NetworkResult
+//    }
+//
+//    init {
+//        instance = this
+//    }
+//
+//    fun set(response: MutableLiveData<String>) {
+//        this.response = response
+//    }
 }
