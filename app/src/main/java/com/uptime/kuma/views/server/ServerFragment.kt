@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.views.adapters.ServerAdapter
 
@@ -20,6 +21,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentServerBinding.bind(view)
+        ConnexionLifecycle.openConnexion()
         val serverAdapter = ServerAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         //get Id from args
@@ -47,6 +49,11 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ConnexionLifecycle.closeConnexion()
     }
 
 }

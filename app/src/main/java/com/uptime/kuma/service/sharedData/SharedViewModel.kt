@@ -14,7 +14,9 @@ import com.uptime.kuma.views.monitorsList.AllServersCompanionObject
 import com.uptime.kuma.views.status.StatusCompanionObject
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SharedViewModel(private val sharedRepository: SharedRepository) : ViewModel() {
 
@@ -34,8 +36,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
     fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
         NetworkResult().set(MutableLiveData("0"))//set connexion to open
         data.subscribe({ response ->
-            lifecycleScope.launch {
-
+            CoroutineScope(Dispatchers.Main).launch {
                 NetworkResult.instance.get().observe(lifecycleOwner, Observer {
                     //to show error dialog after a delay
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -59,26 +60,30 @@ class SharedViewModel(private val sharedRepository: SharedRepository) : ViewMode
                         NetworkResult.instance.get().postValue("2") //Failed connexion
                     }
                 })
+
+                withContext(Dispatchers.Main){
+                    AllServersCompanionObject.getMonitorsFromResponse(
+                        response,
+                        Constants.monitorListSuffix,
+                    )
+
+                    DashbordCompanionObject.getDashbordMonitorItem(
+                        response,
+                        Constants.dashbordMonitorItemsSuffix
+                    )
+
+                    DashbordCompanionObject.getDashbordUpdate(
+                        response,
+                        Constants.dashbordMonitorUpdate
+                    )
+                    AllServersCompanionObject.getServerCalcul(
+                        response,
+                        Constants.heartbeatlist
+                    )
+                    StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
+                }
             }
-            AllServersCompanionObject.getMonitorsFromResponse(
-                response,
-                Constants.monitorListSuffix,
-            )
 
-            DashbordCompanionObject.getDashbordMonitorItem(
-                response,
-                Constants.dashbordMonitorItemsSuffix
-            )
-
-            DashbordCompanionObject.getDashbordUpdate(
-                response,
-                Constants.dashbordMonitorUpdate
-            )
-            AllServersCompanionObject.getServerCalcul(
-                response,
-                Constants.heartbeatlist
-            )
-            StatusCompanionObject.getStatusFromResponse(response, Constants.statusListSuffix)
         }, { error ->
             NetworkResult.instance.get().postValue("3")//set error
             Log.d("error: ", error.toString())

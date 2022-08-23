@@ -3,6 +3,7 @@ package com.uptime.kuma.views.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 import com.uptime.kuma.utils.CALCUL
@@ -37,6 +38,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         shimmerViewCalcul = binding.dashboardShimmerCalcul
         shimmerView.startShimmerAnimation()
         shimmerViewCalcul.startShimmerAnimation()
+        ConnexionLifecycle.openConnexion()
         binding.apply {
             calculRecycler.apply {
                 calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
@@ -55,6 +57,14 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             getStatistics()
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        DashbordCompanionObject.monitorStatusLiveData.removeObservers(viewLifecycleOwner)
+        DashbordCompanionObject.newLiveData.removeObservers(viewLifecycleOwner)
+        ConnexionLifecycle.closeConnexion()
+    }
+
 
     //observe monitorstatus list
     private fun observeMonitorsList() {

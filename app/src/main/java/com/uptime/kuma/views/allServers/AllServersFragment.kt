@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
+import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -31,6 +32,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         binding = FragmentAllServersBinding.bind(view)
+        ConnexionLifecycle.openConnexion()
         allRecycler = view.findViewById(R.id.all_server_recycler)
         allServersViewModel =
             ViewModelProvider(requireActivity()).get(AllServersViewModel::class.java)
@@ -39,22 +41,16 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-
+            itemAdapter.setData(AllServersCompanionObject.monitorCalcul)
         }
         searchViewListener()
-        AllServersCompanionObject.monitorCalcul.forEach {
-            Log.d("DON","id: ====> "+  it.monitor_id.toString())
-          it.monitorStatus.forEach {
-              Log.d("bonbon", "---->"+it.status.toString())
-          }
-        }
 
-        AllServersCompanionObject.monitorCalculLiveData.observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer {
-                itemAdapter.setData(it)
-            })
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        AllServersCompanionObject.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
+        ConnexionLifecycle.closeConnexion()
     }
 
     //search for a monitor in monitors
@@ -76,12 +72,9 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     }
 
 
-
-
     override fun onItemClick(position: Int) {
         val serverId = allServersViewModel.tempMonitors[position].id.toString()
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(serverId)
-
         MainActivity.navController.navigate(action)
     }
 

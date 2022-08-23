@@ -13,6 +13,7 @@ import org.json.JSONObject
 object AllServersCompanionObject {
     val monitors: ArrayList<Monitor> = ArrayList()
     val idMonitors: ArrayList<Int> = ArrayList()
+    val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
 
     //    private val _monitorLiveData = MutableLiveData<ArrayList<Monitor>>()
     private val _monitorCalculLiveData = MutableLiveData<ArrayList<ServerCalcul>>()
@@ -109,7 +110,7 @@ object AllServersCompanionObject {
     }
 
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
-        val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
+
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val customResponseBegin = "[$customResponseAfter"
@@ -137,9 +138,8 @@ object AllServersCompanionObject {
                 )
                 //For recycler graph card
                 calculitems.add(myobject)
-                calculitems.sortByDescending { it.time }
+//                calculitems.sortByDescending { it.time }
                 _calculitemsLiveData.postValue(calculitems)
-//                calculitems.clear()
             }
             monitorCalcul.add(ServerCalcul(monitor_id = idM, monitorStatus = calculitems))
             _monitorCalculLiveData.postValue(monitorCalcul)

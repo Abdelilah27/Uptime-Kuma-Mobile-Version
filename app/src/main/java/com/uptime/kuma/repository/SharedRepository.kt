@@ -9,7 +9,7 @@ class SharedRepository(private val connexionInterface: ConnexionInterface) {
         val response = connexionInterface.sendMessage(param)
     }
 
-    fun getData(): Flowable<WebSocket.Event> {
+   fun getData(): Flowable<WebSocket.Event> {
         return connexionInterface.observeConnection()
     }
 }
