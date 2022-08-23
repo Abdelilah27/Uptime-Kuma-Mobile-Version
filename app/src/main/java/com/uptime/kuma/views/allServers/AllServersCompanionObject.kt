@@ -110,7 +110,7 @@ object AllServersCompanionObject {
     }
 
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
-
+        val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val customResponseBegin = "[$customResponseAfter"
@@ -138,6 +138,7 @@ object AllServersCompanionObject {
                 )
                 //For recycler graph card
                 calculitems.add(myobject)
+                calculitems.sortByDescending { it.time }
 //                calculitems.sortByDescending { it.time }
                 _calculitemsLiveData.postValue(calculitems)
             }

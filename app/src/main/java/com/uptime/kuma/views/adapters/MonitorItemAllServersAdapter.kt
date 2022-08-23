@@ -61,7 +61,7 @@ class MonitorItemAllServersAdapter(
         myList[position].let {
             holder.id.text = it.monitor_id.toString()
             val monitor = AllServersCompanionObject.getMonitorById(it.monitor_id)
-            val statusList = getStatusById((holder.id.text as String).toInt())
+            val statusList = AllServersCompanionObject.monitorCalcul[position].monitorStatus.take(16)
             holder.title.text = monitor.name
             holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
             holder.percent.text = "99.99%"
@@ -123,19 +123,19 @@ class MonitorItemAllServersAdapter(
         }
     }
 
-    private fun getStatusById(id: Int): List<ServerCalcul_Items> {
-        val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
-        myList.forEach { it ->
-            if (it.monitor_id == id) {
-                it.monitorStatus.forEach {
-                    if (it.monitor_id == id) {
-                        statusV2.add(it)
-                    }
-                }
-            }
-        }
-        return statusV2.take(16)
-    }
+//    private fun getStatusById(id: Int): List<ServerCalcul_Items> {
+//        val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
+//        myList.forEach { it ->
+//            if (it.monitor_id == id) {
+//                it.monitorStatus.forEach {
+//                    if (it.monitor_id == id) {
+//                        statusV2.add(it)
+//                    }
+//                }
+//            }
+//        }
+//        return statusV2.take(16)
+//    }
 
 
     private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<ServerCalcul_Items>) {
