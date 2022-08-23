@@ -130,7 +130,6 @@ class MonitorItemAllServersAdapter(
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
         AllServersCompanionObject.calculitemsLiveData.observe(lifecycleOwner, Observer {
-            Log.d("LOLOLO", it.toString())
             adapter.setData(it)
         })
 

@@ -42,11 +42,16 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
 
         }
         searchViewListener()
+        AllServersCompanionObject.monitorCalcul.forEach {
+            Log.d("DON","id: ====> "+  it.monitor_id.toString())
+          it.monitorStatus.forEach {
+              Log.d("bonbon", "---->"+it.status.toString())
+          }
+        }
 
         AllServersCompanionObject.monitorCalculLiveData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
-                Log.d("A", it.toString())
                 itemAdapter.setData(it)
             })
 
@@ -76,6 +81,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     override fun onItemClick(position: Int) {
         val serverId = allServersViewModel.tempMonitors[position].id.toString()
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(serverId)
+
         MainActivity.navController.navigate(action)
     }
 

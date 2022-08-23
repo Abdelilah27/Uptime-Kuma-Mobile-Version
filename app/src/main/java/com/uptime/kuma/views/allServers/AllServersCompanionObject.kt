@@ -20,7 +20,7 @@ object AllServersCompanionObject {
         get() = _monitorCalculLiveData
     var idM = 0
     val monitorCalcul: ArrayList<ServerCalcul> = ArrayList()
-    val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
+
     private val _calculitemsLiveData = MutableLiveData<ArrayList<ServerCalcul_Items>>()
     val calculitemsLiveData: LiveData<ArrayList<ServerCalcul_Items>>
         get() = _calculitemsLiveData
@@ -109,6 +109,7 @@ object AllServersCompanionObject {
     }
 
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
+        val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val customResponseBegin = "[$customResponseAfter"
@@ -138,7 +139,7 @@ object AllServersCompanionObject {
                 calculitems.add(myobject)
                 calculitems.sortByDescending { it.time }
                 _calculitemsLiveData.postValue(calculitems)
-                calculitems.clear()
+//                calculitems.clear()
             }
             monitorCalcul.add(ServerCalcul(monitor_id = idM, monitorStatus = calculitems))
             _monitorCalculLiveData.postValue(monitorCalcul)
