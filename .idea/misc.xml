@@ -23,19 +23,9 @@
         <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_splash.xml" value="0.18675213675213675" />
         <entry key="..\:/Mobile/AndroidProjects/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_status.xml" value="0.18675213675213675" />
         <entry key="..\:/Uptime-Kuma-Mobile-Version/app/src/main/res/layout/fragment_about.xml" value="0.25" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_checklist_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_timelapse_24.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_lock.xml" value="0.157" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/dashbord_recylcer_item.xml" value="0.264" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/fragment_all_servers.xml" value="0.25" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.25" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/fragment_login.xml" value="0.25" />
-        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/fragment_server.xml" value="0.25" />
+        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1745" />
+        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/drawable/ic_baseline_timelapse_24.xml" value="0.1745" />
+        <entry key="..\:/Uptime-Kuma-Mobile-Version3/app/src/main/res/layout/dashbord_recylcer_item.xml" value="0.25" />
         <entry key="..\:/Uptime-Kuma-Mobile-Version5/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Uptime-Kuma-Mobile-Version6/app/src/main/res/layout/item_status_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/background_edit_text_add_status_fragment.xml" value="0.256" />
