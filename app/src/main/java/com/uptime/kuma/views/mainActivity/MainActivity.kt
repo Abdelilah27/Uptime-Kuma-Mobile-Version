@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.tinder.scarlet.Scarlet
@@ -18,6 +17,9 @@ import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
 import com.uptime.kuma.utils.SaveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -47,17 +49,12 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
-
         //instance mainViewModel
         mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         //instance Helper class languageSettings
         languageSettings = LanguageSettings(this)
         mainActivityViewModel.setAppLocale(this, languageSettings.language.toString())
-
-//        setFullScreen(window)
-//        lightStatusBar(window)
-        //        ws://status.mobiblanc.tech/socket.io/?EIO=4&trfansport=websocket
+        // ws://status.mobiblanc.tech/socket.io/?EIO=4&trfansport=websocket
     }
 
     fun setUpConnexion(url: String) {
@@ -72,8 +69,10 @@ class MainActivity : AppCompatActivity() {
             this,
             SharedViewModelFactory(sharedRepository)
         )[SharedViewModel::class.java]
+        CoroutineScope(Dispatchers.IO).launch {
+            sharedViewModel.handleConnexionState()
+        }
 
-        sharedViewModel.handleConnexionState(this, lifecycleScope = lifecycleScope)
     }
 
     override fun onSupportNavigateUp(): Boolean {

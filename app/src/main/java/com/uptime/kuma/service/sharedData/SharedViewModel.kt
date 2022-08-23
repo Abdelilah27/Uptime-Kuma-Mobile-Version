@@ -2,7 +2,10 @@ package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.R
 import com.uptime.kuma.api.NetworkStatus
@@ -17,7 +20,6 @@ import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -64,10 +66,10 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
 
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
-    fun handleConnexionState(lifecycleOwner: LifecycleOwner, lifecycleScope: CoroutineScope) {
-        NetworkStatus.networkStatus = "0" //set connexion to open
-        data.subscribe({ response ->
-            CoroutineScope(Dispatchers.Main).launch {
+    suspend fun handleConnexionState() {
+            NetworkStatus.networkStatus = "0" //set connexion to open
+            data.subscribe({ response ->
+                Log.d("AHMED 1", Thread.currentThread().name.toString())
                 //to show error dialog after a delay
 //                Handler(Looper.getMainLooper()).postDelayed({
 //                    if (NetworkStatus.networkStatus == "0") {
@@ -78,13 +80,14 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                         .contains(Constants.successConnexion) && NetworkStatus.networkStatus == "0"
                 ) {
                     sendQuery(Constants.dataQuery)
+                    Log.d("JAMAL", Thread.currentThread().name.toString())
+
                     NetworkStatus.networkStatus = "1" //Success response
                 } else if (response.toString().contains(Constants.emission)) {
                     sendQuery(Constants.dataQueryResend)
                     NetworkStatus.networkStatus = "5" //Resend response
                 }
-
-                withContext(Dispatchers.Main) {
+                CoroutineScope(Dispatchers.Main).launch {
                     getMonitorsFromResponse(
                         response,
                         Constants.monitorListSuffix,
@@ -108,19 +111,23 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                         Constants.statusListSuffix
                     )
                 }
-            }
-            Log.d("RES", response.toString())
-        }, { error ->
-            NetworkStatus.networkStatus = "3"//set error
-            Log.d("error: ", error.toString())
-        })
+
+                Log.d("RES", response.toString())
+            }, { error ->
+                NetworkStatus.networkStatus = "3"//set error
+                Log.d("error: ", error.toString())
+            })
+
+
     }
 
 
     //Dashboard Fragment
-    fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
-        //
+    suspend fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
+        var monitorStatusItem: MonitorStatusItem
         if (response.toString().contains(suffix)) {
+            Log.d("KAMAL", Thread.currentThread().name.toString())
+
             val customResponseAfter = response.toString().substringAfter(suffix)
             //add [ at the beginning of the response
             val customResponseBegin = "[$customResponseAfter"
@@ -137,18 +144,16 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                 val status = myObject.get("status").toString()
                 val time = myObject.get("time").toString()
                 // init MonitorStatusItem
-                val monitorStatusItem = MonitorStatusItem(
+                monitorStatusItem = MonitorStatusItem(
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time,
                     name = getMonitorName(monitorID.toInt())
-
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
             // Traverse through the first list
-
             newList =
                 monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
             _newLiveData.postValue(newList)
@@ -156,6 +161,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
 
 //            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
+
         }
     }
 
@@ -168,7 +174,8 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
         return ""
     }
 
-    fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+    suspend fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+        var monitorUpdate: MonitorStatusItem
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
@@ -178,7 +185,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
             val time = jsonObject.get("time").toString()
             val important = jsonObject.getBoolean("important")
             // init MonitorStatusItem
-            val monitorUpdate = MonitorStatusItem(
+            monitorUpdate = MonitorStatusItem(
                 monitorID = monitorID.toInt(),
                 msg = msg,
                 status = status.toInt(),
@@ -204,6 +211,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }
                 _monitorStatusLiveData.postValue(monitorStatusList)
+
             }
 
         }
@@ -211,6 +219,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
 
     //AllServers Fragment
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
+        var myobject: ServerCalcul_Items
         val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)
@@ -231,7 +240,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
 //                // init object
-                val myobject = ServerCalcul_Items(
+                myobject = ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
@@ -243,12 +252,11 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
             }
             monitorCalcul.add(ServerCalcul(monitor_id = idM, monitorStatus = calculitems))
             _monitorCalculLiveData.postValue(monitorCalcul)
-
         }
-        //Log.d("monitorCalcul", monitorCalcul.toString())
     }
 
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
+        var monitor: Monitor
         if (response.toString().contains(suffix)) {
             // deleting suffix part
             val customResponseAfter = response.toString().substringAfter(
@@ -297,7 +305,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                         accepted_statuscodes.add(statusCode.toString())
                     }
                     //init monitor
-                    val monitor = Monitor(
+                    monitor = Monitor(
                         id = id as Int,
                         name = name,
                         active =
@@ -341,6 +349,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
 
     //Status Fragment
     fun getStatusFromResponse(response: WebSocket.Event?, suffix: String) {
+        var status: Status
         if (response.toString().contains(suffix)) {
             val responseAfter = response.toString().substringAfter(
                 Constants.statusListSuffix
@@ -369,7 +378,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
                     val theme = json.get("theme").toString()
                     val title = json.get("title").toString()
 
-                    val status = Status(
+                    status = Status(
                         customCSS = customCSS,
                         description = description,
                         footerText = footerText,
