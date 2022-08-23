@@ -67,67 +67,62 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
-            NetworkStatus.networkStatus = "0" //set connexion to open
-            data.subscribe({ response ->
-                Log.d("AHMED 1", Thread.currentThread().name.toString())
-                //to show error dialog after a delay
+        NetworkStatus.networkStatus = "0" //set connexion to open
+        data.subscribe({ response ->
+            //to show error dialog after a delay
 //                Handler(Looper.getMainLooper()).postDelayed({
 //                    if (NetworkStatus.networkStatus == "0") {
 //                        NetworkStatus.networkStatus = "6"
 //                    }
 //                }, 30000)
-                if (response.toString()
-                        .contains(Constants.successConnexion) && NetworkStatus.networkStatus == "0"
-                ) {
-                    sendQuery(Constants.dataQuery)
-                    Log.d("JAMAL", Thread.currentThread().name.toString())
+            if (response.toString()
+                    .contains(Constants.successConnexion) && NetworkStatus.networkStatus == "0"
+            ) {
+                sendQuery(Constants.dataQuery)
+                NetworkStatus.networkStatus = "1" //Success response
+            } else if (response.toString().contains(Constants.emission)) {
+                sendQuery(Constants.dataQueryResend)
+                NetworkStatus.networkStatus = "5" //Resend response
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                getMonitorsFromResponse(
+                    response,
+                    Constants.monitorListSuffix,
+                )
 
-                    NetworkStatus.networkStatus = "1" //Success response
-                } else if (response.toString().contains(Constants.emission)) {
-                    sendQuery(Constants.dataQueryResend)
-                    NetworkStatus.networkStatus = "5" //Resend response
-                }
-                CoroutineScope(Dispatchers.Main).launch {
-                    getMonitorsFromResponse(
-                        response,
-                        Constants.monitorListSuffix,
-                    )
+                getDashbordMonitorItem(
+                    response,
+                    Constants.dashbordMonitorItemsSuffix
+                )
 
-                    getDashbordMonitorItem(
-                        response,
-                        Constants.dashbordMonitorItemsSuffix
-                    )
+                getDashbordUpdate(
+                    response,
+                    Constants.dashbordMonitorUpdate
+                )
+                getServerCalcul(
+                    response,
+                    Constants.heartbeatlist
+                )
+                getStatusFromResponse(
+                    response,
+                    Constants.statusListSuffix
+                )
+            }
 
-                    getDashbordUpdate(
-                        response,
-                        Constants.dashbordMonitorUpdate
-                    )
-                    getServerCalcul(
-                        response,
-                        Constants.heartbeatlist
-                    )
-                    getStatusFromResponse(
-                        response,
-                        Constants.statusListSuffix
-                    )
-                }
-
-                Log.d("RES", response.toString())
-            }, { error ->
-                NetworkStatus.networkStatus = "3"//set error
-                Log.d("error: ", error.toString())
-            })
+//                Log.d("RES", response.toString())
+        }, { error ->
+            NetworkStatus.networkStatus = "3"//set error
+            Log.d("error: ", error.toString())
+        })
 
 
     }
 
 
     //Dashboard Fragment
-    suspend fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
+    fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
         var monitorStatusItem: MonitorStatusItem
         if (response.toString().contains(suffix)) {
-            Log.d("KAMAL", Thread.currentThread().name.toString())
-
             val customResponseAfter = response.toString().substringAfter(suffix)
             //add [ at the beginning of the response
             val customResponseBegin = "[$customResponseAfter"
@@ -174,7 +169,7 @@ class SharedViewModel(private val sharedRepository: SharedRepository?) :
         return ""
     }
 
-    suspend fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
+    fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
         var monitorUpdate: MonitorStatusItem
         if (response.toString().contains(suffix)) {
             val customResponseAfter = response.toString().substringAfter(suffix)

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentAllServersBinding
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -38,7 +37,8 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            itemAdapter.setData(MainActivity.sharedViewModel.monitorCalcul)
+//            itemAdapter.setData(MainActivity.sharedViewModel.monitorCalcul)
+            itemAdapter.setData(allServersViewModel.tempMonitors)
         }
         searchViewListener()
 
@@ -70,7 +70,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
 
 
     override fun onItemClick(position: Int) {
-        val serverId = allServersViewModel.tempMonitors[position].id.toString()
+        val serverId = allServersViewModel.tempMonitors[position].monitor_id.toString()
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(serverId)
         MainActivity.navController.navigate(action)
     }

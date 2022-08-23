@@ -124,19 +124,6 @@ class MonitorItemAllServersAdapter(
         }
     }
 
-//    private fun getPercent(statusList: List<ServerCalcul_Items>): String {
-//        var percent: String
-//        var numberOfTrue = 1
-//        statusList.forEach {
-//            if (it.status == 1) {
-//                numberOfTrue + 1
-//                Log.d("numberOfTrue", numberOfTrue.toString())
-//            }
-//        }
-//        percent = (numberOfTrue / (statusList.size + 1)).toString()
-//        return "$percent %"
-//    }
-
     private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<ServerCalcul_Items>) {
         val adapter = MonitorItemAllServersCardAdapter(context)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
