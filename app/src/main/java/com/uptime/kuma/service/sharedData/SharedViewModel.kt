@@ -1,6 +1,8 @@
 package com.uptime.kuma.service.sharedData
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,8 +18,7 @@ import com.uptime.kuma.models.status.Status
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
 import com.uptime.kuma.utils.NETWORKSTATUS
-import com.uptime.kuma.utils.NotifyChanges
-import com.uptime.kuma.views.mainActivity.MainActivity
+import com.uptime.kuma.utils._NETWORKLIVEDATA
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,13 +29,6 @@ import org.json.JSONObject
 open class SharedViewModel(private val sharedRepository: SharedRepository) :
     ViewModel() {
 //    constructor() : this(null)
-
-
-    //Instance NotifyChangeInterface
-    var OurInterface: NotifyChanges = MainActivity()
-    private val _networkLiveData = MutableLiveData<String>()
-    val networkLiveData: LiveData<String>
-        get() = _networkLiveData
 
     //Dashboard Fragment
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
@@ -78,26 +72,28 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
             //to show error dialog after a delay
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                if (NETWORKSTATUS == "0") {
-//                    NETWORKSTATUS = "6"
-//                }
-//            }, 10000)
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (NETWORKSTATUS == "0") {
+                    NETWORKSTATUS = "6"
+                    _NETWORKLIVEDATA.postValue("6")
+                }
+            }, 10000)
             if (response.toString()
                     .contains(Constants.successConnexion) && NETWORKSTATUS == "0"
             ) {
                 sendQuery(Constants.dataQuery)
                 NETWORKSTATUS = "1" //Success response
-//                OurInterface.getData(NETWORKSTATUS)
-                _networkLiveData.postValue("1")
+                _NETWORKLIVEDATA.postValue("1")
 
             } else if (response.toString().contains(Constants.emission)) {
                 sendQuery(Constants.dataQueryResend)
                 NETWORKSTATUS = "5" //Resend response
+                _NETWORKLIVEDATA.postValue("5")
             } else if (response.toString()
                     .contains(Constants.unSuccessConnexion) && NETWORKSTATUS == "0"
             ) {
-                NETWORKSTATUS = "3" //Error response
+                NETWORKSTATUS = "2" //Error response
+                _NETWORKLIVEDATA.postValue("2")
             }
             CoroutineScope(Dispatchers.Main).launch {
                 getMonitorsFromResponse(
@@ -126,10 +122,9 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
+            _NETWORKLIVEDATA.postValue("3")
             Log.d("error: ", error.toString())
         })
-
-
     }
 
 

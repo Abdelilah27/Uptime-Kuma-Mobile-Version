@@ -2,7 +2,6 @@ package com.uptime.kuma.views.mainActivity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -16,13 +15,12 @@ import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
-import com.uptime.kuma.utils.NotifyChanges
 import com.uptime.kuma.utils.SaveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), NotifyChanges {
+class MainActivity : AppCompatActivity() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var navController: NavController
@@ -81,7 +79,4 @@ class MainActivity : AppCompatActivity(), NotifyChanges {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun getData(data: String) {
-        Log.d("HEHO", "getData: $data")
-    }
 }

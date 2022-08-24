@@ -1,6 +1,8 @@
 package com.uptime.kuma.views.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentLoginBinding
-import com.uptime.kuma.utils.NETWORKSTATUS
+import com.uptime.kuma.utils.NETWORKLIVEDATA
+import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
     lateinit var binding: FragmentLoginBinding
     lateinit var sessionManagement: SessionManagement
 
@@ -50,7 +52,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 if (verificationSocketLink(binding.socketUrl.text.toString())) {
                     (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
                     binding.progressBar.visibility = View.VISIBLE
-                    MainActivity.sharedViewModel.networkLiveData.observe(
+                    NETWORKLIVEDATA.observe(
                         viewLifecycleOwner,
                         Observer {
                             when (it) {
@@ -99,9 +101,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         button.setOnClickListener {
             builder.dismiss()
-            NETWORKSTATUS = "0" //set connexion to open
-            ConnexionLifecycle.closeConnexion()
             binding.socketUrl.text.clear()
+            restartApplication()
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
@@ -115,6 +116,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val pattern: Pattern = Pattern.compile(regex)
         val matcher: Matcher = pattern.matcher(socketLink)
         return matcher.matches()
+    }
+
+    override fun restartApplication() {
+        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
+            requireActivity().baseContext.packageName
+        )
+        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        Process.killProcess(Process.myPid())
+        System.exit(0)
     }
 
 }
