@@ -62,8 +62,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val searchText = binding.searchEditTextAllServersFragment.text.toString()
                     .toLowerCase(Locale.getDefault())
-                itemAdapter.filter.filter(searchText)
-
+                    itemAdapter.filter.filter(searchText)
             }
 
             override fun afterTextChanged(p0: Editable?) {

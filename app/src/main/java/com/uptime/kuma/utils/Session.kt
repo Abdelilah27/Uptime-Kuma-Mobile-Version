@@ -18,3 +18,4 @@ internal var NETWORKSTATUS = "0"
 internal val _NETWORKLIVEDATA = MutableLiveData<String>()
 internal val NETWORKLIVEDATA: LiveData<String>
     get() = _NETWORKLIVEDATA
+
