@@ -93,8 +93,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
     // okhttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 
     // gson
     implementation 'com.google.code.gson:gson:2.9.1'
@@ -103,7 +103,7 @@ dependencies {
     implementation "dev.chrisbanes.insetter:insetter:0.6.0"
 
     // shared preference
-    implementation "androidx.preference:preference:1.1.1"
+    implementation "androidx.preference:preference:1.2.0"
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 

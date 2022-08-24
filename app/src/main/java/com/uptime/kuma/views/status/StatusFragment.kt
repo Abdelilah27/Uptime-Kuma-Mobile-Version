@@ -33,7 +33,6 @@ class StatusFragment : Fragment(R.layout.fragment_status), StatusAdapter.OnClick
     override fun onDestroyView() {
         super.onDestroyView()
         MainActivity.sharedViewModel.statusLiveData.removeObservers(viewLifecycleOwner)
-//        ConnexionLifecycle.closeConnexion()
     }
 
     //observe status list

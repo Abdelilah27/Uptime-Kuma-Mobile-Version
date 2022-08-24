@@ -41,13 +41,11 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             itemAdapter.setData(allServersViewModel.tempMonitors)
         }
         searchViewListener()
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
-//        ConnexionLifecycle.closeConnexion()
     }
 
     //search for a monitor in monitors

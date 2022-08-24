@@ -17,8 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
-import com.uptime.kuma.api.NetworkStatus
 import com.uptime.kuma.databinding.FragmentMainBinding
+import com.uptime.kuma.utils.NETWORKSTATUS
 import com.uptime.kuma.utils.SessionManagement
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -47,10 +47,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         view.findViewById<BottomNavigationView>(R.id.BottomNavigationView)
             .setupWithNavController(navController)
-
-        when (NetworkStatus.networkStatus) {
+        when (NETWORKSTATUS) {
             "2", "3", "6" -> {
-                Log.d("COCO", "onViewCreated: ")
                 showErrorDialog()
             }
         }
@@ -72,7 +70,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         sessionManagement = SessionManagement(requireContext())
         button.setOnClickListener {
             builder.dismiss()
-            NetworkStatus.networkStatus = "0" //set connexion to open
+            NETWORKSTATUS = "0" //set connexion to open
             ConnexionLifecycle.closeConnexion()
             sessionManagement.logOut()
             findNavController().navigate(R.id.loginFragment)

@@ -27,7 +27,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                     MainActivity.navController.navigate(R.id.loginFragment)
                 else
                     findNavController().navigate(R.id.bienvenueFragment)
-            }, 1500)
+            }, 700)
 
         }
     }

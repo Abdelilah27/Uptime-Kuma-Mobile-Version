@@ -2,6 +2,7 @@ package com.uptime.kuma.views.mainActivity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -11,17 +12,17 @@ import com.tinder.scarlet.Scarlet
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ApiUtilities
 import com.uptime.kuma.api.ConnexionInterface
-import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
+import com.uptime.kuma.utils.NotifyChanges
 import com.uptime.kuma.utils.SaveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NotifyChanges {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var navController: NavController
@@ -30,10 +31,11 @@ class MainActivity : AppCompatActivity() {
         lateinit var webSocketService: ConnexionInterface
         lateinit var mainActivityViewModel: MainActivityViewModel
         lateinit var saveData: SaveData
-        var sharedViewModel: SharedViewModel = SharedViewModel()
+        lateinit var sharedViewModel: SharedViewModel
     }
 
     private lateinit var sharedRepository: SharedRepository
+
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,11 +56,11 @@ class MainActivity : AppCompatActivity() {
         //instance Helper class languageSettings
         languageSettings = LanguageSettings(this)
         mainActivityViewModel.setAppLocale(this, languageSettings.language.toString())
-        // ws://status.mobiblanc.tech/socket.io/?EIO=4&trfansport=websocket
+        // ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
+
     }
 
     fun setUpConnexion(url: String) {
-        ConnexionLifecycle.openConnexion()
         //Setup and create connexion
         scarlet =
             ApiUtilities.provideScarlet(url)
@@ -77,5 +79,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun getData(data: String) {
+        Log.d("HEHO", "getData: $data")
     }
 }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tinder.scarlet.WebSocket
 import com.uptime.kuma.R
-import com.uptime.kuma.api.NetworkStatus
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
@@ -16,6 +15,9 @@ import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.models.status.Status
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.Constants
+import com.uptime.kuma.utils.NETWORKSTATUS
+import com.uptime.kuma.utils.NotifyChanges
+import com.uptime.kuma.views.mainActivity.MainActivity
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +25,16 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
-open class SharedViewModel(private val sharedRepository: SharedRepository?) :
+open class SharedViewModel(private val sharedRepository: SharedRepository) :
     ViewModel() {
-    constructor() : this(null)
+//    constructor() : this(null)
+
+
+    //Instance NotifyChangeInterface
+    var OurInterface: NotifyChanges = MainActivity()
+    private val _networkLiveData = MutableLiveData<String>()
+    val networkLiveData: LiveData<String>
+        get() = _networkLiveData
 
     //Dashboard Fragment
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
@@ -55,7 +64,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository?) :
 
     //Get Data
     val data: Flowable<WebSocket.Event>
-        get() = sharedRepository!!.getData()
+        get() = sharedRepository.getData()
 
     private fun sendQuery(param: String) {
         viewModelScope.launch {
@@ -67,22 +76,28 @@ open class SharedViewModel(private val sharedRepository: SharedRepository?) :
     //Send query after opening the connexion
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
-        NetworkStatus.networkStatus = "0" //set connexion to open
         data.subscribe({ response ->
             //to show error dialog after a delay
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    if (NetworkStatus.networkStatus == "0") {
-//                        NetworkStatus.networkStatus = "6"
-//                    }
-//                }, 30000)
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                if (NETWORKSTATUS == "0") {
+//                    NETWORKSTATUS = "6"
+//                }
+//            }, 10000)
             if (response.toString()
-                    .contains(Constants.successConnexion) && NetworkStatus.networkStatus == "0"
+                    .contains(Constants.successConnexion) && NETWORKSTATUS == "0"
             ) {
                 sendQuery(Constants.dataQuery)
-                NetworkStatus.networkStatus = "1" //Success response
+                NETWORKSTATUS = "1" //Success response
+//                OurInterface.getData(NETWORKSTATUS)
+                _networkLiveData.postValue("1")
+
             } else if (response.toString().contains(Constants.emission)) {
                 sendQuery(Constants.dataQueryResend)
-                NetworkStatus.networkStatus = "5" //Resend response
+                NETWORKSTATUS = "5" //Resend response
+            } else if (response.toString()
+                    .contains(Constants.unSuccessConnexion) && NETWORKSTATUS == "0"
+            ) {
+                NETWORKSTATUS = "3" //Error response
             }
             CoroutineScope(Dispatchers.Main).launch {
                 getMonitorsFromResponse(
@@ -108,10 +123,9 @@ open class SharedViewModel(private val sharedRepository: SharedRepository?) :
                     Constants.statusListSuffix
                 )
             }
-
-//                Log.d("RES", response.toString())
+            Log.d("RES", response.toString())
         }, { error ->
-            NetworkStatus.networkStatus = "3"//set error
+            NETWORKSTATUS = "3"//set error
             Log.d("error: ", error.toString())
         })
 
