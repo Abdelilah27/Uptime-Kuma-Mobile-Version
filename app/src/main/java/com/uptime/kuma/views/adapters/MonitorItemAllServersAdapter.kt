@@ -1,140 +1,132 @@
 package com.uptime.kuma.views.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
-import com.uptime.kuma.databinding.ItemAllServersFragmentBinding
+import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.mainActivity.MainActivity
-import java.util.*
+
 
 class MonitorItemAllServersAdapter(
     val context: Context, val listener: OnClickLister
 ) :
-    ListAdapter<ServerCalcul, MonitorItemAllServersAdapter.ViewHolder>(DifCallback()), Filterable {
+    RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>(), Filterable {
+    private var myList: List<ServerCalcul> = listOf()
     private var list = mutableListOf<ServerCalcul>()
-    private var count = 0 // to check if the filtered list is empty
 
-    fun setData(list: MutableList<ServerCalcul>?) {
-        this.list = list!!
-        submitList(list)
-//        notifyDataSetChanged()
+    fun setData(data: List<ServerCalcul>) {
+        myList = data
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MonitorItemAllServersAdapter.ViewHolder {
+    ): MonitorItemAllServersAdapter.ItemViewHolder {
         val binding =
-            ItemAllServersFragmentBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        return ViewHolder(binding)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_all_servers_fragment, parent, false)
+        return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: MonitorItemAllServersAdapter.ViewHolder,
-        position: Int
-    ) {
-        val currentItem = getItem(position)
-        holder.bind(currentItem)
-    }
 
-    inner class ViewHolder(private val binding: ItemAllServersFragmentBinding) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        init {
-            itemView.setOnClickListener(this)
-        }
-
+    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        var id: TextView = view.findViewById(R.id.dashbord_id)
+        var title: TextView = view.findViewById(R.id.title_text)
+        var slug: TextView = view.findViewById(R.id.all_servers_slug_tv)
+        var percent: TextView = view.findViewById(R.id.percent_text)
+        var card: CardView = view.findViewById(R.id.card_view_status)
+        var profileCardServers: CardView = view.findViewById(R.id.profile_card_servers)
+        var secondRecycler: RecyclerView = view.findViewById(R.id.card_graph_recycler)
         override fun onClick(p0: View?) {
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
         }
-
-
-        fun bind(item: ServerCalcul) {
-            binding.apply {
-                idText.text = item.monitor_id.toString()
-                val monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
-                val statusList =
-                    MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus
-                titleText.text = monitor.name
-                allServersSlugTv.text = monitor.name.toUpperCase().subSequence(0, 2)
-                percentText.text = "100 %"
-                when (statusList[0].status) {
-                    0 -> {
-                        cardViewStatus.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .background_no_active_item_all_server_fragment
-                            )
-                        )
-                        profileCardServers.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .background_no_active_item_all_server_fragment
-                            )
-                        )
-                    }
-                    1 -> {
-                        cardViewStatus.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .background_active_item_all_server_fragment
-                            )
-                        )
-                        profileCardServers.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .background_active_item_all_server_fragment
-                            )
-                        )
-
-                    }
-                    else -> {
-                        cardViewStatus.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .attente
-                            )
-                        )
-                        profileCardServers.setCardBackgroundColor(
-                            ContextCompat.getColor(
-                                context,
-                                R.color
-                                    .attente
-                            )
-                        )
-                    }
-                }
-                setCallItemRecycler(
-                    cardGraphRecycler,
-                    statusList.take(16)
-                )
-            }
-        }
     }
 
+
+    override fun getItemCount() = myList.size
+
+
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        myList[position].let {
+            holder.id.text = it.monitor_id.toString()
+            val monitor = MainActivity.sharedViewModel.getMonitorById(it.monitor_id)
+            val statusList =
+                MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus.take(16)
+            holder.title.text = monitor.name
+            holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
+            holder.percent.text = "100 %"
+            when (statusList[0].status) {
+                0 -> {
+                    holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .background_no_active_item_all_server_fragment
+                        )
+                    )
+                    holder.profileCardServers.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .background_no_active_item_all_server_fragment
+                        )
+                    )
+                }
+                1 -> {
+                    holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .background_active_item_all_server_fragment
+                        )
+                    )
+                    holder.profileCardServers.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .background_active_item_all_server_fragment
+                        )
+                    )
+
+                }
+                else -> {
+                    holder.card.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .attente
+                        )
+                    )
+                    holder.profileCardServers.setCardBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color
+                                .attente
+                        )
+                    )
+                }
+            }
+            setCallItemRecycler(
+                holder.secondRecycler,
+                statusList
+            )
+        }
+    }
 
 //    private fun getPercent(statusList: ArrayList<ServerCalcul_Items>): CharSequence {
 //        var numberOfTrueOrFalse = 0.0
@@ -161,50 +153,42 @@ class MonitorItemAllServersAdapter(
         adapter.setData(list)
     }
 
-    class DifCallback : DiffUtil.ItemCallback<ServerCalcul>() {
-        override fun areItemsTheSame(oldItem: ServerCalcul, newItem: ServerCalcul) =
-            oldItem.monitor_id == newItem.monitor_id
-
-        override fun areContentsTheSame(oldItem: ServerCalcul, newItem: ServerCalcul) =
-            oldItem.monitor_id == newItem.monitor_id
-    }
-
     interface OnClickLister {
         fun onItemClick(position: Int)
     }
 
-    override fun getFilter(): Filter {
-        return customFilter
-    }
-
-    private val customFilter = object : Filter() {
-
-        override fun performFiltering(constraint: CharSequence?): FilterResults {
-            val filteredList = mutableListOf<ServerCalcul>()
-            if (constraint!!.isEmpty()) {
-                filteredList.addAll(list)
-//                Log.d("filteredList", filteredList.toString())
-            } else {
-                for (item in list) {
-                    val monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
-                    if (monitor.name.toLowerCase(Locale.getDefault()).contains(constraint)) {
-                        filteredList.add(item)
+    override fun getFilter(): Filter? {
+        var monitor: Monitor
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val results = FilterResults()
+                if (constraint.isEmpty()) {
+                    //no filter implemented we return full list
+                    results.values = myList
+                    results.count = myList!!.size
+                } else {
+                    val list: ArrayList<ServerCalcul> = ArrayList()
+                    for (item in myList!!) {
+                        monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
+                        if (monitor.name.toUpperCase()
+                                .startsWith(constraint.toString().toUpperCase())
+                        ) list.add(item)
                     }
+                    results.values = list
+                    results.count = list.size
+                }
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence, results: FilterResults) {
+                if (results.count == 0 || constraint == "") {
+                    myList = myList
+                    notifyDataSetChanged()
+                } else {
+                    myList = (results.values as ArrayList<ServerCalcul>?)!!
+                    notifyDataSetChanged()
                 }
             }
-            val results = FilterResults()
-            results.values = filteredList
-            count = (results.values as MutableList<ServerCalcul>).count()
-            return results
         }
-
-        override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
-            if (count > 0) {
-                submitList(filterResults?.values as MutableList<ServerCalcul>)
-            } else {
-                Collections.addAll(list)
-            }
-        }
-
     }
 }
