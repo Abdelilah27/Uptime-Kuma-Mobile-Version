@@ -11,7 +11,6 @@ import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 import com.uptime.kuma.utils.CALCUL
-import com.uptime.kuma.utils.STATUS
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -69,8 +68,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         MainActivity.sharedViewModel.monitorStatusLiveData.observe(
             viewLifecycleOwner,
             Observer { data ->
-                STATUS = data
-                itemAdapter.setData(STATUS ?: listOf())
+                itemAdapter.setData(data ?: listOf())
                 if (data.size > 0) {
                     shimmerView.stopShimmerAnimation()
                     shimmerView.visibility = View.GONE

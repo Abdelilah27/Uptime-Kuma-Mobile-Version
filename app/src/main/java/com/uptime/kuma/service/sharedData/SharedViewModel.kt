@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
-class SharedViewModel(private val sharedRepository: SharedRepository?) :
+open class SharedViewModel(private val sharedRepository: SharedRepository?) :
     ViewModel() {
     constructor() : this(null)
 
