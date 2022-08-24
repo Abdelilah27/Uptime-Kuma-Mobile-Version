@@ -58,7 +58,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
 
     //Get Data
     val data: Flowable<WebSocket.Event>
-        get() = sharedRepository.getData()
+        get() = sharedRepository!!.getData()
 
     private fun sendQuery(param: String) {
         viewModelScope.launch {
@@ -119,7 +119,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-            Log.d("RES", response.toString())
+//            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")
@@ -350,6 +350,20 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
         }
         return monitors.get(0)
     }
+
+//    fun getStatuesServerById(id: Int): ArrayList<ServerCalcul_Items> {
+//        val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
+//        monitorCalcul.forEach { it ->
+//            if (it.monitor_id == id) {
+//                it.monitorStatus.forEach {
+//                    if (it.monitor_id == id) {
+//                        statusV2.add(it)
+//                    }
+//                }
+//            }
+//        }
+//        return statusV2
+//    }
 
     //Status Fragment
     fun getStatusFromResponse(response: WebSocket.Event?, suffix: String) {

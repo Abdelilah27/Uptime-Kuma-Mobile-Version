@@ -1,6 +1,8 @@
 package com.uptime.kuma.views.allServers
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -8,6 +10,9 @@ import java.util.*
 
 class AllServersViewModel : ViewModel() {
     val tempMonitors: ArrayList<ServerCalcul> = ArrayList() //for searching monitor
+    private val _liveData = MutableLiveData<ArrayList<ServerCalcul>>()
+    val liveData: LiveData<ArrayList<ServerCalcul>>
+        get() = _liveData
 
     init {
         tempMonitors.addAll(MainActivity.sharedViewModel.monitorCalcul)

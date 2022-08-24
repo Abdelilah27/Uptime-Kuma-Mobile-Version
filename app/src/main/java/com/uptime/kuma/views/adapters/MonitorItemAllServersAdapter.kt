@@ -4,134 +4,202 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
+import com.uptime.kuma.databinding.ItemAllServersFragmentBinding
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.mainActivity.MainActivity
 
 class MonitorItemAllServersAdapter(
-    val context: Context, val listener: OnClickLister, val lifecycleOwner: LifecycleOwner
+    val context: Context, val listener: OnClickLister
 ) :
-    RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>() {
-    private var myList: List<ServerCalcul> = listOf()
+    ListAdapter<ServerCalcul, MonitorItemAllServersAdapter.ViewHolder>(DifCallback()), Filterable {
+    private var list = mutableListOf<ServerCalcul>()
 
-    fun setData(data: List<ServerCalcul>) {
-        myList = data
-        notifyDataSetChanged()
+    fun setData(list: MutableList<ServerCalcul>?) {
+        this.list = list!!
+        submitList(list)
+//        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MonitorItemAllServersAdapter.ItemViewHolder {
+    ): MonitorItemAllServersAdapter.ViewHolder {
         val binding =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_all_servers_fragment, parent, false)
-        return ItemViewHolder(binding)
+            ItemAllServersFragmentBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        return ViewHolder(binding)
     }
 
+    override fun onBindViewHolder(
+        holder: MonitorItemAllServersAdapter.ViewHolder,
+        position: Int
+    ) {
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
+    }
 
-    inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-        var id: TextView = view.findViewById(R.id.dashbord_id)
-        var title: TextView = view.findViewById(R.id.title_text)
-        var slug: TextView = view.findViewById(R.id.all_servers_slug_tv)
-        var percent: TextView = view.findViewById(R.id.percent_text)
-        var card: CardView = view.findViewById(R.id.card_view_status)
-        var profileCardServers: CardView = view.findViewById(R.id.profile_card_servers)
-        var secondRecycler: RecyclerView = view.findViewById(R.id.card_graph_recycler)
+    inner class ViewHolder(private val binding: ItemAllServersFragmentBinding) :
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         override fun onClick(p0: View?) {
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
         }
-    }
 
 
-    override fun getItemCount() = myList.size
-
-
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        myList[position].let {
-            holder.id.text = it.monitor_id.toString()
-            val monitor = MainActivity.sharedViewModel.getMonitorById(it.monitor_id)
-            val statusList =
-                MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus.take(16)
-            holder.title.text = monitor.name
-            holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
-            holder.percent.text = "100%"
-            when (statusList[0].status) {
-                0 -> {
-                    holder.card.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_no_active_item_all_server_fragment
+        fun bind(item: ServerCalcul) {
+            binding.apply {
+                idText.text = item.monitor_id.toString()
+                val monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
+                val statusList =
+                    MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus
+                titleText.text = monitor.name
+                allServersSlugTv.text = monitor.name.toUpperCase().subSequence(0, 2)
+                percentText.text = "100 %"
+                when (statusList[0].status) {
+                    0 -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_no_active_item_all_server_fragment
+                            )
                         )
-                    )
-                    holder.profileCardServers.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_no_active_item_all_server_fragment
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_no_active_item_all_server_fragment
+                            )
                         )
-                    )
+                    }
+                    1 -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_active_item_all_server_fragment
+                            )
+                        )
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .background_active_item_all_server_fragment
+                            )
+                        )
+
+                    }
+                    else -> {
+                        cardViewStatus.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                        profileCardServers.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color
+                                    .attente
+                            )
+                        )
+                    }
                 }
-                1 -> {
-                    holder.card.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_active_item_all_server_fragment
-                        )
-                    )
-                    holder.profileCardServers.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .background_active_item_all_server_fragment
-                        )
-                    )
-
-                }
-                else -> {
-                    holder.card.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .attente
-                        )
-                    )
-                    holder.profileCardServers.setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color
-                                .attente
-                        )
-                    )
-                }
+                setCallItemRecycler(
+                    cardGraphRecycler,
+                    statusList
+                )
             }
-            setCallItemRecycler(
-                holder.secondRecycler,
-                statusList
-            )
         }
     }
 
-    private fun setCallItemRecycler(recyclerView: RecyclerView, list: List<ServerCalcul_Items>) {
+
+//    private fun getPercent(statusList: ArrayList<ServerCalcul_Items>): CharSequence {
+//        var numberOfTrueOrFalse = 0.0
+//        val status = statusList[0].status
+//        statusList.forEach {
+//            if (it.status == status) {
+//                numberOfTrueOrFalse += 1
+//            }
+//        }
+//        numberOfTrueOrFalse /= (statusList.size + 1)
+//        numberOfTrueOrFalse *= 100
+//        val rounded = numberOfTrueOrFalse.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
+//        return "$rounded. %"
+//    }
+
+    private fun setCallItemRecycler(
+        recyclerView: RecyclerView,
+        list: List<ServerCalcul_Items>
+    ) {
         val adapter = MonitorItemAllServersCardAdapter(context)
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
         adapter.setData(list)
+    }
+
+    class DifCallback : DiffUtil.ItemCallback<ServerCalcul>() {
+        override fun areItemsTheSame(oldItem: ServerCalcul, newItem: ServerCalcul) =
+            oldItem.monitor_id == newItem.monitor_id
+
+        override fun areContentsTheSame(oldItem: ServerCalcul, newItem: ServerCalcul) =
+            oldItem.monitor_id == newItem.monitor_id
+
     }
 
     interface OnClickLister {
         fun onItemClick(position: Int)
     }
+
+    override fun getFilter(): Filter {
+        return customFilter
+    }
+
+    private val customFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = mutableListOf<ServerCalcul>()
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList.addAll(list)
+            } else {
+                for (item in list) {
+                    val monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
+                    if (monitor.name.toLowerCase()
+                            .startsWith(constraint.toString().toLowerCase())
+                    ) {
+                        filteredList.add(item)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
+            submitList(filterResults?.values as MutableList<ServerCalcul>)
+        }
+
+    }
+
+
 }

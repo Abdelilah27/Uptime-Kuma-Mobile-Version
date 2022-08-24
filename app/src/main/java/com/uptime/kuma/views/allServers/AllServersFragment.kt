@@ -32,13 +32,18 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         allRecycler = view.findViewById(R.id.all_server_recycler)
         allServersViewModel =
             ViewModelProvider(requireActivity()).get(AllServersViewModel::class.java)
-        itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this, viewLifecycleOwner) }!!
+        itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this) }!!
         allRecycler.apply {
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
 //            itemAdapter.setData(MainActivity.sharedViewModel.monitorCalcul)
-            itemAdapter.setData(allServersViewModel.tempMonitors)
+//            itemAdapter.setData(allServersViewModel.tempMonitors)
+            MainActivity.sharedViewModel.monitorCalculLiveData.observe(
+                viewLifecycleOwner,
+                androidx.lifecycle.Observer {
+                    itemAdapter.setData(it)
+                })
         }
         searchViewListener()
     }
@@ -52,13 +57,13 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
     private fun searchViewListener() {
         binding.searchEditTextAllServersFragment.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val searchText = binding.searchEditTextAllServersFragment.text.toString()
                     .toLowerCase(Locale.getDefault())
-                allServersViewModel.searchMonitor(searchText)
+//                allServersViewModel.searchMonitor(searchText)
+                itemAdapter.filter.filter(searchText)
             }
 
             override fun afterTextChanged(p0: Editable?) {
