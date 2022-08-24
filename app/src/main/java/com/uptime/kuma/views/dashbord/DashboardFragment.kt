@@ -21,7 +21,7 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DashboardRecyclerAdapter.OnItemClickListener {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
-    private lateinit var dashbordViewModel: DashbordViewModel
+//    private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
@@ -32,7 +32,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDashboardBinding.bind(view)
         // instantiation de ViewModel
-        dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
+//        dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
         shimmerView = binding.dashboardShimmer
         shimmerViewCalcul = binding.dashboardShimmerCalcul
         shimmerView.startShimmerAnimation()

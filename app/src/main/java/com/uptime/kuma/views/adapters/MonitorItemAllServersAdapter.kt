@@ -16,12 +16,14 @@ import com.uptime.kuma.databinding.ItemAllServersFragmentBinding
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.mainActivity.MainActivity
+import java.util.*
 
 class MonitorItemAllServersAdapter(
     val context: Context, val listener: OnClickLister
 ) :
     ListAdapter<ServerCalcul, MonitorItemAllServersAdapter.ViewHolder>(DifCallback()), Filterable {
     private var list = mutableListOf<ServerCalcul>()
+    private var count = 0 // to check if the filtered list is empty
 
     fun setData(list: MutableList<ServerCalcul>?) {
         this.list = list!!
@@ -126,7 +128,7 @@ class MonitorItemAllServersAdapter(
                 }
                 setCallItemRecycler(
                     cardGraphRecycler,
-                    statusList
+                    statusList.take(16)
                 )
             }
         }
@@ -164,7 +166,6 @@ class MonitorItemAllServersAdapter(
 
         override fun areContentsTheSame(oldItem: ServerCalcul, newItem: ServerCalcul) =
             oldItem.monitor_id == newItem.monitor_id
-
     }
 
     interface OnClickLister {
@@ -176,30 +177,33 @@ class MonitorItemAllServersAdapter(
     }
 
     private val customFilter = object : Filter() {
+
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filteredList = mutableListOf<ServerCalcul>()
-            if (constraint == null || constraint.isEmpty()) {
+            if (constraint!!.isEmpty()) {
                 filteredList.addAll(list)
+//                Log.d("filteredList", filteredList.toString())
             } else {
                 for (item in list) {
                     val monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
-                    if (monitor.name.toLowerCase()
-                            .startsWith(constraint.toString().toLowerCase())
-                    ) {
+                    if (monitor.name.toLowerCase(Locale.getDefault()).contains(constraint)) {
                         filteredList.add(item)
                     }
                 }
             }
             val results = FilterResults()
             results.values = filteredList
+            count = (results.values as MutableList<ServerCalcul>).count()
             return results
         }
 
         override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
-            submitList(filterResults?.values as MutableList<ServerCalcul>)
+            if (count > 0) {
+                submitList(filterResults?.values as MutableList<ServerCalcul>)
+            } else {
+                Collections.addAll(list)
+            }
         }
 
     }
-
-
 }
