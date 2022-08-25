@@ -37,13 +37,16 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-        saveData = SaveData(this)
-        //set light or dark mode from sharedPreferences
-        if (saveData.lightMode == "true") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        CoroutineScope(Dispatchers.IO).launch {
+            saveData = SaveData(applicationContext)
+            //set light or dark mode from sharedPreferences
+            if (saveData.lightMode == "true") {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navHostFragment =
@@ -52,8 +55,14 @@ class MainActivity : AppCompatActivity() {
         //instance mainViewModel
         mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         //instance Helper class languageSettings
-        languageSettings = LanguageSettings(this)
-        mainActivityViewModel.setAppLocale(this, languageSettings.language.toString())
+        CoroutineScope(Dispatchers.IO).launch {
+            languageSettings = LanguageSettings(applicationContext)
+            mainActivityViewModel.setAppLocale(
+                applicationContext,
+                languageSettings.language.toString()
+            )
+        }
+
         // ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
 
     }
