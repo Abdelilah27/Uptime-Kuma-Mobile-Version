@@ -1,6 +1,7 @@
 package com.uptime.kuma.views.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +58,9 @@ class MonitorItemAllServersAdapter(
         override fun onClick(p0: View?) {
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+                myList[position].let { monitorStatusItem ->
+                    listener.onItemClick(monitorStatusItem.monitor_id)
+                }
             }
         }
     }

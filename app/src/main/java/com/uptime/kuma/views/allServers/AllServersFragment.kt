@@ -3,7 +3,6 @@ package com.uptime.kuma.views.allServers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,8 +75,7 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers), RecyclerClic
     }
 
     override fun onItemClick(position: Int) {
-        val serverId = MainActivity.sharedViewModel.monitorCalcul[position].monitor_id.toString()
-        val action = MainFragmentDirections.actionMainFragmentToServerFragment(serverId)
+        val action = MainFragmentDirections.actionMainFragmentToServerFragment(position.toString())
         MainActivity.navController.navigate(action)
     }
 
