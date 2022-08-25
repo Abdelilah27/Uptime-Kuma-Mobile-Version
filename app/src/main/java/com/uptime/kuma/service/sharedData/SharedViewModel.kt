@@ -71,6 +71,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
+//            Log.d("thread", Thread.currentThread().toString())
             //to show error dialog after a delay
             Handler(Looper.getMainLooper()).postDelayed({
                 if (NETWORKSTATUS == "0") {

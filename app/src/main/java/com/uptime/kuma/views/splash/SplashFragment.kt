@@ -3,32 +3,31 @@ package com.uptime.kuma.views.splash
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
-import com.uptime.kuma.databinding.FragmentSplashBinding
 import com.uptime.kuma.views.mainActivity.MainActivity
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
-class SplashFragment : Fragment(R.layout.fragment_splash) {
+class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope {
 
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentSplashBinding.bind(view)
+//        val binding = FragmentSplashBinding.bind(view)
 
-        binding.apply {
-            Handler(Looper.myLooper()!!).postDelayed({
-                //Direction to the Bienvenue fragment when the data are retrieved
+        launch {
+            delay(500)
+            withContext(Dispatchers.Main) {
                 if (onCommencerFinished())
                     MainActivity.navController.navigate(R.id.loginFragment)
-                else
+                else {
                     findNavController().navigate(R.id.bienvenueFragment)
-            }, 500)
-
+                }
+            }
         }
     }
 
@@ -36,5 +35,8 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         val sharedpref = requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
         return sharedpref.getBoolean("Finished", false)
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }
