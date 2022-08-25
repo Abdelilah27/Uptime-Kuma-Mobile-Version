@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Process
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,6 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
                 }
 
             }
-
         }
 
         val list = resources.getStringArray(R.array.list)
@@ -66,7 +66,6 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
 
             }
         })
-
         return root
     }
 
@@ -104,12 +103,18 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
         }
         view.findViewById<View>(R.id.buttonNo).setOnClickListener {
             binding.switchDarkMode.isChecked = !checked
+            Log.d("bool22", binding.switchDarkMode.hasOnClickListeners().toString())
             alertDialog.dismiss()
         }
         if (alertDialog.window != null) {
             alertDialog.window!!.setBackgroundDrawable(ColorDrawable(0))
         }
         alertDialog.show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.switchDarkMode.setOnCheckedChangeListener(null)
     }
 
 }
