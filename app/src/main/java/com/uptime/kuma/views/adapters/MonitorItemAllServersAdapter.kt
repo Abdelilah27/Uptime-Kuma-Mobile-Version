@@ -23,10 +23,10 @@ class MonitorItemAllServersAdapter(
 ) :
     RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>(), Filterable {
     private var myList: List<ServerCalcul> = listOf()
-    private var list = mutableListOf<ServerCalcul>()
-
+    private var originalList: List<ServerCalcul> = listOf()
     fun setData(data: List<ServerCalcul>) {
         myList = data
+        originalList = myList
         notifyDataSetChanged()
     }
 
@@ -157,7 +157,7 @@ class MonitorItemAllServersAdapter(
         fun onItemClick(position: Int)
     }
 
-    override fun getFilter(): Filter? {
+    override fun getFilter(): Filter {
         var monitor: Monitor
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence): FilterResults {
@@ -165,24 +165,24 @@ class MonitorItemAllServersAdapter(
                 if (constraint.isEmpty()) {
                     //no filter implemented we return full list
                     results.values = myList
-                    results.count = myList!!.size
+                    results.count = myList.size
                 } else {
-                    val list: ArrayList<ServerCalcul> = ArrayList()
-                    for (item in myList!!) {
+                    val count: Int = myList.size
+                    val nlist = ArrayList<ServerCalcul>(count)
+                    for (item in myList) {
                         monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
-                        if (monitor.name.toUpperCase()
-                                .startsWith(constraint.toString().toUpperCase())
-                        ) list.add(item)
+                        if (monitor.name.toUpperCase().contains(constraint.toString().toUpperCase())
+                        ) nlist.add(item)
                     }
-                    results.values = list
-                    results.count = list.size
+                    results.values = nlist
+                    results.count = nlist.size
                 }
                 return results
             }
 
             override fun publishResults(constraint: CharSequence, results: FilterResults) {
                 if (results.count == 0 || constraint == "") {
-                    myList = myList
+                    myList = originalList
                     notifyDataSetChanged()
                 } else {
                     myList = (results.values as ArrayList<ServerCalcul>?)!!

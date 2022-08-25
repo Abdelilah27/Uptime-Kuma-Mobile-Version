@@ -119,7 +119,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-//            Log.d("RES", response.toString())
+            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")
@@ -162,8 +162,6 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 monitorStatusList.distinctBy { MonitorStatusItem -> MonitorStatusItem.monitorID } as ArrayList<MonitorStatusItem>
             _newLiveData.postValue(newList)
             monitorStatusList.sortByDescending { it.time }
-
-//            Log.d("TAG", monitorStatusList.toString())
             _monitorStatusLiveData.postValue(monitorStatusList)
 
         }
