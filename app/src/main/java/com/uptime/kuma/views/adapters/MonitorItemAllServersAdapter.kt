@@ -15,11 +15,12 @@ import com.uptime.kuma.R
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
+import com.uptime.kuma.utils.RecyclerClickInterface
 import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class MonitorItemAllServersAdapter(
-    val context: Context, val listener: OnClickLister
+    val context: Context, val listener: RecyclerClickInterface
 ) :
     RecyclerView.Adapter<MonitorItemAllServersAdapter.ItemViewHolder>(), Filterable {
     private var myList: List<ServerCalcul> = listOf()
@@ -42,6 +43,10 @@ class MonitorItemAllServersAdapter(
 
 
     inner class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        init {
+            view.setOnClickListener(this)
+        }
+
         var id: TextView = view.findViewById(R.id.dashbord_id)
         var title: TextView = view.findViewById(R.id.title_text)
         var slug: TextView = view.findViewById(R.id.all_servers_slug_tv)
@@ -151,10 +156,6 @@ class MonitorItemAllServersAdapter(
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
         adapter.setData(list)
-    }
-
-    interface OnClickLister {
-        fun onItemClick(position: Int)
     }
 
     override fun getFilter(): Filter {

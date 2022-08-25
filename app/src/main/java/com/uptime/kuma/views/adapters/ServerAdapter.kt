@@ -21,7 +21,7 @@ class ServerAdapter(val context: Context) :
         @SuppressLint("RestrictedApi")
         fun bind(monitorStatusItem: MonitorStatusItem) {
             binding.apply {
-                dashbordId.text = monitorStatusItem.monitorID.toString()
+                dashbordIdText.text = monitorStatusItem.monitorID.toString()
                 dashbordServernameTv.visibility = View.GONE // hide username part
                 dashbordTimeTv.text = monitorStatusItem.time
                 dashbordMessageTv.text = monitorStatusItem.msg

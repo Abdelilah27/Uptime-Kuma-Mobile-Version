@@ -1,17 +1,16 @@
 package com.uptime.kuma.views.dashbord
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
 import com.uptime.kuma.utils.CALCUL
+import com.uptime.kuma.utils.RecyclerClickInterface
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -19,9 +18,10 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
-    DashboardRecyclerAdapter.OnItemClickListener {
+    RecyclerClickInterface {
     private lateinit var itemAdapter: DashboardRecyclerAdapter
-//    private lateinit var dashbordViewModel: DashbordViewModel
+
+    //    private lateinit var dashbordViewModel: DashbordViewModel
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
@@ -78,10 +78,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             })
     }
 
-    override fun onItemClick(position: String) {
-        val action = MainFragmentDirections.actionMainFragmentToServerFragment(position)
-        MainActivity.navController.navigate(action)
-    }
 
     private fun getStatistics() {
         MainActivity.sharedViewModel.newLiveData.observe(
@@ -142,6 +138,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 binding.calculRecycler.visibility = View.VISIBLE
                 calculItemAdapter.setData(CALCUL ?: listOf())
             })
+    }
+
+    override fun onItemClick(position: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToServerFragment(position.toString())
+        MainActivity.navController.navigate(action)
     }
 
 }

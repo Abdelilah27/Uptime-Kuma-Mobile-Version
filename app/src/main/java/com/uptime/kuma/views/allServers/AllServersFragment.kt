@@ -3,19 +3,20 @@ package com.uptime.kuma.views.allServers
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentAllServersBinding
+import com.uptime.kuma.utils.RecyclerClickInterface
 import com.uptime.kuma.views.adapters.MonitorItemAllServersAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
 import java.util.*
 
-class AllServersFragment : Fragment(R.layout.fragment_all_servers),
-    MonitorItemAllServersAdapter.OnClickLister {
+class AllServersFragment : Fragment(R.layout.fragment_all_servers), RecyclerClickInterface {
     companion object {
         lateinit var allRecycler: RecyclerView
     }
@@ -73,7 +74,6 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
             }
         })
     }
-
 
     override fun onItemClick(position: Int) {
         val serverId = MainActivity.sharedViewModel.monitorCalcul[position].monitor_id.toString()

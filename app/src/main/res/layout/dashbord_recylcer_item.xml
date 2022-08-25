@@ -59,7 +59,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/dashbord_id"
+                android:id="@+id/dashbord_id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
