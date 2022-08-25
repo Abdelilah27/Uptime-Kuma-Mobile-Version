@@ -52,6 +52,11 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers),
         MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.searchEditTextAllServersFragment.setText("")
+    }
+
     //search for a monitor in monitors
     private fun searchViewListener() {
         binding.searchEditTextAllServersFragment.addTextChangedListener(object : TextWatcher {
