@@ -69,6 +69,11 @@
 
     <string name="empty_socket_url">Veuillez remplir tous les champs</string>
     <string name="valide_socket_url">Veuillez entrer un lien valide</string>
+    <string name="dummy_text">L\'application a besoin d\'un restart</string>
+    <string name="yes">oui</string>
+    <string name="no">non</string>
+    <string name="warning_title">Avertissement</string>
+
 
     <string-array name="list">
         <item>Francais</item>

@@ -130,7 +130,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-            Log.d("RES", response.toString())
+//            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")

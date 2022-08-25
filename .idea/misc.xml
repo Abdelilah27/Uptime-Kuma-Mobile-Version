@@ -27,10 +27,15 @@
         <entry key="..\:/Uptime-Kuma-Mobile-Version6/app/src/main/res/layout/item_status_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/background_edit_text_add_status_fragment.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/button_error_background.xml" value="0.229" />
+        <entry key="app/src/main/res/drawable/button_neutral_background.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/button_warning_background.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_baseline_warning_24.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/layout_warning_dailog.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/search_view_background_all_servers_fragment.xml" value="0.231" />
+        <entry key="app/src/main/res/drawable/warning_background.xml" value="0.191" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/card_graph_server.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/dashboard_recycler_calcul_item.xml" value="0.2857789855072464" />
@@ -59,6 +64,7 @@
         <entry key="app/src/main/res/layout/item_status_group.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_test.xml" value="0.24180327868852458" />
         <entry key="app/src/main/res/layout/layout_error_dialog.xml" value="0.3115942028985507" />
+        <entry key="app/src/main/res/layout/layout_warning_dialog.xml" value="0.2318840579710145" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/notifications_recycler_item.xml" value="0.3125" />
         <entry key="app/src/main/res/layout/parametre_recycler_item.xml" value="0.2776268115942029" />

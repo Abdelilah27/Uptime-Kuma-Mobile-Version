@@ -67,6 +67,10 @@
 
     <string name="empty_socket_url">Please complete all fields</string>
     <string name="valide_socket_url">Please enter a valid link</string>
+    <string name="dummy_text">The application needs a restart</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="warning_title">Warning</string>
 
 
     <string-array name="list">
