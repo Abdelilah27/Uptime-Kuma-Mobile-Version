@@ -66,8 +66,6 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
         }
     }
 
-
-    //Send query after opening the connexion
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
@@ -76,13 +74,25 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             Handler(Looper.getMainLooper()).postDelayed({
                 if (NETWORKSTATUS == "0") {
                     NETWORKSTATUS = "6"
-                    _NETWORKLIVEDATA.postValue("6")
+                    _NETWORKLIVEDATA.postValue("6") //no response after a delay
                 }
             }, 10000)
+            if (response.toString().isEmpty()) {
+                Log.d("response", "response: ")
+            }
+            if (response.toString().isBlank()) {
+                Log.d("response1", "response: ")
+            }
+            if (response.toString().isNullOrBlank()) {
+                Log.d("response2", "response: ")
+            }
+            if (response.toString().isNullOrEmpty()) {
+                Log.d("response3", "response: ")
+            }
             if (response.toString()
                     .contains(Constants.successConnexion) && NETWORKSTATUS == "0"
             ) {
-                sendQuery(Constants.dataQuery)
+                sendQuery(Constants.dataQuery) //Send query after opening the connexion
                 NETWORKSTATUS = "1" //Success response
                 _NETWORKLIVEDATA.postValue("1")
 
@@ -91,7 +101,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 NETWORKSTATUS = "5" //Resend response
                 _NETWORKLIVEDATA.postValue("5")
             } else if (response.toString()
-                    .contains(Constants.unSuccessConnexion) && NETWORKSTATUS == "0"
+                    .contains(Constants.unSuccessConnexion)
             ) {
                 NETWORKSTATUS = "2" //Error response
                 _NETWORKLIVEDATA.postValue("2")
@@ -120,7 +130,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-//            Log.d("RES", response.toString())
+            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")

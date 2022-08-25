@@ -25,7 +25,6 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentServerBinding.bind(view)
-        ConnexionLifecycle.openConnexion()
         val serverAdapter = ServerAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         var monitor: Monitor
