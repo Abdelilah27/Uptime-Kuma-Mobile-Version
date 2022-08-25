@@ -170,7 +170,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     fun getMonitorName(id: Int): String {
         monitors.forEach {
             if (it.id == id) {
-                return it.name
+                return it.name!!
             }
         }
         return ""

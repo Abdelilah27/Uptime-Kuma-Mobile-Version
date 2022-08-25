@@ -60,7 +60,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         super.onDestroyView()
         MainActivity.sharedViewModel.monitorStatusLiveData.removeObservers(viewLifecycleOwner)
         MainActivity.sharedViewModel.newLiveData.removeObservers(viewLifecycleOwner)
-//        ConnexionLifecycle.closeConnexion()
     }
 
 

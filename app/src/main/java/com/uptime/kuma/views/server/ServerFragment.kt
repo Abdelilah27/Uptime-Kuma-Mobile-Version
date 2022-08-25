@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentServerBinding
+import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.views.adapters.ServerAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ServerFragment : Fragment(R.layout.fragment_server) {
@@ -24,6 +28,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         ConnexionLifecycle.openConnexion()
         val serverAdapter = ServerAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
+        var monitor: Monitor
         //get Id from args
         val serverId = args.serverId
         binding.apply {
@@ -37,18 +42,16 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         }
 
         //get monitor
-        val monitor = serverViewModel.getMonitorById(serverId.toInt())
-        binding.apply {
-            serverTitle.text = monitor.name
-            serverLink.text = monitor.url
-            statusVerificationServerFragment.text =
+        CoroutineScope(Dispatchers.IO).launch {
+            monitor = serverViewModel.getMonitorById(serverId.toInt())
+            binding.serverLink.text = monitor.url
+            binding.serverTitle.text = monitor.name
+            binding.statusVerificationServerFragment.text =
                 resources.getString(R.string.status_verification_server_fragment) + " " + monitor
                     .retryInterval.toString() + " " + resources.getString(
                     R.string.seconds
                 )
         }
-
-
     }
 
     override fun onDestroy() {

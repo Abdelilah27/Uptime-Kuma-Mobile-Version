@@ -73,7 +73,7 @@ class MonitorItemAllServersAdapter(
             val statusList =
                 MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus.take(16)
             holder.title.text = monitor.name
-            holder.slug.text = monitor.name.toUpperCase().subSequence(0, 2)
+            holder.slug.text = monitor.name!!.toUpperCase().subSequence(0, 2)
             holder.percent.text = "100 %"
             when (statusList[0].status) {
                 0 -> {
@@ -172,7 +172,8 @@ class MonitorItemAllServersAdapter(
                     val nlist = ArrayList<ServerCalcul>(count)
                     for (item in myList) {
                         monitor = MainActivity.sharedViewModel.getMonitorById(item.monitor_id)
-                        if (monitor.name.toUpperCase().contains(constraint.toString().toUpperCase())
+                        if (monitor.name!!.toUpperCase()
+                                .contains(constraint.toString().toUpperCase())
                         ) nlist.add(item)
                     }
                     results.values = nlist

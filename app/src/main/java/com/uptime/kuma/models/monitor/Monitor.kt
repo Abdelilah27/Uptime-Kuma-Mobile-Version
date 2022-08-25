@@ -17,7 +17,7 @@ data class Monitor(
     val expiryNotification: Boolean = true,
     val headers: Any? = null,
     val hostname: Any? = null,
-    val id: Int,
+    val id: Int = 1,
     val ignoreTls: Boolean = false,
     val interval: Int = 60,
     val keyword: Any? = null,
@@ -28,8 +28,7 @@ data class Monitor(
     val mqttSuccessMessage: Any? = null,
     val mqttTopic: Any? = null,
     val mqttUsername: Any? = null,
-    val name: String,
-    //TODO
+    val name: String? = null,
     val notificationIDList: NotificationIDList? = null,
     val port: Any? = null,
     val proxyId: Any? = null,
@@ -38,6 +37,6 @@ data class Monitor(
     val tags: List<Any>? = null,
     val type: String = "http",
     val upsideDown: Boolean = false,
-    val url: String,
+    val url: String? = null,
     val weight: Int = 2000,
 )
