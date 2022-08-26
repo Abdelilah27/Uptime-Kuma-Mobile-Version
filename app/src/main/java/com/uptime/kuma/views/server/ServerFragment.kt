@@ -58,7 +58,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                         )
                         when (status[0].status) {
                             0 -> {
-                                isOnlineText.resources.getString(R.string.offline)
+                                isOnlineText.text=resources.getString(R.string.offline)
                                 isOnlineCard.setCardBackgroundColor(
                                     ContextCompat.getColor(
                                         context,
@@ -67,7 +67,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                                 )
                             }
                             1 -> {
-                                isOnlineText.resources.getString(R.string.online)
+                                isOnlineText.text=resources.getString(R.string.online)
                                 isOnlineCard.setCardBackgroundColor(
                                     ContextCompat.getColor(
                                         context,
@@ -77,7 +77,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                                 )
                             }
                             else -> {
-                                isOnlineText.resources.getString(R.string.attente)
+                                isOnlineText.text=resources.getString(R.string.attente)
                                 isOnlineCard.setCardBackgroundColor(
                                     ContextCompat.getColor(
                                         context,
