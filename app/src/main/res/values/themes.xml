@@ -67,6 +67,20 @@
 
     </style>
 
+    <style name="status_2_server_fragment">
+        <item name="android:textColor">@color/background_all_server_fragment</item>
+        <item name="backgroundTint">@color/main_text_splash_fragment</item>
+        <item name="android:textSize">20sp</item>s
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+
+    </style>
+
     <style name="status_text_fragment">
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_vertical</item>

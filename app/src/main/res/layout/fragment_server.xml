@@ -68,19 +68,20 @@
                         android:text="@string/status_verification_server_fragment" />
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/isOnlineCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:backgroundTint="@color/background_active_item_all_server_fragment"
                         app:cardCornerRadius="30dp">
 
                         <TextView
-                            style="@style/status_server_fragment"
+                            android:id="@+id/isOnlineText"
+                            style="@style/status_2_server_fragment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/enLigne_status_server_fragment"
+                            android:text="qsd"
                             android:textColor="@color/white" />
                     </androidx.cardview.widget.CardView>
 

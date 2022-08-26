@@ -3,6 +3,7 @@ package com.uptime.kuma.views.server
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,10 +51,43 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 MainActivity.sharedViewModel.monitorCalculLiveData.observe(
                     viewLifecycleOwner,
                     Observer {
+                        val status =
+                            MainActivity.sharedViewModel.getStatuesServerById(serverId.toInt())
                         serverCardAdapter.setData(
-                            MainActivity.sharedViewModel.getStatuesServerById
-                                (serverId.toInt())
+                            status
                         )
+                        when (status[0].status) {
+                            0 -> {
+                                isOnlineText.resources.getString(R.string.offline)
+                                isOnlineCard.setCardBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.background_no_active_item_all_server_fragment
+                                    )
+                                )
+                            }
+                            1 -> {
+                                isOnlineText.resources.getString(R.string.online)
+                                isOnlineCard.setCardBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color
+                                            .background_active_item_all_server_fragment
+                                    )
+                                )
+                            }
+                            else -> {
+                                isOnlineText.resources.getString(R.string.attente)
+                                isOnlineCard.setCardBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color
+                                            .attente
+                                    )
+                                )
+
+                            }
+                        }
                     })
 
             }
