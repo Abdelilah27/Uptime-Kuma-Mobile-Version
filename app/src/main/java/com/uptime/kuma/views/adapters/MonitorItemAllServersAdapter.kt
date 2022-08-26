@@ -1,7 +1,6 @@
 package com.uptime.kuma.views.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.utils.RecyclerClickInterface
 import com.uptime.kuma.views.mainActivity.MainActivity
+import java.math.RoundingMode
 
 
 class MonitorItemAllServersAdapter(
@@ -74,10 +74,10 @@ class MonitorItemAllServersAdapter(
             holder.id.text = it.monitor_id.toString()
             val monitor = MainActivity.sharedViewModel.getMonitorById(it.monitor_id)
             val statusList =
-                MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus.take(16)
+                MainActivity.sharedViewModel.monitorCalcul[position].monitorStatus
             holder.title.text = monitor.name
             holder.slug.text = monitor.name!!.toUpperCase().subSequence(0, 2)
-            holder.percent.text = "100 %"
+            holder.percent.text = getPercent(statusList)
             when (statusList[0].status) {
                 0 -> {
                     holder.card.setCardBackgroundColor(
@@ -131,24 +131,23 @@ class MonitorItemAllServersAdapter(
             }
             setCallItemRecycler(
                 holder.secondRecycler,
-                statusList
+                statusList.take(16)
             )
         }
     }
 
-//    private fun getPercent(statusList: ArrayList<ServerCalcul_Items>): CharSequence {
-//        var numberOfTrueOrFalse = 0.0
-//        val status = statusList[0].status
-//        statusList.forEach {
-//            if (it.status == status) {
-//                numberOfTrueOrFalse += 1
-//            }
-//        }
-//        numberOfTrueOrFalse /= (statusList.size + 1)
-//        numberOfTrueOrFalse *= 100
-//        val rounded = numberOfTrueOrFalse.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
-//        return "$rounded. %"
-//    }
+    private fun getPercent(statusList: List<ServerCalcul_Items>): CharSequence {
+        var numberOfTrueOrFalse = 0.0
+        statusList.forEach {
+            if (it.status == 1) {
+                numberOfTrueOrFalse += 1
+            }
+        }
+        numberOfTrueOrFalse /= (statusList.size)
+        numberOfTrueOrFalse *= 100
+        val rounded = numberOfTrueOrFalse.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
+        return "$rounded. %"
+    }
 
     private fun setCallItemRecycler(
         recyclerView: RecyclerView,
