@@ -89,24 +89,18 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/background_item_all_server_fragment"
+                app:cardCornerRadius="30dp">
 
-            <!--            <androidx.cardview.widget.CardView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="300dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:backgroundTint="@color/background_item_all_server_fragment"-->
-            <!--                app:cardCornerRadius="30dp">-->
-
-            <!--                <com.androidplot.xy.XYPlot-->
-            <!--                    android:id="@+id/graph_server_fragment"-->
-            <!--                    style="@style/APDefacto.Dark"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    app:backgroundColor="@color/grey"-->
-            <!--                    app:rangeTitle="@string/range_graph_server_fragment">-->
-
-            <!--                </com.androidplot.xy.XYPlot>-->
-            <!--            </androidx.cardview.widget.CardView>-->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/getTheGraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"

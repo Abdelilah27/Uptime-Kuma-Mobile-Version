@@ -146,13 +146,15 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 val msg = myObject.get("msg").toString()
                 val status = myObject.get("status").toString()
                 val time = myObject.get("time").toString()
+                val duration = myObject.get("duration").toString()
                 // init MonitorStatusItem
                 monitorStatusItem = MonitorStatusItem(
                     monitorID = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time,
-                    name = getMonitorName(monitorID.toInt())
+                    name = getMonitorName(monitorID.toInt()),
+                    duration = duration.toInt()
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
@@ -184,6 +186,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             val msg = jsonObject.get("msg").toString()
             val status = jsonObject.get("status").toString()
             val time = jsonObject.get("time").toString()
+            val duration = jsonObject.get("duration").toString()
             val important = jsonObject.getBoolean("important")
             // init MonitorStatusItem
             monitorUpdate = MonitorStatusItem(
@@ -192,14 +195,18 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 status = status.toInt(),
                 time = time,
                 important = important,
-                name = getMonitorName(monitorID.toInt())
+                name = getMonitorName(monitorID.toInt()),
+                duration = duration.toInt()
             )
+
             val serverCalculItems = ServerCalcul_Items(
                 monitor_id = monitorID.toInt(),
                 msg = msg,
                 status = status.toInt(),
                 time = time,
+                duration = duration.toInt()
             )
+
             injectNewStatus(serverCalculItems)
             if (monitorUpdate.important == true) {
                 newList.add(monitorUpdate)
@@ -259,12 +266,15 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 val msg = jsonObject.get("msg").toString()
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
+                val duration = jsonObject.get("duration").toString()
 //                // init object
                 myobject = ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
-                    time = time
+                    time = time,
+                    duration = duration.toInt()
+
                 )
                 //For recycler graph card
                 calculitems.add(myobject)

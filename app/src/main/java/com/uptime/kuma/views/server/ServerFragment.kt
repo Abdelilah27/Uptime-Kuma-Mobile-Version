@@ -2,6 +2,7 @@ package com.uptime.kuma.views.server
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -10,10 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.adapters.MonitorItemAllServersCardAdapter
 import com.uptime.kuma.views.adapters.ServerAdapter
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -25,11 +31,13 @@ import kotlinx.coroutines.launch
 class ServerFragment : Fragment(R.layout.fragment_server) {
     private val args: ServerFragmentArgs by navArgs()
     private lateinit var serverViewModel: ServerViewModel
+    private lateinit var binding: FragmentServerBinding
+    private var status: ArrayList<ServerCalcul_Items> = ArrayList()
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentServerBinding.bind(view)
+        binding = FragmentServerBinding.bind(view)
         val serverAdapter = ServerAdapter(requireContext())
         val serverCardAdapter = MonitorItemAllServersCardAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
@@ -51,7 +59,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 MainActivity.sharedViewModel.monitorCalculLiveData.observe(
                     viewLifecycleOwner,
                     Observer {
-                        val status =
+                        status =
                             MainActivity.sharedViewModel.getStatuesServerById(serverId.toInt())
                         serverCardAdapter.setData(
                             status
@@ -89,10 +97,10 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                             }
                         }
                     })
-
             }
-        }
 
+        }
+        setLineChartData()
         //get monitor
         CoroutineScope(Dispatchers.IO).launch {
             monitor = serverViewModel.getMonitorById(serverId.toInt())
@@ -106,9 +114,38 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         }
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         ConnexionLifecycle.closeConnexion()
+    }
+
+    private fun setLineChartData() {
+        val linevalues = ArrayList<Entry>()
+        Log.d("size", status.size.toString())
+        status.take(16).forEach {
+            if (it.duration != null) {
+//                Log.d("duration", it.duration.toString())
+                linevalues.add(Entry(it.duration!!.toFloat(), it.duration!!.toFloat()))
+            }
+        }
+        val linedataset = LineDataSet(linevalues, "First")
+        //We add features to our chart
+        linedataset.color = resources.getColor(R.color.purple_200)
+
+        linedataset.circleRadius = 7f
+        linedataset.setDrawFilled(true)
+        linedataset.valueTextSize = 10F
+        linedataset.fillColor = resources.getColor(R.color.main_color)
+        linedataset.color = resources.getColor(R.color.white)
+        linedataset.mode = LineDataSet.Mode.CUBIC_BEZIER;
+
+        //We connect our data to the UI Screen
+        val data = LineData(linedataset)
+        binding.getTheGraph.data = data
+        binding.getTheGraph.setBackgroundColor(resources.getColor(R.color.grey))
+        binding.getTheGraph.animateXY(2000, 2000, Easing.EaseInCubic)
+
     }
 
 }
