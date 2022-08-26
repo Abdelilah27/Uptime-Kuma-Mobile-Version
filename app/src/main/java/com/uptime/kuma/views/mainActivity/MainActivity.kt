@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-        CoroutineScope(Dispatchers.IO).launch {
             saveData = SaveData(applicationContext)
             //set light or dark mode from sharedPreferences
             if (saveData.lightMode == "true") {
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-        }
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

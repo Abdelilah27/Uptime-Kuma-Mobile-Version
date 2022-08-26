@@ -77,18 +77,6 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     _NETWORKLIVEDATA.postValue("6") //no response after a delay
                 }
             }, 10000)
-            if (response.toString().isEmpty()) {
-                Log.d("response", "response: ")
-            }
-            if (response.toString().isBlank()) {
-                Log.d("response1", "response: ")
-            }
-            if (response.toString().isNullOrBlank()) {
-                Log.d("response2", "response: ")
-            }
-            if (response.toString().isNullOrEmpty()) {
-                Log.d("response3", "response: ")
-            }
             if (response.toString()
                     .contains(Constants.successConnexion) && NETWORKSTATUS == "0"
             ) {
@@ -206,6 +194,13 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 important = important,
                 name = getMonitorName(monitorID.toInt())
             )
+            val serverCalculItems = ServerCalcul_Items(
+                monitor_id = monitorID.toInt(),
+                msg = msg,
+                status = status.toInt(),
+                time = time,
+            )
+            injectNewStatus(serverCalculItems)
             if (monitorUpdate.important == true) {
                 newList.add(monitorUpdate)
 //                newList = newList.sortedBy { it.time }.distinctBy{it->it.monitorID} as ArrayList
@@ -229,6 +224,18 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
 
         }
     }
+
+    private fun injectNewStatus(serverCalculItems: ServerCalcul_Items) {
+        val monitorId = serverCalculItems.monitor_id
+        monitorCalcul.forEach {
+            if (it.monitor_id == monitorId) {
+                it.monitorStatus.add(serverCalculItems)
+                it.monitorStatus.sortByDescending { it.time }
+            }
+        }
+        _monitorCalculLiveData.postValue(monitorCalcul.distinctBy { it.monitor_id } as ArrayList<ServerCalcul>?)
+    }
+
 
     //AllServers Fragment
     fun getServerCalcul(response: WebSocket.Event?, suffix: String) {
