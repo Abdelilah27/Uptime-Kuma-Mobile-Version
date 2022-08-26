@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/grey"
+                android:backgroundTint="@color/black"
                 app:cardCornerRadius="30dp">
 
                 <LinearLayout
@@ -51,175 +51,11 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <LinearLayout
-                        android:id="@+id/graph_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:gravity="top"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_1"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_2"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_3"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_4"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_5"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_6"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_7"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_8"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_9"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_10"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_11"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_12"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_13"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_14"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_15"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_16"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_17"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_18"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_19"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/server_card_graph_20"
-                            android:layout_width="8dp"
-                            android:layout_height="25dp"
-                            android:layout_marginRight="4dp"
-                            android:backgroundTint="@color/background_active_item_all_server_fragment"
-                            app:cardCornerRadius="30dp" />
-                    </LinearLayout>
-
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/card_graph_recycler_server"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/card_graph_server" />
 
                     <TextView
                         android:id="@+id/status_verification_server_fragment"
@@ -250,27 +86,26 @@
 
                 </LinearLayout>
 
-
             </androidx.cardview.widget.CardView>
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/background_item_all_server_fragment"
-                app:cardCornerRadius="30dp">
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:layout_marginTop="12dp"-->
+            <!--                android:backgroundTint="@color/background_item_all_server_fragment"-->
+            <!--                app:cardCornerRadius="30dp">-->
 
-                <com.androidplot.xy.XYPlot
-                    android:id="@+id/graph_server_fragment"
-                    style="@style/APDefacto.Dark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:backgroundColor="@color/grey"
-                    app:rangeTitle="@string/range_graph_server_fragment">
+            <!--                <com.androidplot.xy.XYPlot-->
+            <!--                    android:id="@+id/graph_server_fragment"-->
+            <!--                    style="@style/APDefacto.Dark"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    app:backgroundColor="@color/grey"-->
+            <!--                    app:rangeTitle="@string/range_graph_server_fragment">-->
 
-                </com.androidplot.xy.XYPlot>
-            </androidx.cardview.widget.CardView>
+            <!--                </com.androidplot.xy.XYPlot>-->
+            <!--            </androidx.cardview.widget.CardView>-->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"

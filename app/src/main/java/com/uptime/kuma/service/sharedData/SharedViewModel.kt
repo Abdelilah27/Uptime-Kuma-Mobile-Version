@@ -367,19 +367,19 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
         return monitors.get(0)
     }
 
-//    fun getStatuesServerById(id: Int): ArrayList<ServerCalcul_Items> {
-//        val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
-//        monitorCalcul.forEach { it ->
-//            if (it.monitor_id == id) {
-//                it.monitorStatus.forEach {
-//                    if (it.monitor_id == id) {
-//                        statusV2.add(it)
-//                    }
-//                }
-//            }
-//        }
-//        return statusV2
-//    }
+    fun getStatuesServerById(id: Int): ArrayList<ServerCalcul_Items> {
+        val statusV2: ArrayList<ServerCalcul_Items> = ArrayList()
+        monitorCalcul.forEach { it ->
+            if (it.monitor_id == id) {
+                it.monitorStatus.forEach {
+                    if (it.monitor_id == id) {
+                        statusV2.add(it)
+                    }
+                }
+            }
+        }
+        return statusV2
+    }
 
     //Status Fragment
     fun getStatusFromResponse(response: WebSocket.Event?, suffix: String) {

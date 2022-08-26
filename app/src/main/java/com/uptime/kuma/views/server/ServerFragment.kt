@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.uptime.kuma.R
 import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
+import com.uptime.kuma.views.adapters.MonitorItemAllServersCardAdapter
 import com.uptime.kuma.views.adapters.ServerAdapter
+import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +30,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentServerBinding.bind(view)
         val serverAdapter = ServerAdapter(requireContext())
+        val serverCardAdapter = MonitorItemAllServersCardAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         var monitor: Monitor
         //get Id from args
@@ -37,6 +42,20 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 setHasFixedSize(true)
                 isNestedScrollingEnabled = false
                 serverAdapter.submitList(serverViewModel.filterMonitorstatus(serverId.toInt()))
+            }
+            cardGraphRecyclerServer.apply {
+                adapter = serverCardAdapter
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+
+                MainActivity.sharedViewModel.monitorCalculLiveData.observe(
+                    viewLifecycleOwner,
+                    Observer {
+                        serverCardAdapter.setData(
+                            MainActivity.sharedViewModel.getStatuesServerById
+                                (serverId.toInt())
+                        )
+                    })
+
             }
         }
 
