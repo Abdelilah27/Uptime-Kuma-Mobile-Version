@@ -33,6 +33,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     private lateinit var serverViewModel: ServerViewModel
     private lateinit var binding: FragmentServerBinding
     private var status: ArrayList<ServerCalcul_Items> = ArrayList()
+    var test = true
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         val serverCardAdapter = MonitorItemAllServersCardAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         var monitor: Monitor
+
         //get Id from args
         val serverId = args.serverId
         binding.apply {
@@ -96,11 +98,14 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 
                             }
                         }
+                        if (test) {
+                            setLineChartData()
+                        }
+
                     })
             }
 
         }
-        setLineChartData()
         //get monitor
         CoroutineScope(Dispatchers.IO).launch {
             monitor = serverViewModel.getMonitorById(serverId.toInt())
@@ -112,6 +117,8 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                     R.string.seconds
                 )
         }
+
+
     }
 
 
@@ -121,12 +128,18 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     }
 
     private fun setLineChartData() {
+        test = false
         val linevalues = ArrayList<Entry>()
-        Log.d("size", status.size.toString())
+        var timeFormat: String
+        var timeFormatReplaced: Float
+        status.sortBy { it.time }
+        //TODO
+        Log.d("TAG", status.toString())
         status.take(16).forEach {
-            if (it.duration != null) {
-//                Log.d("duration", it.duration.toString())
-                linevalues.add(Entry(it.duration!!.toFloat(), it.duration!!.toFloat()))
+            if (it.ping != null) {
+                timeFormat = it.time.toString().subSequence(11, 16).toString()
+                timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
+                linevalues.add(Entry(timeFormatReplaced, it.ping.toFloat()))
             }
         }
         val linedataset = LineDataSet(linevalues, "First")

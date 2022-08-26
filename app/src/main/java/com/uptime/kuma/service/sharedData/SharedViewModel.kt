@@ -147,6 +147,8 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 val status = myObject.get("status").toString()
                 val time = myObject.get("time").toString()
                 val duration = myObject.get("duration").toString()
+                val ping = myObject.get("ping").toString()
+
                 // init MonitorStatusItem
                 monitorStatusItem = MonitorStatusItem(
                     monitorID = monitorID.toInt(),
@@ -154,7 +156,8 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     status = status.toInt(),
                     time = time,
                     name = getMonitorName(monitorID.toInt()),
-                    duration = duration.toInt()
+                    duration = duration.toInt(),
+                    ping = ping
                 )
                 monitorStatusList.add(monitorStatusItem)
             }
@@ -204,7 +207,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 msg = msg,
                 status = status.toInt(),
                 time = time,
-                duration = duration.toInt()
+                duration = duration.toInt(),
             )
 
             injectNewStatus(serverCalculItems)
@@ -267,13 +270,15 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 val status = jsonObject.get("status").toString()
                 val time = jsonObject.get("time").toString()
                 val duration = jsonObject.get("duration").toString()
+                val ping = jsonObject.get("ping").toString()
 //                // init object
                 myobject = ServerCalcul_Items(
                     monitor_id = monitorID.toInt(),
                     msg = msg,
                     status = status.toInt(),
                     time = time,
-                    duration = duration.toInt()
+                    duration = duration.toInt(),
+                    ping = ping
 
                 )
                 //For recycler graph card
