@@ -2,7 +2,6 @@ package com.uptime.kuma.views.server
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -134,9 +133,8 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         var timeFormatReplaced: Float
         status.sortBy { it.time }
         //TODO
-        Log.d("TAG", status.toString())
-        status.take(16).forEach {
-            if (it.ping != null) {
+        status.takeLast(16).forEach {
+            if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
                 timeFormat = it.time.toString().subSequence(11, 16).toString()
                 timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
                 linevalues.add(Entry(timeFormatReplaced, it.ping.toFloat()))
@@ -146,7 +144,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         //We add features to our chart
         linedataset.color = resources.getColor(R.color.purple_200)
 
-        linedataset.circleRadius = 7f
+        linedataset.circleRadius = 0f
         linedataset.setDrawFilled(true)
         linedataset.valueTextSize = 10F
         linedataset.fillColor = resources.getColor(R.color.main_color)
