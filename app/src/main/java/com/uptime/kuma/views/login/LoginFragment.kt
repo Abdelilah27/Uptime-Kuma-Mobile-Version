@@ -6,11 +6,7 @@ import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -62,9 +58,16 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                                     findNavController().navigate(R.id.mainFragment)
 
                                 }
-                                "2", "3", "6" -> {
-                                    binding.progressBar.visibility = View.GONE
-                                    showErrorDialog()
+//                                "2", "3", "6" -> {
+//                                    binding.progressBar.visibility = View.GONE
+//                                    showErrorDialog()
+//                                }
+                                else -> {
+                                    val action =
+                                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+                                            binding.socketUrl.text.toString()
+                                        )
+                                    findNavController().navigate(action)
                                 }
                             }
                         })
@@ -86,27 +89,27 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
         }
     }
 
-    private fun showErrorDialog() {
-        val builder =
-            AlertDialog.Builder(requireContext(), com.uptime.kuma.R.style.AlertDialogTheme)
-                .create()
-        val view = layoutInflater.inflate(com.uptime.kuma.R.layout.layout_error_dialog, null)
-        val button = view.findViewById<Button>(com.uptime.kuma.R.id.buttonAction)
-        builder.setView(view)
-        (view.findViewById<View>(com.uptime.kuma.R.id.textTitle) as TextView).text =
-            resources.getString(com.uptime.kuma.R.string.title_error_dialog)
-        (view.findViewById<View>(com.uptime.kuma.R.id.textMessage) as TextView).text =
-            resources.getString(com.uptime.kuma.R.string.message_error_dialog)
-        (view.findViewById<View>(com.uptime.kuma.R.id.imageIcon) as ImageView).setImageResource(com.uptime.kuma.R.drawable.ic_baseline_warning_24)
-
-        button.setOnClickListener {
-            builder.dismiss()
-            binding.socketUrl.text.clear()
-            restartApplication()
-        }
-        builder.setCanceledOnTouchOutside(false)
-        builder.show()
-    }
+//    private fun showErrorDialog() {
+//        val builder =
+//            AlertDialog.Builder(requireContext(), com.uptime.kuma.R.style.AlertDialogTheme)
+//                .create()
+//        val view = layoutInflater.inflate(com.uptime.kuma.R.layout.layout_error_dialog, null)
+//        val button = view.findViewById<Button>(com.uptime.kuma.R.id.buttonAction)
+//        builder.setView(view)
+//        (view.findViewById<View>(com.uptime.kuma.R.id.textTitle) as TextView).text =
+//            resources.getString(com.uptime.kuma.R.string.title_error_dialog)
+//        (view.findViewById<View>(com.uptime.kuma.R.id.textMessage) as TextView).text =
+//            resources.getString(com.uptime.kuma.R.string.message_error_dialog)
+//        (view.findViewById<View>(com.uptime.kuma.R.id.imageIcon) as ImageView).setImageResource(com.uptime.kuma.R.drawable.ic_baseline_warning_24)
+//
+//        button.setOnClickListener {
+//            builder.dismiss()
+//            binding.socketUrl.text.clear()
+//            restartApplication()
+//        }
+//        builder.setCanceledOnTouchOutside(false)
+//        builder.show()
+//    }
 
     //socket link regular expression
     private fun verificationSocketLink(socketLink: String): Boolean {

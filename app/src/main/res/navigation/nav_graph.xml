@@ -72,11 +72,15 @@
     </fragment>
     <fragment
         android:id="@+id/loginPlusFragment"
-        android:name="com.uptime.kuma.LoginPlusFragment"
+        android:name="com.uptime.kuma.views.loginPlus.LoginPlusFragment"
         android:label="fragment_login_plus"
         tools:layout="@layout/fragment_login_plus">
         <action
             android:id="@+id/action_loginPlusFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="socketUrl"
+            app:argType="string"
+            android:defaultValue="socket" />
     </fragment>
 </navigation>
