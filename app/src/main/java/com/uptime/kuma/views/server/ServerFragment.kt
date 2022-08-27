@@ -11,6 +11,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -142,15 +144,28 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 
     private fun setLineChartData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val lineDataSet = LineDataSet(lineValues, "First")
+            val lineDataSet = LineDataSet(lineValues, "Temps de response ")
             //We add features to our chart
-            lineDataSet.color = resources.getColor(R.color.purple_200)
-            lineDataSet.circleRadius = 1f
+            lineDataSet.color = resources.getColor(R.color.attente)
+            lineDataSet.circleRadius = 5f
             lineDataSet.setDrawFilled(true)
-            lineDataSet.valueTextSize = 10F
+            lineDataSet.valueTextSize = 50F
             lineDataSet.fillColor = resources.getColor(R.color.main_color)
-            lineDataSet.color = resources.getColor(R.color.white)
-            lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER;
+            lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER;
+            lineDataSet.setDrawValues(false);
+            val yAxisRight: YAxis = binding.getTheGraph.axisRight
+            val yAxisLeft: YAxis = binding.getTheGraph.axisLeft
+            val xAxis: XAxis = binding.getTheGraph.xAxis
+            xAxis.textColor = resources.getColor(R.color.main_color)
+            yAxisRight.textColor = resources.getColor(R.color.main_color)
+            yAxisLeft.textColor = resources.getColor(R.color.main_color)
+
+
+            //            lineDataSet.setLineWidth(1.75f);
+            //            lineDataSet.setCircleRadius(5f);
+            //            lineDataSet.setColor(Color.WHITE);
+                        lineDataSet.setCircleColor(resources.getColor(R.color.attente));
+//                        lineDataSet.setHighLightColor(Color.WHITE);
 
             //We connect our data to the UI Screen
             val data = LineData(lineDataSet)

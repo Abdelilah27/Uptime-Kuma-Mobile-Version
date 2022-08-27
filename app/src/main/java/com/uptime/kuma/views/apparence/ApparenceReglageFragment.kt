@@ -50,18 +50,26 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
                 "English" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "en")
                     MainActivity.languageSettings.language = "en"
+                    var toast = Toast.makeText(requireContext(), "language has been changed successfully", Toast.LENGTH_LONG)
+                    toast.show()
                 }
                 "French" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "fr")
                     MainActivity.languageSettings.language = "fr"
+                    var toast = Toast.makeText(requireContext(), "la langue à été changé avec succés ", Toast.LENGTH_LONG)
+                    toast.show()
                 }
                 "Anglais" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "en")
                     MainActivity.languageSettings.language = "en"
+                    var toast = Toast.makeText(requireContext(), "language has been changed successfully", Toast.LENGTH_LONG)
+                    toast.show()
                 }
                 "Francais" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "fr")
                     MainActivity.languageSettings.language = "fr"
+                    var toast = Toast.makeText(requireContext(), "la langue à été changé avec succés ", Toast.LENGTH_LONG)
+                    toast.show()
                 }
 
             }
