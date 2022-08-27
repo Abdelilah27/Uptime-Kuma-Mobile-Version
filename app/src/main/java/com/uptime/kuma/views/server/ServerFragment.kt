@@ -15,7 +15,6 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.uptime.kuma.R
-import com.uptime.kuma.api.ConnexionLifecycle
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
@@ -25,6 +24,7 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ServerFragment : Fragment(R.layout.fragment_server) {
@@ -32,7 +32,8 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     private lateinit var serverViewModel: ServerViewModel
     private lateinit var binding: FragmentServerBinding
     private var status: ArrayList<ServerCalcul_Items> = ArrayList()
-    var test = true
+    var lineValues = ArrayList<Entry>()
+    var executeOnce = true
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +57,6 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
             cardGraphRecyclerServer.apply {
                 adapter = serverCardAdapter
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-
                 MainActivity.sharedViewModel.monitorCalculLiveData.observe(
                     viewLifecycleOwner,
                     Observer {
@@ -97,7 +97,8 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 
                             }
                         }
-                        if (test) {
+                        if (executeOnce) {
+                            setData()
                             setLineChartData()
                         }
 
@@ -116,47 +117,49 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                     R.string.seconds
                 )
         }
-
-
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
+    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        ConnexionLifecycle.closeConnexion()
+    private fun setData() { //for the chart
+        CoroutineScope(Dispatchers.IO).launch {
+            executeOnce = false
+            var timeFormat: String
+            var timeFormatReplaced: Float
+            status.sortBy { it.time }
+            status.takeLast(16).forEach {
+                if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
+                    timeFormat = it.time.toString().subSequence(11, 16).toString()
+                    timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
+                    lineValues.add(Entry(timeFormatReplaced, it.ping.toFloat()))
+                }
+            }
+        }
     }
 
     private fun setLineChartData() {
-        test = false
-        val linevalues = ArrayList<Entry>()
-        var timeFormat: String
-        var timeFormatReplaced: Float
-        status.sortBy { it.time }
-        //TODO
-        status.takeLast(16).forEach {
-            if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
-                timeFormat = it.time.toString().subSequence(11, 16).toString()
-                timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
-                linevalues.add(Entry(timeFormatReplaced, it.ping.toFloat()))
+        CoroutineScope(Dispatchers.IO).launch {
+            val lineDataSet = LineDataSet(lineValues, "First")
+            //We add features to our chart
+            lineDataSet.color = resources.getColor(R.color.purple_200)
+            lineDataSet.circleRadius = 1f
+            lineDataSet.setDrawFilled(true)
+            lineDataSet.valueTextSize = 10F
+            lineDataSet.fillColor = resources.getColor(R.color.main_color)
+            lineDataSet.color = resources.getColor(R.color.white)
+            lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER;
+
+            //We connect our data to the UI Screen
+            val data = LineData(lineDataSet)
+            binding.getTheGraph.data = data
+            binding.getTheGraph.setBackgroundColor(resources.getColor(R.color.grey))
+            withContext(Dispatchers.Main) {
+                binding.getTheGraph.animateXY(2000, 2000, Easing.EaseInCubic)
             }
         }
-        val linedataset = LineDataSet(linevalues, "First")
-        //We add features to our chart
-        linedataset.color = resources.getColor(R.color.purple_200)
-
-        linedataset.circleRadius = 0f
-        linedataset.setDrawFilled(true)
-        linedataset.valueTextSize = 10F
-        linedataset.fillColor = resources.getColor(R.color.main_color)
-        linedataset.color = resources.getColor(R.color.white)
-        linedataset.mode = LineDataSet.Mode.CUBIC_BEZIER;
-
-        //We connect our data to the UI Screen
-        val data = LineData(linedataset)
-        binding.getTheGraph.data = data
-        binding.getTheGraph.setBackgroundColor(resources.getColor(R.color.grey))
-        binding.getTheGraph.animateXY(2000, 2000, Easing.EaseInCubic)
-
     }
 
 }
