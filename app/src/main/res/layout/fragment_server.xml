@@ -93,13 +93,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="@color/background_item_all_server_fragment"
-                app:cardCornerRadius="30dp">
+                android:backgroundTint="@color/grey"
+                app:cardCornerRadius="10dp">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/getTheGraph"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView

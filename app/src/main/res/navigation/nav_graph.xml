@@ -37,12 +37,15 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginPlusFragment"
+            app:destination="@id/loginPlusFragment" />
     </fragment>
     <fragment
         android:id="@+id/serverFragment"
         android:name="com.uptime.kuma.views.server.ServerFragment"
         android:label="fragment_server"
-        tools:layout="@layout/fragment_server" >
+        tools:layout="@layout/fragment_server">
         <argument
             android:name="serverId"
             app:argType="string"
@@ -62,9 +65,18 @@
         android:id="@+id/mainFragment"
         android:name="com.uptime.kuma.views.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_serverFragment"
             app:destination="@id/serverFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginPlusFragment"
+        android:name="com.uptime.kuma.LoginPlusFragment"
+        android:label="fragment_login_plus"
+        tools:layout="@layout/fragment_login_plus">
+        <action
+            android:id="@+id/action_loginPlusFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

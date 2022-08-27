@@ -63,6 +63,7 @@
     <string name="range_graph_server_fragment">Temps de reponse</string>
     <string name="socket_url"><font size="15">Lien socket</font></string>
     <string name="Password"><font size="15">Password</font></string>
+    <string name="email"><font size="15">Email</font></string>
 
     <string name="title_error_dialog">Erreur</string>
     <string name="message_error_dialog">Veuillez réessayer ultérieurement</string>
@@ -73,6 +74,7 @@
     <string name="yes">oui</string>
     <string name="no">non</string>
     <string name="warning_title">Avertissement</string>
+    <string name="login">Connexion</string>
 
 
     <string-array name="list">
