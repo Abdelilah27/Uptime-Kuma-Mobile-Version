@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-            saveData = SaveData(applicationContext)
-            //set light or dark mode from sharedPreferences
-            if (saveData.lightMode == "true") {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        saveData = SaveData(applicationContext)
+        //set light or dark mode from sharedPreferences
+        if (saveData.lightMode == "true") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
 
         super.onCreate(savedInstanceState)
