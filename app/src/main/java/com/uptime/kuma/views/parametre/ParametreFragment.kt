@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.parametre
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Process
@@ -13,6 +14,7 @@ import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.adapters.ParametreRecyclerAdapter
 import com.uptime.kuma.views.mainActivity.MainActivity
+import kotlin.system.exitProcess
 
 class ParametreFragment : Fragment(R.layout.fragment_parametre),
     ParametreRecyclerAdapter.OnItemClickListener, RestartApp {
@@ -33,8 +35,11 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
                 parametreRecyclerAdapter.submitList(getData())
             }
             buttonLogout.setOnClickListener {
+                onCommencerFinished()
                 sessionManagement.logOut()
                 restartApplication()
+
+
             }
         }
     }
@@ -60,7 +65,13 @@ class ParametreFragment : Fragment(R.layout.fragment_parametre),
         intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         Process.killProcess(Process.myPid())
-        System.exit(0)
+        exitProcess(0)
+    }
+    private fun onCommencerFinished(){
+        val sharedpref = requireActivity().getSharedPreferences("Bienvenue", Context.MODE_PRIVATE)
+        val editor = sharedpref.edit()
+        editor.putBoolean("Finished", false)
+        editor.apply()
     }
 
 }

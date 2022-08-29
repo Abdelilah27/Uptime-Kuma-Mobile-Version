@@ -7,6 +7,22 @@
     android:background="@color/black"
     tools:context=".views.about.AboutFragment">
 
+    <TextView
+        android:id="@+id/aboutback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        android:drawableRight="@drawable/arrow_back"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@id/guideline15"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline19"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="0dp"

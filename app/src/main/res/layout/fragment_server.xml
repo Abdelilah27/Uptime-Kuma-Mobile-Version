@@ -18,7 +18,17 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-
+            <TextView
+                android:id="@+id/serverback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableRight="@drawable/arrow_back"
+                android:focusable="true"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintHorizontal_bias="0.028"
+                app:layout_constraintVertical_bias="0.0" />
             <TextView
                 android:id="@+id/server_title"
                 style="@style/differente_size_title_fragment"
