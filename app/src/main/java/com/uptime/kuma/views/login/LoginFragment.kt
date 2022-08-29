@@ -89,6 +89,11 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
+    }
+
 //    private fun showErrorDialog() {
 //        val builder =
 //            AlertDialog.Builder(requireContext(), com.uptime.kuma.R.style.AlertDialogTheme)

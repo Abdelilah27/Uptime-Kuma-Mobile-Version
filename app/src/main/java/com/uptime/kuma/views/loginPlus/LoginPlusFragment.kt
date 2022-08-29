@@ -37,6 +37,7 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //TODO: DeConnexion
         sessionManagement = SessionManagement(requireContext())
         val socketUrl = argsSocket.socketUrl
 
@@ -92,6 +93,11 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
     }
 
     override fun restartApplication() {
