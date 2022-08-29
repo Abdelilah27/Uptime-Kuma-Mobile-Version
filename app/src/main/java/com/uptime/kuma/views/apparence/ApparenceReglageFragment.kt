@@ -28,6 +28,9 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
     ): View? {
         binding = FragmentApparenceReglageBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.aapparenceback.setOnClickListener {
+            MainActivity.navController.navigateUp()
+        }
 
         binding.apply {
             switchDarkMode.isChecked = MainActivity.saveData.lightMode == "true"
@@ -52,6 +55,7 @@ class ApparenceReglageFragment : Fragment(R.layout.fragment_apparence_reglage), 
                     MainActivity.languageSettings.language = "en"
                     var toast = Toast.makeText(requireContext(), "language has been changed successfully", Toast.LENGTH_LONG)
                     toast.show()
+
                 }
                 "French" -> {
                     MainActivity.mainActivityViewModel.setAppLocale(requireContext(), "fr")

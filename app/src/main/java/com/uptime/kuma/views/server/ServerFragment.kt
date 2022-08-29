@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -45,6 +47,9 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         val serverCardAdapter = MonitorItemAllServersCardAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         var monitor: Monitor
+        binding.serverback.setOnClickListener {
+            MainActivity.navController.navigateUp()
+        }
 
         //get Id from args
         val serverId = args.serverId
@@ -144,9 +149,11 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 
     private fun setLineChartData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val lineDataSet = LineDataSet(lineValues, "Temps de response ")
+            val lineDataSet = LineDataSet(lineValues, "Temps de réponse (ms)")
             //We add features to our chart
             lineDataSet.color = resources.getColor(R.color.attente)
+            binding.getTheGraph.description.isEnabled=false
+            binding.getTheGraph.legend.textColor=resources.getColor(R.color.attente)
             lineDataSet.circleRadius = 5f
             lineDataSet.setDrawFilled(true)
             lineDataSet.valueTextSize = 50F

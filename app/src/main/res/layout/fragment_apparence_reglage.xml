@@ -7,12 +7,29 @@
     android:background="@color/black"
     tools:context="views.apparence.ApparenceReglageFragment">
 
+    <TextView
+        android:id="@+id/aapparenceback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        android:drawableRight="@drawable/arrow_back"
+        android:focusable="true"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/langue"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/langue"
         style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:maxLines="1"
@@ -20,12 +37,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline23"
+    <TextView
+        android:id="@+id/switch1"
+        style="@style/langue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/switche"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -33,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/langue">
@@ -44,19 +67,16 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:inputType="none"
-            android:textColor="@color/white"
-            android:text="@string/anglais" />
+            android:text="@string/anglais"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/switch1"
-        style="@style/langue"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/switche"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0" />
 
     <Switch
         android:id="@+id/switchDarkMode"
