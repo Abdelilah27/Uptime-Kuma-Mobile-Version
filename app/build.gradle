@@ -147,6 +147,8 @@ dependencies {
     //custom toast library
 //    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
 
+//    implementation "com.androidplot:androidplot-core:1.5.9"
+
 }
 kapt {
     correctErrorTypes true

@@ -106,11 +106,15 @@
                 android:backgroundTint="@color/grey"
                 app:cardCornerRadius="10dp">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/getTheGraph"
+                <com.androidplot.xy.XYPlot
+                    android:id="@+id/graph_server_fragment"
+                    style="@style/APDefacto.Dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="12dp" />
+                    app:backgroundColor="@color/background_item_all_server_fragment"
+                    >
+
+                </com.androidplot.xy.XYPlot>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
