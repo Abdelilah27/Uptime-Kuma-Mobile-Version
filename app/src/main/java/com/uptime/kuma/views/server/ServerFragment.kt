@@ -15,7 +15,6 @@ import com.androidplot.xy.LineAndPointFormatter
 import com.androidplot.xy.SimpleXYSeries
 import com.androidplot.xy.XYGraphWidget
 import com.androidplot.xy.XYSeries
-import com.github.mikephil.charting.data.Entry
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
@@ -38,8 +37,6 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     private lateinit var serverViewModel: ServerViewModel
     private lateinit var binding: FragmentServerBinding
     private var status: ArrayList<ServerCalcul_Items> = ArrayList()
-    var lineValues = ArrayList<Entry>()
-    var executeOnce = true
     private var series1Number = arrayOf<Number>()
     var domainLabels = arrayOf<Number>()
 
@@ -109,41 +106,38 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                             }
                         }
 
-                        if (executeOnce) {
-                            series1Number = setData()
-                            print("Heyyyyyyy" + series1Number)
-                            val series1: XYSeries = SimpleXYSeries(
-                                Arrays.asList(*series1Number),
-                                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-                                "Temps de réponse en (ms)"
-                            );
-                            val series1Format = LineAndPointFormatter(
-                                resources.getColor(R.color.main_color),
-                                resources.getColor(R.color.attente),
-                                null,
-                                null
-                            )
-                            binding.graphServerFragment.addSeries(series1, series1Format)
-                            binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format =
-                                object : Format() {
-                                    override fun format(
-                                        obj: Any?,
-                                        toAppendTo: StringBuffer,
-                                        pos: FieldPosition
-                                    ): StringBuffer {
-                                        val i = (obj as Number).toFloat().roundToInt()
-                                        return toAppendTo.append(domainLabels[i])
-                                    }
-
-                                    override fun parseObject(
-                                        source: String?,
-                                        pos: ParsePosition
-                                    ): Any? {
-                                        return null
-                                    }
-
+                        series1Number = setData()
+                        val series1: XYSeries = SimpleXYSeries(
+                            Arrays.asList(*series1Number),
+                            SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
+                            "Temps de réponse en (ms)"
+                        );
+                        val series1Format = LineAndPointFormatter(
+                            resources.getColor(R.color.main_color),
+                            resources.getColor(R.color.attente),
+                            null,
+                            null
+                        )
+                        binding.graphServerFragment.addSeries(series1, series1Format)
+                        binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format =
+                            object : Format() {
+                                override fun format(
+                                    obj: Any?,
+                                    toAppendTo: StringBuffer,
+                                    pos: FieldPosition
+                                ): StringBuffer {
+                                    val i = (obj as Number).toFloat().roundToInt()
+                                    return toAppendTo.append(domainLabels[i])
                                 }
-                        }
+
+                                override fun parseObject(
+                                    source: String?,
+                                    pos: ParsePosition
+                                ): Any? {
+                                    return null
+                                }
+
+                            }
 
 
                     })
@@ -166,29 +160,10 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     override fun onDestroyView() {
         super.onDestroyView()
         MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
-        executeOnce = false
     }
-
-//    private fun setData() { //for the chart
-//        CoroutineScope(Dispatchers.IO).launch {
-//            executeOnce = false
-//            var timeFormat: String
-//            var timeFormatReplaced: Float
-//            status.sortBy { it.time }
-//            Log.d("TAG", status.takeLast(16).forEach { it.time }.toString())
-//            status.takeLast(16).forEach {
-//                if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
-//                    timeFormat = it.time.toString().subSequence(11, 16).toString()
-//                    timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
-//                    lineValues.add(Entry(timeFormatReplaced, it.ping.toFloat()))
-//                }
-//            }
-//        }
-//    }
 
     private fun setData(): Array<Number> { //for the chart
         var time = 0.0
-        executeOnce = false
         status.sortBy { it.time }
         var timeFormat: String
         var timeFormatReplaced: Float
@@ -202,7 +177,6 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                 } catch (e: Exception) {
                     Log.d("TAG", e.toString())
                 }
-//                    series1Number=addElement(series1Number,timeFormatReplaced)
                 domainLabels = addElement(domainLabels, time)
                 series1Number = addElement(series1Number, it.ping.toInt())
             }
@@ -211,48 +185,10 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     }
 
 
-    fun addElement(arr: Array<Number>, element: Number): Array<Number> {
+    private fun addElement(arr: Array<Number>, element: Number): Array<Number> {
         val mutableArray = arr.toMutableList()
         mutableArray.add(element)
         return mutableArray.toTypedArray()
     }
-
-
-//    private fun setLineChartData() {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val lineDataSet = LineDataSet(lineValues, "Temps de réponse (ms)")
-//            //We add features to our chart
-//            lineDataSet.color = resources.getColor(R.color.attente)
-//            binding.getTheGraph.description.isEnabled=false
-//            binding.getTheGraph.legend.textColor=resources.getColor(R.color.attente)
-//            lineDataSet.circleRadius = 5f
-//            lineDataSet.setDrawFilled(true)
-//            lineDataSet.valueTextSize = 50F
-//            lineDataSet.fillColor = resources.getColor(R.color.main_color)
-//            lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER;
-//            lineDataSet.setDrawValues(false);
-//            val yAxisRight: YAxis = binding.getTheGraph.axisRight
-//            val yAxisLeft: YAxis = binding.getTheGraph.axisLeft
-//            val xAxis: XAxis = binding.getTheGraph.xAxis
-//            xAxis.textColor = resources.getColor(R.color.main_color)
-//            yAxisRight.textColor = resources.getColor(R.color.main_color)
-//            yAxisLeft.textColor = resources.getColor(R.color.main_color)
-//
-//
-//            //            lineDataSet.setLineWidth(1.75f);
-//            //            lineDataSet.setCircleRadius(5f);
-//            //            lineDataSet.setColor(Color.WHITE);
-//                        lineDataSet.setCircleColor(resources.getColor(R.color.attente));
-////                        lineDataSet.setHighLightColor(Color.WHITE);
-//
-//            //We connect our data to the UI Screen
-//            val data = LineData(lineDataSet)
-//            binding.getTheGraph.data = data
-//            binding.getTheGraph.setBackgroundColor(resources.getColor(R.color.grey))
-//            withContext(Dispatchers.Main) {
-//                binding.getTheGraph.animateXY(2000, 2000, Easing.EaseInCubic)
-//            }
-//        }
-//    }
 
 }
