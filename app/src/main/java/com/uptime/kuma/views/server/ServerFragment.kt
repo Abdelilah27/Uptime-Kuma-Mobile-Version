@@ -187,6 +187,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 //    }
 
     private fun setData(): Array<Number> { //for the chart
+        var time = 0.0
         executeOnce = false
         status.sortBy { it.time }
         var timeFormat: String
@@ -195,7 +196,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
             if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
                 timeFormat = it.time.toString().subSequence(11, 16).toString()
                 timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
-                var time = 1.2
+
                 try {
                     time = String.format("%.2f", timeFormatReplaced).toDouble()
                 } catch (e: Exception) {
