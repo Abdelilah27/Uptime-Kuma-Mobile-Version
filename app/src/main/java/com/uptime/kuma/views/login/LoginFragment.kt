@@ -52,7 +52,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                         viewLifecycleOwner,
                         Observer {
                             when (it) {
-                                "1" -> {
+                                //autoLogin
+                                "7" -> {
                                     sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
                                     binding.progressBar.visibility = View.GONE
                                     findNavController().navigate(R.id.mainFragment)
@@ -62,13 +63,13 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
 //                                    binding.progressBar.visibility = View.GONE
 //                                    showErrorDialog()
 //                                }
-                                else -> {
-                                    val action =
-                                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-                                            binding.socketUrl.text.toString()
-                                        )
-                                    findNavController().navigate(action)
-                                }
+//                                else -> {
+//                                    val action =
+//                                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+//                                            binding.socketUrl.text.toString()
+//                                        )
+//                                    findNavController().navigate(action)
+//                                }
                             }
                         })
 

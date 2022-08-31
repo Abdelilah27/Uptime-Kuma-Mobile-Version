@@ -28,8 +28,6 @@ import org.json.JSONObject
 
 open class SharedViewModel(private val sharedRepository: SharedRepository) :
     ViewModel() {
-//    constructor() : this(null)
-
     //Dashboard Fragment
     var newList: ArrayList<MonitorStatusItem> = ArrayList()
     private val _newLiveData = MutableLiveData<ArrayList<MonitorStatusItem>>()
@@ -69,14 +67,13 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
-//            Log.d("thread", Thread.currentThread().toString())
             //to show error dialog after a delay
             Handler(Looper.getMainLooper()).postDelayed({
                 if (NETWORKSTATUS == "0") {
                     NETWORKSTATUS = "6"
                     _NETWORKLIVEDATA.postValue("6") //no response after a delay
                 }
-            }, 10000)
+            }, 30000)
             if (response.toString()
                     .contains(Constants.successConnexion) && NETWORKSTATUS == "0"
             ) {
@@ -84,16 +81,30 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 NETWORKSTATUS = "1" //Success response
                 _NETWORKLIVEDATA.postValue("1")
 
-            } else if (response.toString().contains(Constants.emission)) {
+            }
+
+            if (response.toString()
+                    .contains(Constants.autoLogin) && NETWORKSTATUS == "1"
+            ) {
+                Log.d("resp", "onViewCreated: ")
+                NETWORKSTATUS = "7" //Success response
+                _NETWORKLIVEDATA.postValue("7")
+            }
+
+
+            if (response.toString().contains(Constants.emission)) {
                 sendQuery(Constants.dataQueryResend)
                 NETWORKSTATUS = "5" //Resend response
                 _NETWORKLIVEDATA.postValue("5")
-            } else if (response.toString()
+            }
+            if (response.toString()
                     .contains(Constants.unSuccessConnexion)
             ) {
                 NETWORKSTATUS = "2" //Error response
                 _NETWORKLIVEDATA.postValue("2")
             }
+
+
             CoroutineScope(Dispatchers.Main).launch {
                 getMonitorsFromResponse(
                     response,

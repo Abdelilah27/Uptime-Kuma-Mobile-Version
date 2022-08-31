@@ -14,4 +14,5 @@ object Constants {
     const val dashbordMonitorItemsSuffix = "42[\"importantHeartbeatList\","
     const val dashbordMonitorUpdate = "42[\"heartbeat\","
     const val heartbeatlist = "42[\"heartbeatList\","
+    const val autoLogin = "autoLogin"
 }
