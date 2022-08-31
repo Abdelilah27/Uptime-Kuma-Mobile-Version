@@ -15,4 +15,7 @@ object Constants {
     const val dashbordMonitorUpdate = "42[\"heartbeat\","
     const val heartbeatlist = "42[\"heartbeatList\","
     const val autoLogin = "autoLogin"
+    const val login = "autoLogin"
+    const val successLogin = "\"ok\":true"
+    const val unSuccessLogin = "value=430[{\"ok\":false"
 }

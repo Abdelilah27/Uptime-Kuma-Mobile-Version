@@ -2,6 +2,8 @@ package com.uptime.kuma.views.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
@@ -57,20 +59,21 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                                     sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
                                     binding.progressBar.visibility = View.GONE
                                     findNavController().navigate(R.id.mainFragment)
-
                                 }
 //                                "2", "3", "6" -> {
 //                                    binding.progressBar.visibility = View.GONE
 //                                    showErrorDialog()
 //                                }
-//                                else -> {
-//                                    val action =
-//                                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-//                                            binding.socketUrl.text.toString()
-//                                        )
-//                                    findNavController().navigate(action)
-//                                }
                             }
+
+                            //send to the login+ fragment
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                val action =
+                                    LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+                                        binding.socketUrl.text.toString()
+                                    )
+                                findNavController().navigate(action)
+                            }, 6000)
                         })
 
                 } else {

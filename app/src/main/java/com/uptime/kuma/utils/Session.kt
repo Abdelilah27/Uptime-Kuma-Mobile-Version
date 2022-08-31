@@ -15,6 +15,8 @@ internal var CALCUL: ArrayList<CalculDashboardItem>? = null
 // 5 -> resend response
 // 6 -> no response after a delay
 // 7 -> autoLogin
+// 8 -> success Login
+// 9 -> unSuccess Login
 internal var NETWORKSTATUS = "0"
 internal val _NETWORKLIVEDATA = MutableLiveData<String>()
 internal val NETWORKLIVEDATA: LiveData<String>

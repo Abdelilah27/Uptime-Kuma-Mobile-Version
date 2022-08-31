@@ -20,6 +20,7 @@ import com.uptime.kuma.databinding.FragmentLoginPlusBinding
 import com.uptime.kuma.utils.NETWORKLIVEDATA
 import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
+import com.uptime.kuma.views.mainActivity.MainActivity
 
 class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
     lateinit var binding: FragmentLoginPlusBinding
@@ -44,18 +45,21 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         binding.apply {
             buttonLoginPlus.setOnClickListener {
                 if (mailLoginP.text.isNotEmpty() && passLoginP.text.isNotEmpty()) {
-                    //TODO: Setup Connexion
-//                    (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
                     progressBarPlus.visibility = View.VISIBLE
+                    MainActivity.sharedViewModel.sendQuery(
+                        sendLogin(
+                            mailLoginP.text.toString(),
+                            passLoginP.text.toString()
+                        )
+                    )
                     NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
                         when (it) {
-                            "1" -> {
-                                //sessionManagement.creatLoginSocket(binding.socketUrl.text .toString())
-                                //TODO: Session
+                            "8" -> {
+                                sessionManagement.creatLoginSocket(socketUrl)
                                 progressBarPlus.visibility = View.GONE
                                 findNavController().navigate(R.id.mainFragment)
                             }
-                            "2", "3", "6" -> {
+                            "2", "3", "6", "9" -> {
                                 progressBarPlus.visibility = View.GONE
                                 showErrorDialog()
                             }
@@ -70,6 +74,11 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
                 }
             }
         }
+    }
+
+    private fun sendLogin(mail: String, pass: String): String {
+        return "420[\"login\",{\"username\":\"$mail\",\"password\":\"$pass\"," +
+                "\"token\":\"\"}]"
     }
 
     private fun showErrorDialog() {

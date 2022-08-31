@@ -58,7 +58,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     val data: Flowable<WebSocket.Event>
         get() = sharedRepository!!.getData()
 
-    private fun sendQuery(param: String) {
+    fun sendQuery(param: String) {
         viewModelScope.launch {
             sharedRepository!!.sendMessage(param)
         }
@@ -80,17 +80,26 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 sendQuery(Constants.dataQuery) //Send query after opening the connexion
                 NETWORKSTATUS = "1" //Success response
                 _NETWORKLIVEDATA.postValue("1")
-
             }
-
             if (response.toString()
                     .contains(Constants.autoLogin) && NETWORKSTATUS == "1"
             ) {
-                Log.d("resp", "onViewCreated: ")
-                NETWORKSTATUS = "7" //Success response
+                NETWORKSTATUS = "7" //autoLogin
                 _NETWORKLIVEDATA.postValue("7")
             }
-
+            if (response.toString()
+                    .contains(Constants.successLogin)
+            ) {
+                Log.d("LOLO", "lolo")
+                NETWORKSTATUS = "8" //success Login
+                _NETWORKLIVEDATA.postValue("8")
+            } else if (response.toString()
+                    .contains(Constants.unSuccessLogin)
+            ) {
+                Log.d("MOMO", "lolo")
+                NETWORKSTATUS = "9" //unSuccess Login
+                _NETWORKLIVEDATA.postValue("9")
+            }
 
             if (response.toString().contains(Constants.emission)) {
                 sendQuery(Constants.dataQueryResend)
@@ -129,7 +138,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-//            Log.d("RES", response.toString())
+            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")
