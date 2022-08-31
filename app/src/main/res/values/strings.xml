@@ -73,6 +73,7 @@
     <string name="warning_title">Warning</string>
     <string name="login">Login</string>
     <string name="loginPlus">Login+</string>
+    <string name="loading">Loading...</string>
 
 
     <string-array name="list">

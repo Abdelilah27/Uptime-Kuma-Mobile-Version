@@ -26,6 +26,7 @@
         <entry key="..\:/Uptime-Kuma-Mobile-Version5/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Uptime-Kuma-Mobile-Version6/app/src/main/res/layout/item_status_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/background_edit_text_add_status_fragment.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/bg_round_dialog.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/button_error_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/button_neutral_background.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/button_warning_background.xml" value="0.191" />
@@ -45,7 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2501397949692197" />
         <entry key="app/src/main/res/layout/fragment_add_status.xml" value="0.18478912353515622" />
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.24138946533203112" />
-        <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.4266561889648438" />
+        <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.17708793598446038" />
         <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.34092010498046876" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.40788116455078127" />
@@ -69,6 +70,7 @@
         <entry key="app/src/main/res/layout/list_item.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/notifications_recycler_item.xml" value="0.3125" />
         <entry key="app/src/main/res/layout/parametre_recycler_item.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/progress_dialog.xml" value="0.3550765991210938" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.3125" />
         <entry key="app/src/main/res/layout/toolbar_main_ressource.xml" value="0.3125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.382051282051282" />

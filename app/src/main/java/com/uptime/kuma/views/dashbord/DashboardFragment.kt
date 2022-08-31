@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.dashbord
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -19,24 +20,26 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     RecyclerClickInterface {
-    private lateinit var itemAdapter: DashboardRecyclerAdapter
+    companion object {
+        lateinit var progressDialog: ProgressDialog
+    }
 
-    //    private lateinit var dashbordViewModel: DashbordViewModel
+    private lateinit var itemAdapter: DashboardRecyclerAdapter
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
     private lateinit var shimmerViewCalcul: ShimmerFrameLayout
 
-    //    private lateinit var dashbordViewModel: DashbordViewModelf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDashboardBinding.bind(view)
-        // instantiation de ViewModel
-//        dashbordViewModel = ViewModelProvider(requireActivity()).get(DashbordViewModel::class.java)
         shimmerView = binding.dashboardShimmer
         shimmerViewCalcul = binding.dashboardShimmerCalcul
         shimmerView.startShimmerAnimation()
         shimmerViewCalcul.startShimmerAnimation()
+        //init progress dialog
+        progressDialog = ProgressDialog(requireContext())
+
         binding.apply {
             calculRecycler.apply {
                 calculItemAdapter = DashboardRecyclerCalculItemAdapter(context)
@@ -140,6 +143,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     override fun onItemClick(position: Int) {
+        progressDialog.show()
+        progressDialog.setContentView(R.layout.progress_dialog)
+        progressDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(position.toString())
         MainActivity.navController.navigate(action)
     }

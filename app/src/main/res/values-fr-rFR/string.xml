@@ -75,6 +75,7 @@
     <string name="warning_title">Avertissement</string>
     <string name="login">Connexion</string>
     <string name="loginPlus">Connexion+</string>
+    <string name="loading">Chargement...</string>
 
 
     <string-array name="list">

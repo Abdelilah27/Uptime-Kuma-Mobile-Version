@@ -21,6 +21,7 @@ import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.adapters.MonitorItemAllServersCardAdapter
 import com.uptime.kuma.views.adapters.ServerAdapter
+import com.uptime.kuma.views.dashbord.DashboardFragment
 import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -154,6 +155,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                     .retryInterval.toString() + " " + resources.getString(
                     R.string.seconds
                 )
+            DashboardFragment.progressDialog.dismiss()
         }
     }
 
