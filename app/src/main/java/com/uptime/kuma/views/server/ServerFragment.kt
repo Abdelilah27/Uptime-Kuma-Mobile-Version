@@ -1,7 +1,6 @@
 package com.uptime.kuma.views.server
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,7 +30,6 @@ import java.text.FieldPosition
 import java.text.Format
 import java.text.ParsePosition
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 
@@ -111,9 +109,9 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                             }
                         }
 
-                        if(executeOnce) {
+                        if (executeOnce) {
                             series1Number = setData()
-                            print("Heyyyyyyy"+series1Number)
+                            print("Heyyyyyyy" + series1Number)
                             val series1: XYSeries = SimpleXYSeries(
                                 Arrays.asList(*series1Number),
                                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
@@ -126,21 +124,25 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                                 null
                             )
                             binding.graphServerFragment.addSeries(series1, series1Format)
-                            binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format = object : Format() {
-                                override fun format(
-                                    obj: Any?,
-                                    toAppendTo: StringBuffer,
-                                    pos: FieldPosition
-                                ): StringBuffer {
-                                    val i = (obj as Number).toFloat().roundToInt()
-                                    return toAppendTo.append(domainLabels[i])
-                                }
+                            binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format =
+                                object : Format() {
+                                    override fun format(
+                                        obj: Any?,
+                                        toAppendTo: StringBuffer,
+                                        pos: FieldPosition
+                                    ): StringBuffer {
+                                        val i = (obj as Number).toFloat().roundToInt()
+                                        return toAppendTo.append(domainLabels[i])
+                                    }
 
-                                override fun parseObject(source: String?, pos: ParsePosition): Any? {
-                                    return null
-                                }
+                                    override fun parseObject(
+                                        source: String?,
+                                        pos: ParsePosition
+                                    ): Any? {
+                                        return null
+                                    }
 
-                            }
+                                }
                         }
 
 
@@ -164,7 +166,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     override fun onDestroyView() {
         super.onDestroyView()
         MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
-        executeOnce=false
+        executeOnce = false
     }
 
 //    private fun setData() { //for the chart
@@ -184,21 +186,24 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
 //        }
 //    }
 
-    private fun setData():Array<Number> { //for the chart
+    private fun setData(): Array<Number> { //for the chart
         executeOnce = false
-        status.sortBy{ it.time }
+        status.sortBy { it.time }
         var timeFormat: String
         var timeFormatReplaced: Float
         status.takeLast(10).forEach {
             if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
                 timeFormat = it.time.toString().subSequence(11, 16).toString()
                 timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
-                var time :Double=String.format("%.2f",timeFormatReplaced).toDouble()
-                Log.d("Time", time.toString())
-                Log.d("Ping", it.ping)
+                var time = 1.2
+                try {
+                    time = String.format("%.2f", timeFormatReplaced).toDouble()
+                } catch (e: Exception) {
+                    Log.d("TAG", e.toString())
+                }
 //                    series1Number=addElement(series1Number,timeFormatReplaced)
-                domainLabels=addElement(domainLabels,time)
-                series1Number=addElement(series1Number,it.ping.toInt())
+                domainLabels = addElement(domainLabels, time)
+                series1Number = addElement(series1Number, it.ping.toInt())
             }
         }
         return series1Number
