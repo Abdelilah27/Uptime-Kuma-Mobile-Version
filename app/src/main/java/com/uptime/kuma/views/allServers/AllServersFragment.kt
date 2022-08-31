@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.allServers
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,16 +19,20 @@ import java.util.*
 class AllServersFragment : Fragment(R.layout.fragment_all_servers), RecyclerClickInterface {
     companion object {
         lateinit var allRecycler: RecyclerView
+        lateinit var progressDialogAllServers: ProgressDialog
+
     }
 
+    private val TAG = "AllServersFragment"
     private lateinit var itemAdapter: MonitorItemAllServersAdapter
-
     private lateinit var binding: FragmentAllServersBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         binding = FragmentAllServersBinding.bind(view)
+        progressDialogAllServers = ProgressDialog(requireContext())
+
         allRecycler = view.findViewById(R.id.all_server_recycler)
         itemAdapter = activity?.let { MonitorItemAllServersAdapter(it, this) }!!
         allRecycler.apply {
@@ -75,7 +80,11 @@ class AllServersFragment : Fragment(R.layout.fragment_all_servers), RecyclerClic
     }
 
     override fun onItemClick(position: Int) {
-        val action = MainFragmentDirections.actionMainFragmentToServerFragment(position.toString())
+        progressDialogAllServers.show()
+        progressDialogAllServers.setContentView(R.layout.progress_dialog)
+        progressDialogAllServers.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        val args = position.toString() + TAG
+        val action = MainFragmentDirections.actionMainFragmentToServerFragment(args)
         MainActivity.navController.navigate(action)
     }
 

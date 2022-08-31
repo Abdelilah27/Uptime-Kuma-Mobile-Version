@@ -24,6 +24,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         lateinit var progressDialog: ProgressDialog
     }
 
+    private val TAG = "DashboardFragment"
     private lateinit var itemAdapter: DashboardRecyclerAdapter
     private lateinit var calculItemAdapter: DashboardRecyclerCalculItemAdapter
     private lateinit var binding: FragmentDashboardBinding
@@ -146,7 +147,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         progressDialog.show()
         progressDialog.setContentView(R.layout.progress_dialog)
         progressDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-        val action = MainFragmentDirections.actionMainFragmentToServerFragment(position.toString())
+        val args = position.toString() + TAG
+        val action = MainFragmentDirections.actionMainFragmentToServerFragment(args)
         MainActivity.navController.navigate(action)
     }
 

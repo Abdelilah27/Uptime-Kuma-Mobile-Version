@@ -21,6 +21,7 @@ import com.uptime.kuma.models.monitor.Monitor
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.views.adapters.MonitorItemAllServersCardAdapter
 import com.uptime.kuma.views.adapters.ServerAdapter
+import com.uptime.kuma.views.allServers.AllServersFragment
 import com.uptime.kuma.views.dashbord.DashboardFragment
 import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.CoroutineScope
@@ -40,6 +41,9 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     private var status: ArrayList<ServerCalcul_Items> = ArrayList()
     private var series1Number = arrayOf<Number>()
     var domainLabels = arrayOf<Number>()
+    private val TAG0 = "DashboardFragment"
+    private val TAG1 = "AllServersFragment"
+    private var serverId = "0"
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +58,12 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         }
 
         //get Id from args
-        val serverId = args.serverId
+        val arg = args.serverId
+        if (arg.contains(TAG0)) {
+            serverId = arg.removeSuffix(TAG0)
+        } else if (arg.contains(TAG1)) {
+            serverId = arg.removeSuffix(TAG1)
+        }
         binding.apply {
             recyclerServerFragment.apply {
                 adapter = serverAdapter
@@ -155,7 +164,12 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                     .retryInterval.toString() + " " + resources.getString(
                     R.string.seconds
                 )
-            DashboardFragment.progressDialog.dismiss()
+            if (arg.contains(TAG0)) {
+                DashboardFragment.progressDialog.dismiss()
+            } else if (arg.contains(TAG1)) {
+                AllServersFragment.progressDialogAllServers.dismiss()
+            }
+
         }
     }
 
