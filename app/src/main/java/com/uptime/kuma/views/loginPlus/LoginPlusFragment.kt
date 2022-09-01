@@ -41,6 +41,16 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         sessionManagement = SessionManagement(requireContext())
         val socketUrl = argsSocket.socketUrl
 
+        NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                "7" -> {
+                    sessionManagement.creatLoginSocket(socketUrl)
+                    binding.progressBarPlus.visibility = View.GONE
+                    findNavController().navigate(R.id.mainFragment)
+                }
+            }
+        })
+
         binding.apply {
             buttonLoginPlus.setOnClickListener {
                 if (mailLoginP.text.isNotEmpty() && passLoginP.text.isNotEmpty()) {

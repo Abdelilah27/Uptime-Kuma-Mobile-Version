@@ -2,8 +2,6 @@ package com.uptime.kuma.views.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
@@ -69,7 +67,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                     }
                 })
             }
-
         }
 
 
@@ -78,34 +75,11 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                 if (verificationSocketLink(binding.socketUrl.text.toString())) {
                     (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
                     binding.progressBar.visibility = View.VISIBLE
-                    NETWORKLIVEDATA.observe(
-                        viewLifecycleOwner,
-                        Observer {
-                            when (it) {
-                                //autoLogin
-                                "7" -> {
-                                    sessionManagement.creatLoginSocket(binding.socketUrl.text.toString())
-                                    binding.progressBar.visibility = View.GONE
-                                    findNavController().navigate(R.id.mainFragment)
-                                }
-                                else -> {
-                                    //send to the login+ fragment
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        val action =
-                                            LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-                                                binding.socketUrl.text.toString()
-                                            )
-                                        findNavController().navigate(action)
-                                    }, 8000)
-                                }
-//                                "2", "3", "6" -> {
-//                                    binding.progressBar.visibility = View.GONE
-//                                    showErrorDialog()
-//                                }
-                            }
-
-
-                        })
+                    val action =
+                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+                            binding.socketUrl.text.toString()
+                        )
+                    findNavController().navigate(action)
 
                 } else {
                     Toast.makeText(
