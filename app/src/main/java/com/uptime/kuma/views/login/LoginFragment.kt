@@ -46,7 +46,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
             ) {
                 findNavController().navigate(R.id.mainFragment)
                 binding.progressBar.visibility = View.GONE
-
             } else {
                 NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
                     when (it) {

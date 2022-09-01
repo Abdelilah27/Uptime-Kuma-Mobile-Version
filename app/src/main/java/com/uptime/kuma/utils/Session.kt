@@ -22,3 +22,8 @@ internal val _NETWORKLIVEDATA = MutableLiveData<String>()
 internal val NETWORKLIVEDATA: LiveData<String>
     get() = _NETWORKLIVEDATA
 
+internal var TRYNUMBER = 0
+internal val _TRYNUMBERLIVEDATA = MutableLiveData<Int>()
+internal val TRYNUMBERLIVEDATA: LiveData<Int>
+    get() = _TRYNUMBERLIVEDATA
+

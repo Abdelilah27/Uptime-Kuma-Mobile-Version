@@ -19,9 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentMainBinding
-import com.uptime.kuma.utils.NETWORKLIVEDATA
-import com.uptime.kuma.utils.RestartApp
-import com.uptime.kuma.utils.SessionManagement
+import com.uptime.kuma.utils.*
 
 class MainFragment : Fragment(R.layout.fragment_main), RestartApp {
     companion object {
@@ -58,6 +56,13 @@ class MainFragment : Fragment(R.layout.fragment_main), RestartApp {
                     }
                 }
             })
+
+        TRYNUMBERLIVEDATA.observe(viewLifecycleOwner, Observer {
+            if (it == 3) {
+                NETWORKSTATUS = "6"
+                _NETWORKLIVEDATA.postValue("6") //no response after a delay
+            }
+        })
 
 
     }

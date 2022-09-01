@@ -16,9 +16,7 @@ import com.uptime.kuma.models.serverCalcul.ServerCalcul
 import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.models.status.Status
 import com.uptime.kuma.repository.SharedRepository
-import com.uptime.kuma.utils.Constants
-import com.uptime.kuma.utils.NETWORKSTATUS
-import com.uptime.kuma.utils._NETWORKLIVEDATA
+import com.uptime.kuma.utils.*
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +51,6 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     val statusLiveData: LiveData<ArrayList<Status>>
         get() = _statusLiveData
 
-
     //Get Data
     val data: Flowable<WebSocket.Event>
         get() = sharedRepository!!.getData()
@@ -74,6 +71,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
+            Log.d("TAG", TRYNUMBER.toString())
             //Manage Connexion State
             Handler(Looper.getMainLooper()).postDelayed({ //to show error dialog after a delay
                 if (NETWORKSTATUS == "0") {
@@ -107,6 +105,8 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             }
 
             if (response.toString().contains(Constants.emission)) {
+                TRYNUMBER += 1
+                _TRYNUMBERLIVEDATA.postValue(TRYNUMBER)
                 sendQuery(Constants.dataQueryResend)
                 NETWORKSTATUS = "5" //Resend response
                 _NETWORKLIVEDATA.postValue("5")
@@ -143,7 +143,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-            Log.d("RES", response.toString())
+//            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")
@@ -156,6 +156,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     fun getDashbordMonitorItem(response: WebSocket.Event?, suffix: String) {
         var monitorStatusItem: MonitorStatusItem
         if (response.toString().contains(suffix)) {
+            restartTryNumber()
             val customResponseAfter = response.toString().substringAfter(suffix)
             //add [ at the beginning of the response
             val customResponseBegin = "[$customResponseAfter"
@@ -208,6 +209,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     fun getDashbordUpdate(response: WebSocket.Event?, suffix: String) {
         var monitorUpdate: MonitorStatusItem
         if (response.toString().contains(suffix)) {
+            restartTryNumber()
             val customResponseAfter = response.toString().substringAfter(suffix)
             val jsonObject = JSONObject(customResponseAfter)
             val monitorID = jsonObject.get("monitorID").toString()
@@ -277,6 +279,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
         var myobject: ServerCalcul_Items
         val calculitems: ArrayList<ServerCalcul_Items> = ArrayList()
         if (response.toString().contains(suffix)) {
+            restartTryNumber()
             val customResponseAfter = response.toString().substringAfter(suffix)
             val customResponseBegin = "[$customResponseAfter"
             val customResponseEnd = customResponseBegin.dropLast(9)
@@ -318,6 +321,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     fun getMonitorsFromResponse(response: WebSocket.Event?, suffix: String) {
         var monitor: Monitor
         if (response.toString().contains(suffix)) {
+            restartTryNumber()
             // deleting suffix part
             val customResponseAfter = response.toString().substringAfter(
                 Constants.monitorListSuffix
@@ -425,6 +429,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     fun getStatusFromResponse(response: WebSocket.Event?, suffix: String) {
         var status: Status
         if (response.toString().contains(suffix)) {
+            restartTryNumber()
             val responseAfter = response.toString().substringAfter(
                 Constants.statusListSuffix
             )
@@ -473,6 +478,11 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             }
             _statusLiveData.postValue(statues)
         }
+    }
+
+    private fun restartTryNumber() {
+        TRYNUMBER = 0
+        _TRYNUMBERLIVEDATA.postValue(TRYNUMBER)
     }
 
 }
