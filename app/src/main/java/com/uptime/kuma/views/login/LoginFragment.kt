@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,15 +40,14 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
         super.onViewCreated(view, savedInstanceState)
         sessionManagement = SessionManagement(requireContext())
         //redirection to the dashboard fragment
-        Log.d("TAG", sessionManagement.checkIsLogged().toString())
-        Log.d("TAG", sessionManagement.getUsername().toString())
-        Log.d("TAG", sessionManagement.getPass().toString())
         if (sessionManagement.checkIsLogged()) {
+            binding.progressBar.visibility = View.VISIBLE
             (activity as MainActivity).setUpConnexion(sessionManagement.getSocket())
             if (sessionManagement.getUsername() == null.toString() && sessionManagement.getPass()
                 == null.toString()
             ) {
                 findNavController().navigate(R.id.mainFragment)
+                binding.progressBar.visibility = View.GONE
 
             } else {
                 NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
@@ -65,6 +63,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                                     )
                                 )
                                 findNavController().navigate(R.id.mainFragment)
+                                binding.progressBar.visibility = View.GONE
                             }
                         }
                     }

@@ -92,6 +92,7 @@
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="10sp"
             android:hint="@string/Password"
+            android:inputType="textPassword"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/main_text_item_all_server_fragment" />
