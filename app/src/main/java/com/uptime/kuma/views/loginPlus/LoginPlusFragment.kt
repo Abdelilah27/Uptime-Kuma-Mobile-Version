@@ -2,6 +2,8 @@ package com.uptime.kuma.views.loginPlus
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +42,7 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         super.onViewCreated(view, savedInstanceState)
         sessionManagement = SessionManagement(requireContext())
         val socketUrl = argsSocket.socketUrl
-
+        binding.progressBarPlus.visibility = View.VISIBLE
         NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
             when (it) {
                 "7" -> {
@@ -50,6 +52,10 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
                 }
             }
         })
+
+        Handler(Looper.getMainLooper()).postDelayed({ //hide progress dialog after a delay
+            binding.progressBarPlus.visibility = View.GONE
+        }, 5000)
 
         binding.apply {
             buttonLoginPlus.setOnClickListener {

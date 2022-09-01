@@ -71,12 +71,13 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
 
         binding.buttonLogin.setOnClickListener {
             if (binding.socketUrl.text.isNotEmpty()) {
-                if (verificationSocketLink(binding.socketUrl.text.toString())) {
-                    (activity as MainActivity).setUpConnexion(binding.socketUrl.text.toString())
+                val formatSocketLink = formatSocketLink(binding.socketUrl.text.toString())
+                if (verificationSocketLink(formatSocketLink)) {
+                    (activity as MainActivity).setUpConnexion(formatSocketLink)
                     binding.progressBar.visibility = View.VISIBLE
                     val action =
                         LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-                            binding.socketUrl.text.toString()
+                            formatSocketLink
                         )
                     findNavController().navigate(action)
 
@@ -95,6 +96,10 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                 ).show()
             }
         }
+    }
+
+    private fun formatSocketLink(link: String): String {
+        return "ws://$link/socket.io/?EIO=4&transport=websocket"
     }
 
     override fun onDestroyView() {

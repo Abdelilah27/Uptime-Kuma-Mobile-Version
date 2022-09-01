@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // ws://status.mobiblanc.tech/socket.io/?EIO=4&transport=websocket
+//        status.mobiblanc.tech
 //        ZS}3Dn@:sq@W<=R)U3
 
     }

@@ -71,7 +71,6 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
-            Log.d("TAG", TRYNUMBER.toString())
             //Manage Connexion State
             Handler(Looper.getMainLooper()).postDelayed({ //to show error dialog after a delay
                 if (NETWORKSTATUS == "0") {
@@ -143,7 +142,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                     Constants.statusListSuffix
                 )
             }
-//            Log.d("RES", response.toString())
+            Log.d("RES", response.toString())
         }, { error ->
             NETWORKSTATUS = "3"//set error
             _NETWORKLIVEDATA.postValue("3")

@@ -58,9 +58,9 @@
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
     <string name="range_graph_server_fragment">Time of response</string>
-    <string name="socket_url"><font size="15">Socket url</font></string>
+    <string name="socket_url"><font size="15">Socket url - Domain name</font></string>
     <string name="Password"><font size="15">Password</font></string>
-    <string name="email"><font size="15">Email</font></string>
+    <string name="username"><font size="15">Username</font></string>
 
     <string name="title_error_dialog">Error message</string>
     <string name="message_error_dialog">Please retry later</string>

@@ -76,7 +76,7 @@
             android:background="@drawable/custom_login_edit_text"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="10sp"
-            android:hint="@string/email"
+            android:hint="@string/username"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/main_text_item_all_server_fragment" />
