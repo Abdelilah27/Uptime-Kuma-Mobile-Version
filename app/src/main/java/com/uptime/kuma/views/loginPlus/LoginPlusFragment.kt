@@ -47,7 +47,7 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
                 if (mailLoginP.text.isNotEmpty() && passLoginP.text.isNotEmpty()) {
                     progressBarPlus.visibility = View.VISIBLE
                     MainActivity.sharedViewModel.sendQuery(
-                        sendLogin(
+                        MainActivity.sharedViewModel.sendLogin(
                             mailLoginP.text.toString(),
                             passLoginP.text.toString()
                         )
@@ -55,7 +55,11 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
                     NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
                         when (it) {
                             "8" -> {
-                                sessionManagement.creatLoginSocket(socketUrl)
+                                //store in share preferences
+                                sessionManagement.creatLoginSocket(
+                                    socketUrl, mailLoginP.text
+                                        .toString(), passLoginP.text.toString()
+                                )
                                 progressBarPlus.visibility = View.GONE
                                 findNavController().navigate(R.id.mainFragment)
                             }
@@ -76,10 +80,6 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         }
     }
 
-    private fun sendLogin(mail: String, pass: String): String {
-        return "420[\"login\",{\"username\":\"$mail\",\"password\":\"$pass\"," +
-                "\"token\":\"\"}]"
-    }
 
     private fun showErrorDialog() {
         val builder =

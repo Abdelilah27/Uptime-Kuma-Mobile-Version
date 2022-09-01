@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,10 +41,38 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
         super.onViewCreated(view, savedInstanceState)
         sessionManagement = SessionManagement(requireContext())
         //redirection to the dashboard fragment
+        Log.d("TAG", sessionManagement.checkIsLogged().toString())
+        Log.d("TAG", sessionManagement.getUsername().toString())
+        Log.d("TAG", sessionManagement.getPass().toString())
         if (sessionManagement.checkIsLogged()) {
             (activity as MainActivity).setUpConnexion(sessionManagement.getSocket())
-            findNavController().navigate(R.id.mainFragment)
+            if (sessionManagement.getUsername() == null.toString() && sessionManagement.getPass()
+                == null.toString()
+            ) {
+                findNavController().navigate(R.id.mainFragment)
+
+            } else {
+                NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
+                    when (it) {
+                        "1" -> {
+                            if (sessionManagement.getUsername() != null.toString() && sessionManagement.getPass() != null.toString()
+                            ) {
+                                MainActivity.sharedViewModel.sendQuery(
+                                    MainActivity.sharedViewModel.sendLogin
+                                        (
+                                        sessionManagement.getUsername(),
+                                        sessionManagement.getPass()
+                                    )
+                                )
+                                findNavController().navigate(R.id.mainFragment)
+                            }
+                        }
+                    }
+                })
+            }
+
         }
+
 
         binding.buttonLogin.setOnClickListener {
             if (binding.socketUrl.text.isNotEmpty()) {
@@ -60,20 +89,23 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
                                     binding.progressBar.visibility = View.GONE
                                     findNavController().navigate(R.id.mainFragment)
                                 }
+                                else -> {
+                                    //send to the login+ fragment
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        val action =
+                                            LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+                                                binding.socketUrl.text.toString()
+                                            )
+                                        findNavController().navigate(action)
+                                    }, 8000)
+                                }
 //                                "2", "3", "6" -> {
 //                                    binding.progressBar.visibility = View.GONE
 //                                    showErrorDialog()
 //                                }
                             }
 
-                            //send to the login+ fragment
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                val action =
-                                    LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-                                        binding.socketUrl.text.toString()
-                                    )
-                                findNavController().navigate(action)
-                            }, 6000)
+
                         })
 
                 } else {

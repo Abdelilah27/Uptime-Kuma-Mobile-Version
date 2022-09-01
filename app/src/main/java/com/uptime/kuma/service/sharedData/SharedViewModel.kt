@@ -58,17 +58,24 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     val data: Flowable<WebSocket.Event>
         get() = sharedRepository!!.getData()
 
+    //Send Data
     fun sendQuery(param: String) {
         viewModelScope.launch {
             sharedRepository!!.sendMessage(param)
         }
     }
 
+    //To Login
+    fun sendLogin(mail: String, pass: String): String {
+        return "420[\"login\",{\"username\":\"$mail\",\"password\":\"$pass\"," +
+                "\"token\":\"\"}]"
+    }
+
     @SuppressLint("CheckResult")
     suspend fun handleConnexionState() {
         data.subscribe({ response ->
-            //to show error dialog after a delay
-            Handler(Looper.getMainLooper()).postDelayed({
+            //Manage Connexion State
+            Handler(Looper.getMainLooper()).postDelayed({ //to show error dialog after a delay
                 if (NETWORKSTATUS == "0") {
                     NETWORKSTATUS = "6"
                     _NETWORKLIVEDATA.postValue("6") //no response after a delay
@@ -90,13 +97,11 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             if (response.toString()
                     .contains(Constants.successLogin)
             ) {
-                Log.d("LOLO", "lolo")
                 NETWORKSTATUS = "8" //success Login
                 _NETWORKLIVEDATA.postValue("8")
             } else if (response.toString()
                     .contains(Constants.unSuccessLogin)
             ) {
-                Log.d("MOMO", "lolo")
                 NETWORKSTATUS = "9" //unSuccess Login
                 _NETWORKLIVEDATA.postValue("9")
             }
