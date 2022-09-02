@@ -87,27 +87,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineSc
         NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
     }
 
-//    private fun showErrorDialog() {
-//        val builder =
-//            AlertDialog.Builder(requireContext(), com.uptime.kuma.R.style.AlertDialogTheme)
-//                .create()
-//        val view = layoutInflater.inflate(com.uptime.kuma.R.layout.layout_error_dialog, null)
-//        val button = view.findViewById<Button>(com.uptime.kuma.R.id.buttonAction)
-//        builder.setView(view)
-//        (view.findViewById<View>(com.uptime.kuma.R.id.textTitle) as TextView).text =
-//            resources.getString(com.uptime.kuma.R.string.title_error_dialog)
-//        (view.findViewById<View>(com.uptime.kuma.R.id.textMessage) as TextView).text =
-//            resources.getString(com.uptime.kuma.R.string.message_error_dialog)
-//        (view.findViewById<View>(com.uptime.kuma.R.id.imageIcon) as ImageView).setImageResource(com.uptime.kuma.R.drawable.ic_baseline_warning_24)
-//
-//        button.setOnClickListener {
-//            builder.dismiss()
-//            binding.socketUrl.text.clear()
-//            restartApplication()
-//        }
-//        builder.setCanceledOnTouchOutside(false)
-//        builder.show()
-//    }
+
 
     //socket link regular expression
     private fun verificationSocketLink(socketLink: String): Boolean {
