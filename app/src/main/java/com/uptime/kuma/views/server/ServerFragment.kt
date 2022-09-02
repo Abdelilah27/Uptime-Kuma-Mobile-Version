@@ -83,7 +83,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                         status =
                             MainActivity.sharedViewModel.getStatuesServerById(serverId.toInt())
                         serverCardAdapter.setData(
-                            status
+                            status.take(32)
                         )
                         when (status[0].status) {
                             0 -> {
