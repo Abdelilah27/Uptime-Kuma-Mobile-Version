@@ -53,12 +53,14 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         val serverCardAdapter = MonitorItemAllServersCardAdapter(requireContext())
         serverViewModel = ViewModelProvider(requireActivity())[ServerViewModel::class.java]
         var monitor: Monitor
+        //back button
         binding.serverback.setOnClickListener {
             MainActivity.navController.navigateUp()
         }
 
         //get Id from args
         val arg = args.serverId
+        //to check if safe args are send from dashboard or allServers Fragment
         if (arg.contains(TAG0)) {
             serverId = arg.removeSuffix(TAG0)
         } else if (arg.contains(TAG1)) {
@@ -164,6 +166,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                     .retryInterval.toString() + " " + resources.getString(
                     R.string.seconds
                 )
+            //dismiss dialog progress bar
             if (arg.contains(TAG0)) {
                 DashboardFragment.progressDialog.dismiss()
             } else if (arg.contains(TAG1)) {

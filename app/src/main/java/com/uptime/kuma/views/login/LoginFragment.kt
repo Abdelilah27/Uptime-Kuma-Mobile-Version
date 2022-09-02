@@ -1,8 +1,7 @@
 package com.uptime.kuma.views.login
 
-import android.content.Intent
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
 import com.uptime.kuma.utils.AUTOLOGIN
 import com.uptime.kuma.utils.NETWORKLIVEDATA
-import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.*
@@ -22,9 +20,10 @@ import java.util.regex.Pattern
 import kotlin.coroutines.CoroutineContext
 
 
-class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineScope {
+class LoginFragment : Fragment(R.layout.fragment_login), CoroutineScope {
     lateinit var binding: FragmentLoginBinding
     lateinit var sessionManagement: SessionManagement
+    lateinit var progressDialog: ProgressDialog
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,19 +35,24 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineSc
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressDialog = ProgressDialog(requireContext())
         sessionManagement = SessionManagement(requireContext())
         binding.buttonLogin.setOnClickListener {
             if (binding.socketUrl.text.isNotEmpty()) {
                 val formatSocketLink = formatSocketLink(binding.socketUrl.text.toString())
                 if (verificationSocketLink(formatSocketLink)) {
                     (activity as MainActivity).setUpConnexion(formatSocketLink)
-                    binding.progressBar.visibility = View.VISIBLE
+                    //show progress dialog
+                    progressDialog.show()
+                    progressDialog.setContentView(R.layout.progress_dialog)
+                    progressDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
                     launch {
                         delay(7000)
                         withContext(Dispatchers.Main) {
                             if (AUTOLOGIN == 1) {
                                 sessionManagement.creatLoginSocket(formatSocketLink)
-                                binding.progressBar.visibility = View.GONE
+                                progressDialog.dismiss()
                                 findNavController().navigate(R.id.mainFragment)
                             } else {
                                 val action =
@@ -85,8 +89,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineSc
     override fun onDestroyView() {
         super.onDestroyView()
         NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
+        progressDialog.dismiss()
     }
-
 
 
     //socket link regular expression
@@ -97,16 +101,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineSc
         val pattern: Pattern = Pattern.compile(regex)
         val matcher: Matcher = pattern.matcher(socketLink)
         return matcher.matches()
-    }
-
-    override fun restartApplication() {
-        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
-            requireActivity().baseContext.packageName
-        )
-        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        Process.killProcess(Process.myPid())
-        System.exit(0)
     }
 
     override val coroutineContext: CoroutineContext

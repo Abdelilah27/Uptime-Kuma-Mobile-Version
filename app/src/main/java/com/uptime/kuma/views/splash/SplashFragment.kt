@@ -3,7 +3,6 @@ package com.uptime.kuma.views.splash
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -32,7 +31,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope {
         //redirection to the dashboard fragment
         if (sessionManagement.checkIsLogged()) {
             //setup connexion
-            Log.d("A", "onViewCreated: ")
             (activity as MainActivity).setUpConnexion(sessionManagement.getSocket())
             //case1: autologin without username or pass
             if (sessionManagement.getUsername() == null.toString() && sessionManagement.getPass()
@@ -108,6 +106,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope {
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
     }
 
 

@@ -1,5 +1,6 @@
 package com.uptime.kuma.views.loginPlus
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 class LoginPlusFragment : Fragment(R.layout.fragment_login_plus) {
     lateinit var binding: FragmentLoginPlusBinding
     lateinit var sessionManagement: SessionManagement
+    lateinit var progressDialog: ProgressDialog
     private val argsSocket: LoginPlusFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -35,12 +37,17 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.dismiss()
         sessionManagement = SessionManagement(requireContext())
         val socketUrl = argsSocket.socketUrl
         binding.apply {
             buttonLoginPlus.setOnClickListener {
                 if (mailLoginP.text.isNotEmpty() && passLoginP.text.isNotEmpty()) {
-                    progressBarPlus.visibility = View.VISIBLE
+                    //show progress dialog
+                    progressDialog.show()
+                    progressDialog.setContentView(R.layout.progress_dialog)
+                    progressDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
                     MainActivity.sharedViewModel.sendQuery(
                         MainActivity.sharedViewModel.sendLogin(
                             mailLoginP.text.toString(),
@@ -55,11 +62,11 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus) {
                                     socketUrl, mailLoginP.text
                                         .toString(), passLoginP.text.toString()
                                 )
-                                progressBarPlus.visibility = View.GONE
+                                progressDialog.dismiss()
                                 findNavController().navigate(R.id.mainFragment)
                             }
                             "2", "3", "6", "9" -> {
-                                progressBarPlus.visibility = View.GONE
+                                progressDialog.dismiss()
                                 showErrorDialog()
                             }
                         }
@@ -102,6 +109,7 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus) {
     override fun onDestroyView() {
         super.onDestroyView()
         NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
+        progressDialog.dismiss()
     }
 
 
