@@ -27,3 +27,5 @@ internal val _TRYNUMBERLIVEDATA = MutableLiveData<Int>()
 internal val TRYNUMBERLIVEDATA: LiveData<Int>
     get() = _TRYNUMBERLIVEDATA
 
+internal var AUTOLOGIN = 0
+

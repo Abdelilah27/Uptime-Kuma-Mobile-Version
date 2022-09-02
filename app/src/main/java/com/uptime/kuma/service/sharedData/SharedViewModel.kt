@@ -90,6 +90,7 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
             ) {
                 NETWORKSTATUS = "7" //autoLogin
                 _NETWORKLIVEDATA.postValue("7")
+                AUTOLOGIN = 1
             }
             if (response.toString()
                     .contains(Constants.successLogin)

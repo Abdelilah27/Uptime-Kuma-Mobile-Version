@@ -8,23 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginBinding
+import com.uptime.kuma.utils.AUTOLOGIN
 import com.uptime.kuma.utils.NETWORKLIVEDATA
 import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
+import kotlinx.coroutines.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import kotlin.coroutines.CoroutineContext
 
 
-class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
+class LoginFragment : Fragment(R.layout.fragment_login), RestartApp, CoroutineScope {
     lateinit var binding: FragmentLoginBinding
     lateinit var sessionManagement: SessionManagement
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,49 +37,29 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sessionManagement = SessionManagement(requireContext())
-        //redirection to the dashboard fragment
-        if (sessionManagement.checkIsLogged()) {
-            binding.progressBar.visibility = View.VISIBLE
-            (activity as MainActivity).setUpConnexion(sessionManagement.getSocket())
-            if (sessionManagement.getUsername() == null.toString() && sessionManagement.getPass()
-                == null.toString()
-            ) {
-                findNavController().navigate(R.id.mainFragment)
-                binding.progressBar.visibility = View.GONE
-            } else {
-                NETWORKLIVEDATA.observe(viewLifecycleOwner, Observer {
-                    when (it) {
-                        "1" -> {
-                            if (sessionManagement.getUsername() != null.toString() && sessionManagement.getPass() != null.toString()
-                            ) {
-                                MainActivity.sharedViewModel.sendQuery(
-                                    MainActivity.sharedViewModel.sendLogin
-                                        (
-                                        sessionManagement.getUsername(),
-                                        sessionManagement.getPass()
-                                    )
-                                )
-                                findNavController().navigate(R.id.mainFragment)
-                                binding.progressBar.visibility = View.GONE
-                            }
-                        }
-                    }
-                })
-            }
-        }
-
-
         binding.buttonLogin.setOnClickListener {
             if (binding.socketUrl.text.isNotEmpty()) {
                 val formatSocketLink = formatSocketLink(binding.socketUrl.text.toString())
                 if (verificationSocketLink(formatSocketLink)) {
                     (activity as MainActivity).setUpConnexion(formatSocketLink)
                     binding.progressBar.visibility = View.VISIBLE
-                    val action =
-                        LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
-                            formatSocketLink
-                        )
-                    findNavController().navigate(action)
+                    launch {
+                        delay(7000)
+                        withContext(Dispatchers.Main) {
+                            if (AUTOLOGIN == 1) {
+                                sessionManagement.creatLoginSocket(formatSocketLink)
+                                binding.progressBar.visibility = View.GONE
+                                findNavController().navigate(R.id.mainFragment)
+                            } else {
+                                val action =
+                                    LoginFragmentDirections.actionLoginFragmentToLoginPlusFragment(
+                                        formatSocketLink
+                                    )
+                                findNavController().navigate(action)
+                            }
+                        }
+                    }
+
 
                 } else {
                     Toast.makeText(
@@ -148,5 +128,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), RestartApp {
         Process.killProcess(Process.myPid())
         System.exit(0)
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }
