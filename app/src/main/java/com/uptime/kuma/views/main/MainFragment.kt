@@ -1,8 +1,6 @@
 package com.uptime.kuma.views.main
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +18,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentMainBinding
 import com.uptime.kuma.utils.*
+import com.uptime.kuma.views.mainActivity.MainActivity
 
-class MainFragment : Fragment(R.layout.fragment_main), RestartApp {
+class MainFragment : Fragment(R.layout.fragment_main) {
     companion object {
         lateinit var navController: NavController
     }
@@ -83,20 +82,10 @@ class MainFragment : Fragment(R.layout.fragment_main), RestartApp {
         button.setOnClickListener {
             builder.dismiss()
             sessionManagement.logOut()
-            restartApplication()
+            MainActivity.instance.restartApplication()
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
-    }
-
-    override fun restartApplication() {
-        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
-            requireActivity().baseContext.packageName
-        )
-        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        Process.killProcess(Process.myPid())
-        System.exit(0)
     }
 
 }

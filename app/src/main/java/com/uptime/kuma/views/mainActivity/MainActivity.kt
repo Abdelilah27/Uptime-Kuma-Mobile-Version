@@ -1,7 +1,9 @@
 package com.uptime.kuma.views.mainActivity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Process
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var mainActivityViewModel: MainActivityViewModel
         lateinit var saveData: SaveData
         lateinit var sharedViewModel: SharedViewModel
+        lateinit var instance: MainActivity
     }
 
     private lateinit var sharedRepository: SharedRepository
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        instance = this
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -91,6 +95,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         return
+    }
+
+    fun restartApplication() {
+        val intent = this.baseContext.packageManager.getLaunchIntentForPackage(
+            this.baseContext.packageName
+        )
+        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        Process.killProcess(Process.myPid())
+        System.exit(0)
     }
 
 }

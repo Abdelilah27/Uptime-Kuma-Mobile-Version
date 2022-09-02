@@ -1,8 +1,6 @@
 package com.uptime.kuma.views.loginPlus
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Process
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +16,10 @@ import androidx.navigation.fragment.navArgs
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentLoginPlusBinding
 import com.uptime.kuma.utils.NETWORKLIVEDATA
-import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
 
-class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
+class LoginPlusFragment : Fragment(R.layout.fragment_login_plus) {
     lateinit var binding: FragmentLoginPlusBinding
     lateinit var sessionManagement: SessionManagement
     private val argsSocket: LoginPlusFragmentArgs by navArgs()
@@ -96,7 +93,7 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
             builder.dismiss()
             binding.mailLoginP.text.clear()
             binding.passLoginP.text.clear()
-            restartApplication()
+            MainActivity.instance.restartApplication()
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
@@ -107,14 +104,5 @@ class LoginPlusFragment : Fragment(R.layout.fragment_login_plus), RestartApp {
         NETWORKLIVEDATA.removeObservers(viewLifecycleOwner)
     }
 
-    override fun restartApplication() {
-        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
-            requireActivity().baseContext.packageName
-        )
-        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        Process.killProcess(Process.myPid())
-        System.exit(0)
-    }
 
 }

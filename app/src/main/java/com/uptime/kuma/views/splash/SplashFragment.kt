@@ -2,9 +2,7 @@ package com.uptime.kuma.views.splash
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.Process
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -17,14 +15,13 @@ import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentSplashBinding
 import com.uptime.kuma.utils.NETWORKLIVEDATA
-import com.uptime.kuma.utils.RestartApp
 import com.uptime.kuma.utils.SessionManagement
 import com.uptime.kuma.views.mainActivity.MainActivity
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 
-class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope, RestartApp {
+class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope {
     lateinit var sessionManagement: SessionManagement
 
     @SuppressLint("CheckResult")
@@ -107,20 +104,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope, Resta
         button.setOnClickListener {
             builder.dismiss()
             sessionManagement.logOut() //logout
-            restartApplication()
+            MainActivity.instance.restartApplication()
         }
         builder.setCanceledOnTouchOutside(false)
         builder.show()
     }
 
-    override fun restartApplication() {
-        val intent = requireActivity().baseContext.packageManager.getLaunchIntentForPackage(
-            requireActivity().baseContext.packageName
-        )
-        intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        Process.killProcess(Process.myPid())
-        System.exit(0)
-    }
 
 }
