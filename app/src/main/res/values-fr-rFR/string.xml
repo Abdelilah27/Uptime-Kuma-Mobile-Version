@@ -60,8 +60,7 @@
     <string name="second_uptime_third_server_fragment">98.2%</string>
 
     <string name="range_graph_server_fragment">Temps de reponse</string>
-    <string
-        name="socket_url"><font size="15">Lien socket - Nom de domaine</font></string>
+    <string name="socket_url"><font size="15">Lien socket - Nom de domaine</font></string>
     <string name="Password"><font size="15">Password</font></string>
     <string name="username"><font size="15">Username</font></string>
 
@@ -77,7 +76,8 @@
     <string name="login">Connexion</string>
     <string name="loginPlus">Connexion+</string>
     <string name="loading">Chargement...</string>
-
+    <string name="upStatus">Haut</string>
+    <string name="downStatus">Bas</string>
 
     <string-array name="list">
         <item>Francais</item>

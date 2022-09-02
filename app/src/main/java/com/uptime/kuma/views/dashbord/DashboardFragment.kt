@@ -157,7 +157,14 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceivedData(data: MonitorStatusItem) {
-        MainActivity.instance.sendNotification(data.msg ?: "")
+        var status = resources.getString(com.uptime.kuma.R.string.downStatus)
+        when (data.status) {
+            1 -> status = resources.getString(com.uptime.kuma.R.string.upStatus)
+            0 -> status = resources.getString(com.uptime.kuma.R.string.downStatus)
+        }
+        MainActivity.instance.sendNotification(
+            (data.name + " - " + status + " - " + data.msg) ?: ""
+        )
         Log.d("0000", "onReceivedData: ++++++")
     }
 
