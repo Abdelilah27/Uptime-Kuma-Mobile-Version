@@ -17,6 +17,7 @@ import com.uptime.kuma.models.serverCalcul.ServerCalcul_Items
 import com.uptime.kuma.models.status.Status
 import com.uptime.kuma.repository.SharedRepository
 import com.uptime.kuma.utils.*
+import com.uptime.kuma.views.dashbord.DashboardFragment
 import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +51,9 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
     private val _statusLiveData = MutableLiveData<ArrayList<Status>>()
     val statusLiveData: LiveData<ArrayList<Status>>
         get() = _statusLiveData
+
+    //For Notifications
+
 
     //Get Data
     val data: Flowable<WebSocket.Event>
@@ -256,7 +260,13 @@ open class SharedViewModel(private val sharedRepository: SharedRepository) :
                 monitorStatusList.add(monitorUpdate)
                 monitorStatusList.sortByDescending { it.time }
                 _monitorStatusLiveData.postValue(monitorStatusList)
-
+                //Notification
+                try {
+                    val instance: UpdateData = DashboardFragment.instance
+                    instance.onReceivedData(monitorUpdate)
+                } catch (e: Exception) {
+                    Log.d("Error :", e.message.toString())
+                }
             }
 
         }

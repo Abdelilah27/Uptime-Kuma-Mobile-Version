@@ -1,9 +1,16 @@
 package com.uptime.kuma.views.mainActivity
 
 import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Process
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +25,7 @@ import com.uptime.kuma.service.sharedData.SharedViewModel
 import com.uptime.kuma.service.sharedData.SharedViewModelFactory
 import com.uptime.kuma.utils.LanguageSettings
 import com.uptime.kuma.utils.SaveData
+import com.uptime.kuma.views.dashbord.DashboardFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +42,13 @@ class MainActivity : AppCompatActivity() {
         lateinit var sharedViewModel: SharedViewModel
         lateinit var instance: MainActivity
     }
+
+    //Notification Attributes
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "0"
+    private val description = "Test notification"
 
     private lateinit var sharedRepository: SharedRepository
 
@@ -52,6 +67,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         instance = this
+
+        createNotificationChannel()
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -105,6 +124,44 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         Process.killProcess(Process.myPid())
         System.exit(0)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("RemoteViewLayout")
+    fun sendNotification(elm: String) {
+        val intent = Intent(this, DashboardFragment::class.java)
+
+        val pIntent = PendingIntent.getActivity(this, System.currentTimeMillis().toInt(), intent, 0)
+
+        val n: Notification = Notification.Builder(this, channelId)
+            .setContentTitle("Alert")
+            .setContentText(elm)
+            .setSmallIcon(com.uptime.kuma.R.drawable.icon)
+            .setContentIntent(pIntent)
+            .setAutoCancel(true)
+            .addAction(R.drawable.icon, "Call", pIntent)
+            .addAction(R.drawable.icon, "More", pIntent)
+            .addAction(R.drawable.icon, "And more", pIntent).build()
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.notify(channelId.toInt(), n)
+    }
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "name"
+            val descriptionText = "desc"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
 }

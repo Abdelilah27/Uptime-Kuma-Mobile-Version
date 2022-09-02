@@ -1,8 +1,11 @@
 package com.uptime.kuma.views.dashbord
 
 import android.app.ProgressDialog
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,8 +13,10 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentDashboardBinding
 import com.uptime.kuma.models.dashboardCalcul.CalculDashboardItem
+import com.uptime.kuma.models.monitorStatus.MonitorStatusItem
 import com.uptime.kuma.utils.CALCUL
 import com.uptime.kuma.utils.RecyclerClickInterface
+import com.uptime.kuma.utils.UpdateData
 import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
@@ -19,9 +24,10 @@ import com.uptime.kuma.views.mainActivity.MainActivity
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
-    RecyclerClickInterface {
+    RecyclerClickInterface, UpdateData {
     companion object {
         lateinit var progressDialog: ProgressDialog
+        lateinit var instance: DashboardFragment
     }
 
     private val TAG = "DashboardFragment"
@@ -33,6 +39,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        instance = this
         binding = FragmentDashboardBinding.bind(view)
         shimmerView = binding.dashboardShimmer
         shimmerViewCalcul = binding.dashboardShimmerCalcul
@@ -146,6 +153,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         val args = position.toString() + TAG
         val action = MainFragmentDirections.actionMainFragmentToServerFragment(args)
         MainActivity.navController.navigate(action)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onReceivedData(data: MonitorStatusItem) {
+        MainActivity.instance.sendNotification(data.msg ?: "")
+        Log.d("0000", "onReceivedData: ++++++")
     }
 
 }
