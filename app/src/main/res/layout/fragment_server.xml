@@ -22,13 +22,14 @@
                 android:id="@+id/serverback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="?android:selectableItemBackground"
                 android:clickable="true"
                 android:drawableRight="@drawable/arrow_back"
                 android:focusable="true"
-                android:layout_marginBottom="10dp"
                 app:layout_constraintHorizontal_bias="0.028"
                 app:layout_constraintVertical_bias="0.0" />
+
             <TextView
                 android:id="@+id/server_title"
                 style="@style/differente_size_title_fragment"
@@ -112,7 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:backgroundColor="@color/background_item_all_server_fragment"
-                    >
+                    app:lineLabelTextSizeBottom="13dp"
+                    app:lineLabelTextSizeLeft="11dp">
 
                 </com.androidplot.xy.XYPlot>
             </androidx.cardview.widget.CardView>

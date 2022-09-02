@@ -186,7 +186,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
         status.sortBy { it.time }
         var timeFormat: String
         var timeFormatReplaced: Float
-        status.takeLast(10).forEach {
+        status.takeLast(16).forEach {
             if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
                 timeFormat = it.time.toString().subSequence(11, 16).toString()
                 timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
