@@ -27,7 +27,11 @@
         tools:layout="@layout/fragment_bienvenue">
         <action
             android:id="@+id/action_bienvenueFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/enter_anime"
+            app:exitAnim="@anim/exit_anime"
+            app:popEnterAnim="@anim/pop_enter_anime"
+            app:popExitAnim="@anim/pop_exit_anime" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -39,7 +43,11 @@
             app:destination="@id/mainFragment" />
         <action
             android:id="@+id/action_loginFragment_to_loginPlusFragment"
-            app:destination="@id/loginPlusFragment" />
+            app:destination="@id/loginPlusFragment"
+            app:enterAnim="@anim/enter_anime"
+            app:exitAnim="@anim/exit_anime"
+            app:popEnterAnim="@anim/pop_enter_anime"
+            app:popExitAnim="@anim/pop_exit_anime" />
     </fragment>
     <fragment
         android:id="@+id/serverFragment"
@@ -48,8 +56,8 @@
         tools:layout="@layout/fragment_server">
         <argument
             android:name="serverId"
-            app:argType="string"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/apparenceReglageFragment"
@@ -80,7 +88,7 @@
             app:destination="@id/mainFragment" />
         <argument
             android:name="socketUrl"
-            app:argType="string"
-            android:defaultValue="socket" />
+            android:defaultValue="socket"
+            app:argType="string" />
     </fragment>
 </navigation>

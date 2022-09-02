@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentBienvenueBinding
 import com.uptime.kuma.views.mainActivity.MainActivity
@@ -28,7 +29,10 @@ class BienvenueFragment : Fragment(R.layout.fragment_bienvenue) {
 
         binding.buttonCommencerBiennvenueFragment.setOnClickListener {
             onCommencerFinished()
-            MainActivity.navController.navigate(R.id.loginFragment)
+            val action =
+                BienvenueFragmentDirections.actionBienvenueFragmentToLoginFragment()
+            findNavController().navigate(action)
+
         }
 
         return binding.root
