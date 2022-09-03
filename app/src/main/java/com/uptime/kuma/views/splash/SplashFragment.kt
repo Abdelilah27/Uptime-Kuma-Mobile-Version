@@ -67,7 +67,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash), CoroutineScope {
                 delay(6000)
                 withContext(Dispatchers.Main) {
                     if (onCommencerFinished()) {
-                        MainActivity.navController.navigate(R.id.loginFragment)
+                        MainActivity.navController.navigate(R.id.bienvenueFragment)
                     } else {
                         findNavController().navigate(R.id.bienvenueFragment)
                     }
