@@ -3,6 +3,7 @@ package com.uptime.kuma.views.dashbord
 import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -21,12 +22,10 @@ import com.uptime.kuma.views.adapters.DashboardRecyclerAdapter
 import com.uptime.kuma.views.adapters.DashboardRecyclerCalculItemAdapter
 import com.uptime.kuma.views.main.MainFragmentDirections
 import com.uptime.kuma.views.mainActivity.MainActivity
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
-    RecyclerClickInterface, UpdateData, CoroutineScope {
+    RecyclerClickInterface, UpdateData {
     companion object {
         lateinit var progressDialog: ProgressDialog
         lateinit var instance: DashboardFragment
@@ -38,14 +37,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
     private lateinit var shimmerViewCalcul: ShimmerFrameLayout
-    private var executeOnce: Boolean = false
-    private var executeOnce2: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         instance = this
-        executeOnce = false // init variable for shimmer effect
-        executeOnce2 = false // init variable for shimmer card effect
         binding = FragmentDashboardBinding.bind(view)
         shimmerView = binding.dashboardShimmer
         shimmerViewCalcul = binding.dashboardShimmerCalcul
@@ -86,21 +81,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             viewLifecycleOwner,
             Observer { data ->
                 itemAdapter.setData(data ?: listOf())
-                if (!executeOnce) {
-                    Log.d(TAG, "observeMonitorsList: ")
-                    launch {
-                        delay(2000)
-                        Log.d(TAG, "aaaa: ")
-                        withContext(Dispatchers.Main) {
-                            if (data.size > 0) {
-                                shimmerView.stopShimmerAnimation()
-                                shimmerView.visibility = View.GONE
-                                binding.dashbordRecycler.visibility = View.VISIBLE
-                                executeOnce = true
-                            }
-                        }
+                //show shimmer effect for 1s in case data are retrieved
+                Handler().postDelayed({
+                    if (data.size > 0) {
+                        shimmerView.stopShimmerAnimation()
+                        shimmerView.visibility = View.GONE
+                        binding.dashbordRecycler.visibility = View.VISIBLE
                     }
-                }
+                }, 1000)
+
 
             })
     }
@@ -156,20 +145,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                     )
                 )
 
-                if (!executeOnce2) {
-                    launch {
-                        delay(2000)
-                        Log.d(TAG, "aaaa: ")
-                        withContext(Dispatchers.Main) {
-                            shimmerViewCalcul.stopShimmerAnimation()
-                            shimmerViewCalcul.visibility = View.GONE
-                            binding.calculRecycler.visibility = View.VISIBLE
-                            calculItemAdapter.setData(CALCUL ?: listOf())
-                            executeOnce2 = true
-                        }
-                    }
-                }
+                //show shimmer effect for 1s in case data are retrieved
+                Handler().postDelayed({
+                    shimmerViewCalcul.stopShimmerAnimation()
+                    shimmerViewCalcul.visibility = View.GONE
+                    binding.calculRecycler.visibility = View.VISIBLE
+                }, 1000)
 
+
+                calculItemAdapter.setData(CALCUL ?: listOf())
             })
     }
 
@@ -194,8 +178,5 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
         Log.d("0000", "onReceivedData: ++++++")
     }
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + Job()
 
 }
