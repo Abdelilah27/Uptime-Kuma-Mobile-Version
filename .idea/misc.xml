@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.229" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/ic_baseline_warning_24.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/ic_bienvenue_main2_background.xml" value="0.2295" />
         <entry key="app/src/main/res/drawable/layout_warning_dailog.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/search_view_background_all_servers_fragment.xml" value="0.231" />
         <entry key="app/src/main/res/drawable/warning_background.xml" value="0.191" />
@@ -47,7 +48,7 @@
         <entry key="app/src/main/res/layout/fragment_add_status.xml" value="0.18478912353515622" />
         <entry key="app/src/main/res/layout/fragment_all_servers.xml" value="0.24138946533203112" />
         <entry key="app/src/main/res/layout/fragment_apparence_reglage.xml" value="0.17708793598446038" />
-        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.34092010498046876" />
+        <entry key="app/src/main/res/layout/fragment_bienvenue.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_group_status.xml" value="0.40788116455078127" />
         <entry key="app/src/main/res/layout/fragment_item_status.xml" value="0.25" />
