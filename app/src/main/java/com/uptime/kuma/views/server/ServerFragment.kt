@@ -11,7 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.androidplot.xy.*
+import com.androidplot.xy.LineAndPointFormatter
+import com.androidplot.xy.SimpleXYSeries
+import com.androidplot.xy.XYGraphWidget
+import com.androidplot.xy.XYSeries
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
@@ -40,7 +43,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     var domainLabels = arrayOf<Number>()
     private val TAG0 = "DashboardFragment"
     private val TAG1 = "AllServersFragment"
-    private var excuteonce:Boolean =true
+    private var excuteonce: Boolean = true
     private var serverId = "0"
 
     @SuppressLint("SetTextI18n")
@@ -116,7 +119,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                             }
                         }
 
-                        if(excuteonce){
+                        if (excuteonce) {
                             series1Number = setData()
                             val series1: XYSeries = SimpleXYSeries(
                                 Arrays.asList(*series1Number),
@@ -186,18 +189,20 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     }
 
     private fun setData(): Array<Number> { //for the chart
-        excuteonce=false
+        excuteonce = false
         var time = 0.0
         status.sortBy { it.time }
         var timeFormat: String
         var timeFormatReplaced: Float
-        status.takeLast(16).forEach {
+        status.takeLast(32).forEach {
             if (it.ping != null && it.ping != "null" && it.ping.isNotEmpty()) {
                 timeFormat = it.time.toString().subSequence(11, 16).toString()
                 timeFormatReplaced = timeFormat.replace(":", ".").toFloat()
-
                 try {
-                    time = String.format("%.2f", timeFormatReplaced).toDouble()
+                    //get 2 numbers after the point
+                    val number3digits: Double = Math.round(timeFormatReplaced * 1000.0) / 1000.0
+                    val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+                    time = Math.round(number2digits * 100.0) / 100.0
                 } catch (e: Exception) {
                     Log.d("TAG", e.toString())
                 }
