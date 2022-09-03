@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:inputType="none"
-            android:text="@string/anglais"
+            android:text="@string/Dropdown"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 

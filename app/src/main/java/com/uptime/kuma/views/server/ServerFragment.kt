@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.androidplot.xy.LineAndPointFormatter
-import com.androidplot.xy.SimpleXYSeries
-import com.androidplot.xy.XYGraphWidget
-import com.androidplot.xy.XYSeries
+import com.androidplot.xy.*
 import com.uptime.kuma.R
 import com.uptime.kuma.databinding.FragmentServerBinding
 import com.uptime.kuma.models.monitor.Monitor
@@ -43,6 +40,7 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     var domainLabels = arrayOf<Number>()
     private val TAG0 = "DashboardFragment"
     private val TAG1 = "AllServersFragment"
+    private var excuteonce:Boolean =true
     private var serverId = "0"
 
     @SuppressLint("SetTextI18n")
@@ -118,38 +116,43 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
                             }
                         }
 
-                        series1Number = setData()
-                        val series1: XYSeries = SimpleXYSeries(
-                            Arrays.asList(*series1Number),
-                            SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-                            "Temps de réponse en (ms)"
-                        );
-                        val series1Format = LineAndPointFormatter(
-                            resources.getColor(R.color.main_color),
-                            resources.getColor(R.color.attente),
-                            null,
-                            null
-                        )
-                        binding.graphServerFragment.addSeries(series1, series1Format)
-                        binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format =
-                            object : Format() {
-                                override fun format(
-                                    obj: Any?,
-                                    toAppendTo: StringBuffer,
-                                    pos: FieldPosition
-                                ): StringBuffer {
-                                    val i = (obj as Number).toFloat().roundToInt()
-                                    return toAppendTo.append(domainLabels[i])
-                                }
+                        if(excuteonce){
+                            series1Number = setData()
+                            val series1: XYSeries = SimpleXYSeries(
+                                Arrays.asList(*series1Number),
+                                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
+                                resources.getString(R.string.graphtitle)
+                            );
+                            val series1Format = LineAndPointFormatter(
+                                resources.getColor(R.color.main_color),
+                                resources.getColor(R.color.attente),
+                                null,
+                                null
+                            )
 
-                                override fun parseObject(
-                                    source: String?,
-                                    pos: ParsePosition
-                                ): Any? {
-                                    return null
-                                }
+                            series1Format.linePaint.strokeWidth = 10f
+                            series1Format.vertexPaint.strokeWidth = 25f
+                            binding.graphServerFragment.addSeries(series1, series1Format)
+                            binding.graphServerFragment.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format =
+                                object : Format() {
+                                    override fun format(
+                                        obj: Any?,
+                                        toAppendTo: StringBuffer,
+                                        pos: FieldPosition
+                                    ): StringBuffer {
+                                        val i = (obj as Number).toFloat().roundToInt()
+                                        return toAppendTo.append(domainLabels[i])
+                                    }
 
-                            }
+                                    override fun parseObject(
+                                        source: String?,
+                                        pos: ParsePosition
+                                    ): Any? {
+                                        return null
+                                    }
+
+                                }
+                        }
 
 
                     })
@@ -179,9 +182,11 @@ class ServerFragment : Fragment(R.layout.fragment_server) {
     override fun onDestroyView() {
         super.onDestroyView()
         MainActivity.sharedViewModel.monitorCalculLiveData.removeObservers(viewLifecycleOwner)
+
     }
 
     private fun setData(): Array<Number> { //for the chart
+        excuteonce=false
         var time = 0.0
         status.sortBy { it.time }
         var timeFormat: String

@@ -78,6 +78,8 @@
     <string name="loading">Chargement...</string>
     <string name="upStatus">Haut</string>
     <string name="downStatus">Bas</string>
+    <string name="graphtitle">Temps de réponse en (ms)</string>
+    <string name="Dropdown">Choisir une langue</string>
 
     <string-array name="list">
         <item>Francais</item>

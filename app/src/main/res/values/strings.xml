@@ -76,6 +76,8 @@
     <string name="loading">Loading...</string>
     <string name="upStatus">Up</string>
     <string name="downStatus">Down</string>
+    <string name="graphtitle">Resp.Time (ms)</string>
+    <string name="Dropdown">Choose a language</string>
 
 
     <string-array name="list">

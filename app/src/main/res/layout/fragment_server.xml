@@ -112,7 +112,6 @@
                     style="@style/APDefacto.Dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:backgroundColor="@color/background_item_all_server_fragment"
                     app:lineLabelTextSizeBottom="13dp"
                     app:lineLabelTextSizeLeft="11dp">
 
