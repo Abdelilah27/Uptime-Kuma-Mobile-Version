@@ -37,6 +37,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var shimmerView: ShimmerFrameLayout
     private lateinit var shimmerViewCalcul: ShimmerFrameLayout
+    private var executeOnce = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,8 +45,20 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         binding = FragmentDashboardBinding.bind(view)
         shimmerView = binding.dashboardShimmer
         shimmerViewCalcul = binding.dashboardShimmerCalcul
-        shimmerView.startShimmerAnimation()
-        shimmerViewCalcul.startShimmerAnimation()
+        //to show shimmer effect once
+        if (!executeOnce) {
+            shimmerView.startShimmerAnimation()
+            shimmerViewCalcul.startShimmerAnimation()
+            executeOnce = true
+        } else {
+            shimmerView.stopShimmerAnimation()
+            shimmerView.visibility = View.GONE
+            binding.dashbordRecycler.visibility = View.VISIBLE
+
+            shimmerViewCalcul.stopShimmerAnimation()
+            shimmerViewCalcul.visibility = View.GONE
+            binding.calculRecycler.visibility = View.VISIBLE
+        }
         //init progress dialog
         progressDialog = ProgressDialog(requireContext())
 
