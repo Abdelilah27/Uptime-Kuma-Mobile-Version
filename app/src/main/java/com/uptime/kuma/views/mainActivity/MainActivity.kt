@@ -13,6 +13,7 @@ import android.os.Process
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -131,9 +132,14 @@ class MainActivity : AppCompatActivity() {
     fun sendNotification(elm: String) {
         val intent = Intent(this, DashboardFragment::class.java)
 
-        val pIntent = PendingIntent.getActivity(this, System.currentTimeMillis().toInt(), intent, 0)
+        val pIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_MUTABLE
+        )
 
-        val n: Notification = Notification.Builder(this, channelId)
+        val n: Notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("Alert")
             .setContentText(elm)
             .setSmallIcon(com.uptime.kuma.R.drawable.icon)
